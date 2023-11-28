@@ -2,9 +2,10 @@
 import React from "react";
 import HeroImage from "../assets/HeroSvg.svg";
 import HeroParagraph from "../assets/Ibda3.svg";
+import Cloud from "../assets/Cloud.jpg";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Hero = () => {
   const containerVariants = {
@@ -17,6 +18,14 @@ const Hero = () => {
     visible: { opacity: 1, x: 0, transition: { duration: 1.5 } },
   };
 
+  const cloudVariants = {
+    hidden: { x: "-100%" },
+    visible: {
+      x: "100%",
+      transition: { duration: 5, ease: "linear", loop: Infinity },
+    },
+  };
+
   return (
     <motion.div
       className="relative flex flex-col justify-center items-center mt-6"
@@ -24,18 +33,56 @@ const Hero = () => {
       initial="hidden"
       animate="visible"
     >
-      <motion.div
-        variants={paragraphVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        <Image
-          src={HeroParagraph}
-          priority
-          className="w-[15rem] md:w-[20rem]"
-          alt="Where is the Image?"
-        />
-      </motion.div>
+      <AnimatePresence>
+        {/* Left Cloud */}
+        <motion.div
+          key="leftCloud"
+          initial="hidden"
+          animate="visible"
+          exit="hidden"
+          className="absolute left-0 top-0 w-32 md:w-48 lg:w-64 cloud"
+        >
+          <Image
+            key="leftCloudImage"
+            src={Cloud}
+            priority
+            className="w-full h-full relative"
+            alt="Cloud"
+          />
+        </motion.div>
+
+        {/* Hero Paragraph */}
+        <motion.div
+          variants={paragraphVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          <Image
+            src={HeroParagraph}
+            priority
+            className="w-[15rem] md:w-[20rem] relative"
+            alt="Where is the Image?"
+          />
+        </motion.div>
+
+        {/* Right Cloud */}
+        <motion.div
+          key="rightCloud"
+          initial="hidden"
+          animate="visible"
+          exit="hidden"
+          className="absolute right-0 bottom-0 w-32 md:w-48 lg:w-64 cloud"
+        >
+          <Image
+            key="rightCloudImage"
+            src={Cloud}
+            priority
+            className="w-full h-full"
+            alt="Cloud"
+          />
+        </motion.div>
+      </AnimatePresence>
+
       <motion.p
         className="text-second/60 text-center md:text-xl mx-6 md:w-[75%] lg:w-[50%]"
         id="ibmsemi"
@@ -46,6 +93,7 @@ const Hero = () => {
         مُطوِّر ومُصمِّم يُسهِّل وجودك الرقمي، أقدّم حلول تقنية متقدمة وتصميم
         .فريد لتعزيز تجربة عملائك ونجاح علامتك التجارية على الإنترنت
       </motion.p>
+
       <div className="flex gap-8 my-8" id="ibmbold">
         <Link href="/" className="bg-second rounded-sm text-main">
           <p className="m-2"> أعمالــي</p>
@@ -53,13 +101,15 @@ const Hero = () => {
         <Link href="/" className="border text-second rounded-sm">
           <p className="m-2"> انستغرامـي</p>
         </Link>
-      </div>{" "}
+      </div>
+
       <motion.div
-        className="mx-14 mb-8 lg:mb-0"
+        className="mx-14 mb-8 lg:mb-0 relative"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
+        {/* Hero Image */}
         <Image
           src={HeroImage}
           priority

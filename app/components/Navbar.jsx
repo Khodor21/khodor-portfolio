@@ -35,7 +35,7 @@ const Navbar = () => {
             <div className="flex pl-4">
               <Image
                 src={MainLogo}
-                className="lg:w-48 md:w-36 w-28 mr-2"
+                className="lg:w-20 md:w-16 w-12 mr-2"
                 alt="خضر حسن"
               />
             </div>

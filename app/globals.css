@@ -58,7 +58,19 @@ body {
   scroll-behavior: smooth;
   font-family: "Poppins-Meduim";
 }
+@keyframes cloud {
+  0% {
+    transform: translate(0px, 0px);
+  }
+  100% {
+    transform: translate(100px, 0px);
+  }
+}
 
+.cloud {
+  animation: cloud 5s infinite ease-in-out;
+  animation-direction: alternate;
+}
 #lateef {
   font-family: "Lateef-Bold";
 }
