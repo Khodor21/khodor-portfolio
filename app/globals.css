@@ -2,26 +2,93 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+@font-face {
+  font-family: "Poppins-Bold";
+  src: url("./fonts/Poppins-Bold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Poppins-Medium";
+  src: url("./fonts/Poppins-Medium.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "IBMPlexSansArabic-SemiBold";
+  src: url("./fonts/IBMPlexSansArabic-SemiBold.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "IBMPlexSansArabic-Bold";
+  src: url("./fonts/IBMPlexSansArabic-Bold.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Al-Jazeera-Arabic-Bold";
+  src: url("./fonts/Al-Jazeera-Arabic Bold.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Lateef-Bold";
+  src: url("./fonts/Lateef-Bold.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Almarai-Bold";
+  src: url("./fonts/Almarai-Bold.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "ElMessiri-SemiBold";
+  src: url("./fonts/ElMessiri-SemiBold.ttf");
+  font-weight: normal;
+  font-style: normal;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+html,
+body {
+  background-color: #fdfdfd;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  font-family: "Poppins-Meduim";
+}
+
+#lateef {
+  font-family: "Lateef-Bold";
+}
+#arabic {
+  font-family: "Al-Jazeera-Arabic-Bold";
+}
+#ibmsemi {
+  font-family: "IBMPlexSansArabic-SemiBold";
+}
+#ibmbold {
+  font-family: "IBMPlexSansArabic-Bold";
+}
+#almarai {
+  font-family: "Almarai-Bold";
+}
+#elmessiri {
+  font-family: "ElMessiri-SemiBold";
+}
+#englishBold {
+  font-family: "Poppins-Bold";
+}
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.rotate-animation {
+  animation: rotate 5s linear infinite;
 }
