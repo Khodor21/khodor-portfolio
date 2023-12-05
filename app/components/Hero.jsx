@@ -40,7 +40,7 @@ const Hero = () => {
           initial="hidden"
           animate="visible"
           exit="hidden"
-          className="absolute left-0 top-0 w-32 md:w-48 lg:w-64 cloud"
+          className="absolute left-0 top-[55%] md:top-0 w-32 md:w-48 lg:w-64 cloud"
         >
           <Image
             key="leftCloudImage"
@@ -60,7 +60,7 @@ const Hero = () => {
           <Image
             src={HeroParagraph}
             priority
-            className="w-[15rem] md:w-[20rem] relative"
+            className="w-[15rem] md:w-[20rem]"
             alt="Where is the Image?"
           />
         </motion.div>
@@ -71,7 +71,7 @@ const Hero = () => {
           initial="hidden"
           animate="visible"
           exit="hidden"
-          className="absolute right-0 bottom-0 w-32 md:w-48 lg:w-64 cloud"
+          className="absolute right-0 md:top-0 top-[70%] w-32 md:w-48 lg:w-64 cloud1"
         >
           <Image
             key="rightCloudImage"

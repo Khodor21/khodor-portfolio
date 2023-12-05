@@ -66,9 +66,57 @@ body {
     transform: translate(100px, 0px);
   }
 }
+@keyframes cloud1 {
+  0% {
+    transform: translate(0px, 0px);
+  }
+  100% {
+    transform: translate(-100px, 0px);
+  }
+}
+@keyframes starRight {
+  0% {
+    transform: translate(0px, 0px);
+  }
+  100% {
+    transform: translate(-50px, 0px);
+  }
+}
+@keyframes starLeft {
+  0% {
+    transform: translate(0px, 0px);
+  }
+  100% {
+    transform: translate(10px, 50px);
+  }
+}
+@keyframes startMiddle {
+  0% {
+    transform: translate(0px, 0px);
+  }
+  100% {
+    transform: translate(10px, 30px);
+  }
+}
+.starRight {
+  animation: starRight 6s infinite ease-in-out;
+  animation-direction: alternate;
+}
+.starLeft {
+  animation: starLeft 6s infinite ease-in-out;
+  animation-direction: alternate;
+}
+.starMiddle {
+  animation: startMiddle 6s infinite ease-in-out;
+  animation-direction: alternate;
+}
 
 .cloud {
-  animation: cloud 5s infinite ease-in-out;
+  animation: cloud 10s infinite ease-in-out;
+  animation-direction: alternate;
+}
+.cloud1 {
+  animation: cloud1 10s infinite ease-in-out;
   animation-direction: alternate;
 }
 #lateef {
