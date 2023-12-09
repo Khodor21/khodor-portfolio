@@ -1,13 +1,23 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
+import Pic1 from "../assets/HeroCaption1.svg";
+import Pic2 from "../assets/HeroCaption.svg";
 import HeroImage from "../assets/HeroSvg.svg";
-import HeroParagraph from "../assets/Ibda3.svg";
 import Cloud from "../assets/Cloud.jpg";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 
 const Hero = () => {
+  const [currentImage, setCurrentImage] = useState(Pic1);
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentImage((prevImage) => (prevImage === Pic1 ? Pic2 : Pic1));
+    }, 1000);
+
+    return () => clearInterval(intervalId); // Clear interval on component unmount
+  }, []); // Empty dependency array ensures that the effect runs once on mount
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { duration: 1 } },
@@ -58,9 +68,9 @@ const Hero = () => {
           animate="visible"
         >
           <Image
-            src={HeroParagraph}
+            src={currentImage}
             priority
-            className="w-[15rem] md:w-[20rem]"
+            className="w-[15rem] md:w-[20rem] mr-8"
             alt="Where is the Image?"
           />
         </motion.div>
@@ -91,7 +101,7 @@ const Hero = () => {
         animate="visible"
       >
         مُطوِّر ومُصمِّم يُسهِّل وجودك الرقمي، أقدّم حلول تقنية متقدمة وتصميم
-        .فريد لتعزيز تجربة عملائك ونجاح علامتك التجارية على الإنترنت
+        فريد لتعزيز تجربة عملائك ونجاح علامتك التجارية على الإنترنت
       </motion.p>
 
       <div className="flex gap-8 my-8" id="ibmbold">
