@@ -1,25 +1,25 @@
-"use client";
-import React, { useState, useEffect } from "react";
-import Pic1 from "../assets/HeroCaption1.svg";
-import Pic2 from "../assets/HeroCaption.svg";
+import React from "react";
+import Lamp1 from "../assets/Lamp1.svg";
+import Lamp2 from "../assets/Lamp2.svg";
 import Image from "next/image";
-
-const Page = () => {
-  const [currentImage, setCurrentImage] = useState(Pic1);
-
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setCurrentImage((prevImage) => (prevImage === Pic1 ? Pic2 : Pic1));
-    }, 1000);
-
-    return () => clearInterval(intervalId); // Clear interval on component unmount
-  }, []); // Empty dependency array ensures that the effect runs once on mount
-
+const page = () => {
   return (
-    <div>
-      <Image src={currentImage} alt="/" priority layout="responsive" />
+    <div id="portfolio" className="text-center bg-third relative h-screen">
+      <div className="">
+        {" "}
+        <Image
+          src={Lamp1}
+          alt="Lamp1"
+          className="absolute top-0 left-0 w-48 md:w-96 md:mx-16"
+        />
+        <Image
+          src={Lamp2}
+          alt="Lamp2"
+          className="absolute top-0 right-0 w-48 md:w-96 md:mx-16"
+        />{" "}
+      </div>
     </div>
   );
 };
 
-export default Page;
+export default page;

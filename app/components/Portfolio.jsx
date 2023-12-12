@@ -1,25 +1,35 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import DesignProject1 from "../assets/Project1.jpg";
-import DesignProject2 from "../assets/Project2.jpg";
-import WebProject1 from "../assets/Feature3.png";
-import WebProject2 from "../assets/Feature4.png";
-import Lamp1 from "../assets/Lamp1.svg";
-import Lamp2 from "../assets/Lamp2.svg";
+import MyInstagramDesigns from "../assets/Instagram Post.jpg";
+import DentalInstagramDesign from "../assets/Instagram Post1.jpg";
+import DietitianInstagramDesign from "../assets/Instagram Post2.jpg";
 import Texture from "../assets/Texture.svg";
+import TextureWithNoStars from "../assets/TextureWithNoStars.svg";
 
 const Portfolio = () => {
+  const [currentImage, setCurrentImage] = useState(Texture);
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentImage((prevImage) =>
+        prevImage === Texture ? TextureWithNoStars : Texture
+      );
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
   const [selectedCategory, setSelectedCategory] = useState("design");
 
   const projects = {
     design: [
-      { title: "@khodorD تصميمات لحساب  ", image: DesignProject1 },
-      { title: "@sana_10 تصميمات لحساب", image: DesignProject2 },
+      { title: "@khodorD تصميمات لحساب", image: MyInstagramDesigns },
+      { title: "@sana_10 تصميمات لحساب", image: DentalInstagramDesign },
+      { title: "@sana_10 تصميمات لحساب", image: DietitianInstagramDesign },
     ],
     web: [
-      { title: "خدمات ويب مشروع 1", image: WebProject1 },
-      { title: "خدمات ويب مشروع 2", image: WebProject2 },
+      { title: "خدمات ويب مشروع 1", image: MyInstagramDesigns },
+      { title: "خدمات ويب مشروع 2", image: MyInstagramDesigns },
     ],
   };
 
@@ -28,42 +38,36 @@ const Portfolio = () => {
   };
 
   return (
-    <div id="portfolio" className="text-center py- bg-third relative">
-      <Image
-        src={Lamp1}
-        alt="Lamp1"
-        className="absolute top-0 left-0 w-48 md:w-96"
-      />
-      <Image
-        src={Lamp2}
-        alt="Lamp2"
-        className="absolute top-0 right-0 w-48 md:w-96"
-      />
-      <div>
+    <div id="portfolio" className="text-center bg-main relative">
+      <div className="flex justify-end">
         <Image
-          src={Texture}
+          src={currentImage}
           priority
-          alt="Texture"
-          className="inset-0 w-64 md:w-96 mx-auto relative"
+          alt="Services Title"
+          className="w-64 md:w-[28rem] mx-8"
         />
-        <h3 className="mb-6 text-main/60 relative" id="arabic">
-          مشــاريع مبتكــرة تـرفع مســتوى نجاحـك{" "}
-        </h3>
       </div>
+
+      <h3
+        className="mb-6 mt-2 text-third text-right mx-10 md:text-lg"
+        id="ibmsemi"
+      >
+        خدمات متميزة تســــاعدك علــى تحقيـق أهدافك وتطوير مشروعك بكفاءة عالية
+      </h3>
 
       <div id="arabic" className="flex justify-center mb-4">
         <button
           onClick={() => handleCategoryClick("design")}
-          className={`mx-4 w-24 p-2 border border-main rounded-sm ${
-            selectedCategory === "design" ? " bg-main text-third" : "text-main"
+          className={`mx-4 w-24 p-2 border border-third rounded-sm ${
+            selectedCategory === "design" ? " bg-third text-main" : "text-third"
           }`}
         >
           تصاميم
         </button>
         <button
           onClick={() => handleCategoryClick("web")}
-          className={`mx-4 w-24 p-2 rounded-sm border border-main  ${
-            selectedCategory === "web" ? " bg-main text-third" : "text-main"
+          className={`mx-4 w-24 p-2 rounded-sm border border-third  ${
+            selectedCategory === "web" ? " bg-third text-main" : "text-third"
           }`}
         >
           برمجة
@@ -73,15 +77,19 @@ const Portfolio = () => {
       <div className="pt-6">
         <div className="flex flex-col md:flex-row justify-center items-center text-center mx-12 gap-4">
           {projects[selectedCategory].map((project, index) => (
-            <div key={index} className="mb-4">
+            <div key={index} className="mb-4 project-container relative">
               <Image
                 src={project.image}
                 alt={project.title}
-                layout="responsive"
+                width={600}
+                height={400}
               />
-              <p className="text-main mt-2" id="ibmsemi">
-                {project.title}
-              </p>
+              <div className="overlay">
+                <div className="overlay-content">
+                  <h4 className="text-white">{project.title}</h4>
+                  {/* Add more details or customize as needed */}
+                </div>
+              </div>
             </div>
           ))}
         </div>

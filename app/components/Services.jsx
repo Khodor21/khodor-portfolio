@@ -23,7 +23,7 @@ const ServiceCard = ({ image, title, description, icons }) => {
 
   return (
     <motion.div
-      className="border bg-white p-6 h-full"
+      className="border bg-white px-6 h-full"
       variants={cardVariants}
       initial="hidden"
       animate="visible"
@@ -40,15 +40,15 @@ const ServiceCard = ({ image, title, description, icons }) => {
       <p id="ibmsemi" className="text-third/70 text-base">
         {description}
       </p>
-      <div className="flex flex-col sm:flex-row gap-2 pt-6">
-        <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
+      <div className="flex flex-col lg:flex-row lg:justify-between lg:pb-2 justify-center items-center gap-2 pt-4">
+        <div className="flex flex-wrap gap-2 justify-center md:justify-start">
           {icons.map((icon, index) => (
-            <div key={index} className="bg-third rounded-full p-2 mb-2 sm:mb-0">
+            <div key={index} className="bg-third rounded-full p-2 mb-2 md:mb-0">
               <Image src={icon} alt="" className="h-6 w-6" />
             </div>
           ))}
         </div>
-        <div className="flex items-center justify-center mt-2 sm:mt-0 sm:ml-auto sm:order-first">
+        <div className="flex items-center justify-center mt-2 ">
           <Link href="/portfolio">
             <div className="flex items-center justify-center text-third">
               <p className="mr-1 mb-1 " id="arabic">
@@ -81,7 +81,7 @@ const Services = () => {
 
       <h3
         className="mb-6 mt-2 text-main text-right mx-10 md:text-lg"
-        id="ibmbold"
+        id="ibmsemi"
       >
         خدمات متميزة تســــاعدك علــى تحقيـق أهدافك وتطوير مشروعك بكفاءة عالية
       </h3>
