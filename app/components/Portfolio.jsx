@@ -2,8 +2,8 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import MyInstagramDesigns from "../assets/Instagram Post.jpg";
-import DentalInstagramDesign from "../assets/Instagram Post1.jpg";
-import DietitianInstagramDesign from "../assets/Instagram Post2.jpg";
+import DentalInstagramDesign from "../assets/Instagram post1.jpg";
+import DietitianInstagramDesign from "../assets/Instagram post2.jpg";
 import Texture from "../assets/Texture.svg";
 import TextureWithNoStars from "../assets/TextureWithNoStars.svg";
 
