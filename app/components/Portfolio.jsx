@@ -44,12 +44,12 @@ const Portfolio = () => {
           src={currentImage}
           priority
           alt="Services Title"
-          className="w-64 md:w-[28rem] mx-8"
+          className="w-64 md:w-[28rem] mx-4"
         />
       </div>
 
       <h3
-        className="mb-6 mt-2 text-third text-right mx-10 md:text-lg"
+        className="mb-6 mt-2 text-third text-right mx-6 md:text-lg"
         id="ibmsemi"
       >
         خدمات متميزة تســــاعدك علــى تحقيـق أهدافك وتطوير مشروعك بكفاءة عالية
