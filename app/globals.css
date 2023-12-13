@@ -50,6 +50,12 @@
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: "Swissra-Bold";
+  src: url("./fonts/alfont_com_AlFont_com_Swissra-Bold.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
 
 html,
 body {
@@ -119,6 +125,9 @@ body {
   animation: cloud1 10s infinite ease-in-out;
   animation-direction: alternate;
 }
+#poppins {
+  font-family: "Poppins-Medium";
+}
 #lateef {
   font-family: "Lateef-Bold";
 }
@@ -140,6 +149,9 @@ body {
 #englishBold {
   font-family: "Poppins-Bold";
 }
+#swissra {
+  font-family: "Swissra-Bold";
+}
 @keyframes rotate {
   0% {
     transform: rotate(0deg);
@@ -148,13 +160,27 @@ body {
     transform: rotate(360deg);
   }
 }
+.custom-button {
+  background: linear-gradient(to right, #381668, #8337ee);
+  color: #f9f9f9;
+}
 
+.custom-button:hover {
+  background: linear-gradient(to right, #8337ee, #381668);
+  color: #f9f9f9;
+}
 .rotate-animation {
   animation: rotate 5s linear infinite;
 }
 .project-container {
   position: relative;
   overflow: hidden;
+}
+.icon-link {
+  padding: 8px; /* Adjust the padding as needed */
+  background: linear-gradient(to bottom, #8337ee, #381668);
+  border-radius: 8px; /* Add border radius for rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow for a lifted effect */
 }
 
 .overlay {

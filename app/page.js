@@ -4,6 +4,8 @@ import Hero from "./components/Hero";
 import Features from "./components/Features";
 import Portfolio from "./components/Portfolio";
 import Services from "./components/Services";
+import Contact from "./components/Contact";
+import Footer from "./components/Footer";
 
 const page = () => {
   return (
@@ -13,6 +15,8 @@ const page = () => {
       <Services />
       {/* <Features /> */}
       <Portfolio />
+      <Contact />
+      <Footer />
     </div>
   );
 };

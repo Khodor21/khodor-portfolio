@@ -62,6 +62,7 @@ const Hero = () => {
               priority
               className="w-full h-full relative"
               alt="Cloud"
+              layout="/"
             />
           </motion.div>
 
@@ -76,6 +77,7 @@ const Hero = () => {
               priority
               className="w-[15rem] md:w-[20rem] mr-8"
               alt="Where is the Image?"
+              layout="/"
             />
           </motion.div>
 
@@ -93,6 +95,7 @@ const Hero = () => {
               priority
               className="w-full h-full"
               alt="Cloud"
+              layout="/"
             />
           </motion.div>
         </AnimatePresence>
