@@ -1,8 +1,8 @@
 "use client";
-import React from "react";
+import React, { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import Title from "../assets/ServicesTitle.svg";
 import WebAppDevelopment from "../assets/WebAppDevelopment.svg";
 import SocialMediaDesign from "../assets/SocialMediaDesign.svg";
@@ -68,46 +68,84 @@ const ServiceCard = ({ image, title, description, icons }) => {
   );
 };
 const Services = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+  const container = {
+    hidden: { opacity: 1, scale: 0 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        delayChildren: 0.3,
+        staggerChildren: 0.2,
+      },
+    },
+  };
+  const item = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+    },
+  };
   return (
     <div className="text-center bg-third pb-4">
-      <div className="flex justify-end">
-        <Image
-          src={Title}
-          priority
-          alt="Services Title"
-          className="w-48 md:w-80 pt-6 mx-8"
-        />
-      </div>
-
-      <h3
-        className="mb-6 mt-2 text-main text-right mx-10 md:text-lg"
-        id="ibmsemi"
+      <motion.div
+        ref={ref}
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
+        variants={container}
+        transition={{ duration: 2 }}
       >
-        خدمات متميزة تســــاعدك علــى تحقيـق أهدافك وتطوير مشروعك بكفاءة عالية
-      </h3>
+        <div className="flex justify-end">
+          <Image
+            src={Title}
+            priority
+            alt="Services Title"
+            className="w-48 md:w-80 pt-6 mx-8"
+          />
+        </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center mb-6 mx-8">
-        <ServiceCard
-          image={WebAppDevelopment}
-          title="برمــــــجة تطبيقــــــات الويـــــــب"
-          description="تطوير تطبيقات الويب باستخدام أحدث التقنيات. أُقــدّم حلولًا مخصصة وفعّالة لتلبية احتياجات عملك"
-          icons={[NextJs, Nodejs, MongoDB]}
-        />
-
-        <ServiceCard
-          image={SocialMediaDesign}
-          title="تصــــــاميـــم ســــوشــل ميديـــــــا"
-          description="تصميم محتوى جذاب لوسائط التواصل الاجتماعي. أُساعدك في بناء هوية قوية على منصات التواصل الاجتماعي"
-          icons={[Figma]}
-        />
-
-        <ServiceCard
-          image={AdvertisementsDesign}
-          title="تصميــــم فيديوهــــات إعلانيّــــــة"
-          description="إنشاء فيديوهات إعلانية فاعلة ومبتكرة. أُقدم خدمات الإنتاج الفني بجودة عالية لتعزيز علامتك التجارية"
-          icons={[Blender, AdobePremiere]}
-        />
-      </div>
+        <h3
+          className="mb-6 mt-2 text-main text-right mx-10 md:text-lg"
+          id="ibmsemi"
+        >
+          خدمات متميزة تســــاعدك علــى تحقيـق أهدافك وتطوير مشروعك بكفاءة عالية
+        </h3>
+      </motion.div>
+      <motion.div
+        className="container"
+        variants={container}
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
+      >
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center mb-6 mx-8">
+          <motion.div variants={item}>
+            <ServiceCard
+              image={WebAppDevelopment}
+              title="برمــــــجة تطبيقــــــات الويـــــــب"
+              description="تطوير تطبيقات الويب باستخدام أحدث التقنيات. أُقــدّم حلولًا مخصصة وفعّالة لتلبية احتياجات عملك"
+              icons={[NextJs, Nodejs, MongoDB]}
+            />
+          </motion.div>
+          <motion.div variants={item}>
+            <ServiceCard
+              image={SocialMediaDesign}
+              title="تصــــــاميـــم ســــوشــل ميديـــــــا"
+              description="تصميم محتوى جذاب لوسائط التواصل الاجتماعي. أُساعدك في بناء هوية قوية على منصات التواصل الاجتماعي"
+              icons={[Figma]}
+            />
+          </motion.div>
+          <motion.div variants={item}>
+            <ServiceCard
+              image={AdvertisementsDesign}
+              title="تصميــــم فيديوهــــات إعلانيّــــــة"
+              description="إنشاء فيديوهات إعلانية فاعلة ومبتكرة. أُقدم خدمات الإنتاج الفني بجودة عالية لتعزيز علامتك التجارية"
+              icons={[Blender, AdobePremiere]}
+            />{" "}
+          </motion.div>
+        </div>
+      </motion.div>
     </div>
   );
 };
