@@ -23,7 +23,7 @@ const ServiceCard = ({ image, title, description, icons }) => {
 
   return (
     <motion.div
-      className="border bg-white px-6 h-96" // Set a fixed height for all cards
+      className="border bg-white px-6 h-auto md:h-96" // Set a fixed height for all cards
       variants={cardVariants}
       initial="hidden"
       animate="visible"
