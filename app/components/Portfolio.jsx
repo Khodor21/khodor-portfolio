@@ -11,24 +11,37 @@ import TextureWithNoStars from "../assets/TextureWithNoStars.svg";
 const projects = {
   design: [
     {
+      id: 1,
       title: "@khodorD تصميمات لحساب",
       subtitle: "",
       image: MyInstagramDesigns,
     },
     {
+      id: 2,
       title: "@sana_10 تصميمات لحساب",
       subtitle: "",
       image: DentalInstagramDesign,
     },
     {
+      id: 3,
       title: "@sana_10 تصميمات لحساب",
       subtitle: "",
       image: DietitianInstagramDesign,
     },
   ],
   web: [
-    { title: "خدمات ويب مشروع 1", subtitle: "", image: MyInstagramDesigns },
-    { title: "خدمات ويب مشروع 2", subtitle: "", image: MyInstagramDesigns },
+    {
+      id: 4,
+      title: "خدمات ويب مشروع 1",
+      subtitle: "",
+      image: MyInstagramDesigns,
+    },
+    {
+      id: 5,
+      title: "خدمات ويب مشروع 2",
+      subtitle: "",
+      image: MyInstagramDesigns,
+    },
   ],
 };
 
