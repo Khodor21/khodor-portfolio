@@ -23,17 +23,19 @@ const ServiceCard = ({ image, title, description, icons }) => {
 
   return (
     <motion.div
-      className="border bg-white px-6 h-full"
+      className="border bg-white px-6 h-96" // Set a fixed height for all cards
       variants={cardVariants}
       initial="hidden"
       animate="visible"
     >
-      <Image
-        src={image}
-        priority
-        alt=""
-        className="border object-contain h-48 mx-auto"
-      />
+      <div className="h-48 flex items-center justify-center">
+        <Image
+          src={image}
+          priority
+          alt=""
+          className="border object-contain h-full"
+        />
+      </div>
       <h3 className="mb-2 text-third text-lg" id="arabic">
         {title}
       </h3>
@@ -67,6 +69,7 @@ const ServiceCard = ({ image, title, description, icons }) => {
     </motion.div>
   );
 };
+
 const Services = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
@@ -77,7 +80,7 @@ const Services = () => {
       scale: 1,
       transition: {
         delayChildren: 0.3,
-        staggerChildren: 0.2,
+        staggerChildren: 1,
       },
     },
   };
@@ -120,7 +123,7 @@ const Services = () => {
         animate={isInView ? "visible" : "hidden"}
       >
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center mb-6 mx-8">
-          <motion.div variants={item}>
+          <motion.div variants={item} transition={{ duration: 1 }}>
             <ServiceCard
               image={WebAppDevelopment}
               title="برمــــــجة تطبيقــــــات الويـــــــب"
@@ -128,7 +131,7 @@ const Services = () => {
               icons={[NextJs, Nodejs, MongoDB]}
             />
           </motion.div>
-          <motion.div variants={item}>
+          <motion.div variants={item} transition={{ duration: 1 }}>
             <ServiceCard
               image={SocialMediaDesign}
               title="تصــــــاميـــم ســــوشــل ميديـــــــا"
@@ -136,7 +139,7 @@ const Services = () => {
               icons={[Figma]}
             />
           </motion.div>
-          <motion.div variants={item}>
+          <motion.div variants={item} transition={{ duration: 1 }}>
             <ServiceCard
               image={AdvertisementsDesign}
               title="تصميــــم فيديوهــــات إعلانيّــــــة"

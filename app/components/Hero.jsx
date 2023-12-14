@@ -28,7 +28,15 @@ const Hero = () => {
 
   const paragraphVariants = {
     hidden: { opacity: 0, x: -50 },
-    visible: { opacity: 1, x: 0, transition: { duration: 1.5 } },
+    visible: { opacity: 1, x: 0, transition: { duration: 2 } },
+  };
+  const currentImageVariants = {
+    hidden: { opacity: 0, x: 50 },
+    visible: { opacity: 1, x: 0, transition: { duration: 2 } },
+  };
+  const buttonsVartiants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0, transition: { duration: 3 } },
   };
 
   const cloudVariants = {
@@ -69,7 +77,7 @@ const Hero = () => {
 
           {/* Hero Paragraph */}
           <motion.div
-            variants={paragraphVariants}
+            variants={currentImageVariants}
             initial="hidden"
             animate="visible"
           >
@@ -112,14 +120,20 @@ const Hero = () => {
           فريد لتعزيز تجربة عملائك ونجاح علامتك التجارية على الإنترنت
         </motion.p>
 
-        <div className="flex gap-8 my-8" id="ibmbold">
+        <motion.div
+          variants={buttonsVartiants}
+          initial="hidden"
+          animate="visible"
+          className="flex gap-8 my-8"
+          id="ibmbold"
+        >
           <Link href="/" className="bg-second rounded-sm text-main">
             <p className="m-2"> أعمالــي</p>
           </Link>
           <Link href="/" className="border text-second rounded-sm">
             <p className="m-2"> انستغرامـي</p>
           </Link>
-        </div>
+        </motion.div>
 
         <motion.div
           className="mx-14 mb-8 lg:mb-0 relative"
