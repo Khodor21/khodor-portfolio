@@ -9,7 +9,6 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import "../waves.css";
 import Waves from "./Waves";
-import Tape from "../assets/Tape.svg";
 
 const Hero = () => {
   const [currentImage, setCurrentImage] = useState(Pic1);

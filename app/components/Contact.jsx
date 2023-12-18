@@ -1,13 +1,35 @@
 "use client";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 import Character from "../assets/ContactCharacter.svg";
 import Image from "next/image";
-
 import Link from "next/link";
 import { FaWhatsapp, FaInstagram, FaEnvelope } from "react-icons/fa";
 
 const Contact = () => {
+  const [formRef, formInView] = useInView({
+    rootMargin: "-100px 0px", // Adjust the rootMargin as needed
+  });
+
+  const [imgRef, imgInView] = useInView({
+    rootMargin: "-100px 0px", // Adjust the rootMargin as needed
+  });
+
+  useEffect(() => {
+    if (formInView) {
+      console.log("Form is in view!");
+      // Additional actions when the form is in view
+    }
+  }, [formInView]);
+
+  useEffect(() => {
+    if (imgInView) {
+      console.log("Character image is in view!");
+      // Additional actions when the character image is in view
+    }
+  }, [imgInView]);
+
   return (
     <div>
       <div className="bg-main px-10 pt-8">
@@ -31,6 +53,7 @@ const Contact = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
           className="md:w-1/2 p-8"
+          ref={formRef}
         >
           <form className="text-third text-right px-6 ">
             <div className="mb-4" id="arabic">
@@ -103,6 +126,7 @@ const Contact = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
           className="md:w-1/2 p-8"
+          ref={imgRef} // Add reference to the motion.div
         >
           <Image
             layout=""
