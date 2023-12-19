@@ -5,7 +5,7 @@ import Image from "next/image";
 import MyInstagramDesigns from "../assets/Instagram Post.jpg";
 import DentalInstagramDesign from "../assets/Instagram post1.jpg";
 import DietitianInstagramDesign from "../assets/Instagram post2.jpg";
-
+import Modal from "../components/Modal";
 const items = [
   {
     id: 1,
@@ -26,52 +26,6 @@ const items = [
     subtitle: "Subtitle 3",
   },
 ];
-
-const Modal = ({ item, onClose }) => (
-  <motion.div
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    exit={{ opacity: 0 }}
-    className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
-  >
-    <motion.div
-      initial={{ y: -50, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      exit={{ y: -50, opacity: 0 }}
-      className="p-4 rounded-md bg-white"
-    >
-      <Image
-        src={item.image}
-        alt={item.title}
-        width={300}
-        height={200}
-        className="mb-2 rounded-md"
-      />
-      <motion.h2 className="text-lg font-bold" id="arabic">
-        {item.title}
-      </motion.h2>
-      <AnimatePresence>
-        {item.subtitle && (
-          <motion.h5
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="text-sm"
-            id="swissra"
-          >
-            {item.subtitle}
-          </motion.h5>
-        )}
-      </AnimatePresence>
-      <motion.button
-        className="mt-2 px-4 py-2 bg-blue-500 text-third rounded-md hover:bg-blue-600 focus:outline-none focus:ring "
-        onClick={onClose}
-      >
-        Close
-      </motion.button>
-    </motion.div>
-  </motion.div>
-);
 
 const Page = () => {
   const [selectedId, setSelectedId] = useState(null);

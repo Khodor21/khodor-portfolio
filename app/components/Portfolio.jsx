@@ -1,32 +1,36 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Modal from "./Modal";
 import Image from "next/image";
 import MyInstagramDesigns from "../assets/Instagram Post.jpg";
+import MyInstargramPosts1 from "../assets/My Instargram Posts1.jpg";
 import DentalInstagramDesign from "../assets/Instagram post1.jpg";
 import DietitianInstagramDesign from "../assets/Instagram post2.jpg";
 import Texture from "../assets/Texture.svg";
 import TextureWithNoStars from "../assets/TextureWithNoStars.svg";
-
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 const projects = {
   design: [
     {
       id: 1,
       title: "@khodorD تصميمات لحساب",
       subtitle: "",
-      image: MyInstagramDesigns,
+      images: [MyInstagramDesigns, DentalInstagramDesign],
     },
     {
       id: 2,
       title: "@sana_10 تصميمات لحساب",
       subtitle: "",
-      image: DentalInstagramDesign,
+      images: [DentalInstagramDesign, DentalInstagramDesign],
     },
     {
       id: 3,
       title: "@sana_10 تصميمات لحساب",
       subtitle: "",
-      image: DietitianInstagramDesign,
+      images: [DietitianInstagramDesign, DentalInstagramDesign],
     },
   ],
   web: [
@@ -34,63 +38,16 @@ const projects = {
       id: 4,
       title: "خدمات ويب مشروع 1",
       subtitle: "",
-      image: MyInstagramDesigns,
+      images: [MyInstagramDesigns, DentalInstagramDesign],
     },
     {
       id: 5,
       title: "خدمات ويب مشروع 2",
       subtitle: "",
-      image: MyInstagramDesigns,
+      images: [MyInstagramDesigns, DentalInstagramDesign],
     },
   ],
 };
-
-const Modal = ({ project, onClose }) => (
-  <motion.div
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    exit={{ opacity: 0 }}
-    className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
-  >
-    <motion.div
-      initial={{ y: -50, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      exit={{ y: -50, opacity: 0 }}
-      className="p-4 rounded-md bg-white"
-    >
-      <Image
-        src={project.image}
-        alt={project.title}
-        width={300}
-        height={200}
-        className="mb-2 rounded-md"
-      />
-      <motion.h2 className="text-lg font-bold" id="arabic">
-        {project.title}
-      </motion.h2>
-      <AnimatePresence>
-        {project.subtitle && (
-          <motion.h5
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="text-sm"
-            id="swissra"
-          >
-            {project.subtitle}
-          </motion.h5>
-        )}
-      </AnimatePresence>
-      <motion.button
-        className="mt-2 p-2 w-full custom-button rounded-md "
-        onClick={onClose}
-        id="arabic"
-      >
-        إغـــلاق
-      </motion.button>
-    </motion.div>
-  </motion.div>
-);
 
 const Portfolio = () => {
   const [selectedId, setSelectedId] = useState(null);
@@ -113,7 +70,14 @@ const Portfolio = () => {
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
   };
-
+  const settings = {
+    dots: true,
+    fade: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
   return (
     <div id="portfolio" className="text-center bg-main relative">
       <div className="flex justify-end">
@@ -161,9 +125,9 @@ const Portfolio = () => {
               className="mb-4 project-container relative"
             >
               <Image
-                src={project.image}
+                src={project.images[0]}
                 alt={project.title}
-                width={600}
+                width={500}
                 height={400}
               />
               <div className="overlay">

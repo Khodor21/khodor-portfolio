@@ -1,11 +1,14 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import Character from "../assets/ContactCharacter.svg";
 import Image from "next/image";
 import Link from "next/link";
 import { FaWhatsapp, FaInstagram, FaEnvelope } from "react-icons/fa";
+import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Contact = () => {
   const [formRef, formInView] = useInView({
@@ -19,19 +22,52 @@ const Contact = () => {
   useEffect(() => {
     if (formInView) {
       console.log("Form is in view!");
-      // Additional actions when the form is in view
     }
   }, [formInView]);
 
   useEffect(() => {
     if (imgInView) {
       console.log("Character image is in view!");
-      // Additional actions when the character image is in view
     }
   }, [imgInView]);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+    service: "",
+  });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post(
+        "http://localhost:3001/api/client",
+        formData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        toast.success("تمّ إرسال طلبك بنجاح");
+      } else {
+        toast.error("الرجاء التأكّد من المعلومات");
+      }
+    } catch (error) {
+      toast.error("الرجاء التأكّد من المعلومات");
+    }
+  };
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   return (
-    <div>
+    <div id="contact">
+      <ToastContainer />
       <div className="bg-main px-10 pt-8">
         <h1
           className="text-right text-third text-3xl md:text-4xl mb-2"
@@ -55,7 +91,7 @@ const Contact = () => {
           className="md:w-1/2 p-8"
           ref={formRef}
         >
-          <form className="text-third text-right px-6 ">
+          <form className="text-third text-right px-6 " onSubmit={handleSubmit}>
             <div className="mb-4" id="arabic">
               <label htmlFor="name">اسمك</label>
               <input
@@ -64,6 +100,7 @@ const Contact = () => {
                 name="name"
                 placeholder="اسمك هنا"
                 className="w-full p-2 mt-2 border border-third rounded-sm shadow-xl  placeholder:text-third/50 placeholder:text-right"
+                onChange={handleChange} // Add this line
               />
             </div>
             <div className="mb-4" id="arabic">
@@ -89,6 +126,8 @@ const Contact = () => {
             <div className="mb-4" id="arabic">
               <label htmlFor="service">اختر الخدمة</label>
               <select
+                value={formData.service}
+                onChange={handleChange}
                 id="service"
                 name="service"
                 className="w-full p-2 mt-2 border border-third text-right rounded-sm shadow-xl  placeholder:text-third/50 placeholder:text-right"
@@ -103,7 +142,10 @@ const Contact = () => {
               </select>
             </div>
             <div id="ibmsemi" className="flex flex-col justify-center">
-              <button className="custom-button py-2 px-4 rounded-md">
+              <button
+                type="submit"
+                className="custom-button py-2 px-4 rounded-md"
+              >
                 ارســــــال
               </button>
               <div className="text-main flex justify-center gap-10 p-4">

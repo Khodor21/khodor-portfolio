@@ -28,7 +28,7 @@ const ServiceCard = ({ image, title, description, icons }) => {
       initial="hidden"
       animate="visible"
     >
-      <div className="h-48 flex items-center justify-center">
+      <div id="services" className="h-48 flex items-center justify-center">
         <Image
           src={image}
           priority

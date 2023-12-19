@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { BiSolidQuoteAltLeft } from "react-icons/bi";
+import Finger from "../assets/Finger.svg";
 import TestimonialTitle from "../assets/TestimonialTitle.svg";
 import TestimonialTitle1 from "../assets/TestimonialTitle1Star.svg";
 import TestimonialTitle2 from "../assets/TestimonialTitle2Star.svg";
@@ -11,7 +12,9 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Image from "next/image";
-
+import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const TestimonialCard = ({ text, image, name }) => {
   return (
     <div className="bg-main rounded-sm text-third p-4 w-72 h-64 mx-auto text-center">
@@ -40,6 +43,26 @@ const TestimonialCard = ({ text, image, name }) => {
 
 const Responsive = () => {
   const [currentImage, setCurrentImage] = useState(TestimonialTitle);
+  const [message, setMessage] = useState("");
+  const handleSubmit = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:3001/api/testimonial",
+        {
+          message,
+        }
+      );
+
+      setMessage("");
+      if (response.status === 200) {
+        toast.success("شكراً لمشاركة رأيك ");
+      } else {
+        toast.error("الرجاء التأكّد من ملأ الرسالة");
+      }
+    } catch (error) {
+      toast.error("الرجاء التأكّد من ملأ الرسالة");
+    }
+  };
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -104,7 +127,12 @@ const Responsive = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center text-center bg-third  ">
+    <div
+      id="testimonial"
+      className="flex flex-col justify-center items-center text-center bg-third  "
+    >
+      <ToastContainer />
+
       <div>
         {" "}
         <div className="">
@@ -146,6 +174,37 @@ const Responsive = () => {
             text="لا يوجد أفضل من توفيق! إنه يفهم تمامًا احتياجات العميل ويقدم حلاً فعّالاً ومتميزاً. شكراً لك!"
           />
         </Slider>
+      </div>
+      <div className="mb-4 mt-10 flex flex-col gap-2" id="ibmsemi">
+        <label htmlFor="name" className="text-white text-xl">
+          إذا تحــــب تحـــط رأيــــك
+        </label>
+        <div className="flex flex-row-reverse gap-2">
+          {" "}
+          <input
+            value={message} // Add this line
+            onChange={(e) => setMessage(e.target.value)}
+            type="text"
+            id="name"
+            name="name"
+            placeholder=" اسمك هنا مع الرسالة"
+            className="w-[75vw] text-right p-2 mt-2 border border-third rounded-md shadow-[#0e0e0e] shadow-lg  placeholder:text-third/50 placeholder:text-right"
+          />
+          <Image
+            src={Finger}
+            alt="Finger"
+            priority
+            layout="/"
+            className="w-[48px]  finger"
+          />{" "}
+        </div>
+        <button
+          id="ibmbold"
+          onClick={handleSubmit}
+          className="bg-white text-second p-2 rounded-md mt-4 w-[50%] mx-auto"
+        >
+          أرســل رأيــــك
+        </button>
       </div>
     </div>
   );

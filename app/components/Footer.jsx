@@ -28,25 +28,25 @@ const Footer = () => {
           الرئيسية
         </Link>
         <Link
-          href="#main"
+          href="#services"
           className="hover:text-second hover:bg-main hover:p-2 rounded"
         >
           خدماتي
         </Link>
         <Link
-          href="#main"
+          href="#portfolio"
           className="hover:text-second hover:bg-main hover:p-2 rounded"
         >
           أعمالي
         </Link>
         <Link
-          href="#main"
+          href="#testimonial"
           className="hover:text-second hover:bg-main hover:p-2 rounded"
         >
           آراء العملاء
         </Link>
         <Link
-          href="#main"
+          href="#contact"
           className="hover:text-second hover:bg-main hover:p-2 rounded"
         >
           {" "}
