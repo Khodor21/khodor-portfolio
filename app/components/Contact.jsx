@@ -10,7 +10,7 @@ import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const Contact = () => {
+function Contact() {
   const [formRef, formInView] = useInView({
     rootMargin: "-100px 0px", // Adjust the rootMargin as needed
   });
@@ -180,6 +180,6 @@ const Contact = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Contact;

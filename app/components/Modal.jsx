@@ -70,7 +70,7 @@ const Modal = ({ project, onClose }) => {
             initial={{ y: -50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -50, opacity: 0 }}
-            className="p-4 rounded-md bg-white max-w-md w-full"
+            className="p-4 rounded-md bg-white max-w-md w-[90%]"
           >
             <Slider {...settings}>
               {project.images &&

@@ -6,6 +6,7 @@ import { BsTelephoneInbound } from "react-icons/bs";
 import { motion } from "framer-motion";
 import MainLogo from "../assets/MainLogo.svg";
 import NavSide from "./NavSide";
+import { Example } from "../inview/Example";
 import Image from "next/image";
 import Link from "next/link";
 

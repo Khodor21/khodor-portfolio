@@ -1,19 +1,15 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Modal from "./Modal";
 import Image from "next/image";
-import Texture from "../assets/Texture.svg";
-import TextureWithNoStars from "../assets/TextureWithNoStars.svg";
+import Modal from "../components/Modal";
 
-const Portfolio = () => {
+function Projects() {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentFilter, setCurrentFilter] = useState(null);
   const [selectedItem, setSelectedItem] = useState(null);
-  const [currentImage, setCurrentImage] = useState(Texture);
-
   useEffect(() => {
     const fetchProjects = async () => {
       try {
@@ -36,14 +32,8 @@ const Portfolio = () => {
     };
 
     fetchProjects();
-    const intervalId = setInterval(() => {
-      setCurrentImage((prevImage) =>
-        prevImage === Texture ? TextureWithNoStars : Texture
-      );
-    }, 1000);
-
-    return () => clearInterval(intervalId);
   }, []);
+
   const handleFilterChange = (filter) => {
     setCurrentFilter(filter);
     setSelectedItem(null);
@@ -71,39 +61,33 @@ const Portfolio = () => {
   }
 
   return (
-    <div id="portfolio" className="text-center bg-main relative">
-      <div className="flex justify-end">
-        <Image
-          src={currentImage}
-          priority
-          alt="Services Title"
-          className="w-[20rem] md:w-[28rem] mx-4"
-        />
-      </div>
-
-      <h3
-        className="mb-6 mt-2 text-third text-right mx-6 md:text-lg"
-        id="ibmsemi"
-      >
-        خدمات متميزة تســــاعدك علــى تحقيـق أهدافك وتطوير مشروعك بكفاءة عالية
-      </h3>
-
-      <div id="arabic" className="flex justify-center mb-4">
+    <div className="container mx-auto px-4">
+      <div className="mb-4">
         <button
           onClick={() => handleFilterChange("design")}
-          className={`mx-4 w-24 p-2 border border-third rounded-sm ${
-            currentFilter === "design" ? " bg-third text-main" : "text-third"
+          className={`mr-2 px-4 py-2 ${
+            currentFilter === "design"
+              ? "bg-blue-500 text-white"
+              : "bg-gray-300"
           }`}
         >
-          تصاميم
+          Design
         </button>
         <button
           onClick={() => handleFilterChange("web")}
-          className={`mx-4 w-24 p-2 rounded-sm border border-third  ${
-            currentFilter === "web" ? " bg-third text-main" : "text-third"
+          className={`mr-2 px-4 py-2 ${
+            currentFilter === "web" ? "bg-blue-500 text-white" : "bg-gray-300"
           }`}
         >
-          برمجة
+          Website
+        </button>
+        <button
+          onClick={handleShowAll}
+          className={`px-4 py-2 ${
+            !currentFilter ? "bg-blue-500 text-white" : "bg-gray-300"
+          }`}
+        >
+          Show All
         </button>
       </div>
       <div className="pt-6">
@@ -137,6 +121,6 @@ const Portfolio = () => {
       )}
     </div>
   );
-};
+}
 
-export default Portfolio;
+export default Projects;
