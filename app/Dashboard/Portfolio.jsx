@@ -18,7 +18,7 @@ const PortfolioForm = () => {
         formData.append("images", imgFile);
       });
       const response = await axios.post(
-        "http://localhost:3001/api/portfolio",
+        "https://portfolio-backend2024.vercel.app/api/portfolio",
         formData
       );
 

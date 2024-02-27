@@ -17,7 +17,9 @@ const Portfolio = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/api/portfolio");
+        const response = await axios.get(
+          "https://portfolio-backend2024.vercel.app/api/portfolio"
+        );
 
         const updatedProjects = response.data.map((project) => ({
           ...project,

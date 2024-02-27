@@ -19,7 +19,9 @@ const UserTable = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/api/client");
+        const response = await axios.get(
+          "https://portfolio-backend2024.vercel.app/api/client"
+        );
         const data = response.data;
         setData(data);
       } catch (error) {
