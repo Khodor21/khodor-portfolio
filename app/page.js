@@ -6,6 +6,7 @@ import Portfolio from "./components/Portfolio";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import Testimonial from "./components/Testimonial";
+import ClientWeb from "./components/ClientWeb";
 
 const Page = () => {
   return (
@@ -14,6 +15,7 @@ const Page = () => {
       <Hero />
       <Services />
       <Portfolio />
+      <ClientWeb />
       <Testimonial />
       <Contact />
       <Footer />
