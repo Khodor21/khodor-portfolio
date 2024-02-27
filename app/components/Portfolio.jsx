@@ -10,7 +10,7 @@ const Portfolio = () => {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [currentFilter, setCurrentFilter] = useState(null);
+  const [currentFilter, setCurrentFilter] = useState("web");
   const [selectedItem, setSelectedItem] = useState(null);
   const [currentImage, setCurrentImage] = useState(Texture);
 

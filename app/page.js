@@ -8,7 +8,6 @@ import Footer from "./components/Footer";
 import Testimonial from "./components/Testimonial";
 
 const Page = () => {
-
   return (
     <div>
       <Navbar />
