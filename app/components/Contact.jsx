@@ -1,7 +1,6 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
 import Character from "../assets/ContactCharacter.svg";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,25 +10,6 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function Contact() {
-  const [formRef, formInView] = useInView({
-    rootMargin: "-100px 0px", // Adjust the rootMargin as needed
-  });
-
-  const [imgRef, imgInView] = useInView({
-    rootMargin: "-100px 0px", // Adjust the rootMargin as needed
-  });
-
-  useEffect(() => {
-    if (formInView) {
-      console.log("Form is in view!");
-    }
-  }, [formInView]);
-
-  useEffect(() => {
-    if (imgInView) {
-      console.log("Character image is in view!");
-    }
-  }, [imgInView]);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
