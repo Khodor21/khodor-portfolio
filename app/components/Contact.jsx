@@ -147,7 +147,6 @@ function Contact() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
           className="md:w-1/2 p-8"
-          ref={imgRef} // Add reference to the motion.div
         >
           <Image
             layout=""
