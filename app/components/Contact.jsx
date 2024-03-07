@@ -69,7 +69,6 @@ function Contact() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
           className="md:w-1/2 p-8"
-          ref={formRef}
         >
           <form className="text-third text-right px-6 " onSubmit={handleSubmit}>
             <div className="mb-4" id="arabic">
