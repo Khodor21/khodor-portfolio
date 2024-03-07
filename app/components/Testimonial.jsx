@@ -108,8 +108,8 @@ const Responsive = () => {
       {
         breakpoint: 830,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToShow: 1,
+          slidesToScroll: 1,
           dots: true,
           infinite: true,
         },

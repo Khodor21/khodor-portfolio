@@ -23,7 +23,7 @@ const ServiceCard = ({ image, title, description, icons }) => {
 
   return (
     <motion.div
-      className="border bg-white px-6 h-auto md:h-96" // Set a fixed height for all cards
+      className="border bg-white px-6 h-auto md:h-96"
       variants={cardVariants}
       initial="hidden"
       animate="visible"
@@ -122,7 +122,7 @@ const Services = () => {
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
       >
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center mb-6 mx-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 items-center mb-6 mx-8">
           <motion.div variants={item} transition={{ duration: 1 }}>
             <ServiceCard
               image={WebAppDevelopment}

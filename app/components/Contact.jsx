@@ -62,13 +62,13 @@ function Contact() {
           .التِجاريّــــــة، معـــــــــاً
         </h3>
       </div>{" "}
-      <div className="flex flex-col-reverse md:flex-row items-center justify-center min-h-screen bg-main">
+      <div className="flex flex-col-reverse lg:flex-row items-center justify-center min-h-screen bg-main">
         {/* Form Section */}
         <motion.div
           initial={{ opacity: 0, x: -100 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
-          className="md:w-1/2 p-8"
+          className="lg:w-1/2 p-8"
         >
           <form className="text-third text-right px-6 " onSubmit={handleSubmit}>
             <div className="mb-4" id="arabic">
@@ -146,7 +146,7 @@ function Contact() {
           initial={{ opacity: 0, x: 100 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
-          className="md:w-1/2 p-8"
+          className="w-[70%] lg:w-1/2 p-8"
         >
           <Image
             layout=""
