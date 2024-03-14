@@ -9,6 +9,12 @@
   font-style: normal;
 }
 @font-face {
+  font-family: "Gelasio";
+  src: url("./fonts/Gelasio-Italic.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
   font-family: "Poppins-Medium";
   src: url("./fonts/Poppins-Medium.ttf") format("truetype");
   font-weight: normal;
@@ -103,6 +109,9 @@ body {
 }
 #poppins {
   font-family: "Poppins-Medium";
+}
+#gelasio {
+  font-family: "Gelasio";
 }
 #lateef {
   font-family: "Lateef-Bold";
