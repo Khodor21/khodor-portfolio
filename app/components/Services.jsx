@@ -4,14 +4,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import Title from "../assets/ServicesTitle.svg";
-import WebAppDevelopment from "../assets/WebAppDevelopment.svg";
-import SocialMediaDesign from "../assets/SocialMediaDesign.svg";
-import AdvertisementsDesign from "../assets/AdvertisementsDesign.svg";
+import WebAppDevelopment from "../assets/Coding.svg";
+import SocialMediaDesign from "../assets/Design.svg";
+import AdvertisementsDesign from "../assets/Video.svg";
 import NextJs from "../assets/Nextjs.svg";
 import Nodejs from "../assets/Nodejs.svg";
 import MongoDB from "../assets/MongoDB.svg";
 import Figma from "../assets/Figma.svg";
-import Blender from "../assets/Blender.svg";
 import AdobePremiere from "../assets/Adobe Premiere.svg";
 import RightArrow from "../assets/RightArrow.svg";
 
@@ -23,18 +22,13 @@ const ServiceCard = ({ image, title, description, icons }) => {
 
   return (
     <motion.div
-      className="border bg-white px-6 h-auto md:h-96"
+      className="border bg-main px-6 h-auto"
       variants={cardVariants}
       initial="hidden"
       animate="visible"
     >
-      <div id="services" className="h-48 flex items-center justify-center">
-        <Image
-          src={image}
-          priority
-          alt=""
-          className="border object-contain h-full"
-        />
+      <div id="services" className="my-4 h-28 flex items-center justify-center">
+        <Image src={image} priority alt="" className="h-full" />
       </div>
       <h3 className="mb-2 text-third text-lg" id="arabic">
         {title}
@@ -42,7 +36,7 @@ const ServiceCard = ({ image, title, description, icons }) => {
       <p id="ibmsemi" className="text-third/70 text-base">
         {description}
       </p>
-      <div className="flex flex-col lg:flex-row lg:justify-between lg:pb-2 justify-center items-center gap-2 pt-4">
+      <div className="flex flex-col lg:pb-2 justify-center items-center gap-2 pt-4">
         <div className="flex flex-wrap gap-2 justify-center md:justify-start">
           {icons.map((icon, index) => (
             <div key={index} className="bg-third rounded-full p-2 mb-2 md:mb-0">
@@ -113,16 +107,17 @@ const Services = () => {
           className="mb-6 mt-2 text-main text-right mx-10 md:text-lg"
           id="ibmsemi"
         >
-          خدمات متميزة تســــاعدك علــى تحقيـق أهدافك وتطوير مشروعك بكفاءة عالية
+          خَدمات متميّزة تُســــاعدك عَلــى تحقِيـق أهدَافك وتطْوير مَشروعك
+          بِكَفاءة عَاليّة
         </h3>
       </motion.div>
       <motion.div
-        className="container"
+        className=""
         variants={container}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
       >
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 items-center mb-6 mx-8">
+        <div className="flex flex-col justify-center items-center lg:flex-row gap-4 mb-6 mx-8">
           <motion.div variants={item} transition={{ duration: 1 }}>
             <ServiceCard
               image={WebAppDevelopment}
@@ -135,7 +130,7 @@ const Services = () => {
             <ServiceCard
               image={SocialMediaDesign}
               title="تصــــــاميـــم ســــوشــل ميديـــــــا"
-              description="تصميم محتوى جذاب لوسائط التواصل الاجتماعي. أُساعدك في بناء هوية قوية على منصات التواصل الاجتماعي"
+              description="تصميم محتوى جذاب لوسائط التواصل الاجتماعي. أُساعدك في بناء هوية قوية لمنصات التواصل الاجتماعي"
               icons={[Figma]}
             />
           </motion.div>
@@ -144,7 +139,7 @@ const Services = () => {
               image={AdvertisementsDesign}
               title="تصميــــم فيديوهــــات إعلانيّــــــة"
               description="إنشاء فيديوهات إعلانية فاعلة ومبتكرة. أُقدم خدمات الإنتاج الفني بجودة عالية لتعزيز علامتك التجارية"
-              icons={[Blender, AdobePremiere]}
+              icons={[AdobePremiere]}
             />{" "}
           </motion.div>
         </div>

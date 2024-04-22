@@ -62,7 +62,7 @@ function Contact() {
           .التِجاريّــــــة، معـــــــــاً
         </h3>
       </div>{" "}
-      <div className="flex flex-col-reverse lg:flex-row items-center justify-center min-h-screen bg-main">
+      <div className="flex flex-col-reverse lg:flex-row items-center justify-center bg-main">
         {/* Form Section */}
         <motion.div
           initial={{ opacity: 0, x: -100 }}
@@ -123,9 +123,9 @@ function Contact() {
             <div id="ibmsemi" className="flex flex-col justify-center">
               <button
                 type="submit"
-                className="custom-button py-2 px-4 rounded-md"
+                className="custom-button py-2 px-4 rounded-md tracking-wide"
               >
-                ارســــــال
+                إرســــــال
               </button>
               <div className="text-main flex justify-center gap-10 p-4">
                 <Link href="https://wa.me/">
@@ -146,7 +146,7 @@ function Contact() {
           initial={{ opacity: 0, x: 100 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
-          className="w-[70%] lg:w-1/2 p-8"
+          className="w-[70%] lg:w-1/2 px-8"
         >
           <Image
             layout=""

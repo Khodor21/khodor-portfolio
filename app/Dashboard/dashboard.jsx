@@ -8,7 +8,7 @@ import {
 } from "@tremor/react";
 import UsersTable from "./FormDetails.jsx";
 import Portfolio from "./Portfolio.jsx";
-import ProjectPostForm from "./Project.jsx";
+import ProjectForm from "./Project.jsx";
 
 const Dashboard = () => {
   return (
@@ -36,7 +36,7 @@ const Dashboard = () => {
             <TabPanel>Hello Message</TabPanel>
             <TabPanel className="flex flex-col gap-2">
               <Portfolio />
-              <ProjectPostForm />
+              <ProjectForm />
             </TabPanel>
           </TabPanels>
         </TabGroup>

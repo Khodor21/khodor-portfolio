@@ -76,10 +76,10 @@ const Portfolio = () => {
     <div id="portfolio" className="text-center bg-main relative">
       <div className="flex justify-end">
         <Image
-          src={currentImage}
+          src={Texture}
           priority
           alt="Services Title"
-          className="w-[20rem] md:w-[28rem] mx-4"
+          className="w-[20rem] md:w-[28rem] mx-4 mt-6"
         />
       </div>
 
@@ -87,7 +87,8 @@ const Portfolio = () => {
         className="mb-6 mt-2 text-third text-right mx-6 md:text-lg"
         id="ibmsemi"
       >
-        خدمات متميزة تســــاعدك علــى تحقيـق أهدافك وتطوير مشروعك بكفاءة عالية
+        تمثل هذه المشاريع جهودي وإبداعاتي في مجالات متعددة. تفضل بالاطلاع على
+        بعض المشاريع التي قمت بتنفيذها
       </h3>
 
       <div id="arabic" className="flex justify-center mb-4">
@@ -114,7 +115,7 @@ const Portfolio = () => {
             <div
               key={idx}
               onClick={() => handleProjectClick(project)}
-              className="mb-4 project-container relative"
+              className="mb-4 project-container relative border-[1px] border-second shadow-2xl"
             >
               <Image
                 key={0}
@@ -127,7 +128,7 @@ const Portfolio = () => {
               />
               <div className="overlay">
                 <div className="overlay-content">
-                  <h4 className="text-white">{project.title}</h4>
+                  <h4 className="text-main">{project.title}</h4>
                 </div>
               </div>
             </div>

@@ -14,11 +14,11 @@ const Footer = () => {
           layout="/"
           src={MainLogo}
           priority
-          className="mx-auto w-16 md:w-24 mt-10"
+          className="mx-auto w-24 md:w-32 mt-6"
         />
       </div>
       <div
-        className="flex flex-row-reverse gap-4 md:gap-16 border-b-2 border-[#e0e0e0] justify-center items-center text-white"
+        className="flex flex-row-reverse gap-4 md:gap-16 border-b-2 border-[#e0e0e0] justify-center items-center text-main"
         id="ibmbold"
       >
         <Link
@@ -53,7 +53,7 @@ const Footer = () => {
           تواصل معي
         </Link>
       </div>
-      <div className="my-2 text-main" id="poppins">
+      <div className="my-2 text-main tracking-widest lora">
         {" "}
         © {currentYear} Khodor Hasan. All rights reserved.
       </div>

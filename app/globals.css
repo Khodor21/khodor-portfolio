@@ -3,23 +3,19 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "Poppins-Bold";
-  src: url("./fonts/Poppins-Bold.ttf") format("truetype");
+  font-family: "Lora-Medium";
+  src: url("./fonts/Lora-Medium.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
+
 @font-face {
   font-family: "Gelasio";
   src: url("./fonts/Gelasio-Italic.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
-@font-face {
-  font-family: "Poppins-Medium";
-  src: url("./fonts/Poppins-Medium.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
+
 @font-face {
   font-family: "IBMPlexSansArabic-SemiBold";
   src: url("./fonts/IBMPlexSansArabic-SemiBold.ttf");
@@ -62,13 +58,18 @@
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: "Changa-Medium";
+  src: url("./fonts/Changa-Medium.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
 
 html,
 body {
   background-color: #fdfdfd;
   overflow-x: hidden;
   scroll-behavior: smooth;
-  font-family: "Poppins-Meduim";
 }
 @keyframes cloud {
   0% {
@@ -107,11 +108,18 @@ body {
   animation: cloud1 10s infinite ease-in-out;
   animation-direction: alternate;
 }
-#poppins {
-  font-family: "Poppins-Medium";
-}
+
 #gelasio {
   font-family: "Gelasio";
+}
+.gelasio {
+  font-family: "Gelasio";
+}
+.changa {
+  font-family: "Changa-Medium";
+}
+.lora {
+  font-family: "Lora-Medium";
 }
 #lateef {
   font-family: "Lateef-Bold";
@@ -131,9 +139,7 @@ body {
 #elmessiri {
   font-family: "ElMessiri-SemiBold";
 }
-#englishBold {
-  font-family: "Poppins-Bold";
-}
+
 #swissra {
   font-family: "Swissra-Bold";
 }
@@ -146,12 +152,12 @@ body {
   }
 }
 .custom-button {
-  background: linear-gradient(to right, #381668, #8337ee);
+  background: linear-gradient(to right, #063e0c, #1a5b21);
   color: #f9f9f9;
 }
 
 .custom-button:hover {
-  background: linear-gradient(to right, #8337ee, #381668);
+  background: linear-gradient(to right, #1a5b21, #063e0c);
   color: #f9f9f9;
 }
 .rotate-animation {
@@ -163,7 +169,7 @@ body {
 }
 .icon-link {
   padding: 8px; /* Adjust the padding as needed */
-  background: linear-gradient(to bottom, #8337ee, #381668);
+  background: linear-gradient(to bottom, #1a5b21, #063e0c);
   border-radius: 8px; /* Add border radius for rounded corners */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow for a lifted effect */
 }
@@ -194,7 +200,7 @@ body {
 
 .overlay-content h4 {
   margin: 0;
-  font-size: 1.5rem;
+  font-size: 1rem;
   color: white;
-  font-family: "Lateef-Bold";
+  font-family: "Al-Jazeera-Arabic-Bold";
 }

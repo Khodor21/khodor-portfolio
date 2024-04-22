@@ -14,7 +14,7 @@ function SampleNextArrow(props) {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        background: "#381668",
+        background: "#063E0C",
         padding: "0",
         borderRadius: "50%",
         width: "30px",
@@ -35,7 +35,8 @@ function SamplePrevArrow(props) {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        background: "#381668",
+        background: "#063E0C",
+        color: "#ff0000",
         padding: "0",
         borderRadius: "50%",
         width: "30px",
@@ -86,7 +87,7 @@ const Modal = ({ project, onClose }) => {
                   </div>
                 ))}
             </Slider>
-            <h2 className="text-lg font-bold mb-2" id="arabic">
+            <h2 className="text-lg font-bold mb-2 text-third" id="arabic">
               {project.title}
             </h2>
             {project.subtitle && (
@@ -95,7 +96,7 @@ const Modal = ({ project, onClose }) => {
               </p>
             )}
             <button
-              className="p-2 w-full custom-button rounded-md"
+              className="p-2 text-main w-full custom-button rounded-md"
               onClick={onClose}
               id="arabic"
             >

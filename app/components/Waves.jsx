@@ -8,7 +8,7 @@ const Waves = () => {
           className="wave waveBottom"
           style={{
             backgroundImage:
-              " url('https://firebasestorage.googleapis.com/v0/b/cloud-image-21153.appspot.com/o/wave-dark.png?alt=media&token=36b1a1f5-3ea6-4473-83a7-631ecf4df947')",
+              " url('https://firebasestorage.googleapis.com/v0/b/cloud-image-21153.appspot.com/o/wave-darkGreen.png?alt=media&token=8c201776-9954-4b49-93ec-cf8b855a2004')",
           }}
         ></div>
       </div>
@@ -16,7 +16,7 @@ const Waves = () => {
         <div
           className="wave waveMiddle"
           style={{
-            backgroundImage: `url('https://firebasestorage.googleapis.com/v0/b/cloud-image-21153.appspot.com/o/wave-purple.png?alt=media&token=0a4bd48e-370b-4358-812f-c7c00bc84728')`,
+            backgroundImage: `url('https://firebasestorage.googleapis.com/v0/b/cloud-image-21153.appspot.com/o/wave-green.png?alt=media&token=e8e926b2-6343-4f65-b13e-aca5a875e8bc)`,
           }}
         ></div>
       </div>
@@ -24,7 +24,7 @@ const Waves = () => {
         <div
           className="wave waveBottom"
           style={{
-            backgroundImage: `url('https://firebasestorage.googleapis.com/v0/b/cloud-image-21153.appspot.com/o/wave-purple.png?alt=media&token=0a4bd48e-370b-4358-812f-c7c00bc84728')`,
+            backgroundImage: `url('https://firebasestorage.googleapis.com/v0/b/cloud-image-21153.appspot.com/o/wave-darkGreen.png?alt=media&token=8c201776-9954-4b49-93ec-cf8b855a2004')`,
           }}
         ></div>
       </div>

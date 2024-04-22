@@ -9,7 +9,7 @@ import Testimonial from "./components/Testimonial";
 
 const Page = () => {
   return (
-    <div>
+    <div className="bg-main">
       <Navbar />
       <Hero />
       <Services />

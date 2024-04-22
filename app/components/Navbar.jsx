@@ -6,10 +6,9 @@ import { BsTelephoneInbound } from "react-icons/bs";
 import { motion } from "framer-motion";
 import MainLogo from "../assets/MainLogo.svg";
 import NavSide from "./NavSide";
-import { Example } from "../inview/Example";
 import Image from "next/image";
 import Link from "next/link";
-
+import "fontsource-lora";
 const Navbar = () => {
   const topDataVariants = {
     hidden: { opacity: 0, y: -50 },
@@ -36,7 +35,7 @@ const Navbar = () => {
             <div className="flex pl-4">
               <Image
                 src={MainLogo}
-                className="lg:w-20 md:w-16 w-12 mr-2"
+                className="lg:w-24 md:w-20 w-16 mr-2"
                 alt="خضر حسن"
               />
             </div>
@@ -62,10 +61,10 @@ const Navbar = () => {
             <div>
               <button className="bg-second rounded-xl shadow-xl text-main lg:flex hidden">
                 <Link href="tel:+961-71708103">
-                  <p className={`my-2 mx-4 flex gap-2`} id="englishBold">
-                    <BsTelephoneInbound />
-                    +961-71708103
-                  </p>
+                  <div className="my-2 mx-4 flex gap-2">
+                    <BsTelephoneInbound className="mt-1" />
+                    <p className="lora tracking-[1px]">+961-71708103</p>
+                  </div>
                 </Link>
               </button>
               <button className="lg:hidden" onClick={handleNav}>
