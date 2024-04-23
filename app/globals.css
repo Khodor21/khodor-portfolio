@@ -127,7 +127,13 @@ body {
 #arabic {
   font-family: "Al-Jazeera-Arabic-Bold";
 }
+.arabic {
+  font-family: "Al-Jazeera-Arabic-Bold";
+}
 #ibmsemi {
+  font-family: "IBMPlexSansArabic-SemiBold";
+}
+.ibmsemi {
   font-family: "IBMPlexSansArabic-SemiBold";
 }
 #ibmbold {

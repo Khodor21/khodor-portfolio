@@ -99,7 +99,7 @@ const Project = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3001/api/projects",
+        "https://portfolio-backend2024.vercel.app/api/projects",
         formData
       );
       console.log("Portfolio data submitted successfully!", response.data);
@@ -113,129 +113,170 @@ const Project = () => {
   };
 
   return (
-    <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-      <label className="text-second justify-start gap-4">
-        Title:
-        <input
-          className="border-2"
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-      </label>
-      <label className="text-second justify-start gap-4">
-        Overview:
-        <input
-          className="border-2"
-          type="text"
-          value={overview}
-          onChange={(e) => setOverview(e.target.value)}
-        />
-      </label>
-
-      {/* Features Section */}
-      <h2>Features</h2>
-      {features.map((feature, index) => (
-        <div key={index} className="flex flex-col gap-2 mb-4">
-          <label>Feature {index + 1}:</label>
-          <div className="flex gap-2">
-            <input
-              type="text"
-              placeholder="Title"
-              value={feature.title}
-              name="title"
-              onChange={(e) => handleFeatureChange(e, index)} // Pass the index
-            />
-            <input
-              type="text"
-              placeholder="Description"
-              value={feature.description}
-              name="description"
-              onChange={(e) => handleFeatureChange(e, index)} // Pass the index
-            />
-            {features.length > 1 && (
-              <button onClick={() => handleRemoveFeature(index)}>Remove</button>
-            )}
-          </div>
-        </div>
-      ))}
-      <button
-        onClick={handleAddFeature}
-        className="bg-second rounded text-main"
+    <>
+      <div className="lg:mx-20 md:mx-16 mx-10 mt-10 border-t">
+        <h3
+          id="ibmbold"
+          className="text-right text-third text-3xl md:text-4xl mt-4"
+        >
+          نشــــــــــــر تفاصــــيل مشــــروع
+        </h3>
+      </div>{" "}
+      <form
+        className="flex flex-col gap-4 mt-6 lg:mx-20 md:mx-16 mx-10"
+        onSubmit={handleSubmit}
       >
-        Add Feature
-      </button>
-      {/* Technologies Section */}
-      <h2>Technologies</h2>
-      {technologies.map((technologie, index) => (
-        <div key={index} className="flex flex-col gap-2 mb-4">
-          <label>Technologies {index + 1}:</label>
-          <div className="flex gap-2">
-            <input
-              type="text"
-              placeholder="Icon Url"
-              value={technologie.icon}
-              name="icon"
-              onChange={(e) => handleTechnologieChange(e, index)}
-            />
-            <input
-              type="text"
-              placeholder="Description"
-              value={technologie.description}
-              name="description"
-              onChange={(e) => handleTechnologieChange(e, index)}
-            />
-            {technologies.length > 1 && (
-              <button onClick={() => handleRemoveTechnologie(index)}>
-                Remove
-              </button>
-            )}
-          </div>
-        </div>
-      ))}
-      <button
-        onClick={handleAddTechnologie}
-        className="bg-second rounded text-main"
-      >
-        Add Technology
-      </button>
+        <label className="text-right arabic text-third flex flex-col gap-2">
+          العنوان
+          <input
+            className="w-full p-2 mt-2 border border-third rounded-sm shadow-xl  placeholder:text-third/50 placeholder:text-right"
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </label>
+        <label className="text-right arabic text-third">
+          نظــرة سريعة{" "}
+          <input
+            className="w-full p-2 mt-2 border border-third rounded-sm shadow-xl  placeholder:text-third/50 placeholder:text-right"
+            type="text"
+            value={overview}
+            onChange={(e) => setOverview(e.target.value)}
+          />
+        </label>
 
-      {/* Main Section */}
-      <h2>Main Sections</h2>
-      {main.map((mainn, index) => (
-        <div key={index} className="flex flex-col gap-2 mb-4">
-          <label>Main Sections {index + 1}:</label>
-          <div className="flex gap-2">
-            <input
-              type="text"
-              placeholder="Description"
-              value={mainn.description}
-              name="description"
-              onChange={(e) => handleMainChange(e, index)}
-            />
-            {main.length > 1 && (
-              <button onClick={() => handleRemoveMain(index)}>Remove</button>
-            )}
+        {/* Features Section */}
+        <h2 className="text-right arabic text-third">المميـــــزات</h2>
+        {features.map((feature, index) => (
+          <div key={index} className="flex flex-col gap-2 mb-4">
+            <label className="text-right arabic text-third">
+              الميزة {index + 1}
+            </label>
+            <div className="flex justify-end gap-2" id="arabic">
+              <input
+                type="text"
+                placeholder="الوصف"
+                value={feature.description}
+                name="description"
+                onChange={(e) => handleFeatureChange(e, index)}
+                className="w-full p-2 mt-2 border border-third rounded-sm shadow-xl  placeholder:text-third/50 placeholder:text-right placeholder:ibmsemi"
+              />{" "}
+              <input
+                className="w-full p-2 mt-2 border border-third rounded-sm shadow-xl  placeholder:text-third/50 placeholder:text-right placeholder:ibmsemi"
+                type="text"
+                placeholder="العنوان"
+                value={feature.title}
+                name="title"
+                onChange={(e) => handleFeatureChange(e, index)}
+              />
+              {features.length > 1 && (
+                <button
+                  className="text-[#b33232] ibmsemi"
+                  onClick={() => handleRemoveFeature(index)}
+                >
+                  إزالــة
+                </button>
+              )}
+            </div>
           </div>
-        </div>
-      ))}
-      <button onClick={handleAddMain} className="bg-second rounded text-main">
-        Add Main Section
-      </button>
+        ))}
+        <button
+          onClick={handleAddFeature}
+          className="bg-second rounded text-main arabic mx-1"
+        >
+          إضــــافة ميــزة
+        </button>
+        {/* Technologies Section */}
+        <h2 className="text-right arabic text-third">التقنيــــات</h2>
+        {technologies.map((technologie, index) => (
+          <div key={index} className="flex flex-col gap-2 mb-4">
+            <label className="text-right arabic text-third">
+              القنية {index + 1}
+            </label>
+            <div className="flex justify-end gap-2" id="arabic">
+              <input
+                className="w-full p-2 mt-2 border border-third rounded-sm shadow-xl  placeholder:text-third/50 placeholder:text-right placeholder:ibmsemi"
+                type="text"
+                placeholder="الوصف"
+                value={technologie.description}
+                name="description"
+                onChange={(e) => handleTechnologieChange(e, index)}
+              />{" "}
+              <input
+                className="w-full p-2 mt-2 border border-third rounded-sm shadow-xl  placeholder:text-third/50 placeholder:text-right placeholder:ibmsemi"
+                type="text"
+                placeholder="رابط الأيقونة"
+                value={technologie.icon}
+                name="icon"
+                onChange={(e) => handleTechnologieChange(e, index)}
+              />
+              {technologies.length > 1 && (
+                <button
+                  className="text-[#b33232] ibmsemi"
+                  onClick={() => handleRemoveTechnologie(index)}
+                >
+                  إزالــة
+                </button>
+              )}
+            </div>
+          </div>
+        ))}
+        <button
+          onClick={handleAddTechnologie}
+          className="bg-second rounded text-main arabic mx-1"
+        >
+          إضــــافة تقنــــية{" "}
+        </button>
 
-      <label>
-        Image:
-        <input
-          multiple
-          type="file"
-          accept="image/*"
-          onChange={handleImageChange}
-        />
-      </label>
-      <button className="bg-second rounded text-main" type="submit">
-        <p className="m-2">Submit</p>
-      </button>
-    </form>
+        {/* Main Section */}
+        <h2 className="text-right arabic text-third">الفقرات الأساسية</h2>
+        {main.map((mainn, index) => (
+          <div key={index} className="flex flex-col gap-2 mb-4" id="arabic">
+            <label className="text-right arabic text-third">
+              الفقرة {index + 1}
+            </label>
+            <div className="flex gap-2">
+              <input
+                type="text"
+                placeholder="الوصف"
+                value={mainn.description}
+                name="description"
+                onChange={(e) => handleMainChange(e, index)}
+                className="w-full p-2 mt-2 border border-third rounded-sm shadow-xl  placeholder:text-third/50 placeholder:text-right placeholder:ibmsemi"
+              />
+              {main.length > 1 && (
+                <button
+                  className="text-[#b33232] ibmsemi"
+                  onClick={() => handleRemoveMain(index)}
+                >
+                  إزالــة
+                </button>
+              )}
+            </div>
+          </div>
+        ))}
+        <button
+          onClick={handleAddMain}
+          className="bg-second rounded text-main arabic mx-1"
+        >
+          إضــــافة الفقــرات
+        </button>
+
+        <label className="text-right arabic text-third">
+          إضــــافة الصورة
+          <input
+            multiple
+            type="file"
+            accept="image/*"
+            onChange={handleImageChange}
+            className="bg-third text-main rounded shadow-2xl shadow-third w-full p-2 mt-2"
+          />
+        </label>
+        <button className="bg-second rounded text-main" type="submit">
+          <p className="m-2">Submit</p>
+        </button>
+      </form>
+    </>
   );
 };
 

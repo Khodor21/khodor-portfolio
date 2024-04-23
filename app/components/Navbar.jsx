@@ -41,17 +41,20 @@ const Navbar = () => {
             </div>
             <div id="arabic" className="text-second">
               <div className="lg:flex gap-14 hidden text-xl flex-row-reverse">
-                <Link href="#services" className="hover:underline rounded px-2">
+                <Link
+                  href="/#services"
+                  className="hover:underline rounded px-2"
+                >
                   خدماتي{" "}
                 </Link>{" "}
-                <Link href="#works" className="hover:underline rounded px-2">
+                <Link href="/#works" className="hover:underline rounded px-2">
                   أعمالي{" "}
                 </Link>
-                <Link href="#contact" className="hover:underline rounded px-2">
+                <Link href="/#contact" className="hover:underline rounded px-2">
                   تواصل معي
                 </Link>
                 <Link
-                  href="#testimonial"
+                  href="/#testimonial"
                   className="hover:underline rounded px-2"
                 >
                   آراء العملاء

@@ -3,7 +3,7 @@ import Dashboard from "./dashboard";
 
 const page = () => {
   return (
-    <div id="poppins">
+    <div className="bg-main">
       <Dashboard />
     </div>
   );

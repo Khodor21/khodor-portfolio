@@ -12,28 +12,28 @@ import ProjectForm from "./Project.jsx";
 
 const Dashboard = () => {
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4">Dashboard</h1>
-      {/* <TabExample /> */}
+    <div className="mx-auto p-4">
+      <h1 className="text-3xl mb-4 text-right arabic text-second">
+        لوحة التحكّم
+      </h1>
       <Card>
         <TabGroup>
-          <TabList className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <Tab className="bg-blue text-third p-4 rounded-md hover:bg-blue/70 mr-4">
-              Form
+          <TabList className="mt-8 mx-auto flex flex-col-reverse md:flex-row-reverse md:justify-between gap-4">
+            <Tab className="bg-third text-main flex justify-end arabic w-full p-4 rounded-md hover:bg-third/70">
+              الرئيسيَة
             </Tab>
-            <Tab className="bg-green-500 text-third p-4 rounded-md hover:bg-green-700">
-              Message
+            <Tab className="bg-third text-main flex justify-end arabic w-full p-4 rounded-md hover:bg-green-700">
+              الرسائل
             </Tab>
-
-            <Tab className="bg-purple-500 text-third p-4 rounded-md hover:bg-purple-700">
-              Post
+            <Tab className="bg-third text-main flex justify-end arabic w-full p-4 rounded-md hover:bg-third/30">
+              نشر
             </Tab>
           </TabList>
+
           <TabPanels>
-            <TabPanel>
+            <TabPanel className="py-8">
               <UsersTable />
             </TabPanel>
-            <TabPanel>Hello Message</TabPanel>
             <TabPanel className="flex flex-col gap-2">
               <Portfolio />
               <ProjectForm />

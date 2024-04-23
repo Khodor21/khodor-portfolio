@@ -32,27 +32,38 @@ const UserTable = () => {
   }, []);
 
   return (
-    <Card className="p-4 shadow-md">
-      <Title className="text-2xl mb-4">
-        List of Swiss Federal Councillours
+    <Card className="p-4 shadow-md border-t">
+      <Title className="text-2xl mb-4 arabic text-right ">
+        رســـــائل العُملاء{" "}
       </Title>
-      <Table className="w-full border border-gray-300">
+      <Table className="w-full border border-third">
         <TableHead>
-          <TableRow className="bg-gray-100">
-            <TableHeaderCell className="py-2">Name</TableHeaderCell>
-            <TableHeaderCell className="py-2">Email</TableHeaderCell>
-            <TableHeaderCell className="py-2">Message</TableHeaderCell>
+          <TableRow className="bg-third">
+            <TableHeaderCell className="py-2 text-main ibmsemi">
+              الإيميل
+            </TableHeaderCell>
+            <TableHeaderCell className="py-2 text-main ibmsemi">
+              الرسالة
+            </TableHeaderCell>
+            <TableHeaderCell className="py-2 text-main ibmsemi">
+              الإسم
+            </TableHeaderCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {data.map((item) => (
-            <TableRow key={item.name} className="border-t text-center">
-              <TableCell className="py-2">{item.name}</TableCell>
+            <TableRow
+              key={item.name}
+              className="border-t text-center text-third arabic"
+            >
               <TableCell className="py-2">
                 <Text>{item.email}</Text>
               </TableCell>
               <TableCell className="py-2">
                 <Text>{item.message}</Text>
+              </TableCell>
+              <TableCell className="py-2">
+                <Text>{item.name}</Text>
               </TableCell>
             </TableRow>
           ))}
