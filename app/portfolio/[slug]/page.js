@@ -47,22 +47,22 @@ export default function Doc({ params }) {
         <h1 className="mt-8 text-third text-2xl changa">
           التقنيات الأساسية المُستخدمة
         </h1>
-        <div className="mt-3 flex flex-col justify-end items-end text-2xl gap-6">
-          {project.main &&
-            project.technologies.map((technology) => (
-              <div key={technology._id} className="flex items-center gap-4">
-                <h4 className="text-base changa text-third/70">
-                  {technology.description}
-                </h4>
-                <Image
-                  src={technology.icon}
-                  alt={technology.description}
-                  width={32}
-                  height={32}
-                />
-              </div>
-            ))}
-        </div>
+      </div>
+      <div className="mt-3 flex flex-col gap-2 justify-end items-end text-2xl">
+        {project?.technologies?.map((technology) => (
+          <div key={technology._id} className="flex items-center gap-4">
+            <h4 className="text-base changa text-third/70">
+              {technology.description}
+            </h4>{" "}
+            <img
+              src={technology.icon}
+              alt={technology.description}
+              width={28}
+              height={28}
+              className="m-2 flex justify-center items-center"
+            />
+          </div>
+        ))}
       </div>
       {project.features &&
         project.features.map((feature) => (
