@@ -129,7 +129,10 @@ const Hero = () => {
           <Link href="/" className="bg-second rounded-sm text-main">
             <p className="m-2"> أعمالــي</p>
           </Link>
-          <Link href="/" className="border text-second rounded-sm">
+          <Link
+            href="https://www.instagram.com/khodorhasan._/"
+            className="border text-second rounded-sm"
+          >
             <p className="m-2"> انستغرامـي</p>
           </Link>
         </motion.div>

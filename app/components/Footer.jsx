@@ -17,10 +17,7 @@ const Footer = () => {
           className="mx-auto w-24 md:w-32 mt-6"
         />
       </div>
-      <div
-        className="flex flex-row-reverse gap-4 md:gap-16 border-b-2 border-[#e0e0e0] justify-center items-center text-main"
-        id="ibmbold"
-      >
+      <div className="flex flex-row-reverse arabic gap-4 md:gap-16 border-b-2 border-[#e0e0e0] justify-center items-center text-main">
         <Link
           href="#main"
           className="hover:text-second hover:bg-main hover:p-2 rounded"

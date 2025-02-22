@@ -10,13 +10,6 @@
 }
 
 @font-face {
-  font-family: "Gelasio";
-  src: url("./fonts/Gelasio-Italic.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
   font-family: "IBMPlexSansArabic-SemiBold";
   src: url("./fonts/IBMPlexSansArabic-SemiBold.ttf");
   font-weight: normal;
@@ -31,36 +24,6 @@
 @font-face {
   font-family: "Al-Jazeera-Arabic-Bold";
   src: url("./fonts/Al-Jazeera-Arabic Bold.ttf");
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Lateef-Bold";
-  src: url("./fonts/Lateef-Bold.ttf");
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Almarai-Bold";
-  src: url("./fonts/Almarai-Bold.ttf");
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "ElMessiri-SemiBold";
-  src: url("./fonts/ElMessiri-SemiBold.ttf");
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Swissra-Bold";
-  src: url("./fonts/alfont_com_AlFont_com_Swissra-Bold.ttf");
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Changa-Medium";
-  src: url("./fonts/Changa-Medium.ttf");
   font-weight: normal;
   font-style: normal;
 }
@@ -109,15 +72,6 @@ body {
   animation-direction: alternate;
 }
 
-#gelasio {
-  font-family: "Gelasio";
-}
-.gelasio {
-  font-family: "Gelasio";
-}
-.changa {
-  font-family: "Changa-Medium";
-}
 .lora {
   font-family: "Lora-Medium";
 }
@@ -139,16 +93,7 @@ body {
 #ibmbold {
   font-family: "IBMPlexSansArabic-Bold";
 }
-#almarai {
-  font-family: "Almarai-Bold";
-}
-#elmessiri {
-  font-family: "ElMessiri-SemiBold";
-}
 
-#swissra {
-  font-family: "Swissra-Bold";
-}
 @keyframes rotate {
   0% {
     transform: rotate(0deg);
@@ -209,4 +154,23 @@ body {
   font-size: 1rem;
   color: white;
   font-family: "Al-Jazeera-Arabic-Bold";
+}
+/* HTML: <div class="loader"></div> */
+.loader {
+  color: #063e0c;
+  width: 4px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  box-shadow: 19px 0 0 7px, 38px 0 0 3px, 57px 0 0 0;
+  transform: translateX(-38px);
+  animation: l21 0.5s infinite alternate linear;
+}
+
+@keyframes l21 {
+  50% {
+    box-shadow: 19px 0 0 3px, 38px 0 0 7px, 57px 0 0 3px;
+  }
+  100% {
+    box-shadow: 19px 0 0 0, 38px 0 0 3px, 57px 0 0 7px;
+  }
 }

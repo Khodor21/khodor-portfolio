@@ -8,7 +8,7 @@ export default function Doc({ params }) {
   const [project, setProject] = useState({});
   useEffect(() => {
     axios
-      .get(`https://portfolio-backend2024.vercel.app/api/projects/${id}`)
+      .get(`http://localhost:3001/api/projects/${id}`)
       .then((response) => {
         setProject(response.data);
       })

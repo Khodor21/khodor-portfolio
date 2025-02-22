@@ -134,14 +134,6 @@ const Services = () => {
               icons={[Figma]}
             />
           </motion.div>
-          <motion.div variants={item} transition={{ duration: 1 }}>
-            <ServiceCard
-              image={AdvertisementsDesign}
-              title="تصميــــم فيديوهــــات إعلانيّــــــة"
-              description="إنشاء فيديوهات إعلانية فاعلة ومبتكرة. أُقدم خدمات الإنتاج الفني بجودة عالية لتعزيز علامتك التجارية"
-              icons={[AdobePremiere]}
-            />{" "}
-          </motion.div>
         </div>
       </motion.div>
     </div>

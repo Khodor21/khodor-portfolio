@@ -128,13 +128,13 @@ function Contact() {
                 إرســــــال
               </button>
               <div className="text-main flex justify-center gap-10 p-4">
-                <Link href="https://wa.me/">
+                <Link href="https://wa.me/96171708103">
                   <FaWhatsapp size="38" className="icon-link" />
                 </Link>
-                <Link href="https://www.instagram.com/">
+                <Link href="https://www.instagram.com/khodorhasan._/">
                   <FaInstagram size="38" className="icon-link" />
                 </Link>
-                <Link href="mailto:">
+                <Link href="mailto:khodorhasan17@gmail.com">
                   <FaEnvelope size="38" className="icon-link" />
                 </Link>
               </div>
