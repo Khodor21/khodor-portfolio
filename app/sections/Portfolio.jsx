@@ -2,14 +2,14 @@
 import React, { useState, useEffect } from "react";
 import Modal from "./Modal";
 import Image from "next/image";
-import Texture from "../assets/Texture.svg";
-import TextureWithNoStars from "../assets/TextureWithNoStars.svg";
+import Texture from "../assets/images/Texture.svg";
+import TextureWithNoStars from "../assets/images/TextureWithNoStars.svg";
+import PortfolioTitle from "../assets/images/PortfolioTitle.svg";
+
 import { data } from "../data/data";
 
 const Portfolio = () => {
   const [projects, setProjects] = useState(data);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
   const [currentFilter, setCurrentFilter] = useState("design");
   const [selectedItem, setSelectedItem] = useState(null);
   const [currentImage, setCurrentImage] = useState(Texture);
@@ -41,29 +41,23 @@ const Portfolio = () => {
     : projects;
 
   return (
-    <div id="portfolio" className="text-center bg-main relative">
-      <div className="flex justify-end">
-        <Image
-          src={Texture}
-          priority
-          alt="Services Title"
-          className="w-[20rem] md:w-[28rem] mx-4 mt-6"
-        />
-      </div>
+    <div id="portfolio" className="text-center bg-black relative">
+      <Image
+        src={PortfolioTitle}
+        priority
+        className="w-[15rem] md:w-[20rem] mx-auto"
+        alt="Where is the Image?"
+        layout="/"
+      />
 
-      <h3
-        className="mb-6 mt-2 text-third text-right mx-6 md:text-lg"
-        id="ibmsemi"
-      >
-        تمثل هذه المشاريع جهودي وإبداعاتي في مجالات متعددة. تفضل بالاطلاع على
-        بعض المشاريع التي قمت بتنفيذها
+      <h3 className="mb-6 ibmbold text-green text-center mx-6 text-sm md:text-lg">
+        نتائج تهمّك: تصميم يشدّ، تجربة تبقى، وتطوير يشتغل بذكاء
       </h3>
-
-      <div id="arabic" className="flex justify-center mb-4">
+      <div className="flex justify-center mb-4 ">
         <button
           onClick={() => handleFilterChange("design")}
-          className={`mx-4 w-24 p-2 border border-third rounded-sm ${
-            currentFilter === "design" ? " bg-third text-main" : "text-third"
+          className={`mx-4 w-24 p-2 border text-sm ibmbold rounded-sm ${
+            currentFilter === "design" ? " bg-white text-black" : "text-third"
           }`}
         >
           تصاميم
@@ -81,8 +75,8 @@ const Portfolio = () => {
               <Image
                 src={project.imageCover}
                 alt={project.title}
-                width={500}
-                height={400}
+                width={600}
+                height={300}
                 className=""
               />
               <div className="overlay">

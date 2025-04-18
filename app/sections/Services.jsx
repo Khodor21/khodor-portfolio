@@ -3,16 +3,14 @@ import React, { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
-import Title from "../assets/ServicesTitle.svg";
-import WebAppDevelopment from "../assets/Coding.svg";
-import SocialMediaDesign from "../assets/Design.svg";
-import AdvertisementsDesign from "../assets/Video.svg";
-import NextJs from "../assets/Nextjs.svg";
-import Nodejs from "../assets/Nodejs.svg";
-import MongoDB from "../assets/MongoDB.svg";
-import Figma from "../assets/Figma.svg";
-import AdobePremiere from "../assets/Adobe Premiere.svg";
-import RightArrow from "../assets/RightArrow.svg";
+import Title from "../assets/images/ServicesTitle.svg";
+import WebAppDevelopment from "../assets/images/Coding.svg";
+import SocialMediaDesign from "../assets/images/Design.svg";
+import NextJs from "../assets/images/Nextjs.svg";
+import Nodejs from "../assets/images/Nodejs.svg";
+import MongoDB from "../assets/images/MongoDB.svg";
+import Figma from "../assets/images/Figma.svg";
+import RightArrow from "../assets/images/RightArrow.svg";
 
 const ServiceCard = ({ image, title, description, icons }) => {
   const cardVariants = {
@@ -22,7 +20,7 @@ const ServiceCard = ({ image, title, description, icons }) => {
 
   return (
     <motion.div
-      className="border bg-main px-6 h-auto"
+      className="border px-6 h-auto"
       variants={cardVariants}
       initial="hidden"
       animate="visible"
@@ -86,7 +84,7 @@ const Services = () => {
     },
   };
   return (
-    <div className="text-center bg-third pb-4">
+    <div className="text-center pb-4">
       <motion.div
         ref={ref}
         initial="hidden"

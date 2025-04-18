@@ -1,6 +1,6 @@
 import React from "react";
 import Projects from "./projects";
-import Navbar from "../components/Navbar";
+import Navbar from "../sections/Navbar";
 
 const page = () => {
   return (

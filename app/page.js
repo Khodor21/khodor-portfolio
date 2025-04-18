@@ -1,21 +1,21 @@
 import React from "react";
-import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import Services from "./components/Services";
-import Portfolio from "./components/Portfolio";
-import Contact from "./components/Contact";
-import Footer from "./components/Footer";
-import Testimonial from "./components/Testimonial";
+import Navbar from "./sections/Navbar";
+import Hero from "./sections/Hero";
+import Services from "./sections/Services";
+import Portfolio from "./sections/Portfolio";
+import Contact from "./sections/Contact";
+import Footer from "./sections/Footer";
+import Testimonial from "./sections/Testimonial";
 
 const Page = () => {
   return (
-    <div className="bg-main">
+    <div className="bg-black">
       <Navbar />
       <Hero />
-      <Services />
       <Portfolio />
+      <Services />
       <Testimonial />
-      <Contact />
+      {/* <Contact /> */}
       <Footer />
     </div>
   );

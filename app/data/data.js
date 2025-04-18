@@ -1,9 +1,9 @@
-import BannerDental from "../assets/Dental Banner.jpg";
-import DrinkBanner from "../assets/Energy Drink.jpg";
+import BannerDental from "../assets/images/Dental Banner.jpg";
+import DrinkBanner from "../assets/images/Energy Drink.jpg";
 
-import ImageOne from "../assets/Dental-One.jpg";
-import ImageTwo from "../assets/Dental-Two.jpg";
-import ImageThree from "../assets/Dental-Three.jpg";
+import ImageOne from "../assets/images/Dental-One.jpg";
+import ImageTwo from "../assets/images/Dental-Two.jpg";
+import ImageThree from "../assets/images/Dental-Three.jpg";
 
 export const data = [
   {

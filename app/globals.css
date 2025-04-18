@@ -3,27 +3,29 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "Lora-Medium";
-  src: url("./fonts/Lora-Medium.ttf") format("truetype");
+  font-family: "IBMPlexSansArabic-Medium";
+  src: url("./assets/fonts/IBMPlexSansArabic-Medium.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "IBMPlexSansArabic-SemiBold";
-  src: url("./fonts/IBMPlexSansArabic-SemiBold.ttf");
+  src: url("./assets/fonts/IBMPlexSansArabic-SemiBold.ttf");
   font-weight: normal;
   font-style: normal;
 }
+
 @font-face {
   font-family: "IBMPlexSansArabic-Bold";
-  src: url("./fonts/IBMPlexSansArabic-Bold.ttf");
+  src: url("./assets/fonts/IBMPlexSansArabic-Bold.ttf");
   font-weight: normal;
   font-style: normal;
 }
+
 @font-face {
-  font-family: "Al-Jazeera-Arabic-Bold";
-  src: url("./fonts/Al-Jazeera-Arabic Bold.ttf");
+  font-family: "Directive Four";
+  src: url("./assets/fonts/Directive\ Four.otf");
   font-weight: normal;
   font-style: normal;
 }
@@ -75,23 +77,20 @@ body {
 .lora {
   font-family: "Lora-Medium";
 }
-#lateef {
-  font-family: "Lateef-Bold";
+
+.ibmmed {
+  font-family: "IBMPlexSansArabic-Medium";
 }
-#arabic {
-  font-family: "Al-Jazeera-Arabic-Bold";
-}
-.arabic {
-  font-family: "Al-Jazeera-Arabic-Bold";
-}
-#ibmsemi {
-  font-family: "IBMPlexSansArabic-SemiBold";
-}
+
 .ibmsemi {
   font-family: "IBMPlexSansArabic-SemiBold";
 }
-#ibmbold {
+
+.ibmbold {
   font-family: "IBMPlexSansArabic-Bold";
+}
+.directive {
+  font-family: "Directive Four";
 }
 
 @keyframes rotate {

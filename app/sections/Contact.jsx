@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import Character from "../assets/ContactCharacter.svg";
+import Character from "../assets/images/ContactCharacter.svg";
 import Image from "next/image";
 import Link from "next/link";
 import { FaWhatsapp, FaInstagram, FaEnvelope } from "react-icons/fa";

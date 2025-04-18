@@ -1,14 +1,14 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import Pic1 from "../assets/HeroCaption1.svg";
-import Pic2 from "../assets/HeroCaption.svg";
-import HeroImage from "../assets/HeroSvg.svg";
-import Cloud from "../assets/Cloud.jpg";
+import Pic1 from "../assets/images/Name.svg";
+import Pic2 from "../assets/images/HeroCaption.svg";
+import HeroImage from "../assets/images/Hero.png";
+import HeroSentence from "../assets/images/HeroSentence.svg";
+import HeroSentenceLg from "../assets/images/HeroSentence-Lg.svg";
+import Cloud from "../assets/images/Cloud.jpg";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import "../waves.css";
-import Waves from "./Waves";
 
 const Hero = () => {
   const [currentImage, setCurrentImage] = useState(Pic1);
@@ -50,7 +50,7 @@ const Hero = () => {
     <div>
       {" "}
       <motion.div
-        className="relative flex flex-col justify-center items-center mt-6"
+        className="relative flex flex-col justify-center items-center mt-[3rem]"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
@@ -81,9 +81,9 @@ const Hero = () => {
             animate="visible"
           >
             <Image
-              src={currentImage}
+              src={Pic1}
               priority
-              className="w-[15rem] md:w-[20rem] mr-8"
+              className="w-[15rem] md:w-[20rem] mt-12"
               alt="Where is the Image?"
               layout="/"
             />
@@ -108,37 +108,48 @@ const Hero = () => {
           </motion.div>
         </AnimatePresence>
 
-        <motion.p
-          className="text-second/60 text-center md:text-xl mx-6 md:w-[75%] lg:w-[50%]"
-          id="ibmsemi"
+        <motion.div
+          className="text-white ibmsemi text-center mt-4 md:text-2xl mx-6 md:w-[75%] lg:w-[50%]"
           variants={paragraphVariants}
           initial="hidden"
           animate="visible"
         >
-          مُطوِّر ومُصمِّم يُسهِّل وجودك الرقمي، أقدّم حلول تقنية متقدمة وتصميم
-          فريد لتعزيز تجربة عملائك ونجاح علامتك التجارية على الإنترنت
-        </motion.p>
+          <Image
+            src={HeroSentence}
+            priority
+            alt="Where is the Image?"
+            className="w-[28rem] mx-auto md:hidden"
+          />
+          <Image
+            src={HeroSentenceLg}
+            priority
+            alt="Where is the Image?"
+            className="w-[46rem] mx-auto hidden md:block"
+          />
+        </motion.div>
 
         <motion.div
           variants={buttonsVartiants}
           initial="hidden"
           animate="visible"
-          className="flex gap-8 my-8"
-          id="ibmbold"
+          className="flex gap-8 mb-8 mt-28"
         >
-          <Link href="/" className="bg-second rounded-sm text-main">
-            <p className="m-2"> أعمالــي</p>
+          <Link
+            href="#portfolio"
+            className="bg-white ibmsemi text-black rounded-sm text-main"
+          >
+            <p className="m-2 text-xl"> اطّلع على أعمالي</p>
           </Link>
           <Link
-            href="https://www.instagram.com/khodorhasan._/"
-            className="border text-second rounded-sm"
+            href="https://wa.me/96171708103"
+            className="bg-third ibmsemi text-white  rounded-sm"
           >
-            <p className="m-2"> انستغرامـي</p>
+            <p className="m-2 text-xl"> خلنا نبدأ مشروعك</p>
           </Link>
         </motion.div>
 
         <motion.div
-          className="mx-14 mb-8 lg:mb-0 relative"
+          className="mx-4 mb-8 lg:mb-0 relative"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
@@ -147,12 +158,11 @@ const Hero = () => {
           <Image
             src={HeroImage}
             priority
-            layout="responsive"
             alt="Where is the Image?"
+            className="w-[32rem]"
           />
         </motion.div>
       </motion.div>
-      <Waves />
     </div>
   );
 };
