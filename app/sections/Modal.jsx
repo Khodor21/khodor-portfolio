@@ -91,9 +91,7 @@ const Modal = ({ project, onClose }) => {
               {project.title}
             </h2>
             {project.subtitle && (
-              <p className="text-sm mb-4" id="swissra">
-                {project.subtitle}
-              </p>
+              <p className="text-sm mb-4">{project.subtitle}</p>
             )}
             <button
               className="p-2 text-main w-full custom-button rounded-md"

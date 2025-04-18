@@ -1,10 +1,3 @@
-@font-face {
-  font-family: "Swissra-Bold";
-  src: url("../fonts/alfont_com_AlFont_com_Swissra-Bold.ttf");
-  font-weight: normal;
-  font-style: normal;
-}
-
 body {
   width: 100vw;
   height: 100vh;
@@ -84,7 +77,4 @@ li {
   justify-content: center;
   align-items: center;
   cursor: pointer;
-}
-#swissra {
-  font-family: "Swissra-Bold";
 }
