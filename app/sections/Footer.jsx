@@ -9,9 +9,9 @@ import { FaWhatsapp, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   return (
-    <div className="bg-white flex flex-col justify-between h-full w-full px-8 md:px-16 py-6">
+    <div className="bg-white flex flex-col justify-between h-full w-full px-4 md:px-16 py-6">
       <div className="flex flex-col-reverse items-start md:flex-row md:justify-between md:items-end my-8">
-        <div className="directive text-[72px] text-black flex flex-col leading-none space-y-[-4px] items-start">
+        <div className="directive text-[64px] md:text-[72px] text-black flex flex-col leading-none space-y-[-4px] items-start">
           {" "}
           <h3>Soooooo,</h3>
           <h3>what’s next?</h3>
