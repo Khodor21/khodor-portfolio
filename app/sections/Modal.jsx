@@ -14,11 +14,11 @@ function SampleNextArrow(props) {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        background: "#088F4C",
+        background: "#121212",
         padding: "0",
         borderRadius: "50%",
-        width: "30px",
-        height: "30px",
+        width: "24px",
+        height: "24px",
       }}
       onClick={onClick}
     ></div>
@@ -35,12 +35,11 @@ function SamplePrevArrow(props) {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        background: "#088F4C",
-        color: "#ff0000",
+        background: "#121212",
         padding: "0",
         borderRadius: "50%",
-        width: "30px",
-        height: "30px",
+        width: "24px",
+        height: "24px",
       }}
       onClick={onClick}
     ></div>
@@ -87,14 +86,14 @@ const Modal = ({ project, onClose }) => {
                   </div>
                 ))}
             </Slider>
-            <h2 className="text-lg font-bold mb-2 text-third ibmbold">
+            <h2 className="text-lg font-bold mb-2 text-black ibmbold">
               {project.title}
             </h2>
             {project.subtitle && (
               <p className="text-sm mb-4">{project.subtitle}</p>
             )}
             <button
-              className="p-2 text-main w-full custom-button rounded-md ibmsemi"
+              className="p-2 w-full custom-button rounded-xs ibmsemi"
               onClick={onClose}
             >
               إغــــــــلاق

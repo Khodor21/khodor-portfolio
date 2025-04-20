@@ -65,7 +65,7 @@ const Portfolio = () => {
       </div>
 
       <div className="pt-6">
-        <div className="flex flex-col md:flex-row justify-center items-center text-center mx-12 gap-4">
+        <div className="flex flex-col md:flex-row justify-center items-center text-center mx-4 gap-4">
           {filteredProjects.map((project) => (
             <div
               key={project.id}
