@@ -14,7 +14,7 @@ function SampleNextArrow(props) {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        background: "#063E0C",
+        background: "#088F4C",
         padding: "0",
         borderRadius: "50%",
         width: "30px",
@@ -35,7 +35,7 @@ function SamplePrevArrow(props) {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        background: "#063E0C",
+        background: "#088F4C",
         color: "#ff0000",
         padding: "0",
         borderRadius: "50%",
@@ -87,18 +87,17 @@ const Modal = ({ project, onClose }) => {
                   </div>
                 ))}
             </Slider>
-            <h2 className="text-lg font-bold mb-2 text-third" id="arabic">
+            <h2 className="text-lg font-bold mb-2 text-third ibmbold">
               {project.title}
             </h2>
             {project.subtitle && (
               <p className="text-sm mb-4">{project.subtitle}</p>
             )}
             <button
-              className="p-2 text-main w-full custom-button rounded-md"
+              className="p-2 text-main w-full custom-button rounded-md ibmsemi"
               onClick={onClose}
-              id="arabic"
             >
-              إغـــلاق
+              إغــــــــلاق
             </button>
           </motion.div>
         </motion.div>

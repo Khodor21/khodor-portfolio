@@ -132,7 +132,7 @@ const Hero = () => {
           variants={buttonsVartiants}
           initial="hidden"
           animate="visible"
-          className="flex flex-col gap-8 mb-8 mt-28"
+          className="flex flex-col gap-8 mb-8 mt-12"
         >
           <Link
             href="#portfolio"

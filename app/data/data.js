@@ -16,7 +16,7 @@ export const data = [
   },
   {
     id: 2,
-    title: "حملة إعلانية لمشروب طاقة",
+    title: "حملة إعلانية ليوم التأسيس السعودي",
     category: "design",
     description: "",
     imageCover: DrinkBanner,

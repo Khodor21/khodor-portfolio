@@ -102,13 +102,13 @@ body {
   }
 }
 .custom-button {
-  background: linear-gradient(to right, #063e0c, #1a5b21);
-  color: #f9f9f9;
+  background: linear-gradient(to right, #088f4c, #26cf7b);
+  color: #efefef;
 }
 
 .custom-button:hover {
-  background: linear-gradient(to right, #1a5b21, #063e0c);
-  color: #f9f9f9;
+  background: linear-gradient(to right, #26cf7b, #088f4c);
+  color: #efefef;
 }
 .rotate-animation {
   animation: rotate 5s linear infinite;
