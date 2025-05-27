@@ -15,7 +15,7 @@ const Page = () => {
       <FeatureSection />
       <Portfolio />
       <Services />
-      <Testimonial />
+      {/* <Testimonial /> */}
       <Footer />
     </div>
   );

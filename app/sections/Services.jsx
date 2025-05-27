@@ -74,7 +74,7 @@ const Services = () => {
   };
 
   return (
-    <div className="px-4 pt-4 md:px-20 md:pt-14">
+    <div className="px-8 pt-8 text-center md:px-20 md:pt-14">
       <motion.div
         ref={ref}
         initial="hidden"
