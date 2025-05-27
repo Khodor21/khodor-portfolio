@@ -14,7 +14,7 @@ const features = [
 
 export default function FeatureSection() {
   return (
-    <section className="md:px-12 flex items-start md:pt-16">
+    <section className="md:px-12 px-4 flex items-start md:pt-16">
       <div className="flex flex-col items-start md:flex-row md:gap-12 medium gap-2">
         {features.map(({ id, icon, title }, i) => (
           <motion.div

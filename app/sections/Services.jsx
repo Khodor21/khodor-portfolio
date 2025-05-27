@@ -74,7 +74,7 @@ const Services = () => {
   };
 
   return (
-    <div className=" px-4 md:px-20 md:pt-14">
+    <div className="px-4 pt-4 md:px-20 md:pt-14">
       <motion.div
         ref={ref}
         initial="hidden"
@@ -91,11 +91,11 @@ const Services = () => {
                 loop={true}
               />
             </div>
-            <span className="text-black semiBold text-[1.8rem] md:text-[2rem]">
+            <span className="text-black semiBold text-[1.4rem] md:text-[2rem]">
               My Services
             </span>
           </div>
-          <p className="text-black playfair font-bold flex flex-col items-center text-[1.8rem] md:text-[2rem]">
+          <p className="text-black playfair font-bold flex flex-col items-center text-[1rem] md:text-[2rem]">
             I am here to serve
           </p>
         </div>

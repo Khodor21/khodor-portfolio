@@ -156,11 +156,11 @@ const Portfolio = () => {
               loop={true}
             />
           </div>
-          <span className="text-black semiBold text-[1.8rem] md:text-[2rem]">
+          <span className="text-black semiBold text-[1.4rem] md:text-[2rem]">
             My Projects
           </span>
         </div>
-        <p className="text-black playfair font-bold flex flex-col items-center text-[1.8rem] md:text-[2rem]">
+        <p className="text-black playfair font-bold flex flex-col items-center text-[1rem] md:text-[2rem]">
           The Studio of Possibilities
         </p>
       </div>
