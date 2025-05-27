@@ -1,33 +1,38 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500&display=swap");
 
-@font-face {
-  font-family: "IBMPlexSansArabic-Medium";
-  src: url("./assets/fonts/IBMPlexSansArabic-Medium.ttf");
-  font-weight: normal;
-  font-style: normal;
+.playfair {
+  font-family: "Playfair Display", serif;
+  font-style: italic;
+  font-weight: 500;
+}
+@import url("https://fonts.googleapis.com/css2?family=Play:wght@700&display=swap");
+
+.play {
+  font-family: "Play", sans-serif;
+  font-weight: 700;
 }
 
 @font-face {
-  font-family: "IBMPlexSansArabic-SemiBold";
-  src: url("./assets/fonts/IBMPlexSansArabic-SemiBold.ttf");
+  font-family: "Poppins-Medium";
+  src: url("./assets/fonts/Poppins-Medium.ttf");
   font-weight: normal;
   font-style: normal;
 }
-
-@font-face {
-  font-family: "IBMPlexSansArabic-Bold";
-  src: url("./assets/fonts/IBMPlexSansArabic-Bold.ttf");
-  font-weight: normal;
-  font-style: normal;
+.medium {
+  font-family: "Poppins-Medium";
 }
 
 @font-face {
-  font-family: "Directive Four";
-  src: url("./assets/fonts/Directive\ Four.otf");
+  font-family: "Poppins-SemiBold";
+  src: url("./assets/fonts/Poppins-SemiBold.ttf");
   font-weight: normal;
   font-style: normal;
+}
+.semiBold {
+  font-family: "Poppins-SemiBold";
 }
 
 html,
@@ -74,25 +79,6 @@ body {
   animation-direction: alternate;
 }
 
-.lora {
-  font-family: "Lora-Medium";
-}
-
-.ibmmed {
-  font-family: "IBMPlexSansArabic-Medium";
-}
-
-.ibmsemi {
-  font-family: "IBMPlexSansArabic-SemiBold";
-}
-
-.ibmbold {
-  font-family: "IBMPlexSansArabic-Bold";
-}
-.directive {
-  font-family: "Directive Four";
-}
-
 @keyframes rotate {
   0% {
     transform: rotate(0deg);
@@ -118,10 +104,10 @@ body {
   overflow: hidden;
 }
 .icon-link {
-  padding: 8px; /* Adjust the padding as needed */
+  padding: 8px;
   background: linear-gradient(to bottom, #1a5b21, #063e0c);
-  border-radius: 8px; /* Add border radius for rounded corners */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow for a lifted effect */
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .overlay {
@@ -134,8 +120,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-end; /* Updated to align details at the bottom */
-  padding: 1rem; /* Add padding to the overlay */
+  justify-content: flex-end;
+  padding: 1rem;
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -154,7 +140,6 @@ body {
   color: white;
   font-family: "Al-Jazeera-Arabic-Bold";
 }
-/* HTML: <div class="loader"></div> */
 .loader {
   color: #063e0c;
   width: 4px;

@@ -1,66 +1,55 @@
 "use client";
 import React, { useRef } from "react";
-import Link from "next/link";
-import Image from "next/image";
 import { motion, useInView } from "framer-motion";
-import Title from "../assets/images/ServicesTitle.svg";
-import WebAppDevelopment from "../assets/images/Coding.svg";
-import SocialMediaDesign from "../assets/images/Design.svg";
-import NextJs from "../assets/images/Nextjs.svg";
-import Nodejs from "../assets/images/Nodejs.svg";
-import MongoDB from "../assets/images/MongoDB.svg";
-import Figma from "../assets/images/Figma.svg";
-import RightArrow from "../assets/images/RightArrow.svg";
-
-const ServiceCard = ({ image, title, description, icons }) => {
-  const cardVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
-  };
-
-  return (
-    <motion.div
-      className="border px-6 h-auto"
-      variants={cardVariants}
-      initial="hidden"
-      animate="visible"
-    >
-      <div id="services" className="my-4 h-28 flex items-center justify-center">
-        <Image src={image} priority alt="" className="h-full" />
-      </div>
-      <h3 className="mb-2 text-third text-lg" id="arabic">
-        {title}
-      </h3>
-      <p id="ibmsemi" className="text-third/70 text-base">
-        {description}
-      </p>
-      <div className="flex flex-col lg:pb-2 justify-center items-center gap-2 pt-4">
-        <div className="flex flex-wrap gap-2 justify-center md:justify-start">
-          {icons.map((icon, index) => (
-            <div key={index} className="bg-third rounded-full p-2 mb-2 md:mb-0">
-              <Image src={icon} alt="" className="h-6 w-6" />
-            </div>
-          ))}
-        </div>
-        <div className="flex items-center justify-center mt-2 ">
-          <Link href="/portfolio">
-            <div className="flex items-center justify-center text-third">
-              <p className="mr-1 mb-1 " id="arabic">
-                انتقل إلى معرض الأعمال
-              </p>
-              <Image
-                src={RightArrow}
-                alt="Arrow Right"
-                width={20}
-                height={20}
-              />
-            </div>
-          </Link>
-        </div>
-      </div>
-    </motion.div>
-  );
-};
+import service from "../assets/animation/service.json";
+import Lottie from "lottie-react";
+import fork from "../assets/animation/fork.json";
+import cloudinary from "../assets/animation/cloudinary.json";
+import design from "../assets/animation/design.json";
+const services = [
+  {
+    id: 1,
+    icon: design,
+    title: (
+      <>
+        <span style={{ color: "#EDB55A" }} className="playfair text-2xl">
+          Design
+        </span>{" "}
+        that Connects
+      </>
+    ),
+    description:
+      "Eye-catching social media graphics and posters that bring your brand to life.",
+  },
+  {
+    id: 2,
+    icon: fork,
+    title: (
+      <>
+        <span style={{ color: "#2FA2EA" }} className="playfair text-2xl">
+          Frontend
+        </span>{" "}
+        Development
+      </>
+    ),
+    description:
+      "Responsive, dynamic UIs built with Next.js, Tailwind CSS, and Framer Motion.",
+  },
+  {
+    id: 3,
+    icon: cloudinary,
+    title: (
+      <>
+        <span style={{ color: "#D77D73" }} className="playfair text-2xl">
+          Backend
+        </span>{" "}
+        Development
+      </>
+    ),
+    description:
+      "Robust and scalable backends powered by Express.js and MongoDB.",
+  },
+];
 
 const Services = () => {
   const ref = useRef(null);
@@ -72,7 +61,7 @@ const Services = () => {
       scale: 1,
       transition: {
         delayChildren: 0.3,
-        staggerChildren: 1,
+        staggerChildren: 0.2,
       },
     },
   };
@@ -83,8 +72,9 @@ const Services = () => {
       opacity: 1,
     },
   };
+
   return (
-    <div className="text-center pb-4">
+    <div className=" px-4 md:px-20 md:pt-14">
       <motion.div
         ref={ref}
         initial="hidden"
@@ -92,46 +82,41 @@ const Services = () => {
         variants={container}
         transition={{ duration: 2 }}
       >
-        <div className="flex justify-end">
-          <Image
-            src={Title}
-            priority
-            alt="Services Title"
-            className="w-48 md:w-80 pt-6 mx-8"
-          />
+        <div className="flex flex-col items-center">
+          <div className="flex items-center gap-3">
+            <div className="bg-black rounded shadow-xl hover:scale-120 hover:-rotate-[0.2rad] flex items-center justify-center">
+              <Lottie
+                animationData={service}
+                className="m-2 w-4 h-4 md:w-6 md:h-6"
+                loop={true}
+              />
+            </div>
+            <span className="text-black semiBold text-[1.8rem] md:text-[2rem]">
+              My Services
+            </span>
+          </div>
+          <p className="text-black playfair font-bold flex flex-col items-center text-[1.8rem] md:text-[2rem]">
+            I am here to serve
+          </p>
         </div>
-
-        <h3
-          className="mb-6 mt-2 text-main text-right mx-10 md:text-lg"
-          id="ibmsemi"
-        >
-          خَدمات متميّزة تُســــاعدك عَلــى تحقِيـق أهدَافك وتطْوير مَشروعك
-          بِكَفاءة عَاليّة
-        </h3>
-      </motion.div>
-      <motion.div
-        className=""
-        variants={container}
-        initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
-      >
-        <div className="flex flex-col justify-center items-center lg:flex-row gap-4 mb-6 mx-8">
-          <motion.div variants={item} transition={{ duration: 1 }}>
-            <ServiceCard
-              image={WebAppDevelopment}
-              title="برمــــــجة تطبيقــــــات الويـــــــب"
-              description="تطوير تطبيقات الويب باستخدام أحدث التقنيات. أُقــدّم حلولًا مخصصة وفعّالة لتلبية احتياجات عملك"
-              icons={[NextJs, Nodejs, MongoDB]}
-            />
-          </motion.div>
-          <motion.div variants={item} transition={{ duration: 1 }}>
-            <ServiceCard
-              image={SocialMediaDesign}
-              title="تصــــــاميـــم ســــوشــل ميديـــــــا"
-              description="تصميم محتوى جذاب لوسائط التواصل الاجتماعي. أُساعدك في بناء هوية قوية لمنصات التواصل الاجتماعي"
-              icons={[Figma]}
-            />
-          </motion.div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-3">
+          {services.map(({ id, icon, title, description }) => (
+            <motion.div
+              key={id}
+              className="bg-gray rounded-sm flex flex-col items-center text-center p-8 shadow"
+              variants={item}
+            >
+              <div className="mb-4 flex items-center justify-center">
+                <Lottie
+                  className="w-10 h-10 text-black/80"
+                  animationData={icon}
+                  loop={true}
+                />
+              </div>
+              <h3 className="semiBold text-lg mb-2">{title}</h3>
+              <p className="medium text-sm text-black/70">{description}</p>
+            </motion.div>
+          ))}
         </div>
       </motion.div>
     </div>

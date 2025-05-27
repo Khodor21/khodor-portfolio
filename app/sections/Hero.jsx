@@ -1,170 +1,135 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import Pic1 from "../assets/images/Name.svg";
-import Pic2 from "../assets/images/HeroCaption.svg";
-import HeroImage from "../assets/images/Hero.png";
-import HeroSentence from "../assets/images/HeroSentence.svg";
-import HeroSentenceLg from "../assets/images/HeroSentence-Lg.svg";
-import Cloud from "../assets/images/Cloud.jpg";
-import Image from "next/image";
-import Link from "next/link";
+
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { PiHandWaving } from "react-icons/pi";
+import Navbar from "./Navbar";
 
-const Hero = () => {
-  const [currentImage, setCurrentImage] = useState(Pic1);
+const rotatingWords = ["Designer", "Developer"];
+
+export default function HeroSection() {
+  const [currentWordIndex, setCurrentWordIndex] = useState(0);
+
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      setCurrentImage((prevImage) => (prevImage === Pic1 ? Pic2 : Pic1));
-    }, 1000);
-
-    return () => clearInterval(intervalId); // Clear interval on component unmount
+    const interval = setInterval(() => {
+      setCurrentWordIndex(
+        (prevIndex) => (prevIndex + 1) % rotatingWords.length
+      );
+    }, 3000);
+    return () => clearInterval(interval);
   }, []);
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { duration: 1 } },
-  };
-
-  const paragraphVariants = {
-    hidden: { opacity: 0, x: -50 },
-    visible: { opacity: 1, x: 0, transition: { duration: 2 } },
-  };
-  const currentImageVariants = {
-    hidden: { opacity: 0, x: 50 },
-    visible: { opacity: 1, x: 0, transition: { duration: 2 } },
-  };
-  const buttonsVartiants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 3 } },
-  };
-
-  const cloudVariants = {
-    hidden: { x: "-100%" },
-    visible: {
-      x: "100%",
-      transition: { duration: 5, ease: "linear", loop: Infinity },
-    },
-  };
-
   return (
-    <div>
-      {" "}
-      <motion.div
-        className="relative flex flex-col justify-center items-center mt-[3rem]"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        <AnimatePresence>
-          {/* Left Cloud */}
+    <section className="relative min-h-[90vh] flex flex-col items-start md:items-center justify-center overflow-hidden bg-white px-4 md:px-20">
+      <Navbar />
+      <div className="flex flex-col justify-center">
+        {/* Background Grid Layer with Linear Gradient Mask */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <svg
+            className="w-full h-full opacity-10"
+            xmlns="http://www.w3.org/2000/svg"
+            style={{
+              maskImage:
+                "linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%)",
+              WebkitMaskImage:
+                "linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%)",
+            }}
+          >
+            <defs>
+              <pattern
+                id="grid"
+                width="40"
+                height="40"
+                patternUnits="userSpaceOnUse"
+              >
+                <path
+                  d="M40 0 H0 V40"
+                  fill="none"
+                  stroke="black"
+                  strokeWidth="0.5"
+                />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#grid)" />
+          </svg>
+        </div>
+        {/* Foreground Content */}
+        <div className="relative z-10 w-full text-center">
+          <div className="flex gap-1 items-center justify-center medium text-base md:text-3xl">
+            {" "}
+            Hello{" "}
+            <motion.div
+              className="inline-block text-xl md:text-3xl"
+              animate={{ rotate: [0, 20, -10, 20, 0] }}
+              transition={{
+                duration: 1.5,
+                ease: "easeInOut",
+                repeat: Infinity,
+                repeatDelay: 2,
+              }}
+            >
+              {" "}
+              <PiHandWaving className="" />
+            </motion.div>
+            , I'm Khodor a
+            <motion.span
+              className="relative inline-flex items-center justify-center md:text-2xl text-sm px-2 py-1 mx-1 md:mx-2 rounded border border-black backdrop-blur-md shadow-md text-black semiBold"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+            >
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={rotatingWords[currentWordIndex]}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.4 }}
+                >
+                  {rotatingWords[currentWordIndex]}
+                </motion.span>
+              </AnimatePresence>
+            </motion.span>
+          </div>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-2xl mt-3 md:text-5xl md:mt-6 play text-gray-900 leading-tight md:w-[70%] mx-auto text-center"
+          >
+            I turn ideas into meaningful visual solutions{" "}
+            <span className="playfair">that inspire.</span>
+          </motion.h1>
+          {/* <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.8 }}
+            className="mt-6 medium text-sm md:text-lg text-black opacity-60"
+          >
+            I don't just design, I solve your brand's biggest challenges.
+          </motion.p> */}
           <motion.div
-            key="leftCloud"
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
-            className="absolute left-0 top-[55%] md:top-0 w-32 md:w-48 lg:w-64 cloud"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.8 }}
+            className="mt-8 flex flex-col gap-4 md:flex-row justify-center items-center md:gap-8"
           >
-            <Image
-              key="leftCloudImage"
-              src={Cloud}
-              priority
-              className="w-full h-full relative"
-              alt="Cloud"
-              layout="/"
-            />
+            <a
+              href="#projects"
+              className="inline-block bg-white text-black border-black/40 border-[0.2px] shadow px-2 py-1 rounded text-sm md:text-lg font-semibold hover:bg-black hover:text-white transition"
+            >
+              My Projects
+            </a>
+            <a
+              href="#contact"
+              className="inline-block bg-black text-white px-2 py-1 rounded text-sm md:text-lg font-semibold hover:bg-black transition"
+            >
+              Let's have a deal
+            </a>
           </motion.div>
-
-          {/* Hero Paragraph */}
-          <motion.div
-            variants={currentImageVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            <Image
-              src={Pic1}
-              priority
-              className="w-[15rem] md:w-[20rem] mt-12"
-              alt="Where is the Image?"
-              layout="/"
-            />
-          </motion.div>
-
-          {/* Right Cloud */}
-          <motion.div
-            key="rightCloud"
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
-            className="absolute right-0 md:top-0 top-[70%] w-32 md:w-48 lg:w-64 cloud1"
-          >
-            <Image
-              key="rightCloudImage"
-              src={Cloud}
-              priority
-              className="w-full h-full"
-              alt="Cloud"
-              layout="/"
-            />
-          </motion.div>
-        </AnimatePresence>
-
-        <motion.div
-          className="text-white ibmsemi text-center mt-4 md:text-2xl mx-6 md:w-[75%] lg:w-[50%]"
-          variants={paragraphVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          <Image
-            src={HeroSentence}
-            priority
-            alt="Where is the Image?"
-            className="w-[28rem] mx-auto md:hidden"
-          />
-          <Image
-            src={HeroSentenceLg}
-            priority
-            alt="Where is the Image?"
-            className="w-[46rem] mx-auto hidden md:block"
-          />
-        </motion.div>
-
-        <motion.div
-          variants={buttonsVartiants}
-          initial="hidden"
-          animate="visible"
-          className="flex flex-col gap-8 mb-8 mt-12"
-        >
-          <Link
-            href="#portfolio"
-            className="bg-white ibmsemi text-black rounded-sm text-main"
-          >
-            <p className="m-2 text-xl"> اطّلع على أعمالي</p>
-          </Link>
-          <Link
-            href="https://wa.me/96171708103"
-            className="bg-third ibmsemi text-white  rounded-sm"
-          >
-            <p className="m-2 text-xl"> خلنا نبدأ مشروعك</p>
-          </Link>
-        </motion.div>
-
-        <motion.div
-          className="mx-4 mb-8 lg:mb-0 relative"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          {/* Hero Image */}
-          <Image
-            src={HeroImage}
-            priority
-            alt="Where is the Image?"
-            className="w-[32rem]"
-          />
-        </motion.div>
-      </motion.div>
-    </div>
+        </div>
+      </div>
+    </section>
   );
-};
-
-export default Hero;
+}

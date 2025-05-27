@@ -8,14 +8,14 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        black: "#121212",
-        white: "#EFEFEF",
+        black: "#191919",
+        white: "#fdfdfd",
         green: "#26CF7B",
         third: "#088F4C",
         fourth: "#D4D4D4",
         red: "#FF0000",
-        gray: "#808080",
-        blue: "#3B82F6",
+        gray: "#fafafa",
+        blue: "#3797FF",
       },
     },
   },
