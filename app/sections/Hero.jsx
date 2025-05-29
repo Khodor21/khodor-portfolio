@@ -3,10 +3,11 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { PiHandWaving } from "react-icons/pi";
-
+import contact from "../assets/animation/contact.json";
 import avatar from "../assets/images/Me.jpg";
 import Navbar from "./Navbar";
 import Image from "next/image";
+import Lottie from "lottie-react";
 
 const rotatingWords = ["Designer", "Developer"];
 
@@ -23,7 +24,7 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="min-h-[60vh] md:min-h-screen">
+    <section className="min-h-[60vh] md:min-h-screen mb-14 sm:mb-0">
       {" "}
       <Navbar />
       <div className="relative flex flex-col items-start md:items-center justify-center overflow-hidden bg-white px-4 md:px-20">
@@ -58,7 +59,7 @@ export default function HeroSection() {
               <rect width="100%" height="100%" fill="url(#grid)" />
             </svg>
           </div>
-          <div className="relative z-10 w-full flex flex-col items-center text-center mt-[50%] md:mt-[15%]">
+          <div className="relative z-10 w-full flex flex-col items-center text-center mt-[30%] md:mt-[15%]">
             <div className="flex gap-1 items-center justify-center medium text-base md:text-xl">
               {" "}
               Hello
@@ -74,7 +75,7 @@ export default function HeroSection() {
               </span>
               , I'm Khodor a
               <motion.span
-                className="relative inline-flex items-center justify-center md:text-lg text-sm px-2 py-1 mx-1 md:mx-2 rounded border border-black backdrop-blur-md shadow-md text-black semiBold"
+                className="relative inline-flex items-center justify-center md:text-xl text-base md:mx-1 mx-[2px] backdrop-blur-md text-black semiBold"
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, ease: "easeOut" }}
@@ -97,10 +98,10 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="text-3xl mt-3 md:text-[3.5rem] md:mt-2 inter text-extrabold text-gray-900 leading-tight md:px-16 text-center"
+              className="text-3xl mt-3 md:text-[3.5rem] md:mt-2 semiBold text-extrabold text-gray-900 leading-tight md:px-16 text-center"
             >
               I turn ideas into meaningful visual solutions{" "}
-              <span className="playfair">that inspire.</span>
+              <span className="playfair text-[#d64a40]">that inspire.</span>
             </motion.h1>
 
             {/* Centered button */}
@@ -111,8 +112,13 @@ export default function HeroSection() {
               className="mt-8 flex justify-center items-center w-full"
             >
               <a href="#footer" rel="noopener noreferrer">
-                <button className="bg-black text-white medium px-4 py-2 shadow-sm shadow-black text-sm md:text-base rounded-xl hover:bg-gray-800 transition duration-300">
+                <button className="bg-[#d64a40] gap-1 flex justify-center items-center text-white medium px-4 py-2 shadow-sm shadow-black text-base md:text-lg rounded hover:bg-gray-800 transition duration-300">
                   Contact Me
+                  <Lottie
+                    className="inline-block mb-1 w-5 h-5 md:w-8 md:h-8"
+                    animationData={contact}
+                    loop={true}
+                  />
                 </button>
               </a>
             </motion.div>

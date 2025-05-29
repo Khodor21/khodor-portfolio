@@ -10,7 +10,7 @@ import emailAnimation from "../assets/animation/email.json";
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   return (
-    <div className="">
+    <div id="footer">
       {" "}
       <div className="relative w-full flex justify-center items-center">
         <div className="relative z-20 bg-black flex flex-col justify-center items-center min-h-[50vh] w-full py-6 px-4 overflow-hidden">

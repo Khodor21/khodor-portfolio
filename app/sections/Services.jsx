@@ -131,7 +131,7 @@ const Services = () => {
   };
 
   return (
-    <div className="text-center px-8 pt-14 pb-10 md:px-20 md:py-14">
+    <div className="relative text-center px-8 pt-14 pb-10 md:px-20 md:py-14">
       <motion.div
         ref={ref}
         initial="hidden"
@@ -139,16 +139,17 @@ const Services = () => {
         variants={container}
         transition={{ duration: 2 }}
       >
+        <div className="absolute left-1/2 top-[32px] -translate-x-1/2 z-0 w-[320px] h-[120px] md:w-[480px] md:h-[180px] bg-[#d64a40] opacity-30 blur-2xl rounded-full pointer-events-none" />
         <div className="flex flex-col items-center">
           <h2 className="text-black semiBold md:w-[50%] text-[1.2rem] md:text-[2rem]">
             Tailored Digital
-            <span className="playfair text-[1.4rem] md:text-[2.2rem] ml-1">
+            <span className="playfair text-[#d64a40] text-[1.4rem] md:text-[2.2rem] ml-1">
               Solutions
             </span>{" "}
             to Bring Your Ideas to Life{" "}
           </h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-3">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-3 z-10 relative">
           {services.map(({ id, icon, title, description }) => (
             <motion.div
               key={id}

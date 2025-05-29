@@ -80,9 +80,10 @@ const Portfolio = () => {
       id="projects"
       className="flex flex-col items-center justify-center min-h-[40vh] mx-4 md:mx-24 rounded-xl relative mt-2"
     >
-      <h2 className="text-black text-center semiBold md:w-[50%] text-[1.2rem] md:text-[2rem]">
+      <div className="absolute left-1/2 -top-[32px] -translate-x-1/2 z-0 w-[320px] h-[120px] md:w-[480px] md:h-[180px] bg-[#d64a40] opacity-30 blur-2xl rounded-full pointer-events-none" />
+      <h2 className="text-black text-center semiBold md:w-[</div>50%] text-[1.2rem] md:text-[2rem]">
         A{" "}
-        <span className="playfair text-[1.4rem] md:text-[2.2rem]">
+        <span className="playfair text-[#d64a40] text-[1.4rem] md:text-[2.2rem]">
           Showcase
         </span>{" "}
         of Ideas Transformed into Impactful Experiences
