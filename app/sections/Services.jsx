@@ -74,7 +74,7 @@ const Services = () => {
   };
 
   return (
-    <div className="px-8 pt-8 text-center md:px-20 md:pt-14">
+    <div className="text-center px-8 pt-14 pb-10 md:px-20 md:py-14">
       <motion.div
         ref={ref}
         initial="hidden"
@@ -83,27 +83,19 @@ const Services = () => {
         transition={{ duration: 2 }}
       >
         <div className="flex flex-col items-center">
-          <div className="flex items-center gap-3">
-            <div className="bg-black rounded shadow-xl hover:scale-120 hover:-rotate-[0.2rad] flex items-center justify-center">
-              <Lottie
-                animationData={service}
-                className="m-2 w-4 h-4 md:w-6 md:h-6"
-                loop={true}
-              />
-            </div>
-            <span className="text-black semiBold text-[1.4rem] md:text-[2rem]">
-              My Services
-            </span>
-          </div>
-          <p className="text-black playfair font-bold flex flex-col items-center text-[1rem] md:text-[2rem]">
-            I am here to serve
-          </p>
+          <h2 className="text-black semiBold md:w-[50%] text-[1.2rem] md:text-[2rem]">
+            Tailored Digital
+            <span className="playfair text-[1.4rem] md:text-[2.2rem]">
+              Solutions
+            </span>{" "}
+            to Bring Your Ideas to Life{" "}
+          </h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-3">
           {services.map(({ id, icon, title, description }) => (
             <motion.div
               key={id}
-              className="bg-gray rounded-sm flex flex-col items-center text-center p-8 shadow"
+              className="bg-gray rounded-sm flex flex-col items-center text-center p-6 md:p-8 shadow"
               variants={item}
             >
               <div className="mb-4 flex items-center justify-center">

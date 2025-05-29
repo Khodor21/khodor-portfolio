@@ -8,11 +8,11 @@
   font-style: italic;
   font-weight: 500;
 }
-@import url("https://fonts.googleapis.com/css2?family=Play:wght@700&display=swap");
 
-.play {
-  font-family: "Play", sans-serif;
-  font-weight: 700;
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800&display=swap");
+.inter {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
 }
 
 @font-face {

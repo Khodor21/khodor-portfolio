@@ -16,6 +16,12 @@ module.exports = {
         red: "#FF0000",
         gray: "#fafafa",
         blue: "#3797FF",
+        background: "#04070D",
+        main: "#D5DBE6",
+      },
+      backgroundImage: {
+        "radial-dark":
+          "radial-gradient(ellipse at center, #001f1f 0%, #000000 100%)",
       },
     },
   },

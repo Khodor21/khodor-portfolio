@@ -10,10 +10,10 @@ import emailAnimation from "../assets/animation/email.json";
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   return (
-    <div className="mx-6">
+    <div className="">
       {" "}
       <div className="relative w-full flex justify-center items-center">
-        <div className="relative z-20 bg-black flex flex-col justify-center items-center min-h-[50vh] w-full max-w-6xl px-4 md:px-16 py-6 mb-8 rounded-3xl overflow-hidden">
+        <div className="relative z-20 bg-black flex flex-col justify-center items-center min-h-[50vh] w-full py-6 overflow-hidden">
           {/* Blurred white gradients INSIDE the black background */}
           <div className="pointer-events-none absolute inset-0 z-10">
             <div className="absolute top-[-10%] left-[-10%] w-40 h-40 bg-white opacity-40 rounded-full blur-3xl" />
@@ -76,7 +76,7 @@ const Footer = () => {
             </Link>
           </div>
           <div className="relative z-20 flex flex-col gap-2 md:flex-row justify-center items-center mt-4 w-full">
-            <div className="text-black text-xs directive text-center w-full">
+            <div className="text-white text-xs medium text-center w-full">
               © {currentYear} Khodor Hasan. All rights reserved.
             </div>
           </div>

@@ -145,25 +145,15 @@ const Portfolio = () => {
   return (
     <div
       id="projects"
-      className="flex flex-col items-center justify-center min-h-[40vh] mx-4 md:mx-24 rounded-xl relative"
+      className="flex flex-col items-center justify-center min-h-[40vh] mx-4 md:mx-24 rounded-xl relative mt-8"
     >
-      <div className="flex flex-col items-center">
-        <div className="flex items-center gap-3">
-          <div className="bg-black rounded shadow-xl hover:scale-120 hover:-rotate-[0.2rad] flex items-center justify-center">
-            <Lottie
-              animationData={folder}
-              className="m-2 w-3 h-3 md:w-6 md:h-6"
-              loop={true}
-            />
-          </div>
-          <span className="text-black semiBold text-[1.4rem] md:text-[2rem]">
-            My Projects
-          </span>
-        </div>
-        <p className="text-black playfair font-bold flex flex-col items-center text-[1rem] md:text-[2rem]">
-          The Studio of Possibilities
-        </p>
-      </div>
+      <h2 className="text-black text-center semiBold md:w-[50%] text-[1.2rem] md:text-[2rem]">
+        A{" "}
+        <span className="playfair text-[1.4rem] md:text-[2.2rem]">
+          Showcase
+        </span>{" "}
+        of Ideas Transformed into Impactful Experiences
+      </h2>
 
       <div className="flex justify-center my-4">
         <button

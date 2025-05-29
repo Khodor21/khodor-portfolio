@@ -14,12 +14,15 @@ const features = [
 
 export default function FeatureSection() {
   return (
-    <section className="md:px-12 px-4 flex items-start md:pt-16">
-      <div className="flex flex-col items-start md:flex-row md:gap-12 medium gap-2">
+    <section className="md:px-12 px-4 flex items-start md:items-center">
+      <div
+        className="flex flex-col items-start gap-5 md:flex-row md:items-center md:gap-12
+        w-full md:justify-center"
+      >
         {features.map(({ id, icon, title }, i) => (
           <motion.div
             key={id}
-            className="flex items-center text-left space-x-2"
+            className="flex items-center space-x-2"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
@@ -30,11 +33,11 @@ export default function FeatureSection() {
                 <Lottie
                   animationData={icon}
                   loop={true}
-                  className="text-black/90 w-5 h-5 md:w-8 md:h-8"
+                  className="text-black/90 w-6 h-6 md:w-8 md:h-8"
                 />
               </div>
             </div>
-            <h3 className="text-sm md:text-lg">{title}</h3>
+            <h3 className="text-base md:text-lg medium">{title}</h3>
           </motion.div>
         ))}
       </div>

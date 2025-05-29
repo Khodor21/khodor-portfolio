@@ -3,6 +3,10 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { PiHandWaving } from "react-icons/pi";
+import { LiaTelegram } from "react-icons/lia";
+import { MdWhatsapp } from "react-icons/md";
+import { IoMailOutline } from "react-icons/io5";
+
 import Navbar from "./Navbar";
 
 const rotatingWords = ["Designer", "Developer"];
@@ -20,10 +24,10 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section>
+    <section className="min-h-[60vh] md:min-h-screen">
       {" "}
       <Navbar />
-      <div className="relative min-h-[60vh] my-auto flex flex-col items-start md:items-center justify-center overflow-hidden bg-white px-4 md:px-20">
+      <div className="relative flex flex-col items-start md:items-center justify-center overflow-hidden bg-white px-4 md:px-20">
         <div className="flex flex-col justify-center">
           {/* Background Grid Layer with Linear Gradient Mask */}
           <div className="absolute inset-0 z-0 pointer-events-none">
@@ -56,12 +60,12 @@ export default function HeroSection() {
             </svg>
           </div>
           {/* Foreground Content */}
-          <div className="relative z-10 w-full text-center">
-            <div className="flex gap-1 items-center justify-center medium text-lg md:text-3xl">
+          <div className="relative z-10 w-full flex flex-col items-center text-center mt-[50%] md:mt-[15%]">
+            <div className="flex gap-1 items-center justify-center medium text-base md:text-xl">
               {" "}
               Hello{" "}
               <motion.div
-                className="inline-block text-xl md:text-3xl"
+                className="inline-block text-lg md:text-xl"
                 animate={{ rotate: [0, 20, -10, 20, 0] }}
                 transition={{
                   duration: 1.5,
@@ -98,36 +102,42 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="text-3xl mt-3 md:text-5xl md:mt-6 play text-gray-900 leading-tight md:w-[70%] text-center"
+              className="text-3xl mt-3 md:text-[3.5rem] md:mt-6 inter text-extrabold text-gray-900 leading-tight md:px-16 text-center"
             >
               I turn ideas into meaningful visual solutions{" "}
               <span className="playfair">that inspire.</span>
             </motion.h1>
-            {/* <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-            className="mt-6 medium text-sm md:text-lg text-black opacity-60"
-          >
-            I don't just design, I solve your brand's biggest challenges.
-          </motion.p> */}
+
+            {/* Centered icons */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.8 }}
-              className="mt-8 flex flex-col gap-4 md:flex-row justify-center items-center md:gap-8"
+              className="mt-8 flex justify-center items-center w-full gap-4"
+            >
+              <span>
+                <LiaTelegram className="w-5 h-5 md:w-8 md:h-8" />
+              </span>
+              <span className="border-r-2 border-l-2 px-6">
+                <MdWhatsapp className="w-5 h-5 md:w-8 md:h-8" />
+              </span>
+              <IoMailOutline className="w-5 h-5 md:w-8 md:h-8" />
+            </motion.div>
+            {/* Centered button */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6, duration: 0.8 }}
+              className="mt-8 flex justify-center items-center w-full"
             >
               <a
-                href="#projects"
-                className="inline-block bg-white text-black border-black/40 border-[0.2px] shadow px-2 py-1 rounded  md:text-lg font-semibold hover:bg-black hover:text-white transition min-w-[170px] text-center"
+                href="https://t.me/khodor_gh"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                My Projects
-              </a>
-              <a
-                href="#contact"
-                className="inline-block bg-black text-white px-2 py-1 rounded  md:text-lg font-semibold hover:bg-black transition min-w-[170px] text-center"
-              >
-                Let's have a deal
+                <button className="bg-black text-white medium px-4 py-2 shadow-sm shadow-black text-sm md:text-base rounded-xl hover:bg-gray-800 transition duration-300">
+                  Contact Me
+                </button>
               </a>
             </motion.div>
           </div>
