@@ -3,11 +3,10 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { PiHandWaving } from "react-icons/pi";
-import { LiaTelegram } from "react-icons/lia";
-import { MdWhatsapp } from "react-icons/md";
-import { IoMailOutline } from "react-icons/io5";
 
+import avatar from "../assets/images/Me.jpg";
 import Navbar from "./Navbar";
+import Image from "next/image";
 
 const rotatingWords = ["Designer", "Developer"];
 
@@ -59,27 +58,23 @@ export default function HeroSection() {
               <rect width="100%" height="100%" fill="url(#grid)" />
             </svg>
           </div>
-          {/* Foreground Content */}
           <div className="relative z-10 w-full flex flex-col items-center text-center mt-[50%] md:mt-[15%]">
             <div className="flex gap-1 items-center justify-center medium text-base md:text-xl">
               {" "}
-              Hello{" "}
-              <motion.div
-                className="inline-block text-lg md:text-xl"
-                animate={{ rotate: [0, 20, -10, 20, 0] }}
-                transition={{
-                  duration: 1.5,
-                  ease: "easeInOut",
-                  repeat: Infinity,
-                  repeatDelay: 2,
-                }}
-              >
-                {" "}
-                <PiHandWaving className="" />
-              </motion.div>
+              Hello
+              <span className="inline-block">
+                <Image
+                  src={avatar}
+                  alt="avatar"
+                  className="w-8 h-8 rounded-full shadow-md"
+                  style={{
+                    boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+                  }}
+                />
+              </span>
               , I'm Khodor a
               <motion.span
-                className="relative inline-flex items-center justify-center md:text-2xl text-sm px-2 py-1 mx-1 md:mx-2 rounded border border-black backdrop-blur-md shadow-md text-black semiBold"
+                className="relative inline-flex items-center justify-center md:text-lg text-sm px-2 py-1 mx-1 md:mx-2 rounded border border-black backdrop-blur-md shadow-md text-black semiBold"
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, ease: "easeOut" }}
@@ -102,27 +97,12 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="text-3xl mt-3 md:text-[3.5rem] md:mt-6 inter text-extrabold text-gray-900 leading-tight md:px-16 text-center"
+              className="text-3xl mt-3 md:text-[3.5rem] md:mt-2 inter text-extrabold text-gray-900 leading-tight md:px-16 text-center"
             >
               I turn ideas into meaningful visual solutions{" "}
               <span className="playfair">that inspire.</span>
             </motion.h1>
 
-            {/* Centered icons */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.8 }}
-              className="mt-8 flex justify-center items-center w-full gap-4"
-            >
-              <span>
-                <LiaTelegram className="w-5 h-5 md:w-8 md:h-8" />
-              </span>
-              <span className="border-r-2 border-l-2 px-6">
-                <MdWhatsapp className="w-5 h-5 md:w-8 md:h-8" />
-              </span>
-              <IoMailOutline className="w-5 h-5 md:w-8 md:h-8" />
-            </motion.div>
             {/* Centered button */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -130,11 +110,7 @@ export default function HeroSection() {
               transition={{ delay: 0.6, duration: 0.8 }}
               className="mt-8 flex justify-center items-center w-full"
             >
-              <a
-                href="https://t.me/khodor_gh"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href="#footer" rel="noopener noreferrer">
                 <button className="bg-black text-white medium px-4 py-2 shadow-sm shadow-black text-sm md:text-base rounded-xl hover:bg-gray-800 transition duration-300">
                   Contact Me
                 </button>

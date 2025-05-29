@@ -1,126 +1,59 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import folder from "../assets/animation/folder.json";
 import Lottie from "lottie-react";
 import { useRouter } from "next/navigation";
 import { MdOutlineArrowOutward } from "react-icons/md";
 import { data } from "../data/data";
-import { motion, AnimatePresence } from "framer-motion";
-import Slider from "react-slick";
+import Image from "next/image";
 
 function ProjectCard({ project, onClick }) {
   return (
     <div
       onClick={() => onClick(project)}
-      className="project-container relative cursor-pointer w-full"
+      className="relative bg-gray border-[#8f8f8f] rounded-xl p-4 md:p-6 overflow-hidden shadow-lg transition cursor-pointer mb-8 w-full max-w-3xl flex flex-col md:flex-row"
     >
-      {/* Blurred glass title box */}
-      <div
-        className="absolute top-3 left-3 right-3 z-20 flex justify-center"
-        style={{ pointerEvents: "none" }}
-      >
-        <div className="backdrop-blur-md bg-white/40 rounded-md px-4 py-2 shadow text-black font-semibold text-base md:text-lg text-center w-full max-w-[90%]">
-          {project.title}
+      {/* Left Section */}
+      <div className="z-10 relative text-black w-full md:w-1/2 flex flex-col justify-between">
+        <span className="inline-block py-1 mb-2 text-sm medium rounded-full">
+          {project.category}
+        </span>
+        <h3 className="text-xl md:text-2xl semiBold mb-2">{project.title}</h3>
+        <p className="medium text-sm mb-4">
+          Created a bold, innovative brand identity, improving recognition by
+          45%.
+        </p>
+        {/* Tags */}
+        <div className="flex flex-wrap medium gap-2 text-xs md:text-sm text-black/40 mb-4">
+          <span className="py-1 rounded-full">Identity</span>
+          <span className="py-1 rounded-full">Branding</span>
+          <span className="py-1 rounded-full">Portfolio</span>
+          <span className="py-1 rounded-full">Design</span>
+        </div>
+        {/* View Button */}
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            onClick(project);
+          }}
+          className="mt-2 rounded inline-flex items-center medium bg-black text-white px-2 py-1 w-max"
+        >
+          View Identity <MdOutlineArrowOutward className="ml-1" />
+        </button>
+      </div>
+      {/* Right Section */}
+      <div className="relative w-full md:w-1/2 h-48 md:h-auto mt-4 md:mt-0 md:ml-4 flex-shrink-0">
+        <div className="relative w-full h-48 md:h-full">
+          <Image
+            src={project.imageCover}
+            alt={project.title}
+            fill
+            className="object-cover rounded-lg"
+            sizes="(max-width: 768px) 100vw, 50vw"
+            priority
+          />
         </div>
       </div>
-      {/* Arrow button */}
-      <button
-        onClick={(e) => {
-          e.stopPropagation();
-          onClick(project);
-        }}
-        className="arrow-btn absolute top-3 right-3 bg-white rounded-full p-2 shadow transition z-30 group"
-        aria-label="View project"
-        type="button"
-      >
-        <MdOutlineArrowOutward
-          size={24}
-          className="text-black transition-transform duration-300 group-hover:rotate-45 group-hover:scale-125 group-hover:text-blue-600"
-        />
-      </button>
-      {project.isVideo ? (
-        <video
-          src={project.imageCover}
-          width="100%"
-          height={300}
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="object-cover rounded-sm w-full h-[200px] md:h-[300px]"
-        />
-      ) : (
-        <Image
-          src={project.imageCover}
-          alt={project.title}
-          width={1920}
-          height={400}
-          className="object-cover rounded-lg w-full h-[200px] md:h-[400px]"
-        />
-      )}
-    </div>
-  );
-}
-
-function ProjectCarousel({ projects, onProjectClick }) {
-  const [slidesToShow, setSlidesToShow] = useState(3);
-  const [autoplaySpeed, setAutoplaySpeed] = useState(5000);
-
-  useEffect(() => {
-    function handleResize() {
-      if (window.innerWidth < 768) {
-        setSlidesToShow(1);
-        setAutoplaySpeed(4000);
-      } else if (window.innerWidth < 1024) {
-        setSlidesToShow(2);
-        setAutoplaySpeed(4000);
-      } else {
-        setSlidesToShow(3);
-        setAutoplaySpeed(5000);
-      }
-    }
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow,
-    slidesToScroll: 1, // always slide one card at a time
-    arrows: true,
-    autoplay: true,
-    autoplaySpeed,
-    pauseOnHover: true,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-          autoplaySpeed: 4000,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1,
-          autoplaySpeed: 4000,
-        },
-      },
-    ],
-  };
-
-  return (
-    <div className="w-full">
-      <Slider {...settings}>
-        {projects.map((project) => (
-          <div key={project.id} className="px-2">
-            <ProjectCard project={project} onClick={onProjectClick} />
-          </div>
-        ))}
-      </Slider>
     </div>
   );
 }
@@ -145,7 +78,7 @@ const Portfolio = () => {
   return (
     <div
       id="projects"
-      className="flex flex-col items-center justify-center min-h-[40vh] mx-4 md:mx-24 rounded-xl relative mt-8"
+      className="flex flex-col items-center justify-center min-h-[40vh] mx-4 md:mx-24 rounded-xl relative mt-2"
     >
       <h2 className="text-black text-center semiBold md:w-[50%] text-[1.2rem] md:text-[2rem]">
         A{" "}
@@ -165,11 +98,15 @@ const Portfolio = () => {
           Designs
         </button>
       </div>
+      {/* Cards in flex-col */}
       <div className="pt-6 flex flex-col items-center w-full">
-        <ProjectCarousel
-          projects={filteredProjects}
-          onProjectClick={handleProjectClick}
-        />
+        {filteredProjects.map((project) => (
+          <ProjectCard
+            key={project.id}
+            project={project}
+            onClick={handleProjectClick}
+          />
+        ))}
       </div>
     </div>
   );

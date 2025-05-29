@@ -13,7 +13,7 @@ const Footer = () => {
     <div className="">
       {" "}
       <div className="relative w-full flex justify-center items-center">
-        <div className="relative z-20 bg-black flex flex-col justify-center items-center min-h-[50vh] w-full py-6 overflow-hidden">
+        <div className="relative z-20 bg-black flex flex-col justify-center items-center min-h-[50vh] w-full py-6 px-4 overflow-hidden">
           {/* Blurred white gradients INSIDE the black background */}
           <div className="pointer-events-none absolute inset-0 z-10">
             <div className="absolute top-[-10%] left-[-10%] w-40 h-40 bg-white opacity-40 rounded-full blur-3xl" />

@@ -12,10 +12,8 @@ const Page = () => {
   return (
     <div className="bg-white">
       <Hero />
-      <FeatureSection />
       <Portfolio />
       <Services />
-      {/* <Testimonial /> */}
       <Footer />
     </div>
   );
