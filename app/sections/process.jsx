@@ -74,11 +74,12 @@ const ProcessSection = () => {
             beautifully designed digital experiences.
           </p>
         </div>
+        ...
         <div className="flex gap-8 justify-center flex-wrap">
           {processSteps.map((step, idx) => (
             <motion.div
               key={idx}
-              className="bg-gray rounded-sm items-center p-8 min-w-[220px] max-w-[300px] shadow-[0_4px_12px_rgba(0,0,0,0.2)] text-black text-center flex-1"
+              className="bg-gray rounded-sm items-center p-8 min-w-[220px] max-w-[300px] text-black text-center flex-1 relative"
               variants={item}
             >
               <Lottie
@@ -90,6 +91,31 @@ const ProcessSection = () => {
               <p className="text-black medium text-xs md:text-sm">
                 {step.description}
               </p>
+              {/* Action link at the bottom of each card */}
+              {idx === 0 && (
+                <p
+                  className="absolute bottom-4 left-1/2 -translate-x-1/2 text-xs pt-3 text-[#d64a40] underline cursor-pointer hover:text-[#a83228] transition medium"
+                  onClick={() => (window.location.hash = "#services")}
+                >
+                  Go to Services
+                </p>
+              )}
+              {idx === 1 && (
+                <p
+                  className="absolute bottom-4 left-1/2 -translate-x-1/2 text-xs pt-3 text-[#d64a40] underline cursor-pointer hover:text-[#a83228] transition medium"
+                  onClick={() => (window.location.hash = "#footer")}
+                >
+                  Contact Me
+                </p>
+              )}
+              {idx === 2 && (
+                <p
+                  className="absolute bottom-4 left-1/2 -translate-x-1/2 text-xs pt-3 text-[#d64a40] underline cursor-pointer hover:text-[#a83228] transition medium"
+                  onClick={() => (window.location.hash = "#projects")}
+                >
+                  See Projects
+                </p>
+              )}
             </motion.div>
           ))}
         </div>

@@ -1,156 +1,122 @@
 "use client";
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { data as projects } from "@/app/data/data";
 import Image from "next/image";
-function Carousel({ details = [], title }) {
-  const [index, setIndex] = useState(0);
+import Slider from "react-slick";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
+// Custom arrows using react-icons
+const CustomPrevArrow = ({ onClick }) => (
+  <button
+    className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow p-2 rounded-full hover:bg-gray-100"
+    onClick={onClick}
+  >
+    <FaChevronLeft size={18} />
+  </button>
+);
+
+const CustomNextArrow = ({ onClick }) => (
+  <button
+    className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow p-2 rounded-full hover:bg-gray-100"
+    onClick={onClick}
+  >
+    <FaChevronRight size={18} />
+  </button>
+);
+
+function Carousel({ details = [], title }) {
   if (!details || details.length === 0) {
     return (
-      <div
-        style={{
-          height: 200,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
+      <div className="h-[400px] flex items-center justify-center bg-gray-100 rounded">
         No images
       </div>
     );
   }
 
-  const prev = () => setIndex((i) => (i === 0 ? details.length - 1 : i - 1));
-  const next = () => setIndex((i) => (i === details.length - 1 ? 0 : i + 1));
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToScroll: 1,
+    arrows: true,
+    autoplay: true,
+    autoplaySpeed: 2500,
+    prevArrow: <CustomPrevArrow />,
+    nextArrow: <CustomNextArrow />,
+    responsive: [
+      {
+        breakpoint: 768, // Small devices
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 1024, // Medium devices
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 9999, // Large devices and above
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+    className: "w-full",
+  };
 
   return (
-    <div
-      style={{
-        position: "relative",
-        width: 320,
-        height: 400,
-        margin: "0 auto",
-        borderRadius: 2,
-        overflow: "hidden",
-        boxShadow: "0 4px 24px rgba(0,0,0,0.1)",
-      }}
-    >
-      <AnimatePresence initial={false}>
-        <motion.div
-          key={index}
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -50 }}
-          transition={{ duration: 0.4 }}
-        >
-          <Image
-            src={details[index]}
-            alt={title}
-            width={320}
-            height={400}
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              borderRadius: 2,
-            }}
-          />
-        </motion.div>
-      </AnimatePresence>
-      <button
-        onClick={prev}
-        style={{
-          position: "absolute",
-          left: 10,
-          top: "50%",
-          transform: "translateY(-50%)",
-          background: "rgba(255,255,255,0.7)",
-          border: "none",
-          borderRadius: "50%",
-          width: 32,
-          height: 32,
-          cursor: "pointer",
-        }}
-        aria-label="Previous"
-      >
-        ‹
-      </button>
-      <button
-        onClick={next}
-        style={{
-          position: "absolute",
-          right: 10,
-          top: "50%",
-          transform: "translateY(-50%)",
-          background: "rgba(255,255,255,0.7)",
-          border: "none",
-          borderRadius: "50%",
-          width: 32,
-          height: 32,
-          cursor: "pointer",
-        }}
-        aria-label="Next"
-      >
-        ›
-      </button>
-      <div
-        style={{
-          position: "absolute",
-          bottom: 10,
-          left: "50%",
-          transform: "translateX(-50%)",
-          display: "flex",
-          gap: 6,
-        }}
-      >
-        {details.map((_, i) => (
+    <div className="relative w-full max-w-[220px] max-h-[275px] lg:max-w-[1080px] lg:max-h-[1350px] mx-auto overflow-hidden">
+      <Slider {...settings}>
+        {details.map((img, i) => (
           <div
             key={i}
-            style={{
-              width: 8,
-              height: 8,
-              borderRadius: "50%",
-              background: i === index ? "#333" : "#ccc",
-            }}
-          />
+            className="px-0 lg:px-3 flex items-center justify-center"
+          >
+            <div className="relative aspect-[3/4] w-full rounded overflow-hidden">
+              <Image
+                src={img}
+                alt={title}
+                fill
+                loading="lazy"
+                className="object-cover"
+                draggable={false}
+              />
+            </div>
+          </div>
         ))}
-      </div>
+      </Slider>
     </div>
   );
 }
 
 export default function ProjectsPage() {
   return (
-    <main style={{ padding: 32, maxWidth: 900, margin: "0 auto" }}>
-      <h1 style={{ fontSize: 36, fontWeight: 700, marginBottom: 32 }}>
+    <main className="py-6 px-2 sm:p-8 mx-auto">
+      <h1 className="text-lg md:text-2xl lg:text-4xl semiBold mb-8">
         Projects
       </h1>
-      <div style={{ display: "grid", gap: 40 }}>
-        {projects.map((project, idx) => (
-          <motion.section
+      <div className="grid gap-10">
+        {projects.map((project) => (
+          <section
             key={project.title}
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: idx * 0.1 }}
-            style={{
-              background: "#fff",
-              borderRadius: 4,
-              padding: 24,
-              boxShadow: "0 2px 12px rgba(0,0,0,0.05)",
-            }}
+            className="bg-gray rounded p-6 shadow-[0_2px_12px_rgba(0,0,0,0.05)]"
           >
-            <h2 style={{ fontSize: 24, marginBottom: 16 }}>{project.title}</h2>
-            <div style={{ display: "flex", gap: 24, flexWrap: "wrap" }}>
-              <div>
-                <h3 style={{ fontSize: 16, marginBottom: 8 }}>Images</h3>
+            <h2 className="text-lg md:text-2xl mb-4 medium">{project.title}</h2>
+            <div className="flex justify-between flex-wrap">
+              <div className="w-full h-full">
                 <Carousel
                   details={project.details}
-                  title={project.title + " images"}
+                  title={`${project.title} images`}
                 />
               </div>
             </div>
-          </motion.section>
+          </section>
         ))}
       </div>
     </main>

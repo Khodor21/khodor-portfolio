@@ -112,10 +112,10 @@ export default function HeroSection() {
               className="mt-8 flex justify-center items-center w-full"
             >
               <a href="#footer" rel="noopener noreferrer">
-                <button className="bg-[#d64a40] gap-1 flex justify-center items-center text-white medium px-4 py-2 shadow-sm shadow-black text-base md:text-lg rounded hover:bg-gray-800 transition duration-300">
+                <button className="bg-[#d64a40] gap-1 flex justify-center items-center text-white medium px-2 py-1 md:px-4 md:py-2 shadow-sm shadow-black text-sm md:text-lg rounded hover:bg-gray-800 transition duration-300">
                   Contact Me
                   <Lottie
-                    className="inline-block mb-1 w-5 h-5 md:w-8 md:h-8"
+                    className="inline-block mb-1 w-6 h-6 md:w-8 md:h-8"
                     animationData={contact}
                     loop={true}
                   />

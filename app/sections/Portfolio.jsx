@@ -36,7 +36,7 @@ function ProjectCard({ project, onClick }) {
             e.stopPropagation();
             onClick(project);
           }}
-          className="mt-2 rounded inline-flex items-center medium bg-black text-white px-2 py-1 w-max"
+          className="mt-2 text-sm rounded inline-flex items-center medium bg-black text-white px-2 py-1 w-max"
         >
           View Identity <MdOutlineArrowOutward className="ml-1" />
         </button>

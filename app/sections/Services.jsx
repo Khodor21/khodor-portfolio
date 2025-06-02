@@ -131,7 +131,10 @@ const Services = () => {
   };
 
   return (
-    <div className="relative text-center px-8 pt-14 pb-10 md:px-20 md:py-14">
+    <div
+      id="services"
+      className="relative text-center px-8 pt-14 pb-10 md:px-20 md:py-14"
+    >
       <motion.div
         ref={ref}
         initial="hidden"
