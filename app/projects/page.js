@@ -5,6 +5,7 @@ import Slider from "react-slick";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Navbar from "../sections/Navbar";
 
 // Custom arrows using react-icons
 const CustomPrevArrow = ({ onClick }) => (
@@ -97,9 +98,11 @@ function Carousel({ details = [], title }) {
 
 export default function ProjectsPage() {
   return (
-    <main className="py-6 px-2 sm:p-8 mx-auto">
-      <h1 className="text-lg md:text-2xl lg:text-4xl semiBold mb-8">
-        Projects
+    <main className="py-6 px-2 sm:p-4 mx-4 md:mx-24">
+      <Navbar />
+      <h1 className="text-lg text-center md:text-2xl lg:text-3xl semiBold my-8">
+        My Projects : Building Ideas Into{" "}
+        <span className="playfair text-[#d64a40]">Reality</span>
       </h1>
       <div className="grid gap-10">
         {projects.map((project) => (

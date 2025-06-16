@@ -3,7 +3,6 @@ import React from "react";
 import Hero from "./sections/Hero";
 import Services from "./sections/Services";
 import Portfolio from "./sections/Portfolio";
-import Footer from "./sections/Footer";
 import ProcessSection from "./sections/process";
 
 const Page = () => {
@@ -13,7 +12,6 @@ const Page = () => {
       <Portfolio />
       <Services />
       <ProcessSection />
-      <Footer />
     </div>
   );
 };

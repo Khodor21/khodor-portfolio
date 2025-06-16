@@ -1,11 +1,89 @@
 "use client";
-import React, { useState } from "react";
-import folder from "../assets/animation/folder.json";
-import Lottie from "lottie-react";
+import React, { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
 import { useRouter } from "next/navigation";
 import { MdOutlineArrowOutward } from "react-icons/md";
 import { data } from "../data/data";
 import Image from "next/image";
+
+function ImageShowcase({ images, alt, autoplay = true, interval = 2500 }) {
+  const [index, setIndex] = useState(0);
+  const timer = useRef();
+
+  useEffect(() => {
+    if (!autoplay || images.length < 2) return;
+    timer.current = setInterval(() => {
+      setIndex((prev) => (prev + 1) % images.length);
+    }, interval);
+    return () => clearInterval(timer.current);
+  }, [autoplay, images.length, interval]);
+
+  if (!images || images.length === 0) return null;
+
+  const imgs =
+    images.length >= 3 ? images : [...images, ...images, ...images].slice(0, 3);
+
+  const leftIdx = (index - 1 + imgs.length) % imgs.length;
+  const centerIdx = index;
+  const rightIdx = (index + 1) % imgs.length;
+
+  const imgConfigs = [
+    {
+      key: "left",
+      className:
+        "absolute left-0 w-[55%] max-w-[110px] md:max-w-[150px] aspect-[4/5] rounded overflow-hidden z-10 transition-all duration-500 ease-in-out",
+      style: {
+        transform: "scale(0.88) rotate(-14deg)",
+        filter: "brightness(0.88) blur(1.2px)",
+        boxShadow: "0 4px 16px rgba(0,0,0,0.08)",
+      },
+      img: imgs[leftIdx],
+    },
+    {
+      key: "center",
+      className:
+        "relative z-20 w-[70%] max-w-[180px] md:max-w-[220px] aspect-[4/5] rounded-lg overflow-hidden shadow-lg mx-auto transition-all duration-500 ease-in-out",
+      style: {
+        transform: "scale(1) rotate(0deg)",
+        filter: "brightness(1)",
+        boxShadow: "0 8px 32px rgba(0,0,0,0.18)",
+      },
+      img: imgs[centerIdx],
+    },
+    {
+      key: "right",
+      className:
+        "absolute right-0 w-[55%] max-w-[110px] md:max-w-[150px] aspect-[4/5] rounded overflow-hidden z-10 transition-all duration-500 ease-in-out",
+      style: {
+        transform: "scale(0.88) rotate(14deg)",
+        filter: "brightness(0.88) blur(1.2px)",
+        boxShadow: "0 4px 16px rgba(0,0,0,0.08)",
+      },
+      img: imgs[rightIdx],
+    },
+  ];
+
+  return (
+    <div className="relative w-full flex items-center justify-center h-[260px] md:h-[320px]">
+      {imgConfigs.map(({ key, className, style, img }) => (
+        <div key={key} className={className} style={style}>
+          <Image
+            src={img}
+            alt={alt}
+            fill
+            className="object-cover transition-all duration-500 ease-in-out"
+            draggable={false}
+          />
+          {/* Subtle dark overlay for back images */}
+          {key !== "center" && (
+            <div className="absolute inset-0 bg-black/10 transition-all duration-500" />
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
 
 function ProjectCard({ project, onClick }) {
   return (
@@ -19,10 +97,7 @@ function ProjectCard({ project, onClick }) {
           {project.category}
         </span>
         <h3 className="text-xl md:text-2xl semiBold mb-2">{project.title}</h3>
-        <p className="medium text-sm mb-4">
-          Created a bold, innovative brand identity, improving recognition by
-          45%.
-        </p>
+        <p className="medium text-sm mb-4">{project.description}</p>
         {/* Tags */}
         <div className="flex flex-wrap medium gap-2 text-xs md:text-sm text-black/40 mb-4">
           <span className="py-1 rounded-full">Identity</span>
@@ -36,23 +111,17 @@ function ProjectCard({ project, onClick }) {
             e.stopPropagation();
             onClick(project);
           }}
-          className="mt-2 text-sm rounded inline-flex items-center medium bg-black text-white px-2 py-1 w-max"
+          className="mt-2 text-sm rounded inline-flex items-center medium bg-[#d64a40] text-white px-2 py-1 w-max"
         >
-          View Identity <MdOutlineArrowOutward className="ml-1" />
+          View Projects <MdOutlineArrowOutward className="ml-1" />
         </button>
       </div>
       {/* Right Section */}
-      <div className="relative w-full md:w-1/2 h-48 md:h-auto mt-4 md:mt-0 md:ml-4 flex-shrink-0">
-        <div className="relative w-full h-48 md:h-full">
-          <Image
-            src={project.imageCover}
-            alt={project.title}
-            fill
-            className="object-cover rounded-lg"
-            sizes="(max-width: 768px) 100vw, 50vw"
-            priority
-          />
-        </div>
+      <div className="relative w-full md:w-1/2 mt-4 md:mt-0 md:ml-4 flex-shrink-0 flex items-center justify-center">
+        <ImageShowcase
+          images={project.images || [project.imageCover]}
+          alt={project.title}
+        />
       </div>
     </div>
   );

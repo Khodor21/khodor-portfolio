@@ -13,13 +13,21 @@ import ImageThree from "../assets/images/Dental-Three.jpg";
 import alnajatDetails1 from "../assets/images/Al Najat Colors.jpg";
 import alnajatDetails2 from "../assets/images/Al Najat Highlights.jpg";
 
+import Hospital1 from "../assets/images/Hospital Design - 1.jpg";
+import Hospital2 from "../assets/images/Hospital Design - 2.jpg";
+import Hospital3 from "../assets/images/Hospital Design - 3.jpg";
+import Hospital4 from "../assets/images/Hospital Design - 5.jpg";
+import Hospital5 from "../assets/images/Hospital Design - 4.jpg";
+
 export const data = [
   {
     id: 1,
-    title: "Social media design for a Dental Clinic",
+    title: "Social media designs for a Dental Clinic",
     category: "Design",
     company: "Al Najat Dental Clinic, Kuwait",
-    description: "",
+    description:
+      "Al Najat Dental Clinic needed a fresh visual identity to better represent their modern dental practice on social media. Our mission was to enhance clarity, professionalism, and patient trust through design.",
+
     imageCover: ImageThree,
     isVideo: true,
     images: [ImageOne, ImageTwo, ImageThree],
@@ -46,10 +54,11 @@ export const data = [
   },
   {
     id: 2,
-    title: "Social media design for a Mineral Water Company",
+    title: "Social media designs for a Mineral Water Company",
     category: "Design",
     company: "Tannourine Water, Lebanon",
-    description: "",
+    description:
+      "Tannourine, a renowned Lebanese mineral water brand, aimed to modernize its social media visuals. The goal was to reflect purity, vitality, and the essence of natural springs through design.",
     imageCover: Water1,
     isVideo: true,
     images: [Water1, Water2, Water3, Water4, Water5, Water6],
@@ -65,6 +74,37 @@ export const data = [
       "The challenge was to infuse the brand's natural heritage with a contemporary twist. The designer crafted visuals that emphasize the crystal clarity of Tannourine water using bold contrasts, nature-inspired elements, and dynamic layouts ideal for social media formats.",
     results: {
       designs: [Water1, Water2, Water3, Water4, Water5, Water6],
+      colors: ["#D4F1F9", "#0F75BC", "#FFFFFF"],
+      font: "Montserrat, sans-serif",
+      goals: [
+        "Highlight product purity and origin",
+        "Drive brand recognition across social platforms",
+        "Enhance visual appeal to match premium quality",
+      ],
+    },
+  },
+  {
+    id: 3,
+    title: "Social media designs for a Hospital",
+    category: "Design",
+    company: "Bughshan Hospital, Jeddah",
+    description:
+      "Bughshan Hospital aimed to enhance its social media presence to better connect with patients and showcase its medical services. The goal was to create a visual identity that reflects care, professionalism, and trust.",
+    imageCover: Hospital5,
+    isVideo: true,
+    images: [Hospital5, Hospital2, Hospital3, Hospital1, Hospital4],
+    details: [Hospital5, Hospital2, Hospital3, Hospital1, Hospital4],
+    overview: {
+      text: "Bughshan Hospital aimed to enhance its social media presence to better connect with patients and showcase its medical services. The goal was to create a visual identity that reflects care, professionalism, and trust.",
+      preview: {
+        before: "",
+        after: TannourineBanner,
+      },
+    },
+    solution:
+      "The challenge was to infuse the brand's natural heritage with a contemporary twist. The designer crafted visuals that emphasize the crystal clarity of Tannourine water using bold contrasts, nature-inspired elements, and dynamic layouts ideal for social media formats.",
+    results: {
+      designs: [Hospital5, Hospital2, Hospital3, Hospital1, Hospital4],
       colors: ["#D4F1F9", "#0F75BC", "#FFFFFF"],
       font: "Montserrat, sans-serif",
       goals: [
