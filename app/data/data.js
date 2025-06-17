@@ -54,37 +54,6 @@ export const data = [
   },
   {
     id: 2,
-    title: "Social media designs for a Mineral Water Company",
-    category: "Design",
-    company: "Tannourine Water, Lebanon",
-    description:
-      "Tannourine, a renowned Lebanese mineral water brand, aimed to modernize its social media visuals. The goal was to reflect purity, vitality, and the essence of natural springs through design.",
-    imageCover: Water1,
-    isVideo: true,
-    images: [Water1, Water2, Water3, Water4, Water5, Water6],
-    details: [Water1, Water2, Water3, Water4, Water5, Water6],
-    overview: {
-      text: "Tannourine, a renowned Lebanese mineral water brand, aimed to modernize its social media visuals. The goal was to reflect purity, vitality, and the essence of natural springs through design.",
-      preview: {
-        before: "",
-        after: TannourineBanner,
-      },
-    },
-    solution:
-      "The challenge was to infuse the brand's natural heritage with a contemporary twist. The designer crafted visuals that emphasize the crystal clarity of Tannourine water using bold contrasts, nature-inspired elements, and dynamic layouts ideal for social media formats.",
-    results: {
-      designs: [Water1, Water2, Water3, Water4, Water5, Water6],
-      colors: ["#D4F1F9", "#0F75BC", "#FFFFFF"],
-      font: "Montserrat, sans-serif",
-      goals: [
-        "Highlight product purity and origin",
-        "Drive brand recognition across social platforms",
-        "Enhance visual appeal to match premium quality",
-      ],
-    },
-  },
-  {
-    id: 3,
     title: "Social media designs for a Hospital",
     category: "Design",
     company: "Bughshan Hospital, Jeddah",
@@ -105,6 +74,37 @@ export const data = [
       "The challenge was to infuse the brand's natural heritage with a contemporary twist. The designer crafted visuals that emphasize the crystal clarity of Tannourine water using bold contrasts, nature-inspired elements, and dynamic layouts ideal for social media formats.",
     results: {
       designs: [Hospital5, Hospital2, Hospital3, Hospital1, Hospital4],
+      colors: ["#D4F1F9", "#0F75BC", "#FFFFFF"],
+      font: "Montserrat, sans-serif",
+      goals: [
+        "Highlight product purity and origin",
+        "Drive brand recognition across social platforms",
+        "Enhance visual appeal to match premium quality",
+      ],
+    },
+  },
+  {
+    id: 3,
+    title: "Social media designs for a Mineral Water Company",
+    category: "Design",
+    company: "Tannourine Water, Lebanon",
+    description:
+      "Tannourine, a renowned Lebanese mineral water brand, aimed to modernize its social media visuals. The goal was to reflect purity, vitality, and the essence of natural springs through design.",
+    imageCover: Water1,
+    isVideo: true,
+    images: [Water1, Water2, Water3, Water4, Water5, Water6],
+    details: [Water1, Water2, Water3, Water4, Water5, Water6],
+    overview: {
+      text: "Tannourine, a renowned Lebanese mineral water brand, aimed to modernize its social media visuals. The goal was to reflect purity, vitality, and the essence of natural springs through design.",
+      preview: {
+        before: "",
+        after: TannourineBanner,
+      },
+    },
+    solution:
+      "The challenge was to infuse the brand's natural heritage with a contemporary twist. The designer crafted visuals that emphasize the crystal clarity of Tannourine water using bold contrasts, nature-inspired elements, and dynamic layouts ideal for social media formats.",
+    results: {
+      designs: [Water1, Water2, Water3, Water4, Water5, Water6],
       colors: ["#D4F1F9", "#0F75BC", "#FFFFFF"],
       font: "Montserrat, sans-serif",
       goals: [

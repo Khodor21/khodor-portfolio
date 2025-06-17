@@ -37,9 +37,8 @@ const Navbar = () => {
         <Image
           src={logo}
           alt="Logo"
-          width={72}
-          height={72}
-          className="object-contain"
+          priority
+          className="object-contain w-6 md:w-8"
         />
       </motion.div>
     </nav>
