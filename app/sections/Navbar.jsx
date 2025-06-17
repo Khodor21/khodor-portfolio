@@ -2,7 +2,8 @@
 import React from "react";
 import { FaCircle } from "react-icons/fa";
 import { motion } from "framer-motion";
-
+import Image from "next/image";
+import logo from "../assets/images/logo.png";
 const Navbar = () => {
   const topDataVariants = {
     hidden: { opacity: 0, y: -50 },
@@ -16,20 +17,30 @@ const Navbar = () => {
         animate="visible"
         variants={topDataVariants}
         transition={{ duration: 1.2 }}
-        className="flex gap-1 items-center medium text-[#30b874] text-xs md:text-base"
+        className="flex justify-between items-center medium text-[#30b874] text-xs md:text-base"
       >
-        <motion.div
-          animate={{ opacity: [1, 0, 1] }}
-          transition={{
-            duration: 1.5,
-            repeat: Infinity,
-            repeatType: "loop",
-            ease: "easeInOut",
-          }}
-        >
-          <FaCircle size={8} className="text-[#30b874]" />
-        </motion.div>
-        Available for new project
+        <div className="flex gap-1 flex-row">
+          <motion.div
+            animate={{ opacity: [1, 0, 1] }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+              repeatType: "loop",
+              ease: "easeInOut",
+            }}
+            className="flex gap-1 flex-row items-center"
+          >
+            <FaCircle size={8} className="text-[#30b874]" />
+            Available for new project
+          </motion.div>
+        </div>
+        <Image
+          src={logo}
+          alt="Logo"
+          width={72}
+          height={72}
+          className="object-contain"
+        />
       </motion.div>
     </nav>
   );

@@ -9,8 +9,10 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata = {
   title: "Khodor Hasan Developer | Designer",
   description: "Khodor Hasan Portfolio | Where You Can Find The Magician",
-  favicon:
-    "https://firebasestorage.googleapis.com/v0/b/cloud-image-21153.appspot.com/o/character.svg?alt=media&token=b960320f-7613-4b66-982e-5fa29dad0541",
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 export default function RootLayout({ children }) {
