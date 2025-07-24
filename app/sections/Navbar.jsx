@@ -4,7 +4,12 @@ import { FaCircle } from "react-icons/fa";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import logo from "../assets/images/logo.png";
+import { FaDownload } from "react-icons/fa6";
+import { useRouter } from "next/navigation";
+
 const Navbar = () => {
+  const router = useRouter();
+
   const topDataVariants = {
     hidden: { opacity: 0, y: -50 },
     visible: { opacity: 1, y: 0 },
@@ -34,12 +39,23 @@ const Navbar = () => {
             Available for new project
           </motion.div>
         </div>
-        <Image
-          src={logo}
-          alt="Logo"
-          priority
-          className="object-contain w-6 md:w-8"
-        />
+
+        <div className="flex items-center gap-4">
+          <button
+            onClick={() => router.push("/files")}
+            className="p-2 hover:bg-[#bb3229]/10 rounded-full transition duration-300"
+            aria-label="Download"
+          >
+            <FaDownload size={20} className="text-[#bb3229]" />
+          </button>
+
+          <Image
+            src={logo}
+            alt="Logo"
+            priority
+            className="object-contain w-6 md:w-8"
+          />
+        </div>
       </motion.div>
     </nav>
   );
