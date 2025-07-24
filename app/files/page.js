@@ -9,16 +9,18 @@ import BannerImage from "../assets/images/Banner Course.jpg";
 const page = () => {
   const images = [
     {
-      src: LogoImage,
+      src: "https://firebasestorage.googleapis.com/v0/b/cloud-image-21153.appspot.com/o/Logo%20Course.png?alt=media&token=4811b6ee-a2f0-4c00-9ff0-a468b9b33dd6",
       filename: "Logo Course.png",
       label: "Download Logo",
-      downloadSrc: LogoImage,
+      downloadSrc:
+        "https://firebasestorage.googleapis.com/v0/b/cloud-image-21153.appspot.com/o/Logo%20Course.png?alt=media&token=4811b6ee-a2f0-4c00-9ff0-a468b9b33dd6",
     },
     {
-      src: BannerImage,
+      src: "https://firebasestorage.googleapis.com/v0/b/cloud-image-21153.appspot.com/o/Banner%20Course.jpg?alt=media&token=29d4ac48-251c-4ab9-a3c0-4a1918e3d531",
       filename: "Banner Course.jpg",
       label: "Download Banner",
-      downloadSrc: BannerImage,
+      downloadSrc:
+        "https://firebasestorage.googleapis.com/v0/b/cloud-image-21153.appspot.com/o/Banner%20Course.jpg?alt=media&token=29d4ac48-251c-4ab9-a3c0-4a1918e3d531",
     },
   ];
 
