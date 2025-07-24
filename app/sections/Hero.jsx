@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { PiHandWaving } from "react-icons/pi";
 import contact from "../assets/animation/contact.json";
 import avatar from "../assets/images/Me.jpg";
 import Navbar from "./Navbar";
