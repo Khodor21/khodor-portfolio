@@ -41,13 +41,7 @@ const Navbar = () => {
         </div>
 
         <div className="flex items-center gap-4">
-          <button
-            onClick={() => router.push("/files")}
-            className="p-2 hover:bg-[#bb3229]/10 rounded-full transition duration-300"
-            aria-label="Download"
-          >
-            <FaDownload size={20} className="text-[#bb3229]" />
-          </button>
+        
 
           <Image
             src={logo}
