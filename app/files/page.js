@@ -240,7 +240,7 @@ const Page = () => {
           />
           <button
             onClick={() => handleDownload(image.downloadSrc, image.filename)}
-            className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded transition-all"
+            className="bg-[#da0f0f] hover:bg-[#b30b0b] text-white px-6 py-2 rounded transition-all"
           >
             <FaDownload className="inline mr-2" />
             {image.label}
