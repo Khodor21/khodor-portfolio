@@ -34,6 +34,20 @@
 .semiBold {
   font-family: "Poppins-SemiBold";
 }
+@font-face {
+  font-family: "Handi-Regular";
+  src: url("./assets/fonts/Handi-Regular.otf");
+}
+.handiReg {
+  font-family: "Handi-Regular";
+}
+@font-face {
+  font-family: "Handi-Bold";
+  src: url("./assets/fonts/Handi-Bold.otf");
+}
+.handiBold {
+  font-family: "Handi-Bold";
+}
 
 html,
 body {
