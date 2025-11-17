@@ -7,7 +7,7 @@ import Lottie from "lottie-react";
 import contact from "@/app/assets/animation/contact.json";
 import folderAnimation from "@/app/assets/animation/folder.json";
 import { FaInstagram, FaWhatsapp, FaTiktok } from "react-icons/fa6";
-import Avatar from "@/app/assets/images/My-Avatar.png";
+import Avatar from "@/app/assets/images/My-avatar.png";
 import Image from "next/image";
 
 const rotatingWords = ["مُصمِّم مواقع وتطبيقات", "مُبرمج منصّات إلكترونيّة "];
