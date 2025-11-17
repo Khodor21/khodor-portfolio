@@ -2,10 +2,7 @@
 import React from "react";
 import Link from "next/link";
 import Eyes from "@/app/components/Eyes";
-import Lottie from "lottie-react";
-import callAnimation from "@/app/assets/animation/call.json";
-import whatsappAnimation from "@/app/assets/animation/whatsapp.json";
-import emailAnimation from "@/app/assets/animation/email.json";
+import { FaEnvelope, FaWhatsapp, FaPhone } from "react-icons/fa6";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -45,49 +42,40 @@ const Footer = () => {
             </p>
           </div>
 
-          {/* CONTACT BUTTONS */}
+          {/* CONTACT BUTTONS – موحَّدة الشكل */}
           <div className="relative z-10 flex flex-col md:flex-row gap-4 md:gap-6 mt-4 items-center justify-center">
+            {/* Base button style */}
             {/* Email */}
             <Link
               href="mailto:khodorhasan17@gmail.com"
-              className="bg-white text-black rounded-xl px-4 py-2 md:px-5 md:py-3 hover:bg-gray-100 transition transform hover:-translate-y-0.5 flex items-center gap-3 shadow-lg"
+              className="inline-flex items-center gap-3 rounded-xl px-5 py-3 text-sm md:text-base handiBold border border-white/15 bg-white/5 text-white hover:bg-white hover:text-black transition transform hover:-translate-y-0.5 shadow-lg"
             >
-              <Lottie
-                animationData={emailAnimation}
-                className="w-6 h-6 md:w-7 md:h-7"
-                loop
-              />
-              <p className="handiBold text-sm md:text-base">
-                الإيميل دايمًا مفتوح
-              </p>
+              <span className="flex items-center justify-center w-8 h-8 rounded-full bg-white/10">
+                <FaEnvelope className="text-[15px]" />
+              </span>
+              <span>الإيميل دايمًا مفتوح</span>
             </Link>
 
             {/* WhatsApp */}
             <Link
               href="https://wa.me/96171708103"
-              className="bg-[#16a34a] text-white rounded-xl px-4 py-2 md:px-5 md:py-3 hover:bg-[#15803d] transition transform hover:-translate-y-0.5 flex items-center gap-3 shadow-lg"
+              className="inline-flex items-center gap-3 rounded-xl px-5 py-3 text-sm md:text-base handiBold border border-white/15 bg-white/5 text-white hover:bg-white hover:text-black transition transform hover:-translate-y-0.5 shadow-lg"
             >
-              <Lottie
-                animationData={whatsappAnimation}
-                className="w-6 h-6 md:w-7 md:h-7"
-                loop
-              />
-              <p className="handiBold text-sm md:text-base">أنا على واتساب</p>
+              <span className="flex items-center justify-center w-8 h-8 rounded-full bg-white/10">
+                <FaWhatsapp className="text-[16px]" />
+              </span>
+              <span>أنا على واتساب</span>
             </Link>
 
             {/* Call */}
             <Link
               href="tel:+96171708103"
-              className="bg-white/5 text-white rounded-xl px-4 py-2 md:px-5 md:py-3 border border-white/15 hover:bg-white/10 transition transform hover:-translate-y-0.5 flex items-center gap-3"
+              className="inline-flex items-center gap-3 rounded-xl px-5 py-3 text-sm md:text-base handiBold border border-white/15 bg-white/5 text-white hover:bg-white hover:text-black transition transform hover:-translate-y-0.5 shadow-lg"
             >
-              <Lottie
-                animationData={callAnimation}
-                className="w-6 h-6 md:w-7 md:h-7"
-                loop
-              />
-              <p className="handiBold text-sm md:text-base">
-                خلّينا نحكي اتصال
-              </p>
+              <span className="flex items-center justify-center w-8 h-8 rounded-full bg-white/10">
+                <FaPhone className="text-[15px]" />
+              </span>
+              <span>خلّينا نحكي اتصال</span>
             </Link>
           </div>
 

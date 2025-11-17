@@ -5,8 +5,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "./Ar-Navbar";
 import Lottie from "lottie-react";
 import contact from "@/app/assets/animation/contact.json";
-import folderAnimation from "@/app/assets/animation/folder.json";
-import { FaInstagram, FaWhatsapp, FaTiktok } from "react-icons/fa6";
+import { IoMailUnreadOutline } from "react-icons/io5";
+
+// ❌ شلنا folderAnimation
+import { FaInstagram, FaWhatsapp, FaMail, FaFolderOpen } from "react-icons/fa6"; // 👈 أضفت FaFolderOpen
 import Avatar from "@/app/assets/images/My-avatar.png";
 import Image from "next/image";
 
@@ -125,43 +127,52 @@ export default function HeroSection() {
                 {/* Social Icons */}
                 <div className="flex justify-start md:justify-end gap-3">
                   <a
-                    href="https://www.instagram.com/"
+                    href="https://www.instagram.com/khodorhasan._"
                     target="_blank"
                     className="w-10 h-10 flex items-center justify-center rounded-full text-white/80 bg-white/5 border border-white/10 hover:bg-white/10 transition"
                   >
                     <FaInstagram className="text-xl" />
                   </a>
                   <a
-                    href="https://wa.me/96170000000"
+                    href="https://wa.me/96171708103"
                     target="_blank"
                     className="w-10 h-10 flex items-center justify-center rounded-full text-white/80 bg-white/5 border border-white/10 hover:bg-white/10 transition"
                   >
                     <FaWhatsapp className="text-xl" />
                   </a>
                   <a
-                    href="https://www.tiktok.com/"
+                    href="mailto:khodorhasan17@gmail.com"
                     target="_blank"
                     className="w-10 h-10 flex items-center justify-center rounded-full text-white/80 bg-white/5 border border-white/10 hover:bg-white/10 transition"
                   >
-                    <FaTiktok className="text-xl" />
+                    <IoMailUnreadOutline className="text-xl" />
                   </a>
                 </div>
 
                 {/* CTAs */}
                 <div className="flex flex-wrap gap-4 justify-start md:justify-end">
-                  {/* Projects button with folder Lottie */}
+                  {/* Projects button with animated React icon */}
                   <a href="#projects">
-                    <button
+                    <motion.button
+                      whileHover={{ scale: 1.03, y: -2 }}
+                      whileTap={{ scale: 0.97 }}
                       aria-label="شاهد المشاريع"
-                      className="handiBold px-4 py-3 rounded-lg bg-white text-black text-sm md:text-base shadow-lg hover:bg-gray-100 transition flex items-center justify-center"
+                      className="handiBold px-4 py-3 rounded-lg bg-white text-black text-sm md:text-base shadow-lg hover:bg-gray-100 transition flex items-center justify-center gap-2"
                     >
-                      شاهد المشاريع{" "}
-                      <Lottie
-                        className="w-8 h-8"
-                        animationData={folderAnimation}
-                        loop
-                      />
-                    </button>
+                      شاهد المشاريع
+                      <motion.span
+                        animate={{ y: [0, -3, 0] }}
+                        transition={{
+                          duration: 1.2,
+                          repeat: Infinity,
+                          repeatType: "mirror",
+                          ease: "easeInOut",
+                        }}
+                        className="flex items-center"
+                      >
+                        <FaFolderOpen className="text-lg" />
+                      </motion.span>
+                    </motion.button>
                   </a>
 
                   <a href="#footer">
