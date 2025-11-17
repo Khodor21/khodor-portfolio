@@ -4,11 +4,7 @@ import { motion } from "framer-motion";
 
 export default function ArAboutSection() {
   return (
-    <section
-      id="about"
-      dir="rtl"
-      className="bg-[#050509] text-gray-100 py-20"
-    >
+    <section id="about" dir="rtl" className="bg-[#050509] text-gray-100 py-20">
       <div className="max-w-6xl mx-auto px-4 md:px-8 lg:px-10">
         {/* HEADER */}
         <div className="flex flex-col gap-3 mb-10">
@@ -44,11 +40,55 @@ export default function ArAboutSection() {
                 🧑‍💻 من هو خضر حسن؟
               </h3>
               <p className="handiReg text-white/70 leading-relaxed text-sm md:text-base">
-                أنا <span className="handiBold text-white">خضر حسن</span>، مُحبّ للتصاميم
-                وشغوف بالبرمجة، وطالب علم شرعي — أعيش بين عالم الإبداع الرقمي
-                وعالم المعرفة الشرعية. أسعى دائمًا لتقديم واجهات بسيطة، واضحة،
-                ومريحة للمستخدم.
+                أنا <span className="handiBold text-white">خضر حسن</span>، مُحبّ
+                للتصاميم وشغوف بالبرمجة، وطالب علم شرعي — أعيش بين عالم الإبداع
+                الرقمي وعالم المعرفة الشرعية. أسعى دائمًا لتقديم واجهات بسيطة،
+                واضحة، ومريحة للمستخدم.
               </p>
+            </div>
+
+            {/* Study path / Education timeline */}
+            <div>
+              <h3 className="handiBold text-xl md:text-2xl mb-3">
+                🎓 المسار الدراسي والعلمي
+              </h3>
+
+              <div className="relative pr-4 md:pr-6">
+                {/* الخط العمودي */}
+                <div className="absolute top-1 bottom-1 right-1 md:right-2 w-[2px] bg-white/15" />
+
+                <div className="space-y-4 md:space-y-5 text-sm md:text-base handiReg text-white/70">
+                  {/* 2018 - 2021 */}
+                  <div className="relative flex flex-col gap-1">
+                    <span className="absolute -right-[11px] md:-right-[13px] top-1 w-3 h-3 rounded-full bg-[#f4c542] border border-black/40" />
+                    <p className="text-[11px] md:text-xs text-white/50">
+                      2018 – 2021
+                    </p>
+                    <p>دراسة هندسة كهرباء.</p>
+                  </div>
+
+                  {/* 2021 - 2022 */}
+                  <div className="relative flex flex-col gap-1">
+                    <span className="absolute -right-[11px] md:-right-[13px] top-1 w-3 h-3 rounded-full bg-[#f4c542] border border-black/40" />
+                    <p className="text-[11px] md:text-xs text-white/50">
+                      2021 – 2022
+                    </p>
+                    <p>
+                      الانتقال إلى دراسة البرمجة والتصميم والتركيز على المجال
+                      الرقمي.
+                    </p>
+                  </div>
+
+                  {/* 2023 - now */}
+                  <div className="relative flex flex-col gap-1">
+                    <span className="absolute -right-[11px] md:-right-[13px] top-1 w-3 h-3 rounded-full bg-[#f4c542] border border-black/40" />
+                    <p className="text-[11px] md:text-xs text-white/50">
+                      2023 – حتى الآن
+                    </p>
+                    <p>طلب العلوم الشرعية ضمن برنامج لبناء منهجي متوازن.</p>
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* What I offer */}
@@ -94,9 +134,9 @@ export default function ArAboutSection() {
                 🧩 خبرة العمل
               </h3>
               <p className="handiReg text-white/70 text-sm md:text-base">
-                أعمل كـ<strong>فريلانسر</strong> منذ سنتين، وأحب التعاون مع أصحاب
-                المشاريع الصغيرة والمتاجر الإلكترونية وكل من يريد واجهة عربية
-                محترفة.
+                أعمل كـ<strong>فريلانسر</strong> منذ سنتين، وأحب التعاون مع
+                أصحاب المشاريع الصغيرة والمتاجر الإلكترونية وكل من يريد واجهة
+                عربية محترفة.
               </p>
             </div>
 
@@ -106,9 +146,8 @@ export default function ArAboutSection() {
                 ❤️ لمحة شخصية
               </h3>
               <p className="handiReg text-white/70 text-sm md:text-base">
-                أحب القراءة، وأستمتع جدًا مع فنجان القهوة، وأتابع كرة القدم
-                بشغف، ومع ذلك أهتم بمواكبة التحليل السياسي ومعرفة ما وراء
-                الأخبار.
+                مُحبّ للقراءة، ومُتابع لكرة القدم ،ومع ذلك أهتم بمواكبة التحليل
+                السياسي ومعرفة ما وراء الأخبار.
               </p>
             </div>
           </div>
