@@ -1,12 +1,11 @@
 import Image from "next/image";
 import { FaMapMarkerAlt } from "react-icons/fa";
-import Hero from "../images/Hero-Banner.jpg"
+import Hero from "../images/Hero-banner.jpg"
 import Logo from "../images/Logo-White.svg"
 const HeroSection = () => {
   return (
     <section className="hero-section relative w-full h-[90vh]">
 
-      {/* Background Image */}
       <Image
         src={Hero}
         alt="Hero Banner"
