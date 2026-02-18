@@ -8,7 +8,7 @@ import ProcessSection from "./sections/process";
 
 const Page = () => {
   const router = useRouter();
-  
+
   useEffect(() => {
     router.push("/ar");
   }, [router]);

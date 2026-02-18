@@ -1,0 +1,34 @@
+/* =============================
+   Fonts
+============================= */
+
+@font-face {
+  font-family: "Somar-Bold";
+  src: url("/fonts/ArbFONTS-Somar-Bold.otf") format("truetype");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Somar-Medium";
+  src: url("/fonts/ArbFONTS-Somar-Medium.otf") format("truetype");
+  font-weight: 700;
+}
+
+
+
+.mustaqar-font {
+  font-family: "Somar", sans-serif;
+}
+
+.font-bold {
+    font-family: "Somar-Bold"
+}
+
+.font-regular {
+    font-family: "Somar-Medium";
+}
+/* Hero Specific Custom Styling */
+
+.hero-section {
+  position: relative;
+}
