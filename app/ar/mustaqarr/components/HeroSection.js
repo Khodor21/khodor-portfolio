@@ -16,34 +16,34 @@ const HeroSection = () => {
 
       {/* Dark Overlay */}
       <div className="absolute inset-0 bg-black/60 z-10"></div>
-
+<div className="flex justify-between items-center">
       {/* Logo */}
-      <div className="absolute top-6 left-6 z-20">
+      <div className="absolute top-6 left-4 z-20">
         <Image
           src={Logo}
           alt="Logo"
-          width={56}
-          height={56}
+          width={48}
+          height={48}
         />
       </div>
 
       {/* Location */}
-      <div className="absolute top-6 right-6 z-20 flex items-center gap-2 text-white text-sm md:text-base">
+      <div className="absolute top-6 right-4 z-20 flex items-center gap-1 text-white text-sm md:text-base">
         <FaMapMarkerAlt />
         <div className="leading-tight">
-          <p className="font-bold">مدينة إدلب</p>
+          <p className="font-bold text-sm">مدينة إدلب</p>
           <p className="text-xs font-regular opacity-80">جنوب ساحة الساعة - بناية...</p>
         </div>
       </div>
-
+</div>
       {/* Main Content */}
       <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center text-white px-4">
 
-        <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-wide">
+        <h1 className="text-5xl  font-bold mb-4 tracking-wide">
           مُــسْـتـقَـــــــر
         </h1>
 
-        <p className="text-lg md:text-2xl font-regular opacity-90">
+        <p className="text-2xl  font-regular opacity-90">
           أصالة تُكمل شخصيتك
         </p>
 

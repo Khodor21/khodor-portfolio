@@ -3,7 +3,7 @@ import SyriaFlag from "../images/Syria-Flag.svg"
 import IslamicFlag from "../images/Islamic-Flag.svg"
 const TopBar = () => {
   return (
-    <div className="w-full bg-[#0A2A8A] text-white py-3 px-2 md:px-4 flex items-center justify-center gap-3 text-sm md:text-base relative z-20">
+    <div className="w-full bg-[#0A2A8A] text-white py-3 px-4 flex items-center justify-between gap-3 text-sm md:text-base relative z-20">
 
      
 <Image
@@ -12,7 +12,7 @@ const TopBar = () => {
         width={28}
         height={20}
       />
-      <p className="font-medium text-sm">
+      <p className="font-regular text-sm">
         توصيل إلى جميع محافظات سوريا
       </p>
  <Image
