@@ -20,10 +20,10 @@ const NavSide = ({ onCloseNav }) => {
               الرئيسية
             </Link>
             <Link href="#services" className="hover:text-main">
-              خدماتي{" "}
-            </Link>{" "}
+              خدماتي
+            </Link>
             <Link href="#works" className="hover:text-main">
-              أعمالي{" "}
+              أعمالي
             </Link>
             <Link href="#contact" className="hover:text-main">
               تواصل معي

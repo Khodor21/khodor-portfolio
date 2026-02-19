@@ -110,10 +110,10 @@ export default function HeroSection() {
                 transition={{ duration: 1 }}
                 className="mt-8 text-base handiReg md:text-xl text-white/90 leading-relaxed"
               >
-                أركِّز على بناء{" "}
+                أركِّز على بناء
                 <span className="text-[#f4c542] handiBold">
                   تجارب رقمية تُحسِّن حياة المستخدمين
-                </span>{" "}
+                </span>
                 وتُظهر هوية مشروعك بشكل واضح وجذّاب.
               </motion.p>
 

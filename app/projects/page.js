@@ -101,7 +101,7 @@ export default function ProjectsPage() {
     <main className="py-6 px-2 sm:p-4 mx-4 md:mx-24">
       <Navbar />
       <h1 className="text-lg text-center md:text-2xl lg:text-3xl semiBold my-8">
-        My Projects : Building Ideas Into{" "}
+        My Projects : Building Ideas Into
         <span className="playfair text-[#d64a40]">Reality</span>
       </h1>
       <div className="grid gap-10">

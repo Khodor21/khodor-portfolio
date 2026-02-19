@@ -20,7 +20,7 @@ export default function ArProjectsSection() {
           </span>
 
           <h2 className="handiBold text-2xl md:text-3xl lg:text-4xl text-white">
-            مشاريع مختارة من أعمالي في تصميم{" "}
+            مشاريع مختارة من أعمالي في تصميم
             <span className="text-[#f4c542]">الواجهات وتجربة المستخدم</span>
           </h2>
 

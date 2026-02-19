@@ -16,7 +16,7 @@ export default function HeroSection() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentWordIndex(
-        (prevIndex) => (prevIndex + 1) % rotatingWords.length
+        (prevIndex) => (prevIndex + 1) % rotatingWords.length,
       );
     }, 3000);
     return () => clearInterval(interval);
@@ -24,7 +24,6 @@ export default function HeroSection() {
 
   return (
     <section className="min-h-[60vh] md:min-h-screen mb-14 sm:mb-0">
-      {" "}
       <Navbar />
       <div className="relative flex flex-col items-start md:items-center justify-center overflow-hidden bg-white px-4 md:px-20">
         <div className="flex flex-col justify-center">
@@ -60,7 +59,6 @@ export default function HeroSection() {
           </div>
           <div className="relative z-10 w-full flex flex-col items-center text-center mt-[30%] md:mt-[15%]">
             <div className="flex gap-1 items-center justify-center medium text-base md:text-xl">
-              {" "}
               Hello
               <span className="inline-block">
                 <Image
@@ -99,7 +97,7 @@ export default function HeroSection() {
               transition={{ duration: 0.8 }}
               className="text-3xl mt-3 md:text-[3.5rem] md:mt-2 semiBold text-extrabold text-gray-900 leading-tight md:px-16 text-center"
             >
-              I turn ideas into meaningful visual solutions{" "}
+              I turn ideas into meaningful visual solutions
               <span className="playfair text-[#d64a40]">that inspire.</span>
             </motion.h1>
 

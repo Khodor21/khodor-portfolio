@@ -28,7 +28,6 @@ const ClientWeb = () => {
   return (
     <div className="bg-third">
       <div>
-        {" "}
         <div className="">
           <Image
             src={currentImage}
@@ -41,7 +40,7 @@ const ClientWeb = () => {
           className="mb-6 mt-2 text-main text-center mx-6 md:text-lg"
           id="ibmsemi"
         >
-          قصص نجاح: إلهام يعكس تأثيرنا الإيجابي{" "}
+          قصص نجاح: إلهام يعكس تأثيرنا الإيجابي
         </h3>
       </div>
     </div>

@@ -19,7 +19,7 @@ const PortfolioForm = () => {
       });
       const response = await axios.post(
         "https://portfolio-backend2024.vercel.app/api/portfolio",
-        formData
+        formData,
       );
 
       console.log("Portfolio data submitted successfully!", response.data);
@@ -39,7 +39,7 @@ const PortfolioForm = () => {
         >
           نشــــــــــــر تصميــــم
         </h3>
-      </div>{" "}
+      </div>
       <form
         className="flex flex-col justify-end lg:mx-20 md:mx-16 mx-10 "
         onSubmit={handleSubmit}

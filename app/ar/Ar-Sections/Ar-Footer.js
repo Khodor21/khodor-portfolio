@@ -30,7 +30,7 @@ const Footer = () => {
             </p>
 
             <h3 className="handiBold text-2xl md:text-3xl lg:text-4xl text-white leading-snug">
-              جاهز نشتغل سوا على{" "}
+              جاهز نشتغل سوا على
               <span className="text-[#f4c542]">مشروعك القادم؟</span>
             </h3>
 

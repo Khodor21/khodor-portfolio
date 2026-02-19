@@ -25,7 +25,7 @@ const ProjectDesign = ({ image, title, description, id }) => {
           <p className="absolute bottom-0 right-0 p-4 text-white hover:text-blue-500">
             View Project
           </p>
-        </Link>{" "}
+        </Link>
       </div>
     </div>
   );
@@ -42,7 +42,7 @@ const Projects = () => {
 
     try {
       const response = await axios.get(
-        "https://portfolio-backend2024.vercel.app/api/projects"
+        "https://portfolio-backend2024.vercel.app/api/projects",
       );
       setProjects(response.data);
       console.log(response.data);

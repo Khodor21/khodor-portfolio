@@ -1,0 +1,42 @@
+/* =============================
+   Fonts
+============================= */
+
+@font-face {
+  font-family: "Somar-Bold";
+  src: url("./fonts/ArbFONTS-Somar-Bold.otf") format("truetype");
+}
+
+@font-face {
+  font-family: "Somar-Medium";
+  src: url("./fonts/ArbFONTS-Somar-Bold.otf") format("opentype");
+}
+@font-face {
+  font-family: "Somar-ExtraBold";
+  src: url("./fonts/ArbFONTS-Somar-ExtraBold.otf") format("opentype");
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.font-extrabold {
+  font-family: "Somar-ExtraBold";
+}
+
+.font-bold {
+  font-family: "Somar-Bold";
+}
+
+.font-regular {
+  font-family: "Somar-Medium";
+}
+/* Hero Specific Custom Styling */
+
+.hero-section {
+  position: relative;
+}

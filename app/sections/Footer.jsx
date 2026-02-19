@@ -11,7 +11,6 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
   return (
     <div id="footer">
-      {" "}
       <div className="relative w-full flex justify-center items-center">
         <div className="relative z-20 bg-[#d64a40] flex flex-col justify-center items-center min-h-[50vh] w-full py-6 px-4 overflow-hidden">
           {/* Blurred white gradients INSIDE the black background */}
@@ -23,7 +22,7 @@ const Footer = () => {
           <div className="relative z-20 flex flex-col justify-center items-center my-4">
             <div className="text-center medium text-[18px] md:text-[36px] text-white flex justify-center items-center leading-none">
               <h3>
-                If you scrolled this far, It's time to{" "}
+                If you scrolled this far, It's time to
                 <span className="playfair text-xl md:text-4xl">
                   Take a step
                 </span>
@@ -44,7 +43,7 @@ const Footer = () => {
                   animationData={emailAnimation}
                   className="w-5 h-5 md:w-8 md:h-8"
                   loop={true}
-                />{" "}
+                />
                 <p className="md:text-lg text-sm medium">Email always open</p>
               </div>
             </Link>
@@ -57,7 +56,7 @@ const Footer = () => {
                   animationData={whatsappAnimation}
                   className="w-5 h-5 md:w-8 md:h-8"
                   loop={true}
-                />{" "}
+                />
                 <p className="md:text-lg text-sm medium">I'm on Whatsapp</p>
               </div>
             </Link>
@@ -70,7 +69,7 @@ const Footer = () => {
                   animationData={callAnimation}
                   className="w-5 h-5 md:w-8 md:h-8"
                   loop={true}
-                />{" "}
+                />
                 <p className="md:text-lg text-sm medium">Let’s talk call</p>
               </div>
             </Link>

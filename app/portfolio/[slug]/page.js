@@ -19,7 +19,7 @@ export default function Doc({ params }) {
   return (
     <div className="text-right mb-10 lg:mx-[300px] md:mx-[200px] mx-10">
       <h1 id="arabic" className="mt-10 text-3xl text-third">
-        {project.title}{" "}
+        {project.title}
       </h1>
       <h5 className="text-md mt-4 text-third/70 changa">{project.overview} </h5>
       {project.images && project.images.length > 0 && (
@@ -30,7 +30,7 @@ export default function Doc({ params }) {
           alt="Project image"
           className="mx-auto mt-2"
         />
-      )}{" "}
+      )}
       <div>
         <h1 className="mt-8 text-third text-2xl changa">نظرة عامّة</h1>
 
@@ -53,7 +53,7 @@ export default function Doc({ params }) {
           <div key={technology._id} className="flex items-center gap-4">
             <h4 className="text-base changa text-third/70">
               {technology.description}
-            </h4>{" "}
+            </h4>
             <img
               src={technology.icon}
               alt={technology.description}
@@ -67,7 +67,6 @@ export default function Doc({ params }) {
       {project.features &&
         project.features.map((feature) => (
           <>
-            {" "}
             <h1 className="mt-8 text-third text-2xl changa">{feature.title}</h1>
             <h4 className="text-base changa text-third/70 mt-4">
               {feature.description}

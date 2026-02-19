@@ -17,7 +17,7 @@ const services = [
       <>
         <span className="playfair text-lg md:text-2xl relative inline-block">
           Design
-        </span>{" "}
+        </span>
         that Connects
       </>
     ),
@@ -31,7 +31,7 @@ const services = [
       <>
         <span className="playfair text-lg md:text-2xl relative inline-block">
           Frontend
-        </span>{" "}
+        </span>
         Development
       </>
     ),
@@ -45,7 +45,7 @@ const services = [
       <>
         <span className="playfair text-lg md:text-2xl relative inline-block">
           Backend
-        </span>{" "}
+        </span>
         Development
       </>
     ),
@@ -63,7 +63,7 @@ const services = [
             aria-hidden="true"
           ></span>
           Response
-        </span>{" "}
+        </span>
         in 24 hours
       </>
     ),
@@ -81,7 +81,7 @@ const services = [
             aria-hidden="true"
           ></span>
           Affordable
-        </span>{" "}
+        </span>
         Excellence
       </>
     ),
@@ -99,7 +99,7 @@ const services = [
             aria-hidden="true"
           ></span>
           Fast
-        </span>{" "}
+        </span>
         Turnaround
       </>
     ),
@@ -148,8 +148,8 @@ const Services = () => {
             Tailored Digital
             <span className="playfair text-[#d64a40] text-[1.4rem] md:text-[2.2rem] ml-1">
               Solutions
-            </span>{" "}
-            to Bring Your Ideas to Life{" "}
+            </span>
+            to Bring Your Ideas to Life
           </h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-3 z-10 relative">

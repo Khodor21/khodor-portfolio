@@ -8,9 +8,8 @@ export const metadata = {
 export default function MustaqarLayout({ children }) {
   return (
     <html lang="ar" dir="rtl">
-      <body className="mustaqar-font bg-black">
+      <body className="mustaqar-font bg-[#fefefe]">
         {children}
-
         <BottomNavigation />
       </body>
     </html>

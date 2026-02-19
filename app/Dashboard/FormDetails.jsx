@@ -34,7 +34,7 @@ const UserTable = () => {
   return (
     <Card className="p-4 shadow-md border-t">
       <Title className="text-2xl mb-4 arabic text-right ">
-        رســـــائل العُملاء{" "}
+        رســـــائل العُملاء
       </Title>
       <Table className="w-full border border-third">
         <TableHead>

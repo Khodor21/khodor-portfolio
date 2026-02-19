@@ -100,7 +100,7 @@ const Project = () => {
     try {
       const response = await axios.post(
         "https://portfolio-backend2024.vercel.app/api/projects",
-        formData
+        formData,
       );
       console.log("Portfolio data submitted successfully!", response.data);
     } catch (error) {
@@ -121,7 +121,7 @@ const Project = () => {
         >
           نشــــــــــــر تفاصــــيل مشــــروع
         </h3>
-      </div>{" "}
+      </div>
       <form
         className="flex flex-col gap-4 mt-6 lg:mx-20 md:mx-16 mx-10"
         onSubmit={handleSubmit}
@@ -136,7 +136,7 @@ const Project = () => {
           />
         </label>
         <label className="text-right arabic text-third">
-          نظــرة سريعة{" "}
+          نظــرة سريعة
           <input
             className="w-full p-2 mt-2 border border-third rounded-sm shadow-xl  placeholder:text-third/50 placeholder:text-right"
             type="text"
@@ -160,7 +160,7 @@ const Project = () => {
                 name="description"
                 onChange={(e) => handleFeatureChange(e, index)}
                 className="w-full p-2 mt-2 border border-third rounded-sm shadow-xl  placeholder:text-third/50 placeholder:text-right placeholder:ibmsemi"
-              />{" "}
+              />
               <input
                 className="w-full p-2 mt-2 border border-third rounded-sm shadow-xl  placeholder:text-third/50 placeholder:text-right placeholder:ibmsemi"
                 type="text"
@@ -201,7 +201,7 @@ const Project = () => {
                 value={technologie.description}
                 name="description"
                 onChange={(e) => handleTechnologieChange(e, index)}
-              />{" "}
+              />
               <input
                 className="w-full p-2 mt-2 border border-third rounded-sm shadow-xl  placeholder:text-third/50 placeholder:text-right placeholder:ibmsemi"
                 type="text"
@@ -225,7 +225,7 @@ const Project = () => {
           onClick={handleAddTechnologie}
           className="bg-second rounded text-main arabic mx-1"
         >
-          إضــــافة تقنــــية{" "}
+          إضــــافة تقنــــية
         </button>
 
         {/* Main Section */}
