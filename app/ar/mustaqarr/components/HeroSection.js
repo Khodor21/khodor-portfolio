@@ -14,7 +14,7 @@ const HeroSection = () => {
       />
 
       {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-black/60 z-10"></div>
+      {/* <div className="absolute inset-0 bg-black/60 z-10"></div> */}
       <div className="flex justify-between items-center">
         {/* Logo */}
         <div className="absolute top-6 left-4 z-20">
@@ -34,11 +34,11 @@ const HeroSection = () => {
       </div>
       {/* Main Content */}
       <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center text-white px-4">
-        <h1 className="text-5xl font-bold mb-2 tracking-wide">
+        <h1 className="text-6xl font-bold mb-1 tracking-wide">
           مُــسْـتـقَـــــــر
         </h1>
 
-        <p className="text-2xl font-regular opacity-90">أصالة تُكمل شخصيتك</p>
+        <p className="text-3xl font-regular opacity-90">أصالة تُكمل شخصيتك</p>
       </div>
     </section>
   );
