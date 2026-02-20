@@ -44,7 +44,7 @@ export default function BottomNavigation() {
   ];
 
   return (
-    <nav className="fixed bottom-0 left-0 w-full bg-white rounded-t-[20px] shadow-[0_-8px_30px_rgba(0,0,0,0.06)] z-50 pt-4 pb-2 px-2 border-t border-1 border-[#0B1261]">
+    <nav className="fixed bottom-0 left-0 w-full bg-white rounded-t-[20px] shadow-[0_-8px_30px_rgba(0,0,0,0.06)] z-50 pt-4 pb-2 px-2 border-t-[1px] border-[#0B1261]">
       <ul className="flex justify-between items-center w-full">
         {navItems.map((item, index) => {
           const isActive = pathname === item.path;
@@ -57,7 +57,7 @@ export default function BottomNavigation() {
               >
                 {/* Custom SVG Icon Container */}
                 <div
-                  className={`relative w-4 h-4 transition-all duration-300 ${
+                  className={`relative w-5 h-5 transition-all duration-300 ${
                     isActive ? "opacity-100 scale-110" : "opacity-100 grayscale"
                   }`}
                 >
@@ -71,7 +71,7 @@ export default function BottomNavigation() {
 
                 {/* Text Label */}
                 <span
-                  className={`text-[13px] font-medium transition-colors ${
+                  className={`text-base font-regular transition-colors ${
                     isActive ? "text-[#0B1261] font-bold" : "text-black"
                   }`}
                 >

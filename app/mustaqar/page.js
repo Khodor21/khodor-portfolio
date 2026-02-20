@@ -6,7 +6,7 @@ import categories from "./CategoriesData.js";
 
 const Page = () => {
   return (
-    <div className="w-full min-h-screen overflow-hidden">
+    <div className="w-full mb-10 min-h-screen overflow-hidden">
       <TopBar />
       <HeroSection />
       {categories.map((section) => (

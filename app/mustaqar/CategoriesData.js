@@ -1,5 +1,6 @@
 import NewArrivalsBanner from "./images/New-Arrivals-Banner.jpg";
 import MensWatchBanner from "./images/Men's Watch Banner.jpg";
+import WomenWatchBanner from "./images/Women's-Watch-Banner.jpg";
 import Watch1 from "./images/Watch-1.png";
 
 const categoriesData = [
@@ -48,6 +49,34 @@ const categoriesData = [
       alt: "ساعات مستقر تبقي حضورك ثابتاً",
     },
     discoverLink: "/category/mens-watches",
+    products: [
+      {
+        id: "p4",
+        name: "AUDEMARS PIGUET",
+        image: Watch1,
+        feature: "ضمان سنة واحدة",
+        price: "60",
+        currency: "$",
+      },
+      {
+        id: "p5",
+        name: "Rolex - Black",
+        image: Watch1,
+        feature: "متوفر لونين",
+        price: "12",
+        currency: "$",
+      },
+    ],
+  },
+  {
+    id: "womens-watches",
+    title: "ساعات نسائيّة",
+    banner: {
+      imageUrl: WomenWatchBanner,
+      ratio: "2:1",
+      alt: "ساعات مستقر تبقي حضوركِ ملفتاً",
+    },
+    discoverLink: "/category/women-watches",
     products: [
       {
         id: "p4",
