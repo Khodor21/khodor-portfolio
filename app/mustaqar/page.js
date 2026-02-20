@@ -3,6 +3,8 @@ import TopBar from "./components/TopBar";
 import HeroSection from "./components/HeroSection";
 import CategorySection from "./components/CategorySection";
 import categories from "./CategoriesData.js";
+import Features from "./components/Features";
+import Footer from "./components/Footer";
 
 const Page = () => {
   return (
@@ -12,6 +14,8 @@ const Page = () => {
       {categories.map((section) => (
         <CategorySection key={section.id} section={section} />
       ))}
+      <Features />
+      <Footer />
     </div>
   );
 };

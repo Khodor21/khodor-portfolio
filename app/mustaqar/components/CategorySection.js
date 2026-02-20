@@ -7,7 +7,7 @@ export default function CategorySection({ section }) {
     section.banner.ratio === "4:1" ? "aspect-[4/1]" : "aspect-[2/1]";
 
   return (
-    <section className="flex flex-col w-full mb-12 overflow-hidden">
+    <section className="flex flex-col w-full overflow-hidden">
       {/* 1. Banner */}
       <div className={`relative w-full ${bannerRatioClass} mb-6 md:mb-8`}>
         <Image

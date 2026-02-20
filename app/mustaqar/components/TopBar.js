@@ -5,8 +5,7 @@ const TopBar = () => {
   return (
     <div className="w-full bg-[#0A2A8A] text-white py-3 px-4 flex items-center justify-between gap-3 text-sm md:text-base relative z-20">
       <Image src={IslamicFlag} alt="Islamic Flag" width={24} height={18} />
-      <p className="font-regular text-sm">
-      
+      <p className="font-regular text-base">
         توصيــل إلـــى جميـــع محافظـــات ســـوريا
       </p>
       <Image src={SyriaFlag} alt="Syria Flag" width={24} height={18} />

@@ -3,12 +3,12 @@ import { BiHeart } from "react-icons/bi";
 
 export default function ProductCard({ product }) {
   return (
-    <div className="w-[70vw] flex-[0_0_70vw] md:w-[220px] md:flex-[0_0_220px] bg-white rounded-lg flex flex-col snap-center relative shadow-sm border border-[#eaeaea] overflow-hidden">
+    <div className="w-[45vw] flex-[0_0_45vw] md:w-[220px] md:flex-[0_0_220px] bg-white rounded-lg flex flex-col snap-center relative shadow-sm border border-[#eaeaea] overflow-hidden">
       {" "}
       {/* Favorite Icon */}
       {/* Changed 'ledt-2' to 'left-2', increased padding-x to 'px-3', and kept y-padding at 'py-1.5' */}
       <button className="absolute bg-white rounded-full top-2 left-2 text-gray-200 hover:text-red-500 z-10 p-2 backdrop-blur-sm">
-        <BiHeart size={26} />
+        <BiHeart size={18} />
       </button>
       {/* Image Container - Changed aspect-[4/5] to aspect-square to lower the height */}
       <div className="relative w-full aspect-square bg-[#f8f8f8] overflow-hidden">

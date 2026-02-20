@@ -44,7 +44,7 @@ export default function BottomNavigation() {
   ];
 
   return (
-    <nav className="fixed bottom-0 left-0 w-full bg-white rounded-t-[20px] shadow-[0_-8px_30px_rgba(0,0,0,0.06)] z-50 pt-4 pb-2 px-2 border-t-[1px] border-[#0B1261]">
+    <nav className="fixed bottom-0 left-0 w-full bg-white rounded-t-[20px] shadow-[0_-8px_30px_rgba(0,0,0,0.06)] z-50 pt-4 px-2 border-t-[1px] border-[#0B1261]">
       <ul className="flex justify-between items-center w-full">
         {navItems.map((item, index) => {
           const isActive = pathname === item.path;
