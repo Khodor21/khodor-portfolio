@@ -21,21 +21,10 @@ export default function CategorySection({ section }) {
 
       <div className="w-full flex flex-col">
         {/* 2. Section Title */}
-        <div className="px-4 container mx-auto flex justify-between items-center mb-6">
-          <div className="relative inline-block">
-            <div className="absolute bottom-0 left-0 w-full h-1/3 bg-[#D1D5FF] -z-10 rounded-sm"></div>
-            <h2 className="text-2xl md:text-3xl font-extrabold text-[#0B1261] px-1 z-10 relative">
-              {section.title}
-            </h2>
-          </div>
-
-          {/* Top Discover More Link (Optional, looks better on mobile) */}
-          <Link
-            href={section.discoverLink}
-            className="text-sm font-bold text-[#0B1261] underline decoration-2 underline-offset-4"
-          >
-            عرض الكل
-          </Link>
+        <div className="px-4 container mx-auto mb-6">
+          <h2 className="text-3xl text-center md:text-3xl font-extrabold text-[#0B1261] px-1 z-10 relative">
+            {section.title}
+          </h2>
         </div>
 
         {/* 3. Carousel - Mobile Optimized */}

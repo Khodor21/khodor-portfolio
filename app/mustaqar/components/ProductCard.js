@@ -5,7 +5,7 @@ export default function ProductCard({ product }) {
   return (
     <div className="w-[calc(50%-8px)] flex-[0_0_calc(50%-8px)] md:flex-[0_0_220px] bg-white rounded-lg flex flex-col snap-center relative shadow-sm border border-[#eaeaea] overflow-hidden">
       {/* Favorite Icon */}
-      <button className="absolute top-2 right-2 text-gray-400 hover:text-red-500 z-10 bg-white/80 p-1.5 rounded-full backdrop-blur-sm">
+      <button className="absolute top-2 ledt-2 text-gray-400 hover:text-red-500 z-10 p-1.5 backdrop-blur-sm">
         <BiHeart size={20} />
       </button>
 
@@ -20,22 +20,22 @@ export default function ProductCard({ product }) {
 
       {/* Product Details - Tighter padding like Zbrand */}
       <div className="flex flex-col flex-grow p-3 text-right">
-        <h3 className="font-bold text-[#0B1261] text-xl md:text-xl line-clamp-1">
+        <h3 className="font-bold text-[#0B1261] text-2xl md:text-xl line-clamp-1">
           {product.name}
         </h3>
 
-        <p className="text-gray-500 font-regular text-base mt-1 line-clamp-1">
+        <p className="text-black/80 font-regular text-base mt-1 line-clamp-1">
           {product.feature}
         </p>
 
-        <div className="mt-2 font-bold text-black flex gap-1 items-center">
-          <p className="text-black/90 text-base font-regular">السعر:</p>
-          <span className="text-lg">{product.price}$</span>
+        <div className="mt-2 text-black flex gap-1 items-center">
+          <p className="text-black/90 text-xl font-regular">السعر:</p>
+          <span className="text-xl font-extrabold">{product.price}$</span>
         </div>
 
         {/* Add to Cart Button */}
-        <button className="w-full mt-3 bg-[#0B1261] text-white py-2 rounded-md font-bold text-base md:text-lg transition hover:bg-blue-900 active:scale-95">
-          أضف للسّـلـة
+        <button className="w-full mt-3 bg-[#0B1261] text-white py-1 rounded-md font-bold text-xl md:text-lg transition hover:bg-blue-900 active:scale-95">
+          أضِــــف للسّـلـــــة
         </button>
       </div>
     </div>

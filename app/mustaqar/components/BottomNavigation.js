@@ -2,62 +2,52 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  BiHomeAlt,
-  BiSolidHome,
-  BiUser,
-  BiSolidUser,
-  BiSearch,
-  BiHeart,
-  BiSolidHeart,
-} from "react-icons/bi";
-import { BsBagCheck, BsBagCheckFill } from "react-icons/bs";
+import Image from "next/image";
+
+// Import your custom SVGs
+import homeIcon from "../images/icons/home.svg";
+import userIcon from "../images/icons/user.svg";
+import searchIcon from "../images/icons/search.svg";
+import cartIcon from "../images/icons/cart.svg";
+import heartIcon from "../images/icons/heart.svg";
 
 export default function BottomNavigation() {
   const pathname = usePathname();
 
-  // Define navigation items with both an outline (inactive) and filled (active) icon
+  // Define navigation items with your custom SVGs
   const navItems = [
     {
       name: "الرئيسية",
       path: "/",
-      Icon: BiHomeAlt,
-      ActiveIcon: BiSolidHome,
+      icon: homeIcon,
     },
     {
       name: "حسابي",
       path: "/profile",
-      Icon: BiUser,
-      ActiveIcon: BiSolidUser,
+      icon: userIcon,
     },
     {
       name: "بحث",
       path: "/search",
-      Icon: BiSearch,
-      ActiveIcon: BiSearch, // Search rarely needs a filled state, but you can change this if preferred
+      icon: searchIcon,
     },
     {
       name: "طلباتي",
       path: "/orders",
-      Icon: BsBagCheck,
-      ActiveIcon: BsBagCheckFill,
+      icon: cartIcon, // Used cart.svg here for orders/bag
     },
     {
       name: "المفضلة",
       path: "/favorites",
-      Icon: BiHeart,
-      ActiveIcon: BiSolidHeart,
+      icon: heartIcon,
     },
   ];
 
   return (
-    <nav className="fixed bottom-0 left-0 w-full bg-white rounded-t-[2.5rem] shadow-[0_-8px_30px_rgba(0,0,0,0.06)] z-50 pt-4 pb-2 px-2 border-t broder-1 border-[#0B1261]">
+    <nav className="fixed bottom-0 left-0 w-full bg-white rounded-t-[20px] shadow-[0_-8px_30px_rgba(0,0,0,0.06)] z-50 pt-4 pb-2 px-2 border-t border-1 border-[#0B1261]">
       <ul className="flex justify-between items-center w-full">
         {navItems.map((item, index) => {
           const isActive = pathname === item.path;
-
-          // Determine which icon to show based on the active state
-          const CurrentIcon = isActive ? item.ActiveIcon : item.Icon;
 
           return (
             <li key={index} className="flex-1 flex justify-center">
@@ -65,16 +55,25 @@ export default function BottomNavigation() {
                 href={item.path}
                 className="flex flex-col items-center gap-1.5 w-full relative pb-3"
               >
-                {/* React Icon Component */}
+                {/* Custom SVG Icon Container */}
                 <div
-                  className={`text-2xl transition-colors ${isActive ? "text-[#0B1261]" : "text-black"}`}
+                  className={`relative w-4 h-4 transition-all duration-300 ${
+                    isActive ? "opacity-100 scale-110" : "opacity-100 grayscale"
+                  }`}
                 >
-                  <CurrentIcon />
+                  <Image
+                    src={item.icon}
+                    alt={item.name}
+                    fill
+                    className="object-contain"
+                  />
                 </div>
 
                 {/* Text Label */}
                 <span
-                  className={`text-[13px] font-medium transition-colors ${isActive ? "text-[#0B1261] font-bold" : "text-black"}`}
+                  className={`text-[13px] font-medium transition-colors ${
+                    isActive ? "text-[#0B1261] font-bold" : "text-black"
+                  }`}
                 >
                   {item.name}
                 </span>
