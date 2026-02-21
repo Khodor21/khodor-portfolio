@@ -18,27 +18,27 @@ export default function BottomNavigation() {
   const navItems = [
     {
       name: "الرئيسية",
-      path: "/",
+      path: "/mustaqar",
       icon: homeIcon,
     },
     {
       name: "حسابي",
-      path: "/profile",
+      path: "/mustaqar/not-found",
       icon: userIcon,
     },
     {
       name: "بحث",
-      path: "/search",
+      path: "/mustaqar/not-found",
       icon: searchIcon,
     },
     {
       name: "طلباتي",
-      path: "/orders",
-      icon: cartIcon, // Used cart.svg here for orders/bag
+      path: "/mustaqar/not-found",
+      icon: cartIcon,
     },
     {
       name: "المفضلة",
-      path: "/favorites",
+      path: "/mustaqar/not-found",
       icon: heartIcon,
     },
   ];
