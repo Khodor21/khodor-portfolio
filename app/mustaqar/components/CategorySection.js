@@ -36,6 +36,9 @@ export default function CategorySection({ section }) {
             ))}
           </div>
         </div>
+        <div className="bg-white border border-[#0B1261] px-2 py-1 w-fit mx-auto rounded text-center mb-6">
+          <p className="font-extrabold text-xl text-[#0B1261] ">عرض المزيد</p>
+        </div>
       </div>
     </section>
   );

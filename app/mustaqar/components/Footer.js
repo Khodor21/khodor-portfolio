@@ -8,8 +8,8 @@ export default function Footer() {
       <div className="container mx-auto max-w-6xl grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8">
         {/* 1. About Store */}
         <div className="flex flex-col">
-          <h3 className="text-2xl font-bold mb-4">عن متجرنا</h3>
-          <p className="text-white/80 font-regular leading-relaxed text-sm md:text-base">
+          <h3 className="text-2xl font-extrabold mb-4">عن متجرنا</h3>
+          <p className="text-white/80 font-regular leading-relaxed text-lg md:text-lg">
             مستقر هي علامة متخصصة في الساعات ذات الجودة العالية، نختار تصاميمنا
             بعناية لنقدم لك مزيجاً من الدقة، الأناقة، والمتانة. رؤيتنا أن نجعل
             الوقت أكثر قيمة... وأن يكون حضورك ثابتاً في كل لحظة.
@@ -18,7 +18,7 @@ export default function Footer() {
 
         {/* 2. Contact & Socials */}
         <div className="flex flex-col">
-          <h3 className="text-2xl font-bold mb-4">تواصل معنا</h3>
+          <h3 className="text-2xl font-extrabold mb-4">تواصل معنا</h3>
 
           <div
             dir="rtl"
@@ -26,22 +26,28 @@ export default function Footer() {
           >
             <a
               href="https://wa.me/963957861895"
-              className="flex items-center gap-2 font-bold hover:text-[#C8CEFF] transition"
+              className="flex items-center gap-2 text-lg font-regular  hover:text-[#C8CEFF] transition"
             >
               <BiChevronsLeft className="text-[#C8CEFF]" size={20} />
-              <span dir="ltr">00963957861895</span> : واتساب
+              واتساب:
+              <span dir="rtl" className="text-xl font-bold">
+                00963957861895
+              </span>
             </a>
             <a
               href="https://t.me/963957861895"
-              className="flex items-center gap-2 hover:text-[#C8CEFF] transition"
+              className="flex items-center gap-2 text-lg font-regular  hover:text-[#C8CEFF] transition"
             >
               <BiChevronsLeft className="text-[#C8CEFF]" size={20} />
-              <span dir="ltr">00963957861895</span> : تلغرام
+              تلغرام :
+              <span dir="rtl" className="text-xl font-bold">
+                00963957861895
+              </span>
             </a>
           </div>
 
           {/* Social Icons */}
-          <h3 className="text-xl font-bold mb-3">تابعنا على</h3>
+          <h3 className="text-xl font-extrabold mb-3">تابعنا على</h3>
           <div className="flex gap-3">
             <a
               href="#"
@@ -60,12 +66,12 @@ export default function Footer() {
 
         {/* 3. Important Links */}
         <div className="flex flex-col">
-          <h3 className="text-2xl font-bold mb-4">روابط مهمة</h3>
+          <h3 className="text-2xl font-extrabold mb-4">روابط مهمة</h3>
           <ul className="flex flex-col gap-3 text-white/80 text-sm md:text-base">
             <li>
               <Link
                 href="#"
-                className="flex items-center gap-2 hover:text-[#C8CEFF] transition"
+                className="flex font-regular text-lg items-center gap-2 hover:text-[#C8CEFF] transition"
               >
                 <BiChevronsLeft className="text-[#C8CEFF]" size={20} />
                 من نحن
@@ -74,7 +80,7 @@ export default function Footer() {
             <li>
               <Link
                 href="#"
-                className="flex items-center gap-2 hover:text-[#C8CEFF] transition"
+                className="flex font-regular text-lg items-center gap-2 hover:text-[#C8CEFF] transition"
               >
                 <BiChevronsLeft className="text-[#C8CEFF]" size={20} />
                 سياسة الخصوصية
@@ -83,7 +89,7 @@ export default function Footer() {
             <li>
               <Link
                 href="#"
-                className="flex items-center gap-2 hover:text-[#C8CEFF] transition"
+                className="flex font-regular text-lg items-center gap-2 hover:text-[#C8CEFF] transition"
               >
                 <BiChevronsLeft className="text-[#C8CEFF]" size={20} />
                 الشروط والاحكام
@@ -92,7 +98,7 @@ export default function Footer() {
             <li>
               <Link
                 href="#"
-                className="flex items-center gap-2 hover:text-[#C8CEFF] transition"
+                className="flex font-regular text-lg items-center gap-2 hover:text-[#C8CEFF] transition"
               >
                 <BiChevronsLeft className="text-[#C8CEFF]" size={20} />
                 الدعم الفني

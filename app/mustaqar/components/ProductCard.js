@@ -5,12 +5,9 @@ export default function ProductCard({ product }) {
   return (
     <div className="w-[45vw] flex-[0_0_45vw] md:w-[220px] md:flex-[0_0_220px] bg-white rounded-lg flex flex-col snap-center relative shadow-sm border border-[#eaeaea] overflow-hidden">
       {" "}
-      {/* Favorite Icon */}
-      {/* Changed 'ledt-2' to 'left-2', increased padding-x to 'px-3', and kept y-padding at 'py-1.5' */}
       <button className="absolute bg-white rounded-full top-2 left-2 text-gray-200 hover:text-red-500 z-10 p-2 backdrop-blur-sm">
         <BiHeart size={18} />
       </button>
-      {/* Image Container - Changed aspect-[4/5] to aspect-square to lower the height */}
       <div className="relative w-full aspect-square bg-[#f8f8f8] overflow-hidden">
         <Image
           src={product.image}
@@ -19,9 +16,8 @@ export default function ProductCard({ product }) {
           className="object-contain p-6 mix-blend-multiply transition-transform duration-300 hover:scale-110"
         />
       </div>
-      {/* Product Details */}
       <div className="flex flex-col flex-grow p-3 text-right">
-        <h3 className="font-bold text-[#0B1261] text-2xl md:text-xl line-clamp-1">
+        <h3 className="font-regular text-black/90 text-xl md:text-xl line-clamp-1">
           {product.name}
         </h3>
 
