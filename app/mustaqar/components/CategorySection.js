@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import ProductCard from "./ProductCard";
 
 export default function CategorySection({ section }) {
@@ -32,7 +31,11 @@ export default function CategorySection({ section }) {
           {/* CHANGED HERE: Replaced px-4 with px-8 for more margin at the screen edges */}
           <div className="flex gap-4 px-4 w-max md:w-full">
             {section.products.map((product) => (
-              <ProductCard key={product.id} product={product} />
+              <ProductCard
+                key={product.id}
+                product={product}
+                categoryId={section.id}
+              />
             ))}
           </div>
         </div>
