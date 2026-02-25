@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
+import { useCart } from "../context/cartContext";
 
 // Import your custom SVGs
 import homeIcon from "../images/icons/home.svg";
@@ -13,6 +14,12 @@ import heartIcon from "../images/icons/heart.svg";
 
 export default function BottomNavigation() {
   const pathname = usePathname();
+  const { cartItems, favorites } = useCart(); // ✅ fixed: favorites instead of favoriteItems
+
+  // ✅ Total cart quantity
+  const cartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
+  // ✅ Total favorite count
+  const favCount = favorites.length;
 
   // Define navigation items with your custom SVGs
   const navItems = [
@@ -33,12 +40,12 @@ export default function BottomNavigation() {
     },
     {
       name: "طلباتي",
-      path: "/mustaqar/not-found",
+      path: "/mustaqar/cart",
       icon: cartIcon,
     },
     {
       name: "المفضلة",
-      path: "/mustaqar/not-found",
+      path: "/mustaqar/favorites",
       icon: heartIcon,
     },
   ];
@@ -48,6 +55,8 @@ export default function BottomNavigation() {
       <ul className="flex justify-between items-center w-full">
         {navItems.map((item, index) => {
           const isActive = pathname === item.path;
+          const isCart = item.path === "/mustaqar/cart";
+          const isFav = item.name === "المفضلة";
 
           return (
             <li key={index} className="flex-1 flex justify-center">
@@ -55,7 +64,7 @@ export default function BottomNavigation() {
                 href={item.path}
                 className="flex flex-col items-center gap-1.5 w-full relative pb-3"
               >
-                {/* Custom SVG Icon Container */}
+                {/* Icon Container */}
                 <div
                   className={`relative w-5 h-5 transition-all duration-300 ${
                     isActive ? "opacity-100 scale-110" : "opacity-100 grayscale"
@@ -67,6 +76,20 @@ export default function BottomNavigation() {
                     fill
                     className="object-contain"
                   />
+
+                  {/* ✅ Cart Counter Badge */}
+                  {isCart && cartCount > 0 && (
+                    <span className="absolute -top-2 -right-2 min-w-[18px] h-[18px] px-1 flex items-center justify-center text-[11px] font-bold text-white rounded-full bg-[#D50000]">
+                      {cartCount > 99 ? "99+" : cartCount}
+                    </span>
+                  )}
+
+                  {/* ✅ Favorite Counter Badge */}
+                  {isFav && favCount > 0 && (
+                    <span className="absolute -top-2 -right-2 min-w-[18px] h-[18px] px-1 flex items-center justify-center text-[11px] font-bold text-white rounded-full bg-[#D50000]">
+                      {favCount > 9 ? "9+" : favCount}
+                    </span>
+                  )}
                 </div>
 
                 {/* Text Label */}
