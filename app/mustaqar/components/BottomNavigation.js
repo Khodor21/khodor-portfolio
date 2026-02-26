@@ -1,11 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 import Image from "next/image";
 import { useCart } from "../context/cartContext";
 
-// Import your custom SVGs
 import homeIcon from "../images/icons/home.svg";
 import userIcon from "../images/icons/user.svg";
 import searchIcon from "../images/icons/search.svg";
@@ -14,40 +13,17 @@ import heartIcon from "../images/icons/heart.svg";
 
 export default function BottomNavigation() {
   const pathname = usePathname();
-  const { cartItems, favorites } = useCart(); // ✅ fixed: favorites instead of favoriteItems
+  const { cartItems, favorites } = useCart();
 
-  // ✅ Total cart quantity
   const cartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
-  // ✅ Total favorite count
   const favCount = favorites.length;
 
-  // Define navigation items with your custom SVGs
   const navItems = [
-    {
-      name: "الرئيسية",
-      path: "/mustaqar",
-      icon: homeIcon,
-    },
-    {
-      name: "حسابي",
-      path: "/mustaqar/not-found",
-      icon: userIcon,
-    },
-    {
-      name: "بحث",
-      path: "/mustaqar/not-found",
-      icon: searchIcon,
-    },
-    {
-      name: "طلباتي",
-      path: "/mustaqar/cart",
-      icon: cartIcon,
-    },
-    {
-      name: "المفضلة",
-      path: "/mustaqar/favorites",
-      icon: heartIcon,
-    },
+    { name: "الرئيسية", path: "/mustaqar", icon: homeIcon },
+    { name: "حسابي", path: "/mustaqar/not-found", icon: userIcon },
+    { name: "بحث", path: "/mustaqar/not-found", icon: searchIcon },
+    { name: "طلباتي", path: "/mustaqar/cart", icon: cartIcon },
+    { name: "المفضلة", path: "/mustaqar/favorites", icon: heartIcon },
   ];
 
   return (
@@ -56,7 +32,7 @@ export default function BottomNavigation() {
         {navItems.map((item, index) => {
           const isActive = pathname === item.path;
           const isCart = item.path === "/mustaqar/cart";
-          const isFav = item.name === "المفضلة";
+          const isFav = item.path === "/mustaqar/favorites";
 
           return (
             <li key={index} className="flex-1 flex justify-center">
@@ -64,27 +40,24 @@ export default function BottomNavigation() {
                 href={item.path}
                 className="flex flex-col items-center gap-1.5 w-full relative pb-3"
               >
-                {/* Icon Container */}
-                <div
-                  className={`relative w-5 h-5 transition-all duration-300 ${
-                    isActive ? "opacity-100 scale-110" : "opacity-100 grayscale"
-                  }`}
-                >
+                {/* Icon + badges */}
+                <div className="relative w-5 h-5 transition-all duration-300">
+                  {/* Icon */}
                   <Image
                     src={item.icon}
                     alt={item.name}
                     fill
-                    className="object-contain"
+                    className={`object-contain ${!isActive ? "grayscale" : ""}`}
                   />
 
-                  {/* ✅ Cart Counter Badge */}
+                  {/* Cart Badge */}
                   {isCart && cartCount > 0 && (
                     <span className="absolute -top-2 -right-2 min-w-[18px] h-[18px] px-1 flex items-center justify-center text-[11px] font-bold text-white rounded-full bg-[#D50000]">
-                      {cartCount > 99 ? "99+" : cartCount}
+                      {cartCount > 9 ? "9+" : cartCount}
                     </span>
                   )}
 
-                  {/* ✅ Favorite Counter Badge */}
+                  {/* Favorite Badge */}
                   {isFav && favCount > 0 && (
                     <span className="absolute -top-2 -right-2 min-w-[18px] h-[18px] px-1 flex items-center justify-center text-[11px] font-bold text-white rounded-full bg-[#D50000]">
                       {favCount > 9 ? "9+" : favCount}
@@ -92,7 +65,7 @@ export default function BottomNavigation() {
                   )}
                 </div>
 
-                {/* Text Label */}
+                {/* Label */}
                 <span
                   className={`text-base font-regular transition-colors ${
                     isActive ? "text-[#0B1261] font-bold" : "text-black"
@@ -101,7 +74,7 @@ export default function BottomNavigation() {
                   {item.name}
                 </span>
 
-                {/* Active Underline Indicator */}
+                {/* Active underline */}
                 {isActive && (
                   <div className="absolute bottom-0 w-10 h-1 bg-[#0B1261] rounded-t-md" />
                 )}
@@ -111,7 +84,6 @@ export default function BottomNavigation() {
         })}
       </ul>
 
-      {/* iOS-style Bottom Home Indicator */}
       <div className="w-[120px] h-[4px] bg-gray-100 rounded-full mx-auto mt-2" />
     </nav>
   );

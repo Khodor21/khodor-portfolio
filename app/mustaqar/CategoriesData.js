@@ -1,5 +1,5 @@
 import NewArrivalsBanner from "./images/New-Arrivals-Banner.jpg";
-import NewArrivalsBanner2 from "./images/New-Arrivals-Banner#2.jpg"
+import NewArrivalsBanner2 from "./images/New-Arrivals-Banner-2.jpg";
 import MensWatchBanner from "./images/Men's Watch Banner.jpg";
 import WomenWatchBanner from "./images/Women's-Watch-Banner.jpg";
 import Watch1 from "./images/Watch-1.png";
@@ -14,13 +14,12 @@ import Watch8 from "./images/Watch-8.png";
 import Watch9 from "./images/Watch-9.png";
 import Watch10 from "./images/Watch-10.png";
 
-
 const categoriesData = [
   {
     id: "new-arrivals",
     title: "وصل حديثاً",
     banner: {
-  imageUrls: [NewArrivalsBanner, NewArrivalsBanner2],
+      imageUrls: [NewArrivalsBanner, NewArrivalsBanner2],
       ratio: "4:1",
       alt: "مستقر - وصل حديثاً",
     },

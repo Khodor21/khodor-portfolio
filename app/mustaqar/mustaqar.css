@@ -40,3 +40,30 @@
 .hero-section {
   position: relative;
 }
+
+/* global.css */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.animation-fadeIn {
+  animation: fadeIn 0.25s ease-out forwards;
+}
+
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    scale: 0.9;
+  }
+  100% {
+    opacity: 1;
+    scale: 1;
+  }
+}
+.animation-popIn {
+  animation: popIn 0.3s ease-out forwards;
+}
