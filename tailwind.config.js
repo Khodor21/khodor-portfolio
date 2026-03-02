@@ -18,6 +18,7 @@ module.exports = {
         blue: "#3797FF",
         background: "#04070D",
         main: "#D5DBE6",
+        mustaqar :"#0a2a8a",
       },
       backgroundImage: {
         "radial-dark":

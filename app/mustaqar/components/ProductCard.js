@@ -10,8 +10,8 @@ import { useState } from "react";
 import AddToCartPopup from "./AddToCartPopup.js";
 
 export default function ProductCard({ product, categoryId }) {
-  const { addToCart, toggleFavorite, isFavorite } = useCart();
-  const favorited = isFavorite(product.id);
+  const { addToCart, toggleFavorite, isFavorite, hydrated } = useCart();
+  const favorited = hydrated && isFavorite(product.id);
   const [showPopup, setShowPopup] = useState(false);
 
   const handleAddToCart = (e) => {
@@ -69,7 +69,7 @@ export default function ProductCard({ product, categoryId }) {
           <button
             type="button"
             onClick={handleAddToCart}
-            className="text-[#0B1261] hover:text-white flex justify-center items-center gap-2 w-full mt-3 border-[0.5px] border-[#0B1261] hover:bg-[#0B1261] py-1 rounded-md font-regular text-lg transition active:scale-95"
+            className="text-mustaqar hover:text-white flex justify-center items-center gap-2 w-full mt-3 border-[0.5px] border-mustaqar hover:bg-mustaqar py-1 rounded-md font-regular text-lg transition active:scale-95"
           >
             <CgShoppingBag className="" />
             أضِــــف للسّـلـــــة

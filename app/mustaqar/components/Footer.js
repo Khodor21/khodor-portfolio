@@ -4,7 +4,7 @@ import { BiChevronsLeft } from "react-icons/bi";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#0B1261] text-white py-12 px-6" dir="rtl">
+    <footer className="bg-mustaqar text-white py-12 px-6" dir="rtl">
       <div className="container mx-auto max-w-6xl grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8">
         {/* 1. About Store */}
         <div className="flex flex-col">
@@ -51,13 +51,13 @@ export default function Footer() {
           <div className="flex gap-3">
             <a
               href="#"
-              className="w-10 h-10 rounded-full border border-white/40 flex items-center justify-center hover:bg-white hover:text-[#0B1261] transition"
+              className="w-10 h-10 rounded-full border border-white/40 flex items-center justify-center hover:bg-white hover:text-mustaqar transition"
             >
               <FaTelegramPlane size={20} />
             </a>
             <a
               href="#"
-              className="w-10 h-10 rounded-full border border-white/40 flex items-center justify-center hover:bg-white hover:text-[#0B1261] transition"
+              className="w-10 h-10 rounded-full border border-white/40 flex items-center justify-center hover:bg-white hover:text-mustaqar transition"
             >
               <FaInstagram size={20} />
             </a>

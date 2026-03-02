@@ -42,22 +42,22 @@ export default function CategorySection({ section }) {
 
       {/* 2. Section Title */}
       <div className="px-4 container mx-auto mb-8 text-center">
-        <h2 className="relative inline-block px-2 text-4xl font-extrabold text-[#0B1261] z-10 after:content-[''] after:absolute after:bottom-[2px] after:left-0 after:w-full after:h-[16px] after:bg-[#C8CEFF] after:-z-10">
+        <h2 className="relative inline-block px-2 text-4xl font-extrabold text-mustaqar z-10 after:content-[''] after:absolute after:bottom-[2px] after:left-0 after:w-full after:h-[16px] after:bg-[#C8CEFF] after:-z-10">
           {section.title}
         </h2>
       </div>
 
       {/* 3. Horizontal Scroll Carousel */}
       <div className="w-full overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-4">
-        <div className="flex gap-4 px-2">
+        <div className="flex gap-2 px-4 items-center justify-center">
           {section.products.map((product) => (
             <div
               key={product.id}
               className="
                 flex-shrink-0
-                w-1/2       /* phones: 2 cards per view */
-                sm:w-1/3    /* tablets: 3 cards per view */
-                md:w-1/4    /* desktops: 4 cards per view */
+                w-1/2     
+                sm:w-1/3  
+                md:w-1/4 
                 snap-start
               "
             >
@@ -68,8 +68,8 @@ export default function CategorySection({ section }) {
       </div>
 
       {/* 4. Show More Button */}
-      <div className="bg-white border-2 border-[#0B1261] px-2 py-1 w-fit mx-auto rounded text-center mb-6">
-        <p className="font-extrabold text-xl text-[#0B1261]">عرض المزيد</p>
+      <div className="bg-white border-[0.5px] border-mustaqar px-2 py-1 w-fit mx-auto rounded text-center mb-6">
+        <p className="font-extrabold text-xl text-mustaqar">عرض المزيد</p>
       </div>
     </section>
   );

@@ -16,13 +16,14 @@ export function CartProvider({ children }) {
     return [];
   });
 
-  const [favorites, setFavorites] = useState(() => {
-    if (typeof window !== "undefined") {
-      const stored = localStorage.getItem("favorites");
-      return stored ? JSON.parse(stored) : [];
-    }
-    return [];
-  });
+  const [favorites, setFavorites] = useState([]);
+  const [hydrated, setHydrated] = useState(false);
+
+  useEffect(() => {
+    const stored = localStorage.getItem("favorites");
+    if (stored) setFavorites(JSON.parse(stored));
+    setHydrated(true);
+  }, []);
 
   // -------------------------
   // SYNC TO LOCAL STORAGE
@@ -125,6 +126,7 @@ export function CartProvider({ children }) {
         removeFromFavorites,
         toggleFavorite,
         isFavorite,
+        hydrated,
       }}
     >
       {children}

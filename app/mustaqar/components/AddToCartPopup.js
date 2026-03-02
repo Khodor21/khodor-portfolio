@@ -60,7 +60,7 @@ export default function AddToCartPopupTop({
       >
         {/* Header */}
         <div className="flex justify-between items-center">
-          <h3 className="text-xl font-extrabold text-[#0B1261]">
+          <h3 className="text-xl font-extrabold text-mustaqar">
             تم إضافة المنتج!
           </h3>
           <button
@@ -98,13 +98,13 @@ export default function AddToCartPopupTop({
         <div className="flex flex-row-reverse gap-2">
           <button
             onClick={handleClose}
-            className="flex-1 py-2 rounded-md border-[0.5px] border-[#0B1261] font-regular text-[#0B1261] hover:bg-[#0B1261] hover:text-white transition"
+            className="flex-1 py-2 rounded-md border-[0.5px] border-mustaqar font-regular text-mustaqar hover:bg-mustaqar hover:text-white transition"
           >
             مواصلة التسوق
           </button>
           <a
             href="/mustaqar/cart"
-            className="flex-1 py-2 rounded-md bg-[#0B1261] text-white font-regular text-center hover:bg-[#09144b] transition"
+            className="flex-1 py-2 rounded-md bg-mustaqar text-white font-regular text-center hover:bg-[#09144b] transition"
           >
             الذهاب للسلة
           </a>
@@ -113,7 +113,7 @@ export default function AddToCartPopupTop({
         {/* Progress bar */}
         <div className="h-1 w-full bg-gray-200 rounded-full overflow-hidden mt-2">
           <div
-            className="h-full bg-[#0B1261] transition-all"
+            className="h-full bg-mustaqar transition-all"
             style={{ width: `${progress}%` }}
           />
         </div>

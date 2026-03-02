@@ -29,7 +29,7 @@ export default function CartPage() {
       <TopBar />
 
       <div className="w-full md:max-w-4xl md:mx-auto px-4 py-6 mb-24">
-        <h1 className="text-2xl font-extrabold text-[#0B1261] mb-6">
+        <h1 className="text-2xl font-extrabold text-mustaqar mb-6">
           سلة المشتريات
         </h1>
 
@@ -58,7 +58,7 @@ export default function CartPage() {
                         </button>
                         <div>
                           <h2 className="font-bold text-xl">{item.name}</h2>
-                          <p className="text-[#0B1261] font-bold text-2xl">
+                          <p className="text-mustaqar font-bold text-2xl">
                             {item.currency}
                             {item.price}
                           </p>
@@ -115,12 +115,12 @@ export default function CartPage() {
                 <span className="font-bold text-xl">$ {totalPrice}</span>
               </div>
 
-              <div className="flex justify-between text-2xl font-extrabold">
+              <div className="flex justify-between text-2xl font-bold">
                 <span>الإجمالي</span>
-                <span className="text-[#0B1261]">$ {totalPrice}</span>
+                <span className="text-mustaqar">$ {totalPrice}</span>
               </div>
 
-              <button className="w-full mt-6 bg-[#0B1261] text-white py-2 rounded-xl font-bold text-2xl">
+              <button className="w-full mt-6 bg-mustaqar text-white py-2 rounded-xl font-bold text-2xl">
                 إتمَـــام الطَلـــب
               </button>
             </div>

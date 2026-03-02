@@ -27,7 +27,7 @@ export default function BottomNavigation() {
   ];
 
   return (
-    <nav className="fixed bottom-0 left-0 w-full bg-white rounded-t-[20px] shadow-[0_-8px_30px_rgba(0,0,0,0.06)] z-50 pt-4 px-2 border-t-[1px] border-[#0B1261]">
+    <nav className="fixed bottom-0 left-0 w-full bg-white rounded-t-[20px] shadow-[0_-8px_30px_rgba(0,0,0,0.06)] z-50 pt-4 px-2 border-t-[1px] border-mustaqar">
       <ul className="flex justify-between items-center w-full">
         {navItems.map((item, index) => {
           const isActive = pathname === item.path;
@@ -68,7 +68,7 @@ export default function BottomNavigation() {
                 {/* Label */}
                 <span
                   className={`text-base font-regular transition-colors ${
-                    isActive ? "text-[#0B1261] font-bold" : "text-black"
+                    isActive ? "text-mustaqar font-bold" : "text-black"
                   }`}
                 >
                   {item.name}
@@ -76,7 +76,7 @@ export default function BottomNavigation() {
 
                 {/* Active underline */}
                 {isActive && (
-                  <div className="absolute bottom-0 w-10 h-1 bg-[#0B1261] rounded-t-md" />
+                  <div className="absolute bottom-0 w-10 h-1 bg-mustaqar rounded-t-md" />
                 )}
               </Link>
             </li>

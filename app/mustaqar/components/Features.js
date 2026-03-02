@@ -35,7 +35,7 @@ export default function Features() {
       <div className="container mx-auto px-4 flex flex-col items-center">
         {/* Section Title with Highlighter Effect */}
         <div className="mb-10 text-center">
-          <h2 className="relative inline-block px-2 text-4xl md:text-4xl font-extrabold text-[#0B1261] z-10 after:content-[''] after:absolute after:bottom-[2px] after:left-0 after:w-full after:h-[14px] after:bg-[#C8CEFF] after:-z-10">
+          <h2 className="relative inline-block px-2 text-4xl md:text-4xl font-extrabold text-mustaqar z-10 after:content-[''] after:absolute after:bottom-[2px] after:left-0 after:w-full after:h-[14px] after:bg-[#C8CEFF] after:-z-10">
             مميّزات مُستقر
           </h2>
         </div>
@@ -47,7 +47,7 @@ export default function Features() {
               key={feature.id}
               className="flex flex-col items-center text-center"
             >
-              <div className="text-[#0B1261] mb-3">{feature.icon}</div>
+              <div className="text-mustaqar mb-3">{feature.icon}</div>
               <p className="text-black font-bold text-lg md:text-xl leading-tight">
                 {feature.title}
                 <br />

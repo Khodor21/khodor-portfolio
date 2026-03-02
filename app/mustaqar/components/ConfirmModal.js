@@ -37,7 +37,7 @@ export default function ConfirmModal({
               shadow-2xl
             "
           >
-            <h2 className="text-3xl font-extrabold text-[#0B1261] text-center">
+            <h2 className="text-3xl font-extrabold text-mustaqar text-center">
               {title}
             </h2>
 
@@ -55,7 +55,7 @@ export default function ConfirmModal({
 
               <button
                 onClick={onConfirm}
-                className="w-full py-2 rounded-xl bg-[#0B1261] text-white font-extrabold"
+                className="w-full py-2 rounded-xl bg-mustaqar text-white font-extrabold"
               >
                 تأكيد
               </button>
