@@ -21,7 +21,7 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <link rel="icon" href={metadata.favicon} />
         {children} <SpeedInsights />
-        <Footer />
+        {/* <Footer /> */}
       </body>
     </html>
   );

@@ -224,7 +224,7 @@ export default function ProductPage({ params }) {
                 </div>
 
                 <div className="w-full overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-4">
-                  <div className="flex gap-4 px-4 w-max md:w-full">
+                  <div className="flex items-center justify-center gap-4 px-4 w-max md:w-full">
                     {section.products.map((product) => (
                       <ProductCard
                         key={product.id}

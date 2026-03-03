@@ -15,6 +15,7 @@
     "@vercel/speed-insights": "^1.0.2",
     "antd": "^5.15.0",
     "axios": "^1.6.2",
+    "canvas-confetti": "^1.9.4",
     "fontsource-lora": "^4.0.0",
     "framer-motion": "^10.16.4",
     "lottie-react": "^2.4.1",
