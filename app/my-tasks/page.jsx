@@ -450,18 +450,11 @@ export default function DailyDashboard() {
             </p>
           </div>
           <div className="relative w-14 h-14 flex items-center justify-center">
-            <CircularProgress
-              pct={totalPct}
-              size={56}
-              stroke={6}
-              color="#6C63FF"
-            />
-            <span
-              className="absolute handiBold text-xs text-[#6C63FF]"
-              style={{ fontFamily: "Handi-Bold, sans-serif" }}
-            >
-              {totalPct}٪
-            </span>
+            <a href="/my-tasks/clients">
+              <p className="handiBold text-[#6C63FF] bg-[#6C63FF]/30 px-3 py-1 rounded text-sm ">
+                جدول العملاء
+              </p>
+            </a>
           </div>
         </div>
 
