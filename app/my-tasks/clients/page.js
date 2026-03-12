@@ -50,16 +50,7 @@ const DEFAULT_CLIENTS = [
     note: "متحمس جداً للتجربة",
     date: "2026-03-01",
   },
-  {
-    id: "c2",
-    name: "سارة المالكي",
-    cafe: "كافيه نوار",
-    slug: "noir-cafe",
-    phone: "0557654321",
-    status: "later",
-    note: "تنتظر موافقة الشريك",
-    date: "2026-03-03",
-  },
+ 
   {
     id: "c3",
     name: "خالد العتيبي",
