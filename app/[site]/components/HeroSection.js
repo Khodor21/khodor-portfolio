@@ -10,6 +10,7 @@ const HeroSection = ({ data }) => {
       <Image
         src={bannerImage}
         alt={`${storeName} banner`}
+        z
         fill
         priority
         className="object-cover"
@@ -18,18 +19,21 @@ const HeroSection = ({ data }) => {
       {/* Top Bar: Logo + Location */}
       <div className="flex justify-between items-center">
         {/* Logo */}
-        <div className="absolute top-6 left-4 z-20">
+        <div className="absolute top-2 left-2 z-20">
           <Image
             src={logoImage}
             alt={`${storeName} logo`}
-            width={40}
-            height={40}
+            width={64}
+            height={64}
           />
         </div>
 
         {/* Location */}
         {location && (
-          <div className="absolute top-6 right-4 z-20 flex items-center gap-1 text-white text-sm md:text-base">
+          <div
+            dir="rtl"
+            className="absolute text-right top-2 right-3 z-20 flex items-center gap-1 text-white text-sm md:text-base"
+          >
             <FaMapMarkerAlt />
             <div className="leading-tight">
               <p className="font-bold text-sm">{location.city}</p>

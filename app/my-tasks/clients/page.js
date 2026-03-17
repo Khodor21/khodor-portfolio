@@ -51,46 +51,7 @@ const DEFAULT_CLIENTS = [
     date: "2026-03-01",
   },
  
-  {
-    id: "c3",
-    name: "خالد العتيبي",
-    cafe: "سبيشلتي روستر",
-    slug: "specialty-r",
-    phone: "0531122334",
-    status: "no_reply",
-    note: "",
-    date: "2026-03-05",
-  },
-  {
-    id: "c4",
-    name: "نورة الدوسري",
-    cafe: "بلاك كوف",
-    slug: "blackcove",
-    phone: "0509988776",
-    status: "rejected",
-    note: "لديهم نظام مشابه بالفعل",
-    date: "2026-03-07",
-  },
-  {
-    id: "c5",
-    name: "فيصل الشمري",
-    cafe: "أريجا كافيه",
-    slug: "areeja",
-    phone: "0555443322",
-    status: "accepted",
-    note: "طلب عرض سعر إضافي",
-    date: "2026-03-08",
-  },
-  {
-    id: "c6",
-    name: "لمى القحطاني",
-    cafe: "ستيم هاوس",
-    slug: "steamhouse",
-    phone: "0523344556",
-    status: "no_reply",
-    note: "",
-    date: "2026-03-10",
-  },
+ 
 ];
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────

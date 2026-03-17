@@ -1,9 +1,9 @@
 import { notFound } from "next/navigation";
 import { getSiteConfig } from "./lib/getSiteConfig";
-
-// import TopBar from "./components/TopBar";
+import "./style.css";
+import TopBar from "./components/TopBar";
 import HeroSection from "./components/HeroSection";
-// import CategorySection from "./components/CategorySection";
+import CategorySection from "./components/CategorySection";
 // import Features from "./components/Features";
 // import Footer from "./components/Footer";
 
@@ -29,15 +29,18 @@ export default function SitePage({ params }) {
   if (!config) return notFound();
 
   return (
-    <div className="w-full mb-10 min-h-screen overflow-hidden">
-      {/* <TopBar data={config.topBar} /> */}
+    <div
+      className="w-full mb-10 min-h-screen overflow-hidden"
+      style={{ "--primary-color": config.primaryColor }}
+    >
+      <TopBar data={config.topBar} />
 
       <HeroSection data={config.hero} />
 
-      {/* {config.categories.map((section) => (
+      {config.categories.map((section) => (
         <CategorySection key={section.id} section={section} />
       ))}
-
+      {/*
       <Features data={config.features} />
 
       <Footer data={config.footer} /> */}

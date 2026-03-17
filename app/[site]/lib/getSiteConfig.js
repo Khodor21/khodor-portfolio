@@ -1,91 +1,109 @@
+import tirhalBanner from "../images/Tirhal/Tirhal-Banner.jpg";
+import tirhalLogo from "../images/Tirhal/Tirhal-Logo.svg";
+import shoesBanner from "../images/Tirhal/Shoes-Banner.jpg";
+import tripsBanner from "../images/Tirhal/Trips-Banner.jpg";
+
+import shoe1 from "../images/Tirhal/shoe-1.png";
+import shoe2 from "../images/Tirhal/shoe-2.png";
+import shoe3 from "../images/Tirhal/shoe-3.png";
+
+import trip1 from "../images/Tirhal/trips-1.png";
+import trip2 from "../images/Tirhal/trips-2.png";
+import trip3 from "../images/Tirhal/trips-3.png";
+
 const siteConfigs = {
-  // ─────────────────────────────────────────────
-  //  Client 1 → khodor.vercel.app/watchesStore
-  // ─────────────────────────────────────────────
-  watchesStore: {
-    /** ── Meta (browser tab / SEO) ──────────── */
+  tirhal: {
     meta: {
-      title: "مُسْتَقَر – ساعات فاخرة",
-      description: "أصالة تُكمل شخصيتك",
-    },
-
-    /** ── TopBar ────────────────────────────── */
-    topBar: {
-      // add any top-bar props your component needs, e.g.:
-      // announcementText: "شحن مجاني على الطلبات فوق 500$",
-    },
-
-    /** ── Hero Section ──────────────────────── */
-    hero: {
-      // Images live in /public/sites/watchesStore/
-      bannerImage: "/sites/watchesStore/Hero-banner.jpg",
-      logoImage: "/sites/watchesStore/Logo-White.svg",
-
-      storeName: "مُــسْـتـقَـــــــر",
-      tagline: "أصالة تُكمل شخصيتك",
-
-      location: {
-        city: "مدينة إدلب",
-        address: "جنوب ساحة الساعة - بناية...",
-      },
-    },
-
-    /** ── Category Sections ─────────────────── */
-    categories: [
-      {
-        id: 1,
-        // …your existing category fields
-      },
-    ],
-
-    /** ── Features Section ──────────────────── */
-    features: {
-      // add feature props here
-    },
-
-    /** ── Footer ────────────────────────────── */
-    footer: {
-      // add footer props here
-    },
-  },
-
-  // ─────────────────────────────────────────────
-  //  Client 2 → khodor.vercel.app/coffeeShop
-  //  (scaffold – fill in when ready)
-  // ─────────────────────────────────────────────
-  coffeeShop: {
-    meta: {
-      title: "قهوتي – أفضل قهوة في المدينة",
+      title: "ترحال",
       description: "رائحة الصباح، طعم اللحظة",
     },
+    primaryColor: "#BA9D67",
     topBar: {},
     hero: {
-      bannerImage: "/sites/coffeeShop/Hero-banner.jpg",
-      logoImage: "/sites/coffeeShop/Logo-White.svg",
-      storeName: "قهوتي",
-      tagline: "رائحة الصباح، طعم اللحظة",
+      bannerImage: tirhalBanner,
+      logoImage: tirhalLogo,
+      storeName: "ترحــــــــــــال",
+      tagline: "مغامرتُـك تَبدأ مِن هُنــا",
       location: {
         city: "مدينة حلب",
         address: "شارع النيال - بناية...",
       },
     },
-    categories: [],
+    categories: [
+      {
+        id: "shoes",
+        title: "قسم الأحذية",
+        banner: {
+          ratio: "2:1",
+          imageUrl: shoesBanner,
+          alt: "قسم الأحذية",
+        },
+        products: [
+          {
+            id: "shoe-1",
+            name: "حذاء شتوي كعب حديد  ",
+            feature: "مناسب لجميع التضاريس",
+            price: 45,
+            image: shoe1,
+          },
+          {
+            id: "shoe-2",
+            name: "حذاء صوف عالي  ",
+            feature: "نعل مقاوم ",
+            price: 65,
+            image: shoe2,
+          },
+          {
+            id: "shoe-3",
+            name: "حذاء رياضي للمشي ",
+            feature: "خفيف الوزن ومريح",
+            price: 38,
+            image: shoe3,
+          },
+        ],
+      },
+      {
+        id: "trips",
+        title: "قسم الرحلات",
+        banner: {
+          ratio: "2:1",
+          imageUrl: tripsBanner,
+          alt: "قسم الرحلات",
+        },
+        products: [
+          {
+            id: "trip-1",
+            name: "رحلة جبال الساحل",
+            feature: "يومان - شامل الإقامة",
+            price: 120,
+            image: trip1,
+          },
+          {
+            id: "trip-2",
+            name: "رحلة بادية الشام",
+            feature: "ثلاثة أيام - تخييم",
+            price: 95,
+            image: trip2,
+          },
+          {
+            id: "trip-3",
+            name: "رحلة وادي العلا",
+            feature: "يوم واحد - مشي وتسلق",
+            price: 55,
+            image: trip3,
+          },
+        ],
+      },
+    ],
     features: {},
     footer: {},
   },
 };
 
-/**
- * Returns the config for a given URL slug, or null if not found.
- * @param {string} slug  - e.g. "watchesStore"
- */
 export function getSiteConfig(slug) {
   return siteConfigs[slug] ?? null;
 }
 
-/**
- * Returns all registered slugs (useful for generateStaticParams).
- */
 export function getAllSiteSlugs() {
   return Object.keys(siteConfigs);
 }
