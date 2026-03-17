@@ -2,7 +2,8 @@ import Image from "next/image";
 import { FaMapMarkerAlt } from "react-icons/fa";
 
 const HeroSection = ({ data }) => {
-  const { bannerImage, logoImage, storeName, tagline, location } = data;
+  const { bannerImage, logoImage, storeName, storesvg, tagline, location } =
+    data;
 
   return (
     <section className="hero-section relative w-full h-[90vh]">
@@ -10,7 +11,6 @@ const HeroSection = ({ data }) => {
       <Image
         src={bannerImage}
         alt={`${storeName} banner`}
-        z
         fill
         priority
         className="object-cover"
@@ -47,7 +47,7 @@ const HeroSection = ({ data }) => {
 
       {/* Main Content */}
       <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center text-white px-4">
-        <h1 className="text-6xl font-bold mb-1 tracking-wide">{storeName}</h1>
+        {storesvg && <Image src={storesvg} alt={storeName} className="w-48" />}
         <p className="text-3xl font-regular opacity-90">{tagline}</p>
       </div>
     </section>

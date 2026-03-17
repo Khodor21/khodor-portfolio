@@ -4,6 +4,7 @@ import "./style.css";
 import TopBar from "./components/TopBar";
 import HeroSection from "./components/HeroSection";
 import CategorySection from "./components/CategorySection";
+import CategoriesSection from "./components/Categories";
 // import Features from "./components/Features";
 // import Footer from "./components/Footer";
 
@@ -36,7 +37,7 @@ export default function SitePage({ params }) {
       <TopBar data={config.topBar} />
 
       <HeroSection data={config.hero} />
-
+      <CategoriesSection />
       {config.categories.map((section) => (
         <CategorySection key={section.id} section={section} />
       ))}

@@ -1,5 +1,6 @@
 import tirhalBanner from "../images/Tirhal/Tirhal-Banner.jpg";
 import tirhalLogo from "../images/Tirhal/Tirhal-Logo.svg";
+import tirhalContent from "../images/Tirhal/Tirhal-Word.svg";
 import shoesBanner from "../images/Tirhal/Shoes-Banner.jpg";
 import tripsBanner from "../images/Tirhal/Trips-Banner.jpg";
 
@@ -14,7 +15,7 @@ import trip3 from "../images/Tirhal/trips-3.png";
 const siteConfigs = {
   tirhal: {
     meta: {
-      title: "ترحال",
+      title: "موقع ترحال الالكتروني",
       description: "رائحة الصباح، طعم اللحظة",
     },
     primaryColor: "#BA9D67",
@@ -23,10 +24,11 @@ const siteConfigs = {
       bannerImage: tirhalBanner,
       logoImage: tirhalLogo,
       storeName: "ترحــــــــــــال",
+      storesvg: tirhalContent,
       tagline: "مغامرتُـك تَبدأ مِن هُنــا",
       location: {
-        city: "مدينة حلب",
-        address: "شارع النيال - بناية...",
+        city: "مدينة إدلب",
+        address: "خلف مبنى وزارة الإعلام - جنوب ساحة السيرياتيل",
       },
     },
     categories: [
