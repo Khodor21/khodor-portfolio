@@ -1,5 +1,4 @@
 "use client";
-
 import { useState, useMemo, useEffect, useCallback, useRef } from "react";
 import {
   RadialBarChart,
@@ -50,29 +49,19 @@ function useNotifications(daily, work) {
   const intervalRef = useRef(null);
   const firedRef = useRef({ reminder: "", overdue: "" });
 
-  // Register SW + read saved prefs on mount
   useEffect(() => {
     if (typeof window === "undefined") return;
-
-    // Register service worker
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.register("/sw.js").catch(console.error);
     }
-
-    // Read current browser permission
     if ("Notification" in window) {
       setPermission(Notification.permission);
-      if (Notification.permission === "granted") {
-        setEnabled(true);
-      }
+      if (Notification.permission === "granted") setEnabled(true);
     }
-
-    // Restore saved reminder time
     const saved = localStorage.getItem("tasks_reminder_time");
     if (saved) setReminderTime(saved);
   }, []);
 
-  // Ask for permission
   const requestPermission = useCallback(async () => {
     if (!("Notification" in window)) return;
     const result = await Notification.requestPermission();
@@ -80,12 +69,8 @@ function useNotifications(daily, work) {
     setEnabled(result === "granted");
   }, []);
 
-  // Disable notifications
-  const disableNotifications = useCallback(() => {
-    setEnabled(false);
-  }, []);
+  const disableNotifications = useCallback(() => setEnabled(false), []);
 
-  // Show a notification via the service worker
   const showNotification = useCallback((title, body) => {
     if (Notification.permission !== "granted") return;
     if ("serviceWorker" in navigator) {
@@ -101,7 +86,6 @@ function useNotifications(daily, work) {
     }
   }, []);
 
-  // Save reminder time to localStorage
   const saveReminderTime = useCallback((time) => {
     setReminderTime(time);
     if (typeof window !== "undefined") {
@@ -109,19 +93,16 @@ function useNotifications(daily, work) {
     }
   }, []);
 
-  // Main checker — runs every minute when enabled
   useEffect(() => {
     if (!enabled) {
       clearInterval(intervalRef.current);
       return;
     }
-
     function check() {
       const now = new Date();
       const nowTime = `${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
       const today = now.toDateString();
 
-      // 1. Daily reminder at chosen time
       if (
         nowTime === reminderTime &&
         firedRef.current.reminder !== today + reminderTime
@@ -142,7 +123,6 @@ function useNotifications(daily, work) {
         }
       }
 
-      // 2. Overdue check — 8 PM if still unfinished tasks
       if (
         now.getHours() === 20 &&
         now.getMinutes() === 0 &&
@@ -158,7 +138,6 @@ function useNotifications(daily, work) {
         }
       }
     }
-
     intervalRef.current = setInterval(check, 60 * 1000);
     return () => clearInterval(intervalRef.current);
   }, [enabled, reminderTime, daily, work, showNotification]);
@@ -173,7 +152,7 @@ function useNotifications(daily, work) {
   };
 }
 
-// ─── NotificationSettings widget ──────────────────────────────────────────────
+// ─── NotificationSettings widget — 3 states ───────────────────────────────────
 function NotificationSettings({
   permission,
   enabled,
@@ -189,14 +168,76 @@ function NotificationSettings({
     onTimeChange(e.target.value);
   }
 
-  function handleToggle() {
-    if (enabled) onDisable();
-    else onEnable();
+  // ── State 1: never asked yet ───────────────────────────────────────────
+  if (permission === "default") {
+    return (
+      <div className="bg-white rounded-3xl shadow-sm border border-[#E8E4F3] p-5 space-y-3">
+        <div className="flex items-center justify-between">
+          <h2
+            className="handiBold text-sm text-[#2D2654]"
+            style={{ fontFamily: "Handi-Bold, sans-serif" }}
+          >
+            🔔 التذكيرات
+          </h2>
+          <span className="handiReg text-xs text-[#9B93C8] bg-[#F6F4FC] px-3 py-1 rounded-full">
+            غير مفعّلة
+          </span>
+        </div>
+        <p className="handiReg text-xs text-[#9B93C8] text-right">
+          فعّل التذكيرات لتصلك إشعارات بمهامك اليومية حتى عند إغلاق الصفحة
+        </p>
+        <button
+          onClick={onEnable}
+          className="w-full h-12 rounded-2xl text-white text-sm handiBold
+            transition-all duration-200 active:scale-95 flex items-center justify-center gap-2"
+          style={{
+            fontFamily: "Handi-Bold, sans-serif",
+            background: "#6C63FF",
+          }}
+        >
+          <span>🔔</span>
+          <span>فعّل الإشعارات</span>
+        </button>
+      </div>
+    );
   }
 
+  // ── State 2: blocked by user ───────────────────────────────────────────
+  if (permission === "denied") {
+    return (
+      <div className="bg-white rounded-3xl shadow-sm border border-[#E8E4F3] p-5 space-y-3">
+        <div className="flex items-center justify-between">
+          <h2
+            className="handiBold text-sm text-[#2D2654]"
+            style={{ fontFamily: "Handi-Bold, sans-serif" }}
+          >
+            🔔 التذكيرات
+          </h2>
+          <span className="handiReg text-xs text-red-400 bg-red-50 px-3 py-1 rounded-full">
+            محظورة
+          </span>
+        </div>
+        <div className="bg-red-50 rounded-2xl px-4 py-3 space-y-1">
+          <p className="handiReg text-xs text-red-400 text-right font-semibold mb-1">
+            لقد حظرت الإشعارات مسبقاً. لتفعيلها:
+          </p>
+          <p className="handiReg text-xs text-red-400 text-right">
+            ١. اضغط على 🔒 في شريط العنوان
+          </p>
+          <p className="handiReg text-xs text-red-400 text-right">
+            ٢. غيّر الإشعارات من "محظور" إلى "مسموح"
+          </p>
+          <p className="handiReg text-xs text-red-400 text-right">
+            ٣. أعد تحميل الصفحة
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  // ── State 3: granted — show toggle + time picker ───────────────────────
   return (
     <div className="bg-white rounded-3xl shadow-sm border border-[#E8E4F3] p-5 space-y-4">
-      {/* header row */}
       <div className="flex items-center justify-between">
         <h2
           className="handiBold text-sm text-[#2D2654]"
@@ -204,28 +245,20 @@ function NotificationSettings({
         >
           🔔 التذكيرات
         </h2>
-
-        {permission === "denied" ? (
-          <span className="handiReg text-xs text-red-400 bg-red-50 px-3 py-1 rounded-full">
-            محظورة من المتصفح
-          </span>
-        ) : (
-          <button
-            onClick={handleToggle}
-            className={`w-12 h-6 rounded-full transition-all duration-300 relative flex-shrink-0 ${
-              enabled ? "bg-[#6C63FF]" : "bg-[#E8E4F3]"
+        <button
+          onClick={enabled ? onDisable : onEnable}
+          className={`w-12 h-6 rounded-full transition-all duration-300 relative flex-shrink-0 ${
+            enabled ? "bg-[#6C63FF]" : "bg-[#E8E4F3]"
+          }`}
+        >
+          <span
+            className={`absolute top-1 w-4 h-4 rounded-full bg-white shadow-sm transition-all duration-300 ${
+              enabled ? "right-1" : "left-1"
             }`}
-          >
-            <span
-              className={`absolute top-1 w-4 h-4 rounded-full bg-white shadow-sm transition-all duration-300 ${
-                enabled ? "right-1" : "left-1"
-              }`}
-            />
-          </button>
-        )}
+          />
+        </button>
       </div>
 
-      {/* time picker — only when enabled */}
       {enabled && (
         <>
           <div className="flex items-center justify-between gap-3">
@@ -241,7 +274,6 @@ function NotificationSettings({
               وقت التذكير اليومي
             </span>
           </div>
-
           <div className="bg-[#F6F4FC] rounded-2xl px-4 py-3 space-y-1">
             <p className="handiReg text-xs text-[#9B93C8] text-right">
               🌅 تذكير يومي في الوقت المحدد بعدد المهام المتبقية
@@ -251,14 +283,6 @@ function NotificationSettings({
             </p>
           </div>
         </>
-      )}
-
-      {/* permission denied help */}
-      {permission === "denied" && (
-        <p className="handiReg text-xs text-[#9B93C8] text-right">
-          لتفعيل التذكيرات، اسمح بالإشعارات من إعدادات المتصفح ثم أعد تحميل
-          الصفحة
-        </p>
       )}
     </div>
   );
@@ -341,9 +365,7 @@ function TaskCard({ task, onToggle, onDelete }) {
           </svg>
         )}
       </button>
-
       <span className="text-xl flex-shrink-0">{task.icon}</span>
-
       <span
         onClick={() => onToggle(task.id)}
         className={`flex-1 text-sm leading-relaxed handiReg cursor-pointer select-none text-right ${
@@ -352,7 +374,6 @@ function TaskCard({ task, onToggle, onDelete }) {
       >
         {task.text}
       </span>
-
       <button
         onClick={() => onDelete(task.id)}
         className="opacity-0 group-hover:opacity-100 focus:opacity-100 w-7 h-7 flex-shrink-0
@@ -462,7 +483,6 @@ function AddTaskModal({ type, onClose, onAdd }) {
         >
           {label}
         </p>
-
         <div className="flex flex-wrap gap-2 justify-end mb-4">
           {icons.map((ic) => (
             <button
@@ -483,7 +503,6 @@ function AddTaskModal({ type, onClose, onAdd }) {
             </button>
           ))}
         </div>
-
         <div className="flex gap-2 items-center">
           <button
             onClick={handleAdd}
@@ -557,10 +576,8 @@ function LoginScreen() {
     const trimmedEmail = email.trim();
     const trimmedPassword = password.trim();
     if (!trimmedEmail || !trimmedPassword) return;
-
     setLoading(true);
     setError("");
-
     const { error: authError } = isSignUp
       ? await supabase.auth.signUp({
           email: trimmedEmail,
@@ -570,7 +587,6 @@ function LoginScreen() {
           email: trimmedEmail,
           password: trimmedPassword,
         });
-
     if (authError) {
       if (authError.message === "Email not confirmed") {
         setError("يرجى تأكيد بريدك الإلكتروني أولاً، أو تواصل مع المسؤول");
@@ -595,7 +611,6 @@ function LoginScreen() {
         <div className="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-[#6C63FF] opacity-[0.08] blur-3xl" />
         <div className="absolute top-1/2 -left-20 w-56 h-56 rounded-full bg-[#43C6AC] opacity-[0.07] blur-3xl" />
       </div>
-
       <div className="w-full max-w-sm bg-white rounded-3xl shadow-sm border border-[#E8E4F3] p-8 space-y-5">
         <div className="text-center space-y-1">
           <div className="text-4xl">✅</div>
@@ -609,13 +624,11 @@ function LoginScreen() {
             {isSignUp ? "أنشئ حساباً جديداً" : "سجّل دخولك للمتابعة"}
           </p>
         </div>
-
         {error && (
           <div className="bg-red-50 border border-red-200 text-red-500 handiReg text-xs rounded-xl px-4 py-3 text-right">
             {error}
           </div>
         )}
-
         <div className="space-y-3">
           <input
             dir="rtl"
@@ -639,7 +652,6 @@ function LoginScreen() {
               focus:border-[#C5BCE8] transition-all duration-200 text-right"
           />
         </div>
-
         <button
           onClick={handleSubmit}
           disabled={loading || !email.trim() || !password.trim()}
@@ -652,13 +664,11 @@ function LoginScreen() {
         >
           {loading ? "..." : isSignUp ? "إنشاء حساب" : "تسجيل الدخول"}
         </button>
-
         <div className="flex items-center gap-3">
           <div className="flex-1 h-px bg-[#E8E4F3]" />
           <span className="handiReg text-xs text-[#C5BCE8]">أو</span>
           <div className="flex-1 h-px bg-[#E8E4F3]" />
         </div>
-
         <button
           onClick={handleGoogle}
           className="w-full h-12 rounded-2xl border-2 border-[#E8E4F3] text-[#2D2654]
@@ -685,7 +695,6 @@ function LoginScreen() {
           </svg>
           الدخول عبر Google
         </button>
-
         <p className="handiReg text-xs text-center text-[#9B93C8]">
           {isSignUp ? "لديك حساب بالفعل؟ " : "ليس لديك حساب؟ "}
           <button
@@ -709,7 +718,6 @@ function TasksPage({ userId, userEmail, onSignOut }) {
     useTasks(userId);
   const [modal, setModal] = useState(null);
 
-  // ── Notifications ──────────────────────────────────────────────────────
   const {
     permission,
     enabled,
@@ -723,7 +731,6 @@ function TasksPage({ userId, userEmail, onSignOut }) {
     await requestPermission();
   }
 
-  // ── Progress calculations ──────────────────────────────────────────────
   const dailyPct = useMemo(
     () =>
       daily.length === 0
@@ -793,7 +800,6 @@ function TasksPage({ userId, userEmail, onSignOut }) {
               {getArabicDate()}
             </p>
           </div>
-
           <div className="flex items-center gap-2">
             <a href="/my-tasks/clients">
               <p className="handiBold text-[#6C63FF] bg-[#6C63FF]/30 px-3 py-1 rounded text-sm">
@@ -1066,13 +1072,11 @@ export default function DailyDashboard() {
       setUser(session?.user ?? null);
       setLoadingAuth(false);
     });
-
     const { data: listener } = supabase.auth.onAuthStateChange(
       (_event, session) => {
         setUser(session?.user ?? null);
       },
     );
-
     return () => listener.subscription.unsubscribe();
   }, []);
 
