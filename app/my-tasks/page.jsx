@@ -843,10 +843,8 @@ export default function DailyDashboard() {
     );
   }
 
-  // Not logged in → show login screen
   if (!user) return <LoginScreen />;
 
-  // Logged in → show tasks
   return (
     <TasksPage
       userId={user.id}
