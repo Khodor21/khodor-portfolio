@@ -818,13 +818,11 @@ export default function DailyDashboard() {
   const [loadingAuth, setLoadingAuth] = useState(true);
 
   useEffect(() => {
-    // Get session on first load
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user ?? null);
       setLoadingAuth(false);
     });
 
-    // Listen for login / logout
     const { data: listener } = supabase.auth.onAuthStateChange(
       (_event, session) => {
         setUser(session?.user ?? null);
@@ -834,7 +832,6 @@ export default function DailyDashboard() {
     return () => listener.subscription.unsubscribe();
   }, []);
 
-  // Checking session...
   if (loadingAuth) {
     return (
       <div className="min-h-screen bg-[#F6F4FC] flex items-center justify-center">
