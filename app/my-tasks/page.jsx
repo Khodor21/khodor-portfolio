@@ -14,8 +14,10 @@ import {
   ResponsiveContainer,
   Cell,
 } from "recharts";
+import { supabase } from "@/lib/supabaseClient";
+import { useTasks } from "./useTasks";
 
-// ─── Arabic date ──────────────────────────────────────────────────────────────
+// ─── Arabic date ───────────────────────────────────────────────────────────────
 function getArabicDate() {
   return new Date().toLocaleDateString("ar-SA", {
     weekday: "long",
@@ -25,20 +27,7 @@ function getArabicDate() {
   });
 }
 
-// ─── Defaults ─────────────────────────────────────────────────────────────────
-const DEFAULT_DAILY = [
-  { id: "d1", text: "قراءة ٣٠ دقيقة", done: false, icon: "📖" },
-  { id: "d2", text: "ممارسة الرياضة", done: false, icon: "🏃" },
-  { id: "d3", text: "شرب ٨ أكواب ماء", done: false, icon: "💧" },
-  { id: "d4", text: "مراجعة الأهداف", done: false, icon: "🎯" },
-];
-const DEFAULT_WORK = [
-  { id: "w1", text: "إنهاء تقرير المشروع", done: false, icon: "📊" },
-  { id: "w2", text: "مراجعة البريد الإلكتروني", done: false, icon: "📬" },
-  { id: "w3", text: "اجتماع الفريق", done: false, icon: "👥" },
-  { id: "w4", text: "تحديث لوحة المشروع", done: false, icon: "🗂️" },
-];
-
+// ─── Icon lists ────────────────────────────────────────────────────────────────
 const DAILY_ICONS = [
   "📖",
   "🏃",
@@ -53,24 +42,7 @@ const DAILY_ICONS = [
 ];
 const WORK_ICONS = ["📊", "📬", "👥", "🗂️", "💼", "🖥️", "📝", "📞", "🔍", "⚙️"];
 
-// ─── localStorage helpers ─────────────────────────────────────────────────────
-function load(key, fallback) {
-  if (typeof window === "undefined") return fallback;
-  try {
-    const raw = localStorage.getItem(key);
-    return raw ? JSON.parse(raw) : fallback;
-  } catch {
-    return fallback;
-  }
-}
-function save(key, value) {
-  if (typeof window === "undefined") return;
-  try {
-    localStorage.setItem(key, JSON.stringify(value));
-  } catch {}
-}
-
-// ─── CircularProgress ─────────────────────────────────────────────────────────
+// ─── CircularProgress ──────────────────────────────────────────────────────────
 function CircularProgress({ pct, size = 56, stroke = 6, color = "#6C63FF" }) {
   const r = (size - stroke) / 2;
   const circ = 2 * Math.PI * r;
@@ -102,7 +74,7 @@ function CircularProgress({ pct, size = 56, stroke = 6, color = "#6C63FF" }) {
   );
 }
 
-// ─── ProgressBar ──────────────────────────────────────────────────────────────
+// ─── ProgressBar ───────────────────────────────────────────────────────────────
 function ProgressBar({ pct, color = "#6C63FF" }) {
   return (
     <div className="w-full h-2 bg-[#F0EDF9] rounded-full overflow-hidden">
@@ -114,13 +86,12 @@ function ProgressBar({ pct, color = "#6C63FF" }) {
   );
 }
 
-// ─── TaskCard ─────────────────────────────────────────────────────────────────
+// ─── TaskCard ──────────────────────────────────────────────────────────────────
 function TaskCard({ task, onToggle, onDelete }) {
   return (
     <div
       className={`
-      group w-full flex items-center gap-3 p-4 rounded-2xl border
-      transition-all duration-300
+      group w-full flex items-center gap-3 p-4 rounded-2xl border transition-all duration-300
       ${
         task.done
           ? "bg-[#F0EDF9] border-[#C5BCE8] opacity-75"
@@ -180,7 +151,7 @@ function TaskCard({ task, onToggle, onDelete }) {
   );
 }
 
-// ─── StatusCard ───────────────────────────────────────────────────────────────
+// ─── StatusCard ────────────────────────────────────────────────────────────────
 function StatusCard({ pct }) {
   const cfg =
     pct >= 80
@@ -218,7 +189,7 @@ function StatusCard({ pct }) {
   );
 }
 
-// ─── CustomTooltip ────────────────────────────────────────────────────────────
+// ─── CustomTooltip ─────────────────────────────────────────────────────────────
 function CustomTooltip({ active, payload, label }) {
   if (!active || !payload?.length) return null;
   return (
@@ -234,7 +205,7 @@ function CustomTooltip({ active, payload, label }) {
   );
 }
 
-// ─── AddTaskModal (bottom sheet) ──────────────────────────────────────────────
+// ─── AddTaskModal ──────────────────────────────────────────────────────────────
 function AddTaskModal({ type, onClose, onAdd }) {
   const [text, setText] = useState("");
   const [icon, setIcon] = useState(
@@ -257,14 +228,12 @@ function AddTaskModal({ type, onClose, onAdd }) {
       onClick={onClose}
     >
       <div className="absolute inset-0 bg-black/30 backdrop-blur-sm" />
-
       <div
         className="relative w-full max-w-lg bg-white rounded-t-3xl p-6 pb-10 shadow-2xl"
         style={{ animation: "slideUp 0.28s cubic-bezier(0.32,0.72,0,1)" }}
         onClick={(e) => e.stopPropagation()}
       >
         <div className="w-10 h-1 bg-[#E0DCF0] rounded-full mx-auto mb-5" />
-
         <p
           className="handiBold text-base text-[#2D2654] mb-4 text-right"
           style={{ fontFamily: "Handi-Bold, sans-serif" }}
@@ -272,14 +241,12 @@ function AddTaskModal({ type, onClose, onAdd }) {
           {label}
         </p>
 
-        {/* icon picker */}
         <div className="flex flex-wrap gap-2 justify-end mb-4">
           {icons.map((ic) => (
             <button
               key={ic}
               onClick={() => setIcon(ic)}
-              className={`text-xl w-10 h-10 rounded-xl flex items-center justify-center
-                transition-all duration-150
+              className={`text-xl w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-150
                 ${icon === ic ? "scale-110 shadow-md" : "bg-[#F6F4FC] hover:bg-[#EEE8FF]"}`}
               style={
                 icon === ic
@@ -295,14 +262,12 @@ function AddTaskModal({ type, onClose, onAdd }) {
           ))}
         </div>
 
-        {/* input row */}
         <div className="flex gap-2 items-center">
           <button
             onClick={handleAdd}
             disabled={!text.trim()}
             className="flex-shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center
-              text-white transition-all duration-200 active:scale-95
-              disabled:opacity-40 disabled:cursor-not-allowed"
+              text-white transition-all duration-200 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
             style={{ background: accentColor }}
           >
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
@@ -314,7 +279,6 @@ function AddTaskModal({ type, onClose, onAdd }) {
               />
             </svg>
           </button>
-
           <input
             dir="rtl"
             autoFocus
@@ -328,7 +292,6 @@ function AddTaskModal({ type, onClose, onAdd }) {
           />
         </div>
       </div>
-
       <style>{`
         @keyframes slideUp {
           from { transform: translateY(100%); opacity: 0; }
@@ -339,7 +302,7 @@ function AddTaskModal({ type, onClose, onAdd }) {
   );
 }
 
-// ─── AddButton ────────────────────────────────────────────────────────────────
+// ─── AddButton ─────────────────────────────────────────────────────────────────
 function AddButton({ color, onClick }) {
   return (
     <button
@@ -360,34 +323,171 @@ function AddButton({ color, onClick }) {
   );
 }
 
-// ─── Main Page ────────────────────────────────────────────────────────────────
-export default function DailyDashboard() {
-  const [daily, setDaily] = useState(() => load("tasks_daily", DEFAULT_DAILY));
-  const [work, setWork] = useState(() => load("tasks_work", DEFAULT_WORK));
+// ─── LoginScreen ───────────────────────────────────────────────────────────────
+function LoginScreen() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isSignUp, setIsSignUp] = useState(false);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  async function handleSubmit() {
+    const trimmedEmail = email.trim();
+    const trimmedPassword = password.trim();
+    if (!trimmedEmail || !trimmedPassword) return;
+
+    setLoading(true);
+    setError("");
+
+    const { error: authError } = isSignUp
+      ? await supabase.auth.signUp({
+          email: trimmedEmail,
+          password: trimmedPassword,
+        })
+      : await supabase.auth.signInWithPassword({
+          email: trimmedEmail,
+          password: trimmedPassword,
+        });
+
+    if (authError) setError(authError.message);
+    setLoading(false);
+  }
+
+  async function handleGoogle() {
+    await supabase.auth.signInWithOAuth({ provider: "google" });
+  }
+
+  return (
+    <div
+      dir="rtl"
+      className="min-h-screen bg-[#F6F4FC] flex items-center justify-center px-4"
+      style={{ fontFamily: "Handi-Regular, sans-serif" }}
+    >
+      {/* blobs */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden -z-10">
+        <div className="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-[#6C63FF] opacity-[0.08] blur-3xl" />
+        <div className="absolute top-1/2 -left-20 w-56 h-56 rounded-full bg-[#43C6AC] opacity-[0.07] blur-3xl" />
+      </div>
+
+      <div className="w-full max-w-sm bg-white rounded-3xl shadow-sm border border-[#E8E4F3] p-8 space-y-5">
+        {/* logo / title */}
+        <div className="text-center space-y-1">
+          <div className="text-4xl">✅</div>
+          <h1
+            className="handiBold text-2xl text-[#2D2654]"
+            style={{ fontFamily: "Handi-Bold, sans-serif" }}
+          >
+            مهامي اليوم
+          </h1>
+          <p className="handiReg text-xs text-[#9B93C8]">
+            {isSignUp ? "أنشئ حساباً جديداً" : "سجّل دخولك للمتابعة"}
+          </p>
+        </div>
+
+        {/* error */}
+        {error && (
+          <div className="bg-red-50 border border-red-200 text-red-500 handiReg text-xs rounded-xl px-4 py-3 text-right">
+            {error}
+          </div>
+        )}
+
+        {/* fields */}
+        <div className="space-y-3">
+          <input
+            dir="rtl"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="البريد الإلكتروني"
+            className="w-full h-12 bg-[#F6F4FC] rounded-2xl px-4 text-sm text-[#2D2654]
+              handiReg placeholder-[#C5BCE8] outline-none border-2 border-transparent
+              focus:border-[#C5BCE8] transition-all duration-200 text-right"
+          />
+          <input
+            dir="rtl"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
+            placeholder="كلمة المرور"
+            className="w-full h-12 bg-[#F6F4FC] rounded-2xl px-4 text-sm text-[#2D2654]
+              handiReg placeholder-[#C5BCE8] outline-none border-2 border-transparent
+              focus:border-[#C5BCE8] transition-all duration-200 text-right"
+          />
+        </div>
+
+        {/* submit */}
+        <button
+          onClick={handleSubmit}
+          disabled={loading || !email.trim() || !password.trim()}
+          className="w-full h-12 rounded-2xl text-white text-sm handiBold
+            transition-all duration-200 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
+          style={{
+            fontFamily: "Handi-Bold, sans-serif",
+            background: "#6C63FF",
+          }}
+        >
+          {loading ? "..." : isSignUp ? "إنشاء حساب" : "تسجيل الدخول"}
+        </button>
+
+        {/* divider */}
+        <div className="flex items-center gap-3">
+          <div className="flex-1 h-px bg-[#E8E4F3]" />
+          <span className="handiReg text-xs text-[#C5BCE8]">أو</span>
+          <div className="flex-1 h-px bg-[#E8E4F3]" />
+        </div>
+
+        {/* google */}
+        <button
+          onClick={handleGoogle}
+          className="w-full h-12 rounded-2xl border-2 border-[#E8E4F3] text-[#2D2654]
+            handiReg text-sm flex items-center justify-center gap-2
+            hover:border-[#A89DD4] transition-all duration-200 active:scale-95"
+        >
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <path
+              d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.875 2.684-6.615z"
+              fill="#4285F4"
+            />
+            <path
+              d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z"
+              fill="#34A853"
+            />
+            <path
+              d="M3.964 10.707A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.707V4.961H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.039l3.007-2.332z"
+              fill="#FBBC05"
+            />
+            <path
+              d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.961L3.964 7.293C4.672 5.166 6.656 3.58 9 3.58z"
+              fill="#EA4335"
+            />
+          </svg>
+          الدخول عبر Google
+        </button>
+
+        {/* toggle sign up / sign in */}
+        <p className="handiReg text-xs text-center text-[#9B93C8]">
+          {isSignUp ? "لديك حساب بالفعل؟ " : "ليس لديك حساب؟ "}
+          <button
+            onClick={() => {
+              setIsSignUp(!isSignUp);
+              setError("");
+            }}
+            className="text-[#6C63FF] underline"
+          >
+            {isSignUp ? "سجّل دخولك" : "أنشئ حساباً"}
+          </button>
+        </p>
+      </div>
+    </div>
+  );
+}
+
+// ─── TasksPage (inner, receives userId) ───────────────────────────────────────
+function TasksPage({ userId, userEmail, onSignOut }) {
+  const { daily, work, loading, addTask, toggleTask, deleteTask } =
+    useTasks(userId);
   const [modal, setModal] = useState(null); // "daily" | "work" | null
-
-  useEffect(() => {
-    save("tasks_daily", daily);
-  }, [daily]);
-  useEffect(() => {
-    save("tasks_work", work);
-  }, [work]);
-
-  const toggleTask = useCallback(
-    (list, setList, id) =>
-      setList(list.map((t) => (t.id === id ? { ...t, done: !t.done } : t))),
-    [],
-  );
-
-  const deleteTask = useCallback(
-    (list, setList, id) => setList(list.filter((t) => t.id !== id)),
-    [],
-  );
-
-  const addTask = useCallback((type, task) => {
-    if (type === "daily") setDaily((p) => [...p, task]);
-    else setWork((p) => [...p, task]);
-  }, []);
 
   const dailyPct = useMemo(
     () =>
@@ -396,7 +496,6 @@ export default function DailyDashboard() {
         : Math.round((daily.filter((t) => t.done).length / daily.length) * 100),
     [daily],
   );
-
   const workPct = useMemo(
     () =>
       work.length === 0
@@ -404,7 +503,6 @@ export default function DailyDashboard() {
         : Math.round((work.filter((t) => t.done).length / work.length) * 100),
     [work],
   );
-
   const totalPct = useMemo(() => {
     const total = daily.length + work.length;
     if (total === 0) return 0;
@@ -421,6 +519,17 @@ export default function DailyDashboard() {
     { name: "مهام العمل", value: workPct },
   ];
   const radialData = [{ name: "إنجاز", value: totalPct, fill: "#6C63FF" }];
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-[#F6F4FC] flex items-center justify-center">
+        <div className="text-center space-y-3">
+          <div className="w-10 h-10 rounded-full border-4 border-[#6C63FF] border-t-transparent animate-spin mx-auto" />
+          <p className="handiReg text-sm text-[#9B93C8]">جاري التحميل...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div
@@ -449,12 +558,30 @@ export default function DailyDashboard() {
               {getArabicDate()}
             </p>
           </div>
-          <div className="relative w-14 h-14 flex items-center justify-center">
+
+          {/* right side: clients link + sign out */}
+          <div className="flex items-center gap-2">
             <a href="/my-tasks/clients">
-              <p className="handiBold text-[#6C63FF] bg-[#6C63FF]/30 px-3 py-1 rounded text-sm ">
+              <p className="handiBold text-[#6C63FF] bg-[#6C63FF]/30 px-3 py-1 rounded text-sm">
                 جدول العملاء
               </p>
             </a>
+            <button
+              onClick={onSignOut}
+              title={userEmail}
+              className="w-8 h-8 rounded-full bg-[#F0EDF9] flex items-center justify-center
+                text-[#9B93C8] hover:text-red-400 hover:bg-red-50 transition-all duration-200"
+            >
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path
+                  d="M5 2H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h3M9 10l3-3-3-3M12 7H5"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
           </div>
         </div>
 
@@ -548,9 +675,7 @@ export default function DailyDashboard() {
               {daily.filter((t) => t.done).length}/{daily.length}
             </span>
           </div>
-
           <ProgressBar pct={dailyPct} color="#6C63FF" />
-
           <div className="space-y-2">
             {daily.length === 0 && (
               <button
@@ -566,8 +691,8 @@ export default function DailyDashboard() {
               <TaskCard
                 key={t.id}
                 task={t}
-                onToggle={(id) => toggleTask(daily, setDaily, id)}
-                onDelete={(id) => deleteTask(daily, setDaily, id)}
+                onToggle={(id) => toggleTask("daily", id)}
+                onDelete={(id) => deleteTask("daily", id)}
               />
             ))}
           </div>
@@ -589,9 +714,7 @@ export default function DailyDashboard() {
               {work.filter((t) => t.done).length}/{work.length}
             </span>
           </div>
-
           <ProgressBar pct={workPct} color="#43C6AC" />
-
           <div className="space-y-2">
             {work.length === 0 && (
               <button
@@ -607,8 +730,8 @@ export default function DailyDashboard() {
               <TaskCard
                 key={t.id}
                 task={t}
-                onToggle={(id) => toggleTask(work, setWork, id)}
-                onDelete={(id) => deleteTask(work, setWork, id)}
+                onToggle={(id) => toggleTask("work", id)}
+                onDelete={(id) => deleteTask("work", id)}
               />
             ))}
           </div>
@@ -686,5 +809,49 @@ export default function DailyDashboard() {
         />
       )}
     </div>
+  );
+}
+
+// ─── Root Export ───────────────────────────────────────────────────────────────
+export default function DailyDashboard() {
+  const [user, setUser] = useState(null);
+  const [loadingAuth, setLoadingAuth] = useState(true);
+
+  useEffect(() => {
+    // Get session on first load
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+      setLoadingAuth(false);
+    });
+
+    // Listen for login / logout
+    const { data: listener } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        setUser(session?.user ?? null);
+      },
+    );
+
+    return () => listener.subscription.unsubscribe();
+  }, []);
+
+  // Checking session...
+  if (loadingAuth) {
+    return (
+      <div className="min-h-screen bg-[#F6F4FC] flex items-center justify-center">
+        <div className="w-10 h-10 rounded-full border-4 border-[#6C63FF] border-t-transparent animate-spin" />
+      </div>
+    );
+  }
+
+  // Not logged in → show login screen
+  if (!user) return <LoginScreen />;
+
+  // Logged in → show tasks
+  return (
+    <TasksPage
+      userId={user.id}
+      userEmail={user.email}
+      onSignOut={() => supabase.auth.signOut()}
+    />
   );
 }

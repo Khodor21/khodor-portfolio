@@ -37,7 +37,7 @@ export default function SitePage({ params }) {
       <TopBar data={config.topBar} />
 
       <HeroSection data={config.hero} />
-      <CategoriesSection />
+      {/* <CategoriesSection /> */}
       {config.categories.map((section) => (
         <CategorySection key={section.id} section={section} />
       ))}

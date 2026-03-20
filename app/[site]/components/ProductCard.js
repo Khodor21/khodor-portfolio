@@ -62,14 +62,14 @@ export default function ProductCard({ product, categoryId }) {
           </p>
           <div className="mt-2 text-black flex gap-1 items-center">
             <p className="text-black/90 text-2xl font-regular">السعر:</p>
-            <span className="text-2xl font-extrabold">{product.price}$</span>
+            <span className="text-2xl font-bold">{product.price}$</span>
           </div>
 
           {/* Add to Cart Button */}
           <button
             type="button"
             onClick={handleAddToCart}
-            className="text-primary hover:text-white flex justify-center items-center gap-2 w-full mt-3 border-[0.5px] border-primary hover:bg-primary py-1 rounded-md font-regular text-lg transition active:scale-95"
+            className="hover:text-primary text-white flex justify-center items-center gap-2 w-full mt-3 hover:border-[0.5px] hover:border-primary bg-primary py-1 rounded-md font-bold text-lg transition active:scale-95"
           >
             <CgShoppingBag className="" />
             أضِــــف للسّـلـــــة

@@ -48,18 +48,19 @@ export default function CategorySection({ section }) {
       </div>
 
       {/* 3. Horizontal Scroll Carousel */}
-      <div className="w-full overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-4">
-        <div className="flex gap-2 px-4 items-center justify-center">
+      <div className="w-full overflow-x-auto snap-x snap-mandatory pb-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+        {" "}
+        <div className="flex gap-2 px-4">
           {section.products.map((product) => (
             <div
               key={product.id}
               className="
-                flex-shrink-0
-                w-1/2     
-                sm:w-1/3  
-                md:w-1/4 
-                snap-start
-              "
+          flex-shrink-0
+          w-[47%]     
+          sm:w-1/3  
+          md:w-1/4 
+          snap-start
+        "
             >
               <ProductCard product={product} categoryId={section.id} />
             </div>
@@ -69,7 +70,7 @@ export default function CategorySection({ section }) {
 
       {/* 4. Show More Button */}
       <div className="bg-white border-[0.5px] border-primary px-2 py-1 w-fit mx-auto rounded text-center mb-6">
-        <p className="font-extrabold text-xl text-primary">عرض المزيد</p>
+        <p className="font-regular text-xl text-primary">عرض المزيد</p>
       </div>
     </section>
   );
