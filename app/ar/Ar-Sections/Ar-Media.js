@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { projects } from "@/app/data/projects";
+import { projects } from "../../data/projects";
 
 export default function ArProjectsSection() {
   return (

@@ -4,12 +4,12 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "./Ar-Navbar";
 import Lottie from "lottie-react";
-import contact from "@/app/assets/animation/contact.json";
+import contact from "../../assets/animation/contact.json";
 import { IoMailUnreadOutline } from "react-icons/io5";
 
 // ❌ شلنا folderAnimation
 import { FaInstagram, FaWhatsapp, FaMail, FaFolderOpen } from "react-icons/fa6"; // 👈 أضفت FaFolderOpen
-import Avatar from "@/app/assets/images/My-avatar.png";
+import Avatar from "../../assets/images/My-avatar.png";
 import Image from "next/image";
 
 const rotatingWords = ["مُصمِّم مواقع وتطبيقات", "مُبرمج منصّات إلكترونيّة "];
@@ -20,7 +20,7 @@ export default function HeroSection() {
   useEffect(() => {
     const interval = setInterval(
       () => setCurrentWordIndex((prev) => (prev + 1) % rotatingWords.length),
-      2500
+      2500,
     );
     return () => clearInterval(interval);
   }, []);

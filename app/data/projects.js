@@ -1,6 +1,6 @@
-import MainOne from "@/app/assets/images/Ar-Main One.jpg";
-import MainTwo from "@/app/assets/images/Ar-Main Two.png";
-import MainThree from "@/app/assets/images/Ar-Main Three.png";
+import MainOne from "../assets/images/Ar-Main One.jpg";
+import MainTwo from "../assets/images/Ar-Main Two.png";
+import MainThree from "../assets/images/Ar-Main Three.png";
 
 export const projects = [
   {

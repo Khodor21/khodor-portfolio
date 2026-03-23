@@ -4,7 +4,6 @@ import React from "react";
 import { FaCircle } from "react-icons/fa";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import logo from "@/app/assets/images/logo.png";
 import { useRouter } from "next/navigation";
 
 const Navbar = () => {

@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "IBMPlexArabic";
+  src: url("/IBMPlexSansArabic-Medium.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IBMPlexArabic-SemiBold";
+  src: url("/IBMPlexSansArabic-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IBMPlexArabic-Bold";
+  src: url("/IBMPlexSansArabic-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Outside any @layer so it has full specificity */
+*,
+*::before,
+*::after {
+  font-family: "IBMPlexArabic", sans-serif;
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+.text-semiBold {
+  font-family: "IBMPlexArabic-SemiBold", sans-serif;
+}
+.text-bold {
+  font-family: "IBMPlexArabic-Bold", sans-serif;
+}

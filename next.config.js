@@ -6,7 +6,7 @@ const nextConfig = {
     localeDetection: true,
   },
   images: {
-    domains: ["firebasestorage.googleapis.com"],
+    domains: ["firebasestorage.googleapis.com", "placehold.co"],
   },
 };
 const withVideos = require("next-videos");
