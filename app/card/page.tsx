@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import ProductCard from "./ProductCard";
-import ProductCardSkeleton from "./ProductCardSkeleton";
+import ProductCardSkeleton from "./Productcardskeleton";
 import { products } from "./products";
 import "./card.css";
 import SallaHeader from "./header";

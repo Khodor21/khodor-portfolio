@@ -2,9 +2,9 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { supabase } from "@/lib/supabaseClient";
+import { supabase } from "../../lib/supabaseClient";
 
-const USER_ID = "demo-user"; // later replace with real auth user id
+const USER_ID = "demo-user"; 
 
 export function useTasks() {
   const [daily, setDaily] = useState([]);

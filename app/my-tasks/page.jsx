@@ -13,7 +13,7 @@ import {
   ResponsiveContainer,
   Cell,
 } from "recharts";
-import { supabase } from "@/lib/supabaseClient";
+import { supabase } from "../../lib/supabaseClient";
 import { useTasks } from "./useTasks";
 
 // ─── Arabic date ───────────────────────────────────────────────────────────────

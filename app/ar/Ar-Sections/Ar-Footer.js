@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import Eyes from "@/app/components/Eyes";
+import Eyes from "../../components/Eyes";
 import { FaEnvelope, FaWhatsapp, FaPhone } from "react-icons/fa6";
 
 const Footer = () => {
