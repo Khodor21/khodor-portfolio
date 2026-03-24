@@ -8,7 +8,7 @@ import { BsHandbag } from "react-icons/bs";
 export interface Product {
   id: number;
   slug: string;
-  brand: string;
+  // brand: string;
   name: string;
   price: number;
   oldPrice?: number;
@@ -100,11 +100,11 @@ export default function ProductCard({ product }: { product: Product }) {
         </h3>
 
         {/* Brand subtitle */}
-        {product.brand && (
+        {/* {product.brand && (
           <p className="text-xs text-gray-400 leading-none">
             {product.brand}
           </p>
-        )}
+        )} */}
 
         {/* Price row: old (strikethrough) + new */}
         <div className="flex  items-center gap-1 mt-1 flex-wrap">
