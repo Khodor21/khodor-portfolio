@@ -59,7 +59,7 @@ export default function ProductCardSkeleton() {
       `}</style>
     </div>
   );
-}──────────────────────────────────────────── */
+}
 export function ProductGridSkeleton({ count = 2 }: { count?: number }) {
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">

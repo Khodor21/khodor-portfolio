@@ -1,5 +1,5 @@
 import { Inter } from "next/font/google";
-import "@/app/globals.css";
+import "../globals.css";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";

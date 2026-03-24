@@ -1,5 +1,5 @@
 "use client";
-import { data as projects } from "@/app/data/data";
+import { data as projects } from "../data/data";
 import Image from "next/image";
 import Slider from "react-slick";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
