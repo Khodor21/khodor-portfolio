@@ -13,6 +13,7 @@ export interface Product {
   price: number;
   oldPrice?: number;
   discount?: number;
+  rating: number; // 0–5
   badge?: { type: "new" | "sale" | "best" };
   colors: { hex: string; name: string }[];
   sizes: string[];
@@ -30,6 +31,7 @@ export const products: Product[] = [
     price: 385,
     oldPrice: 520,
     discount: 26,
+    rating: 4.8,
     badge: { type: "best" },
     colors: [
       { hex: "#1a1410", name: "أسود غامق" },
@@ -41,10 +43,10 @@ export const products: Product[] = [
   },
   {
     id: 2,
-    slug: "abaya-black-classic",
+    slug: "abaya-black-classic-2",
     name: "عباية كريب مكسرة مع حزام",
     price: 460,
-    // badge: { type: "new" },
+    rating: 4.5,
     colors: [
       { hex: "#2D2040", name: "بنفسجي" },
       { hex: "#1a1410", name: "أسود" },
@@ -56,11 +58,12 @@ export const products: Product[] = [
   },
   {
     id: 3,
-    slug: "abaya-black-classic",
+    slug: "abaya-linen-open",
     name: "عباية كتان مفتوحة",
     price: 290,
     oldPrice: 440,
     discount: 34,
+    rating: 4.2,
     badge: { type: "sale" },
     colors: [
       { hex: "#8B7355", name: "كاميل" },
@@ -74,11 +77,12 @@ export const products: Product[] = [
   },
   {
     id: 4,
-    slug: "abaya-black-classic",
+    slug: "abaya-lace-embroidered",
     name: "عباية مزخرفة بالدانتيل",
     price: 550,
     oldPrice: 720,
     discount: 24,
+    rating: 4.6,
     badge: { type: "sale" },
     colors: [
       { hex: "#1a1410", name: "أسود" },
