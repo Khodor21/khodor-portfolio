@@ -9,7 +9,7 @@ import ConfirmModal from "../components/ConfirmModal";
 import { toast } from "react-toastify";
 import confetti from "canvas-confetti";
 import Lottie from "lottie-react";
-import successAnimation from "@/public/lotties/Confetti.json";
+import successAnimation from "../public/lotties/Confetti.json";
 import { useRouter } from "next/navigation";
 
 export default function CartPage() {

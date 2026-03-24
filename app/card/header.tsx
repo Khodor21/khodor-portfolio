@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import {
   AiOutlineSearch,
   AiOutlineUser,
@@ -24,13 +23,44 @@ const navLinks = [
 export default function SallaHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [cartCount] = useState(3); // Mock count
+  const [cartCount] = useState(3);
 
   return (
     <header dir="rtl" className="bg-white sticky top-0 z-50 shadow-sm">
-      {/* Top Bar */}
-      <div className="bg-[#2C3E50] text-white text-center text-xs md:text-sm py-2 px-4">
-        <p>شحن مجاني للطلبات فوق 50 دولار داخل لبنا</p>
+      {/* --- Infinite News Ticker Bar --- */}
+      <div className="bg-[#2C3E50] text-white overflow-hidden py-2 relative">
+        <div className="flex whitespace-nowrap animate-marquee">
+          {/* We repeat the text twice to ensure a seamless loop */}
+          <span className="text-xs md:text-sm px-4">
+            شحن مجاني للطلبات فوق 50 دولار لكل لبنان   
+          </span>
+          <span className="text-xs md:text-sm px-4">
+              اطلب الآن واستفد من العروض الحصرية  
+          </span>
+        </div>
+
+        {/* CSS for the animation */}
+        <style jsx>{`
+          .animate-marquee {
+            display: inline-flex;
+            animation: marquee 20s linear infinite;
+          }
+
+          @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(50%); } 
+          }
+          
+          /* For RTL, we move positive 50% to push it along the x-axis */
+          [dir="rtl"] .animate-marquee {
+            animation: marquee-rtl 20s linear infinite;
+          }
+
+          @keyframes marquee-rtl {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(50%); }
+          }
+        `}</style>
       </div>
 
       {/* Main Header */}
@@ -40,13 +70,8 @@ export default function SallaHeader() {
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="md:hidden p-2 text-gray-700 focus:outline-none"
-            aria-label="فتح القائمة"
           >
-            {isMenuOpen ? (
-              <AiOutlineClose size={24} />
-            ) : (
-              <AiOutlineMenu size={24} />
-            )}
+            {isMenuOpen ? <AiOutlineClose size={24} /> : <AiOutlineMenu size={24} />}
           </button>
 
           {/* Logo */}
@@ -73,7 +98,6 @@ export default function SallaHeader() {
 
           {/* Actions */}
           <div className="flex items-center space-x-4 space-x-reverse">
-            {/* Search Toggle (Mobile) / Search Bar (Desktop) */}
             <div className="hidden md:block relative w-64">
               <input
                 type="text"
@@ -86,39 +110,23 @@ export default function SallaHeader() {
               />
             </div>
 
-            <button
-              className="md:hidden p-2 text-gray-700"
-              onClick={() => setIsSearchOpen(!isSearchOpen)}
-              aria-label="بحث"
-            >
+            <button className="md:hidden p-2 text-gray-700" onClick={() => setIsSearchOpen(!isSearchOpen)}>
               <AiOutlineSearch size={22} />
             </button>
 
-            <button
-              className="hidden md:block text-gray-700 hover:text-[#C0392B]"
-              aria-label="اللغة"
-            >
+            <button className="hidden md:block text-gray-700 hover:text-[#C0392B]">
               <AiOutlineGlobal size={22} />
             </button>
 
-            <button
-              className="text-gray-700 hover:text-[#C0392B]"
-              aria-label="الحساب"
-            >
+            <button className="text-gray-700 hover:text-[#C0392B]">
               <AiOutlineUser size={22} />
             </button>
 
-            <button
-              className="text-gray-700 hover:text-[#C0392B] relative"
-              aria-label="المفضلة"
-            >
+            <button className="text-gray-700 hover:text-[#C0392B] relative">
               <AiOutlineHeart size={22} />
             </button>
 
-            <button
-              className="text-gray-700 hover:text-[#C0392B] relative"
-              aria-label="السلة"
-            >
+            <button className="text-gray-700 hover:text-[#C0392B] relative">
               <BsCart2 size={22} />
               {cartCount > 0 && (
                 <span className="absolute -top-1 -left-1 bg-[#C0392B] text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
@@ -138,10 +146,7 @@ export default function SallaHeader() {
                 placeholder="ابحث هنا..."
                 className="w-full bg-gray-50 border border-gray-200 rounded-full py-2 px-4 pr-10 text-sm focus:outline-none focus:border-[#C0392B]"
               />
-              <AiOutlineSearch
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
-                size={18}
-              />
+              <AiOutlineSearch className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
             </div>
           </div>
         )}
@@ -149,10 +154,7 @@ export default function SallaHeader() {
 
       {/* Mobile Menu Overlay */}
       {isMenuOpen && (
-        <div
-          className="md:hidden fixed inset-0 z-40 bg-black/50"
-          onClick={() => setIsMenuOpen(false)}
-        >
+        <div className="md:hidden fixed inset-0 z-40 bg-black/50" onClick={() => setIsMenuOpen(false)}>
           <div
             className="absolute right-0 top-0 h-full w-72 bg-white shadow-2xl transform transition-transform duration-300"
             onClick={(e) => e.stopPropagation()}
@@ -176,11 +178,6 @@ export default function SallaHeader() {
                   </Link>
                 ))}
               </nav>
-              <div className="p-4 border-t mt-auto">
-                <button className="w-full bg-[#C0392B] text-white py-2 rounded-lg font-medium">
-                  تسجيل الدخول
-                </button>
-              </div>
             </div>
           </div>
         </div>

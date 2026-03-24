@@ -24,7 +24,7 @@ export interface Product {
 export const products: Product[] = [
   {
     id: 1,
-    brand: "سرداب",
+    slug: "abaya-black-classic",
     name: "عباية نيدا مطرزة",
     price: 385,
     oldPrice: 520,
@@ -40,7 +40,7 @@ export const products: Product[] = [
   },
   {
     id: 2,
-    brand: "أصايل",
+    slug: "abaya-black-classic",
     name: "عباية كريب مكسرة مع حزام",
     price: 460,
     // badge: { type: "new" },
@@ -55,7 +55,7 @@ export const products: Product[] = [
   },
   {
     id: 3,
-    brand: "ريفان بوتيك",
+    slug: "abaya-black-classic",
     name: "عباية كتان مفتوحة",
     price: 290,
     oldPrice: 440,
@@ -73,7 +73,7 @@ export const products: Product[] = [
   },
   {
     id: 4,
-    brand: "فزّة",
+    slug: "abaya-black-classic",
     name: "عباية مزخرفة بالدانتيل",
     price: 550,
     oldPrice: 720,

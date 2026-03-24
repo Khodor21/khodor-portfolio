@@ -1,13 +1,13 @@
 "use client";
 import { useState } from "react";
+import Link from "next/link";
 import Image, { StaticImageData } from "next/image";
-import { BsCart2 } from "react-icons/bs";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-import { AiOutlineEye } from "react-icons/ai";
-import { TbShoppingBagPlus } from "react-icons/tb";
+import { BsHandbag } from "react-icons/bs";
 
 export interface Product {
   id: number;
+  slug: string;
   brand: string;
   name: string;
   price: number;
@@ -22,174 +22,106 @@ export interface Product {
   image: StaticImageData;
 }
 
-const badgeStyles: Record<string, string> = {
-  new: "bg-[#3C3489] text-white",
-  best: "bg-[#0F6E56] text-white",
-};
-const badgeLabels: Record<string, string> = {
-  new: "جديد",
-  best: "الأكثر مبيعاً",
-};
-
 export default function ProductCard({ product }: { product: Product }) {
   const [wished, setWished] = useState(false);
   const [added, setAdded] = useState(false);
 
-  const isLowStock = product.stock !== undefined && product.stock <= 5;
-  const stockPct =
-    product.stock !== undefined && product.stockTotal
-      ? Math.round((product.stock / product.stockTotal) * 100)
-      : null;
-
-  const handleAdd = () => {
+  const handleAdd = (e: React.MouseEvent) => {
+    e.preventDefault();
     setAdded(true);
     setTimeout(() => setAdded(false), 1500);
   };
 
-  const showDiscountBadge = !!product.discount;
-  const showTextBadge =
-    !showDiscountBadge && product.badge && product.badge.type !== "sale";
+  const handleWish = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setWished((w) => !w);
+  };
+
+  // Savings amount shown in badge like ZBrand
+  const savings =
+    product.oldPrice ? product.oldPrice - product.price : null;
 
   return (
-    <div
+    <Link
+      href={`/card/description/${product.slug}`}
       dir="rtl"
-      className="group relative bg-white rounded overflow-hidden flex flex-col shadow-sm hover:shadow-lg transition-shadow duration-300 h-full"
+      className="group relative bg-white flex flex-col h-full"
+      style={{ fontFamily: "'Tajawal', 'Cairo', sans-serif" }}
     >
-      {/* ── IMAGE — slightly taller ratio ── */}
-      <div className="relative w-full aspect-[9/16] sm:aspect-[2/3]  overflow-hidden bg-gray-100 shrink-0">
+      {/* ── IMAGE AREA ── */}
+      <div className="relative w-full aspect-[3/4] overflow-hidden bg-[#F7F7F7] shrink-0">
         <Image
           src={product.image}
           alt={product.name}
           fill
-          className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
+          className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]"
           sizes="(max-width: 640px) 50vw, 25vw"
         />
 
-        {/* Gradient overlay */}
-        <div className="absolute bottom-0 inset-x-0 h-24 bg-gradient-to-t from-black/30 to-transparent" />
+        {/* Top-left: Cart icon */}
+        <button
+          onClick={handleAdd}
+          aria-label="أضف للسلة"
+          className="absolute top-2.5 right-2.5 z-10 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-sm transition-transform active:scale-90"
+        >
+          {added ? (
+            <span className="text-[10px] text-green-600 font-bold">✓</span>
+          ) : (
+            <BsHandbag size={15} color="#1A1A1A" />
+          )}
+        </button>
 
-        {/* Badge */}
-        {showDiscountBadge && (
-          <span className="absolute top-2.5 right-2.5 text-[12px] font-bold px-2.5 py-1 rounded-full bg-[#C0392B] text-white">
-            -{product.discount}%
+        {/* Top-right: Wishlist heart */}
+        <button
+          onClick={handleWish}
+          aria-label="أضف للمفضلة"
+          className="absolute top-2.5 left-2.5 z-10 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-sm transition-transform active:scale-90"
+        >
+          {wished ? (
+            <AiFillHeart size={16} color="#C0392B" />
+          ) : (
+            <AiOutlineHeart size={16} color="#1A1A1A" />
+          )}
+        </button>
+
+        {/* Bottom-right: Savings badge — exactly like ZBrand "خصم ٢٠.٠٠ ﷼" */}
+        {savings && (
+          <span className="absolute bottom-2.5 right-2.5 z-10 bg-[#C0392B] text-white text-[11px] font-bold px-2.5 py-1 rounded-full">
+            {savings.toLocaleString("ar-SA")} ﷼ خصم
           </span>
         )}
-        {showTextBadge && product.badge && (
-          <span
-            className={`absolute top-2.5 right-2.5 text-[11px] font-bold px-2.5 py-1 rounded-full ${badgeStyles[product.badge.type]}`}
-          >
-            {badgeLabels[product.badge.type]}
-          </span>
-        )}
-
-        {/* Icons bottom center — hover on desktop */}
-        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 sm:flex">
-          <button
-            onClick={() => setWished((w) => !w)}
-            aria-label="أضف للمفضلة"
-            className="w-7 h-7 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow transition-transform hover:scale-110 active:scale-95"
-          >
-            {wished ? (
-              <AiFillHeart size={14} color="#C0392B" />
-            ) : (
-              <AiOutlineHeart size={14} color="#333" />
-            )}
-          </button>
-          <button
-            aria-label="عرض المنتج"
-            className="w-7 h-7 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow transition-transform hover:scale-110 active:scale-95"
-          >
-            <AiOutlineEye size={14} color="#333" />
-          </button>
-        </div>
-
-        {/* Icons — always visible on mobile */}
-        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-[3px] sm:hidden">
-          <button
-            onClick={() => setWished((w) => !w)}
-            aria-label="أضف للمفضلة"
-            className="w-7 h-7 rounded-full bg-white/90 flex items-center justify-center shadow"
-          >
-            {wished ? (
-              <AiFillHeart size={14} color="#C0392B" />
-            ) : (
-              <AiOutlineHeart size={14} color="#333" />
-            )}
-          </button>
-          <button
-            aria-label="عرض المنتج"
-            className="w-7 h-7 rounded-full bg-white/90 flex items-center justify-center shadow"
-          >
-            <AiOutlineEye size={14} color="#333" />
-          </button>
-        </div>
       </div>
 
       {/* ── BODY ── */}
-      <div className="px-3 pt-2.5 flex flex-col gap-2 flex-1">
-        {/* Name */}
-        <h3 className="text-sm sm:text-base text-gray-900 leading-snug">
+      <div className="pt-2.5 pb-3 flex flex-col gap-1">
+        {/* Product name */}
+        <h3 className="text-sm text-[#1A1A1A] leading-snug line-clamp-1 font-normal">
           {product.name}
         </h3>
 
-        {/* Price */}
-        <div className="flex items-end gap-1.5 flex-wrap">
-          <span className="text-base font-bold text-gray-900">
-            {product.price} ر.س
-          </span>
-          {product.oldPrice && (
-            <span className="text-[11px] text-gray-400 line-through">
-              {product.oldPrice} ر.س
-            </span>
-          )}
-        </div>
-
-        {/* Colors */}
-        <div className="flex gap-1.5 flex-wrap">
-          {product.colors.map((c, i) => (
-            <div
-              key={i}
-              title={c.name}
-              className="w-4 h-4 rounded-full border-[2px] border-white shadow-sm ring-1 ring-gray-200"
-              style={{ background: c.hex }}
-            />
-          ))}
-        </div>
-
-        {/* Low stock */}
-        {isLowStock && stockPct !== null ? (
-          <div>
-            <p className="text-[10px] text-[#C0392B] font-medium mb-1">
-              باقي {product.stock} قطع فقط
-            </p>
-            <div className="h-0.5 bg-gray-100 rounded-full overflow-hidden">
-              <div
-                className="h-full bg-[#C0392B] rounded-full"
-                style={{ width: `${stockPct}%` }}
-              />
-            </div>
-          </div>
-        ) : (
-          <div className="h-[22px]" />
+        {/* Brand subtitle */}
+        {product.brand && (
+          <p className="text-xs text-gray-400 leading-none">
+            {product.brand}
+          </p>
         )}
 
-        {/* Spacer pushes button to bottom */}
-        <div className="flex-1" />
+        {/* Price row: old (strikethrough) + new */}
+        <div className="flex  items-center gap-1 mt-1 flex-wrap">
+           <span
+            className={`text-sm font-bold ${
+              product.oldPrice ? "text-[#C0392B]" : "text-[#1A1A1A]"
+            }`}
+          >
+            {product.price.toLocaleString("ar-SA")}﷼
+          </span> {product.oldPrice && (
+            <span className="text-[16px] text-gray-400 line-through">
+              {product.oldPrice.toLocaleString("ar-SA")}﷼
+            </span>
+          )}
+        
+        </div>
       </div>
-
-      {/* ── CTA — outside body, flush to card bottom, full width, no radius at bottom ── */}
-      <button
-        onClick={handleAdd}
-        className={`w-full py-3 text-[14px] transition-all duration-200 active:scale-[0.97] flex items-center justify-center gap-2 shrink-0
-          ${
-            added
-              ? "bg-[#0F6E56] text-white"
-              : "bg-[#9F6E56] text-white hover:bg-[#7a5240]"
-          }`}
-      >
-        <TbShoppingBagPlus size={16} />
-        {added ? "تمت الإضافة ✓" : "أضف إلى السلة"}
-      </button>
-    </div>
+    </Link>
   );
 }
