@@ -3,7 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-
+import CategoryOne from "./images/Category-1.jpeg";
 interface Category {
   id: number;
   name: string;
@@ -19,7 +19,7 @@ const categoriesData: Category[] = [
     id: 1,
     name: "عبايات يومية",
     description: "أناقة وراحة",
-    image: "https://placehold.co/600x800/EAE/EEE?text=Casual",
+    image: CategoryOne,
     href: "/category/casual",
     count: 45,
   },
@@ -27,7 +27,7 @@ const categoriesData: Category[] = [
     id: 2,
     name: "عبايات رسمية",
     description: "للمناسبات",
-    image: "https://placehold.co/600x800/DDD/EEE?text=Formal",
+    image: CategoryOne,
     href: "/category/formal",
     count: 23,
   },
@@ -35,7 +35,7 @@ const categoriesData: Category[] = [
     id: 3,
     name: "فساتين سهره",
     description: "تصاميم فاخرة",
-    image: "https://placehold.co/600x800/CCC/EEE?text=Dresses",
+    image: CategoryOne,
     href: "/category/dresses",
     count: 18,
   },
@@ -43,7 +43,7 @@ const categoriesData: Category[] = [
     id: 4,
     name: "إكسسوارات",
     description: "لمسة نهائية",
-    image: "https://placehold.co/600x800/BBB/EEE?text=Accessories",
+    image: CategoryOne,
     href: "/category/accessories",
     count: 60,
   },
@@ -51,18 +51,14 @@ const categoriesData: Category[] = [
 
 export default function ShopByCategory() {
   return (
-    <section dir="rtl" className="py-16 md:py-24">
+    <section dir="rtl" className="py-8 md:py-16">
       <div className="container">
         {/* Section Header */}
-        <div className="flex justify-between items-end mb-8 md:mb-12">
-          <div>
+        <div className="flex justify-between items-end mb-2 md:mb-6">
             <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
               تصفحي حسب القسم
             </h2>
-            <p className="text-gray-500 text-sm md:text-base max-w-md">
-              تشكيلة متنوعة تلبي جميع احتياجاتك بجودة عالية وأسعار تنافسية
-            </p>
-          </div>
+            
           <Link
             href="/category"
             className="hidden md:flex items-center text-[#C0392B] font-medium text-sm hover:underline"

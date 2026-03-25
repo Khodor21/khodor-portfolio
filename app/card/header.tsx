@@ -32,12 +32,10 @@ export default function SallaHeader() {
       <div className="bg-[#2C3E50] text-white overflow-hidden py-2 relative">
         <div className="flex whitespace-nowrap animate-marquee">
           <span className="text-xs md:text-sm px-4">
-            شحن مجاني للطلبات فوق 50 دولار لكل لبنان — اطلب الآن واستفد من
-            العروض الحصرية —&nbsp;
+            شحن مجاني للطلبات فوق 50 دولار لكل لبنان &nbsp;
           </span>
           <span className="text-xs md:text-sm px-4">
-            شحن مجاني للطلبات فوق 50 دولار لكل لبنان — اطلب الآن واستفد من
-            العروض الحصرية —&nbsp;
+            اطلب الآن واستفد من العروض الحصرية &nbsp;
           </span>
         </div>
         <style jsx>{`
@@ -65,14 +63,14 @@ export default function SallaHeader() {
             className="text-gray-900"
             aria-label="القائمة"
           >
-            <AiOutlineMenu size={24} />
+            <AiOutlineMenu size={20} />
           </button>
           <button
             onClick={() => setIsSearchOpen((v) => !v)}
             className="text-gray-900 pr-1"
             aria-label="بحث"
           >
-            <RiSearch2Line size={24} />
+            <RiSearch2Line size={20} />
           </button>
         </div>
 
@@ -124,7 +122,7 @@ export default function SallaHeader() {
             className="text-gray-900 hover:text-[#C0392B]"
             aria-label="حسابي"
           >
-            <AiOutlineUser size={24} />
+            <AiOutlineUser size={20} />
           </button>
 
           {/* Cart — both mobile & desktop */}
@@ -132,7 +130,7 @@ export default function SallaHeader() {
             className="text-gray-900 pr-1 hover:text-[#C0392B] relative"
             aria-label="السلة"
           >
-            <BsHandbag size={24} />
+            <BsHandbag size={20} />
             {cartCount > 0 && (
               <span className="absolute top-1 left-1 bg-[#C0392B] text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
                 {cartCount}
