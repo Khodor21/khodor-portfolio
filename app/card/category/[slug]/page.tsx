@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { notFound } from "next/navigation";
 import ProductCard from "../../ProductCard";
-import ProductCardSkeleton from "../../ProductCardSkeleton";
+import ProductCardSkeleton from "../../Productcardskeleton";
 import { products } from "../../products";
 
 // ─── Category metadata map ────────────────────────────────────────────────────
