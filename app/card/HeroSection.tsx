@@ -9,21 +9,19 @@ import {
   MdVerifiedUser,
   MdSupportAgent,
 } from "react-icons/md";
-
-// Mock image import - replace with your actual StaticImageData or URL
-// import heroBg from "@/assets/hero-bg.jpg";
+import HeroAbaya from "./images/Hero-Abaya.jpg";
 
 export default function HeroSection() {
   return (
     <section
       dir="rtl"
-      className="relative w-full h-[70vh] md:h-[85vh] overflow-hidden"
+      className="relative w-full h-[85vh] md:h-[85vh] overflow-hidden"
     >
       {/* Background Image */}
       <div className="absolute inset-0 bg-gray-200">
         {/* For static import use <Image src={heroBg} ... /> */}
         <Image
-          src="https://placehold.co/1920x1080/EEE/EEE.png" // Replace with actual image
+          src={HeroAbaya}
           alt="مجموعة العبايات الجديدة"
           fill
           className="object-cover"
@@ -33,8 +31,7 @@ export default function HeroSection() {
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
       </div>
 
-      {/* Content Container */}
-      <div className="relative h-full container mx-auto px-4 flex flex-col justify-end pb-16 md:pb-24">
+      <div className="relative h-full mx-auto px-4 flex flex-col justify-end pb-16 md:pb-24">
         {/* Trust Badges - Hidden on very small screens */}
         <div className="hidden md:flex gap-6 mb-6">
           <div className="flex items-center gap-2 text-white/90 text-sm backdrop-blur-sm bg-white/10 px-3 py-1.5 rounded-full border border-white/20">

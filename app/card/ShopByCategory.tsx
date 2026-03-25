@@ -51,8 +51,8 @@ const categoriesData: Category[] = [
 
 export default function ShopByCategory() {
   return (
-    <section dir="rtl" className="bg-white py-16 md:py-24">
-      <div className="container mx-auto px-4">
+    <section dir="rtl" className="py-16 md:py-24">
+      <div className="container">
         {/* Section Header */}
         <div className="flex justify-between items-end mb-8 md:mb-12">
           <div>

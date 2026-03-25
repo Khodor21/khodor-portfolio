@@ -1,7 +1,7 @@
-import Hijab1 from "./images/Hijab-1.jpg";
-import Hijab2 from "./images/Hijab-2.jpg";
-import Hijab3 from "./images/Hijab-3.jpg";
-import Hijab4 from "./images/Hijab-4.jpg";
+import Hijab1 from "./images/Hijab-1.jpeg";
+import Hijab2 from "./images/Hijab-2.png";
+import Hijab3 from "./images/Hijab-3.jpeg";
+import Hijab4 from "./images/Hijab-4.jpeg";
 
 import { StaticImageData } from "next/image";
 

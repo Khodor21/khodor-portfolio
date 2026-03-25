@@ -38,8 +38,7 @@ export default function ProductCard({ product }: { product: Product }) {
   };
 
   // Savings amount shown in badge like ZBrand
-  const savings =
-    product.oldPrice ? product.oldPrice - product.price : null;
+  const savings = product.oldPrice ? product.oldPrice - product.price : null;
 
   return (
     <Link
@@ -95,7 +94,7 @@ export default function ProductCard({ product }: { product: Product }) {
       {/* ── BODY ── */}
       <div className="pt-2.5 pb-3 flex flex-col gap-1">
         {/* Product name */}
-        <h3 className="text-sm text-[#1A1A1A] leading-snug line-clamp-1 font-normal">
+        <h3 className="text-sm font-semibold text-[#1A1A1A] leading-snug line-clamp-1">
           {product.name}
         </h3>
 
@@ -107,19 +106,19 @@ export default function ProductCard({ product }: { product: Product }) {
         )} */}
 
         {/* Price row: old (strikethrough) + new */}
-        <div className="flex  items-center gap-1 mt-1 flex-wrap">
-           <span
-            className={`text-sm font-bold ${
+        <div className="flex font-bold items-center gap-1 mt-1 flex-wrap">
+          <span
+            className={`text-sm ${
               product.oldPrice ? "text-[#C0392B]" : "text-[#1A1A1A]"
             }`}
           >
             {product.price.toLocaleString("ar-SA")}﷼
-          </span> {product.oldPrice && (
+          </span>{" "}
+          {product.oldPrice && (
             <span className="text-[16px] text-gray-400 line-through">
               {product.oldPrice.toLocaleString("ar-SA")}﷼
             </span>
           )}
-        
         </div>
       </div>
     </Link>
