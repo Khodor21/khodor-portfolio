@@ -1,5 +1,12 @@
 import { useState } from "react";
-import { CartItem } from "../types";
+interface CartItem {
+  id: number;
+  name: string;
+  size: string;
+  price: number;
+  qty: number;
+  image: string;
+}
 
 export function useCart() {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);

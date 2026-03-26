@@ -2,7 +2,15 @@ import { useEffect } from "react";
 import { AiOutlineClose, AiOutlineDelete } from "react-icons/ai";
 import { BsCart2 } from "react-icons/bs";
 import { HiMinus, HiPlus } from "react-icons/hi";
-import { CartItem } from "../types";
+
+interface CartItem {
+  id: number;
+  name: string;
+  size: string;
+  price: number;
+  qty: number;
+  image: string;
+}
 
 interface CartDrawerProps {
   open: boolean;
