@@ -26,7 +26,7 @@ export interface Product {
   stock?: number;
   stockTotal?: number;
   image: StaticImageData;
-  productImages: string[]
+  productImages?: StaticImageData[]; // Fixed: Changed from string[] to StaticImageData[] and made optional
 }
 
 export const products: Product[] = [
@@ -46,7 +46,7 @@ export const products: Product[] = [
     ],
     sizes: ["XS", "S", "M", "L", "XL"],
     image: Hijab1,
-    productImages: [Desc1, Desc2, Desc3, Desc4]
+    productImages: [Desc1, Desc2, Desc3, Desc4],
   },
   {
     id: 2,
@@ -62,7 +62,7 @@ export const products: Product[] = [
     sizes: ["S", "M", "L", "XL", "XXL"],
     soldOut: ["XXL"],
     image: Hijab2,
-    productImages: [Desc1, Desc2, Desc3, Desc4] 
+    productImages: [Desc1, Desc2, Desc3, Desc4],
   },
   {
     id: 3,
