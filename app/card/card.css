@@ -51,10 +51,20 @@
 }
 
 .container {
-  width: 100%; /* Take full screen width */
-  max-width: 1440px; /* Don't go wider than this */
-  margin-left: auto; /* Center it */
-  margin-right: auto; /* Center it */
-  padding-left: 24px;
-  padding-right: 24px;
+  width: 100%;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+
+  /* 1. Small Devices (Default): 16px padding */
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+/* 2. Medium Devices & Up (Tablets/Desktops): 24px padding */
+@media (min-width: 768px) {
+  .container {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
 }

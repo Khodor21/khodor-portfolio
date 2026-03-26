@@ -27,9 +27,9 @@ export default function SallaHeader() {
   const [cartCount] = useState(0);
 
   return (
-    <header dir="rtl" className="bg-white sticky top-0 z-50 shadow-sm">
+    <header dir="rtl" className="bg-white sticky top-0 z-50">
       {/* ── TICKER ── */}
-      <div className="bg-[#2C3E50] text-white overflow-hidden py-2 relative">
+      <div className="bg-[#2C3E50] text-white overflow-hidden flex items-center justify-center h-[40px] relative">
         <div className="flex whitespace-nowrap animate-marquee">
           <span className="text-xs md:text-sm px-4">
             شحن مجاني للطلبات فوق 50 دولار لكل لبنان &nbsp;

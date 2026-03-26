@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./card.css";
+import SallaHeader from "./header";
 
 export const metadata: Metadata = {
   title: "عبايات | متجر العبايات الفاخرة",
@@ -11,5 +12,7 @@ export default function CardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return <>
+  <SallaHeader />
+  {children}</>;
 }
