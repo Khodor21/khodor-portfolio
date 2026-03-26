@@ -3,6 +3,11 @@ import Hijab2 from "./images/Hijab-2.png";
 import Hijab3 from "./images/Hijab-3.jpeg";
 import Hijab4 from "./images/Hijab-4.jpeg";
 
+import Desc1 from "./images/Desc-1.jpeg";
+import Desc2 from "./images/Desc-2.jpeg";
+import Desc3 from "./images/Desc-3.jpeg";
+import Desc4 from "./images/Desc-4.jpeg";
+
 import { StaticImageData } from "next/image";
 
 export interface Product {
@@ -21,6 +26,7 @@ export interface Product {
   stock?: number;
   stockTotal?: number;
   image: StaticImageData;
+  productImages: string[]
 }
 
 export const products: Product[] = [
@@ -40,6 +46,7 @@ export const products: Product[] = [
     ],
     sizes: ["XS", "S", "M", "L", "XL"],
     image: Hijab1,
+    productImages: [Desc1, Desc2, Desc3, Desc4]
   },
   {
     id: 2,
@@ -55,6 +62,7 @@ export const products: Product[] = [
     sizes: ["S", "M", "L", "XL", "XXL"],
     soldOut: ["XXL"],
     image: Hijab2,
+    productImages: [Desc1, Desc2, Desc3, Desc4] 
   },
   {
     id: 3,
