@@ -54,6 +54,8 @@ export const products: Product[] = [
     name: "عباية كريب مكسرة مع حزام",
     price: 460,
     rating: 4.5,
+    badge: { type: "best" },
+
     colors: [
       { hex: "#2D2040", name: "بنفسجي" },
       { hex: "#1a1410", name: "أسود" },
@@ -72,7 +74,7 @@ export const products: Product[] = [
     oldPrice: 440,
     discount: 34,
     rating: 4.2,
-    badge: { type: "sale" },
+    badge: { type: "best" },
     colors: [
       { hex: "#8B7355", name: "كاميل" },
       { hex: "#1a1410", name: "أسود" },

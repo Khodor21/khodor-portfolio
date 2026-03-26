@@ -4,11 +4,13 @@ import { useRef } from "react";
 import Link from "next/link";
 import ProductCard from "./ProductCard";
 import { products } from "./products";
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import { MdArrowForwardIos } from "react-icons/md";
 
-// ─── Pull only best-seller products ──────────────────────────────────────────
+// ─── Filter best sellers ──────────────────────────────────────────────────────
 const bestSellers = products.filter((p) => p.badge?.type === "best");
 
-// ─── Arrow button ─────────────────────────────────────────────────────────────
+// ─── Arrow Button ─────────────────────────────────────────────────────────────
 function ArrowButton({
   direction,
   onClick,
@@ -30,33 +32,10 @@ function ArrowButton({
         flex-shrink-0
       "
     >
-      {direction === "next" ? (
-        // Arrow points right (next = scroll left in RTL)
-        <svg
-          width="18"
-          height="18"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <polyline points="9 18 15 12 9 6" />
-        </svg>
+      {direction === "prev" ? (
+        <FiChevronLeft size={18} />
       ) : (
-        <svg
-          width="18"
-          height="18"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <polyline points="15 18 9 12 15 6" />
-        </svg>
+        <FiChevronRight size={18} />
       )}
     </button>
   );
@@ -66,14 +45,11 @@ function ArrowButton({
 export default function BestSellersCarousel() {
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  // One card width + gap
   const scrollBy = (dir: "prev" | "next") => {
     const el = scrollRef.current;
     if (!el) return;
-    // In RTL, "next" means scrolling right (positive scrollLeft direction is reversed)
-    const amount = el.clientWidth * 0.85;
     el.scrollBy({
-      left: dir === "next" ? -amount : amount,
+      left: dir === "next" ? -el.clientWidth * 0.85 : el.clientWidth * 0.85,
       behavior: "smooth",
     });
   };
@@ -82,10 +58,9 @@ export default function BestSellersCarousel() {
 
   return (
     <section dir="rtl" className="py-10 sm:py-14 bg-[#FAFAF8]">
-      {/* ── Section header ── */}
+      {/* ── Header ── */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6 flex items-end justify-between">
         <div>
-          {/* Eyebrow */}
           <p className="text-xs font-semibold tracking-widest text-amber-500 uppercase mb-1">
             ⭐ الأكثر مبيعاً
           </p>
@@ -94,7 +69,6 @@ export default function BestSellersCarousel() {
           </h2>
         </div>
 
-        {/* Desktop arrows + View all */}
         <div className="flex items-center gap-2">
           <ArrowButton direction="prev" onClick={() => scrollBy("prev")} />
           <ArrowButton direction="next" onClick={() => scrollBy("next")} />
@@ -103,69 +77,41 @@ export default function BestSellersCarousel() {
             className="
               hidden sm:inline-flex items-center gap-1
               text-sm font-medium text-gray-500
-              hover:text-gray-900 transition-colors
-              mr-2
+              hover:text-gray-900 transition-colors mr-2
             "
           >
             عرض الكل
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="rotate-180"
-            >
-              <polyline points="9 18 15 12 9 6" />
-            </svg>
+            <MdArrowForwardIos size={12} className="rotate-180" />
           </Link>
         </div>
       </div>
 
-      {/* ── Carousel track ── */}
-      {/*
-        On mobile  : each card = ~80vw  → 1 full card + ~0.25 of the next peeking
-        On sm+     : each card = ~38vw  → ~2.6 cards visible
-        On lg+     : each card = 280px  → multiple cards visible
-        scroll-snap ensures a snappy swipe feel
-      */}
+      {/* ── Carousel Track ── */}
       <div
         ref={scrollRef}
+        style={{ WebkitOverflowScrolling: "touch" }}
         className="
           flex gap-3 sm:gap-4
-          overflow-x-auto
-          scroll-smooth
+          overflow-x-auto scroll-smooth
           snap-x snap-mandatory
-          [scrollbar-width:none]          /* Firefox */
-          [&::-webkit-scrollbar]:hidden   /* Chrome/Safari */
-          px-4 sm:px-6 lg:px-8
-          pb-2                            /* breathing room for shadow */
+          [scrollbar-width:none] [&::-webkit-scrollbar]:hidden
+          px-4 sm:px-6 lg:px-8 pb-2
         "
-        style={{ WebkitOverflowScrolling: "touch" }}
       >
         {bestSellers.map((product) => (
           <div
             key={product.id}
-            className="
-              snap-start flex-shrink-0
-              w-[80vw] sm:w-[38vw] lg:w-[280px]
-            "
+            className="snap-start flex-shrink-0 w-[80vw] sm:w-[38vw] lg:w-[calc(25%-9px)]"
           >
-            {/* Carousel card — slightly larger via wrapper scale/padding */}
-            <div className="h-full">
-              <ProductCard product={product} variant="large" />
-            </div>
+            <ProductCard product={product} variant="large" />
           </div>
         ))}
 
-        {/* Trailing spacer so last card doesn't hug the edge */}
+        {/* Trailing spacer */}
         <div className="flex-shrink-0 w-4 sm:w-6 lg:w-8" aria-hidden />
       </div>
 
-      {/* ── Mobile "View all" link ── */}
+      {/* ── Mobile View All ── */}
       <div className="sm:hidden mt-5 flex justify-center">
         <Link
           href="/category/abayas"
@@ -178,19 +124,7 @@ export default function BestSellersCarousel() {
           "
         >
           عرض جميع المنتجات
-          <svg
-            width="14"
-            height="14"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="rotate-180"
-          >
-            <polyline points="9 18 15 12 9 6" />
-          </svg>
+          <MdArrowForwardIos size={12} className="rotate-180" />
         </Link>
       </div>
     </section>

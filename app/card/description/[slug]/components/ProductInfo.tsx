@@ -1,7 +1,8 @@
 import { AiFillHeart, AiOutlineHeart, AiOutlineShareAlt } from "react-icons/ai";
 import { BsCart2 } from "react-icons/bs";
 import { LuPencilLine } from "react-icons/lu";
-export interface Product {
+ 
+interface Product {
   id: number;
   slug: string;
   name: string;
