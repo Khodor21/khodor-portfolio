@@ -21,6 +21,30 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "ArbFONTS-PNU-Bold";
+  src: url("/ArbFONTS-PNU-Bold.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "ArbFONTS-PNU-Regular";
+  src: url("/ArbFONTS-PNU-Regular.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "ArbFONTS-PNU-Medium";
+  src: url("/ArbFONTS-PNU-Medium.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ─── Reset / Base ───────────────────────────────────── */
 *,
 *::before,
@@ -110,14 +134,14 @@
   color: #ffffff;
 }
 .font-extrabold {
-  font-family: "Somar-ExtraBold";
+  font-family: "ArbFONTS-PNU-Bold";
 }
 
 .font-bold {
-  font-family: "Somar-Bold";
+  font-family: "ArbFONTS-PNU-Medium";
 }
 .font-regular {
-  font-family: "Somar-Medium";
+  font-family: "ArbFONTS-PNU-Regular";
 }
 .hero-tagline {
   font-family: "Somar", sans-serif;

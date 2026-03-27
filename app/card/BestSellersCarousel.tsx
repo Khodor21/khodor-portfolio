@@ -57,9 +57,9 @@ export default function BestSellersCarousel() {
   if (bestSellers.length === 0) return null;
 
   return (
-    <section dir="rtl" className="py-10 sm:py-14 bg-[#FAFAF8]">
+    <section dir="rtl" className="py-10 container sm:py-14  bg-[#FAFAF8]">
       {/* ── Header ── */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6 flex items-end justify-between">
+      <div className=" mb-6 flex items-end justify-between">
         <div>
           <p className="text-xs font-semibold tracking-widest text-amber-500 uppercase mb-1">
             ⭐ الأكثر مبيعاً
@@ -95,7 +95,7 @@ export default function BestSellersCarousel() {
           overflow-x-auto scroll-smooth
           snap-x snap-mandatory
           [scrollbar-width:none] [&::-webkit-scrollbar]:hidden
-          px-4 sm:px-6 lg:px-8 pb-2
+           pb-2
         "
       >
         {bestSellers.map((product) => (

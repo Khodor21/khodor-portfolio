@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "IBMPlexArabic";
+  font-family: "ArbFONTS-PNU-Light";
   src: url("/ArbFONTS-PNU-Light.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
@@ -11,7 +11,7 @@
 }
 
 @font-face {
-  font-family: "IBMPlexArabic-SemiBold";
+  font-family: "ArbFONTS-PNU-Regular";
   src: url("/ArbFONTS-PNU-Regular.ttf") format("truetype");
   font-weight: 600;
   font-style: normal;
@@ -19,18 +19,17 @@
 }
 
 @font-face {
-  font-family: "IBMPlexArabic-Bold";
+  font-family: "ArbFONTS-PNU-Medium";
   src: url("/ArbFONTS-PNU-Medium.ttf") format("truetype");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 
-/* Outside any @layer so it has full specificity */
 *,
 *::before,
 *::after {
-  font-family: "IBMPlexArabic", sans-serif;
+  font-family: "ArbFONTS-PNU-Regular";
 }
 
 @layer utilities {
@@ -43,11 +42,15 @@
   }
 }
 
-.text-semiBold {
-  font-family: "IBMPlexArabic-SemiBold", sans-serif;
+.text-light, .font-light {
+  font-family: "ArbFONTS-PNU-Light";
 }
-.text-bold {
-  font-family: "IBMPlexArabic-Bold", sans-serif;
+
+.text-medium, .font-medium {
+  font-family: "ArbFONTS-PNU-Regular";
+}
+.text-bold, .font-bold {
+  font-family: "ArbFONTS-PNU-Medium";
 }
 
 .container {
@@ -55,16 +58,26 @@
   max-width: 1440px;
   margin-left: auto;
   margin-right: auto;
-
-  /* 1. Small Devices (Default): 16px padding */
   padding-left: 16px;
   padding-right: 16px;
 }
 
-/* 2. Medium Devices & Up (Tablets/Desktops): 24px padding */
 @media (min-width: 768px) {
   .container {
     padding-left: 24px;
     padding-right: 24px;
+  }
+}
+
+.animate-marquee {
+  display: inline-flex;
+  animation: marquee-rtl 20s linear infinite;
+}
+@keyframes marquee-rtl {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(50%);
   }
 }

@@ -93,7 +93,7 @@ export const products: Product[] = [
     oldPrice: 720,
     discount: 24,
     rating: 4.6,
-    badge: { type: "sale" },
+    badge: { type: "best" },
     colors: [
       { hex: "#1a1410", name: "أسود" },
       { hex: "#4A2040", name: "عنابي" },

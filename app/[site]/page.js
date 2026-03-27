@@ -6,7 +6,7 @@ import HeroSection from "./components/HeroSection";
 import CategorySection from "./components/CategorySection";
 import CategoriesSection from "./components/Categories";
 // import Features from "./components/Features";
-// import Footer from "./components/Footer";
+import Footer from "./components/Footer";
 
 // This generates static pages at build time (optional, for performance)
 export async function generateMetadata({ params }) {
@@ -37,14 +37,14 @@ export default function SitePage({ params }) {
       <TopBar data={config.topBar} />
 
       <HeroSection data={config.hero} />
-      {/* <CategoriesSection /> */}
+      <CategoriesSection />
       {config.categories.map((section) => (
         <CategorySection key={section.id} section={section} />
       ))}
       {/*
       <Features data={config.features} />
-
-      <Footer data={config.footer} /> */}
+*/}
+      <Footer data={config.footer} />
     </div>
   );
 }

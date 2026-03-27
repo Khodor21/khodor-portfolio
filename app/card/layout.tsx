@@ -7,12 +7,19 @@ export const metadata: Metadata = {
   description: "أحدث تشكيلات العبايات النسائية بأفضل الأسعار",
 };
 
-export default function CardLayout({
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <>
-  <SallaHeader />
-  {children}</>;
+  return (
+    <html lang="ar" dir="rtl">
+      <body className="">
+        <div className="flex flex-col min-h-screen">
+          <SallaHeader />
+          {children}
+        </div>
+      </body>
+    </html>
+  );
 }

@@ -98,7 +98,45 @@ const siteConfigs = {
       },
     ],
     features: {},
-    footer: {},
+    footer: {
+      brand: {
+        name: "ترحال",
+        description:
+          "المتجر الأول والوحيد في سوريا المتخصص في لوازم الرحلات والتخييم. نوفر معدات عالية الجودة لعشّاق المغامرة—من الأحذية والحقائب وحتى أدوات البقاء—لنرافقك في كل خطوة نحو طريقٍ أبعد وتجربةٍ أقوى.",
+      },
+
+      contact: {
+        phone: "00963996777273",
+        email: "tirhal.store@gmail.com", // (you can change later)
+      },
+
+      socials: [
+        {
+          icon: "FaWhatsapp", // map it later in component if needed
+          label: "WhatsApp",
+          href: "https://wa.me/963996777273",
+        },
+        {
+          icon: "FaTelegram",
+          label: "Telegram",
+          href: "https://t.me/TIRHALL_1",
+        },
+      ],
+
+      paymentMethods: ["الدفع عند الاستلام", "تحويل محلي"],
+
+      crNumber: "—", // not available
+
+      country: "سوريا",
+      language: "العربية",
+
+      links: [
+        { label: "من نحن", href: "#" },
+        { label: "سياسة الخصوصية", href: "#" },
+        { label: "الشروط والأحكام", href: "#" },
+        { label: "الدعم الفني", href: "#" },
+      ],
+    },
   },
 };
 

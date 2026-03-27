@@ -37,7 +37,7 @@ const HeroSection = ({ data }) => {
             <FaMapMarkerAlt />
             <div className="leading-tight">
               <p className="font-bold text-sm">{location.city}</p>
-              <p className="text-xs font-regular opacity-80">
+              <p className="text-[11px] font-regular opacity-80">
                 {location.address}
               </p>
             </div>
@@ -48,7 +48,7 @@ const HeroSection = ({ data }) => {
       {/* Main Content */}
       <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center text-white px-4">
         {storesvg && <Image src={storesvg} alt={storeName} className="w-48" />}
-        <p className="text-3xl font-regular opacity-90">{tagline}</p>
+        <p className="text-2xl font-regular opacity-90">{tagline}</p>
       </div>
     </section>
   );

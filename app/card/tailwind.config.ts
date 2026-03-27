@@ -8,9 +8,7 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      fontFamily: {
-        arabic: ["IBMPlexArabic", "sans-serif"],
-      },
+     
     },
   },
   plugins: [],
