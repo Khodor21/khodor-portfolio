@@ -1,12 +1,12 @@
-import tirhalBanner from "../images/Tirhal/Tirhal-Banner.jpg";
+import tirhalBanner from "../images/Tirhal/Hero-Banner.jpeg";
 import tirhalLogo from "../images/Tirhal/Tirhal-Logo.svg";
 import tirhalContent from "../images/Tirhal/Tirhal-Word.svg";
 import shoesBanner from "../images/Tirhal/Shoes-Banner.jpg";
 import tripsBanner from "../images/Tirhal/Trips-Banner.jpg";
 
-import shoe1 from "../images/Tirhal/shoe-1.png";
-import shoe2 from "../images/Tirhal/shoe-2.png";
-import shoe3 from "../images/Tirhal/shoe-3.png";
+import shoe1 from "../images/Tirhal/shoe-1.jpeg";
+import shoe2 from "../images/Tirhal/shoe-2.jpeg";
+import shoe3 from "../images/Tirhal/shoe-3.jpeg";
 
 import trip1 from "../images/Tirhal/trips-1.png";
 import trip2 from "../images/Tirhal/trips-2.png";
@@ -46,6 +46,8 @@ const siteConfigs = {
             name: "حذاء شتوي كعب حديد  ",
             feature: "مناسب لجميع التضاريس",
             price: 45,
+
+            rating: 4.2,
             image: shoe1,
           },
           {
@@ -53,6 +55,8 @@ const siteConfigs = {
             name: "حذاء صوف عالي  ",
             feature: "نعل مقاوم ",
             price: 65,
+
+            rating: 4.4,
             image: shoe2,
           },
           {
@@ -60,7 +64,18 @@ const siteConfigs = {
             name: "حذاء رياضي للمشي ",
             feature: "خفيف الوزن ومريح",
             price: 38,
+
+            rating: 5,
             image: shoe3,
+          },
+          {
+            id: "shoe-4",
+            name: "حذاء شتوي كعب حديد  ",
+            feature: "مناسب لجميع التضاريس",
+            price: 45,
+
+            rating: 4.2,
+            image: shoe1,
           },
         ],
       },
@@ -78,6 +93,7 @@ const siteConfigs = {
             name: "رحلة جبال الساحل",
             feature: "يومان - شامل الإقامة",
             price: 120,
+            rating: 4.1,
             image: trip1,
           },
           {
@@ -85,6 +101,8 @@ const siteConfigs = {
             name: "رحلة بادية الشام",
             feature: "ثلاثة أيام - تخييم",
             price: 95,
+
+            rating: 4.7,
             image: trip2,
           },
           {
@@ -92,6 +110,8 @@ const siteConfigs = {
             name: "رحلة وادي العلا",
             feature: "يوم واحد - مشي وتسلق",
             price: 55,
+
+            rating: 4.2,
             image: trip3,
           },
         ],
