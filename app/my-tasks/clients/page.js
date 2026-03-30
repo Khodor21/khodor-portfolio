@@ -1,23 +1,7 @@
 "use client";
 
 import { useState, useMemo, useEffect } from "react";
-
-// ─── localStorage ─────────────────────────────────────────────────────────────
-function load(key, fallback) {
-  if (typeof window === "undefined") return fallback;
-  try {
-    const r = localStorage.getItem(key);
-    return r ? JSON.parse(r) : fallback;
-  } catch {
-    return fallback;
-  }
-}
-function save(key, val) {
-  if (typeof window === "undefined") return;
-  try {
-    localStorage.setItem(key, JSON.stringify(val));
-  } catch {}
-}
+import { supabase } from "../../../lib/supabaseClient"; // Import Supabase client
 
 // ─── Status config ────────────────────────────────────────────────────────────
 const STATUS = {
@@ -39,29 +23,9 @@ const STATUS = {
 
 const STATUS_KEYS = Object.keys(STATUS);
 
-const DEFAULT_CLIENTS = [
-  {
-    id: "c1",
-    name: "أحمد الزهراني",
-    cafe: "كافيه ذا بريم",
-    slug: "thebream",
-    phone: "0501234567",
-    status: "accepted",
-    note: "متحمس جداً للتجربة",
-    date: "2026-03-01",
-  },
- 
- 
-];
-
 // ─── Helpers ──────────────────────────────────────────────────────────────────
-function uid() {
-  return `c-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
-}
-function today() {
-  return new Date().toISOString().slice(0, 10);
-}
 function arabicDate(d) {
+  if (!d) return "";
   return new Date(d).toLocaleDateString("ar-SA", {
     year: "numeric",
     month: "short",
@@ -71,7 +35,7 @@ function arabicDate(d) {
 
 // ─── StatusBadge ──────────────────────────────────────────────────────────────
 function StatusBadge({ status, size = "md" }) {
-  const s = STATUS[status];
+  const s = STATUS[status] || STATUS.no_reply;
   const px = size === "sm" ? "px-2 py-0.5 text-[10px]" : "px-3 py-1 text-xs";
   return (
     <span
@@ -97,7 +61,9 @@ function StatsBar({ clients }) {
       later: 0,
       total: clients.length,
     };
-    clients.forEach((cl) => c[cl.status]++);
+    clients.forEach((cl) => {
+      if (c[cl.status] !== undefined) c[cl.status]++;
+    });
     return c;
   }, [clients]);
 
@@ -178,7 +144,6 @@ function ClientCard({ client, onEdit, onDelete }) {
         className="w-full flex items-center gap-3 p-4 text-right active:bg-[#FAFAFE]"
         onClick={() => setExpanded((e) => !e)}
       >
-        {/* avatar */}
         <div
           className="w-10 h-10 rounded-xl flex-shrink-0 flex items-center justify-center text-white text-sm handiBold"
           style={{
@@ -186,7 +151,7 @@ function ClientCard({ client, onEdit, onDelete }) {
             fontFamily: "Handi-Bold,sans-serif",
           }}
         >
-          {client.name.trim().charAt(0)}
+          {client.name?.trim()?.charAt(0) || "?"}
         </div>
 
         <div className="flex-1 min-w-0">
@@ -322,7 +287,7 @@ function TableRow({ client, onEdit, onDelete, index }) {
               fontFamily: "Handi-Bold,sans-serif",
             }}
           >
-            {client.name.trim().charAt(0)}
+            {client.name?.trim()?.charAt(0) || "?"}
           </div>
         </div>
       </td>
@@ -395,7 +360,7 @@ function ClientModal({ initial, onClose, onSave }) {
     phone: "",
     status: "no_reply",
     note: "",
-    date: today(),
+    date: new Date().toISOString().slice(0, 10),
   };
   const [form, setForm] = useState(initial ? { ...initial } : empty);
   const [errors, setErrors] = useState({});
@@ -417,11 +382,7 @@ function ClientModal({ initial, onClose, onSave }) {
 
   function handleSave() {
     if (!validate()) return;
-    onSave({
-      ...form,
-      id: form.id || uid(),
-      slug: form.slug.replace(/^\//, ""),
-    });
+    onSave(form); // Pass whole form, parent handles ID/DB logic
     onClose();
   }
 
@@ -615,6 +576,7 @@ function inputCls(error) {
 
 // ─── Color hash for avatars ───────────────────────────────────────────────────
 function stringToColor(str) {
+  if (!str) return "#6C63FF";
   const palette = [
     "#6C63FF",
     "#EC4899",
@@ -645,33 +607,229 @@ function FilterChip({ label, active, color, bg, onClick }) {
   );
 }
 
-// ─── Main Page ────────────────────────────────────────────────────────────────
-export default function ClientsPage() {
-  const [clients, setClients] = useState(() =>
-    load("saas_clients", DEFAULT_CLIENTS),
-  );
-  const [filter, setFilter] = useState("all");
-  const [search, setSearch] = useState("");
-  const [modal, setModal] = useState(null); // null | "add" | client-object
-  const [deleteId, setDeleteId] = useState(null);
-  const [sortBy, setSortBy] = useState("date"); // "date" | "name" | "status"
-  const [sortDir, setSortDir] = useState("desc");
+// ─── LoginScreen (Reused from my-tasks) ───────────────────────────────────────
+function LoginScreen() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isSignUp, setIsSignUp] = useState(false);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    save("saas_clients", clients);
-  }, [clients]);
-
-  function handleSave(client) {
-    setClients((prev) => {
-      const exists = prev.find((c) => c.id === client.id);
-      return exists
-        ? prev.map((c) => (c.id === client.id ? client : c))
-        : [...prev, client];
-    });
+  async function handleSubmit() {
+    const trimmedEmail = email.trim();
+    const trimmedPassword = password.trim();
+    if (!trimmedEmail || !trimmedPassword) return;
+    setLoading(true);
+    setError("");
+    const { error: authError } = isSignUp
+      ? await supabase.auth.signUp({
+          email: trimmedEmail,
+          password: trimmedPassword,
+        })
+      : await supabase.auth.signInWithPassword({
+          email: trimmedEmail,
+          password: trimmedPassword,
+        });
+    if (authError) {
+      if (authError.message === "Email not confirmed") {
+        setError("يرجى تأكيد بريدك الإلكتروني أولاً، أو تواصل مع المسؤول");
+      } else {
+        setError(authError.message);
+      }
+    }
+    setLoading(false);
   }
 
-  function handleDelete(id) {
-    setClients((prev) => prev.filter((c) => c.id !== id));
+  async function handleGoogle() {
+    await supabase.auth.signInWithOAuth({ provider: "google" });
+  }
+
+  return (
+    <div
+      dir="rtl"
+      className="min-h-screen bg-[#F6F4FC] flex items-center justify-center px-4"
+      style={{ fontFamily: "Handi-Regular, sans-serif" }}
+    >
+      <div className="fixed inset-0 pointer-events-none overflow-hidden -z-10">
+        <div className="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-[#6C63FF] opacity-[0.08] blur-3xl" />
+        <div className="absolute top-1/2 -left-20 w-56 h-56 rounded-full bg-[#43C6AC] opacity-[0.07] blur-3xl" />
+      </div>
+      <div className="w-full max-w-sm bg-white rounded-3xl shadow-sm border border-[#E8E4F3] p-8 space-y-5">
+        <div className="text-center space-y-1">
+          <div className="text-4xl">📋</div>
+          <h1
+            className="handiBold text-2xl text-[#2D2654]"
+            style={{ fontFamily: "Handi-Bold, sans-serif" }}
+          >
+            جدول العملاء
+          </h1>
+          <p className="handiReg text-xs text-[#9B93C8]">
+            {isSignUp ? "أنشئ حساباً جديداً" : "سجّل دخولك للمتابعة"}
+          </p>
+        </div>
+        {error && (
+          <div className="bg-red-50 border border-red-200 text-red-500 handiReg text-xs rounded-xl px-4 py-3 text-right">
+            {error}
+          </div>
+        )}
+        <div className="space-y-3">
+          <input
+            dir="rtl"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="البريد الإلكتروني"
+            className="w-full h-12 bg-[#F6F4FC] rounded-2xl px-4 text-sm text-[#2D2654]
+              handiReg placeholder-[#C5BCE8] outline-none border-2 border-transparent
+              focus:border-[#C5BCE8] transition-all duration-200 text-right"
+          />
+          <input
+            dir="rtl"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
+            placeholder="كلمة المرور"
+            className="w-full h-12 bg-[#F6F4FC] rounded-2xl px-4 text-sm text-[#2D2654]
+              handiReg placeholder-[#C5BCE8] outline-none border-2 border-transparent
+              focus:border-[#C5BCE8] transition-all duration-200 text-right"
+          />
+        </div>
+        <button
+          onClick={handleSubmit}
+          disabled={loading || !email.trim() || !password.trim()}
+          className="w-full h-12 rounded-2xl text-white text-sm handiBold
+            transition-all duration-200 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
+          style={{
+            fontFamily: "Handi-Bold, sans-serif",
+            background: "#6C63FF",
+          }}
+        >
+          {loading ? "..." : isSignUp ? "إنشاء حساب" : "تسجيل الدخول"}
+        </button>
+        <div className="flex items-center gap-3">
+          <div className="flex-1 h-px bg-[#E8E4F3]" />
+          <span className="handiReg text-xs text-[#C5BCE8]">أو</span>
+          <div className="flex-1 h-px bg-[#E8E4F3]" />
+        </div>
+        <button
+          onClick={handleGoogle}
+          className="w-full h-12 rounded-2xl border-2 border-[#E8E4F3] text-[#2D2654]
+            handiReg text-sm flex items-center justify-center gap-2
+            hover:border-[#A89DD4] transition-all duration-200 active:scale-95"
+        >
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <path
+              d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.875 2.684-6.615z"
+              fill="#4285F4"
+            />
+            <path
+              d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z"
+              fill="#34A853"
+            />
+            <path
+              d="M3.964 10.707A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.707V4.961H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.039l3.007-2.332z"
+              fill="#FBBC05"
+            />
+            <path
+              d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.961L3.964 7.293C4.672 5.166 6.656 3.58 9 3.58z"
+              fill="#EA4335"
+            />
+          </svg>
+          الدخول عبر Google
+        </button>
+        <p className="handiReg text-xs text-center text-[#9B93C8]">
+          {isSignUp ? "لديك حساب بالفعل؟ " : "ليس لديك حساب؟ "}
+          <button
+            onClick={() => {
+              setIsSignUp(!isSignUp);
+              setError("");
+            }}
+            className="text-[#6C63FF] underline"
+          >
+            {isSignUp ? "سجّل دخولك" : "أنشئ حساباً"}
+          </button>
+        </p>
+      </div>
+    </div>
+  );
+}
+
+// ─── Main Page (Connected to DB) ────────────────────────────────────────────────
+function ClientsPage({ userId, onSignOut }) {
+  const [clients, setClients] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [filter, setFilter] = useState("all");
+  const [search, setSearch] = useState("");
+  const [modal, setModal] = useState(null);
+  const [deleteId, setDeleteId] = useState(null);
+  const [sortBy, setSortBy] = useState("date");
+  const [sortDir, setSortDir] = useState("desc");
+
+  // Fetch Clients from Supabase
+  useEffect(() => {
+    if (userId) fetchClients();
+  }, [userId]);
+
+  async function fetchClients() {
+    setLoading(true);
+    const { data, error } = await supabase
+      .from("clients")
+      .select("*")
+      .eq("user_id", userId)
+      .order("created_at", { ascending: false });
+
+    if (!error && data) {
+      setClients(data);
+    } else {
+      console.error("Error fetching clients:", error);
+    }
+    setLoading(false);
+  }
+
+  async function handleSave(form) {
+    const slugClean = form.slug.replace(/^\//, "");
+    const payload = {
+      name: form.name,
+      cafe: form.cafe,
+      slug: slugClean,
+      phone: form.phone,
+      status: form.status,
+      note: form.note,
+      date: form.date,
+      user_id: userId, // Link to user
+    };
+
+    if (form.id) {
+      // Update
+      const { data, error } = await supabase
+        .from("clients")
+        .update(payload)
+        .eq("id", form.id)
+        .select();
+      if (!error && data) {
+        setClients((prev) =>
+          prev.map((c) => (c.id === form.id ? data[0] : c)),
+        );
+      }
+    } else {
+      // Insert
+      const { data, error } = await supabase
+        .from("clients")
+        .insert([payload])
+        .select();
+      if (!error && data) {
+        setClients((prev) => [data[0], ...prev]);
+      }
+    }
+    setModal(null);
+  }
+
+  async function handleDelete(id) {
+    const { error } = await supabase.from("clients").delete().eq("id", id);
+    if (!error) {
+      setClients((prev) => prev.filter((c) => c.id !== id));
+    }
     setDeleteId(null);
   }
 
@@ -690,19 +848,22 @@ export default function ClientsPage() {
       const q = search.trim().toLowerCase();
       list = list.filter(
         (c) =>
-          c.name.toLowerCase().includes(q) ||
-          c.cafe.toLowerCase().includes(q) ||
-          c.slug.toLowerCase().includes(q) ||
-          c.phone.includes(q),
+          c.name?.toLowerCase().includes(q) ||
+          c.cafe?.toLowerCase().includes(q) ||
+          c.slug?.toLowerCase().includes(q) ||
+          c.phone?.includes(q),
       );
     }
     list.sort((a, b) => {
       let va = a[sortBy],
         vb = b[sortBy];
       if (sortBy === "status") {
-        va = STATUS[va].label;
-        vb = STATUS[vb].label;
+        va = STATUS[va]?.label || "";
+        vb = STATUS[vb]?.label || "";
       }
+      if (va === undefined || va === null) return 1;
+      if (vb === undefined || vb === null) return -1;
+
       const r = va < vb ? -1 : va > vb ? 1 : 0;
       return sortDir === "asc" ? r : -r;
     });
@@ -765,6 +926,17 @@ export default function ClientsPage() {
     </svg>
   );
 
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-[#F6F4FC] flex items-center justify-center">
+        <div className="text-center space-y-3">
+          <div className="w-10 h-10 rounded-full border-4 border-[#6C63FF] border-t-transparent animate-spin mx-auto" />
+          <p className="handiReg text-sm text-[#9B93C8]">جاري تحميل البيانات...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div
       dir="rtl"
@@ -791,25 +963,43 @@ export default function ClientsPage() {
               {clients.length} عميل مسجّل
             </p>
           </div>
-          <button
-            onClick={() => setModal("add")}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-2xl text-white handiBold text-sm
-              shadow-lg shadow-[#6C63FF33] active:scale-95 transition-all duration-200"
-            style={{
-              background: "linear-gradient(135deg,#6C63FF,#9B93FF)",
-              fontFamily: "Handi-Bold,sans-serif",
-            }}
-          >
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path
-                d="M7 2v10M2 7h10"
-                stroke="white"
-                strokeWidth="2.2"
-                strokeLinecap="round"
-              />
-            </svg>
-            <span className="hidden sm:inline">إضافة عميل</span>
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setModal("add")}
+              className="flex items-center gap-2 px-4 py-2.5 rounded-2xl text-white handiBold text-sm
+                shadow-lg shadow-[#6C63FF33] active:scale-95 transition-all duration-200"
+              style={{
+                background: "linear-gradient(135deg,#6C63FF,#9B93FF)",
+                fontFamily: "Handi-Bold,sans-serif",
+              }}
+            >
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path
+                  d="M7 2v10M2 7h10"
+                  stroke="white"
+                  strokeWidth="2.2"
+                  strokeLinecap="round"
+                />
+              </svg>
+              <span className="hidden sm:inline">إضافة عميل</span>
+            </button>
+            <button
+              onClick={onSignOut}
+              className="w-8 h-8 rounded-full bg-[#F0EDF9] flex items-center justify-center
+                text-[#9B93C8] hover:text-red-400 hover:bg-red-50 transition-all duration-200"
+              title="تسجيل خروج"
+            >
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path
+                  d="M5 2H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h3M9 10l3-3-3-3M12 7H5"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+          </div>
         </div>
 
         {/* STATS */}
@@ -817,7 +1007,6 @@ export default function ClientsPage() {
 
         {/* SEARCH + FILTERS */}
         <div className="space-y-3">
-          {/* search */}
           <div className="relative">
             <svg
               width="16"
@@ -851,7 +1040,6 @@ export default function ClientsPage() {
             />
           </div>
 
-          {/* filter chips */}
           <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
             {filterOptions.map((f) => (
               <FilterChip
@@ -938,7 +1126,6 @@ export default function ClientsPage() {
               </table>
             </div>
 
-            {/* table footer */}
             <div className="px-5 py-3 border-t border-[#F0EDF9] flex items-center justify-between">
               <p className="handiReg text-xs text-[#C5BCE8]">
                 عرض {filtered.length} من {clients.length}
@@ -1038,5 +1225,41 @@ export default function ClientsPage() {
         }
       `}</style>
     </div>
+  );
+}
+
+// ─── Root Export (Auth Wrapper) ────────────────────────────────────────────────
+export default function ClientsRoute() {
+  const [user, setUser] = useState(null);
+  const [loadingAuth, setLoadingAuth] = useState(true);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+      setLoadingAuth(false);
+    });
+    const { data: listener } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        setUser(session?.user ?? null);
+      },
+    );
+    return () => listener.subscription.unsubscribe();
+  }, []);
+
+  if (loadingAuth) {
+    return (
+      <div className="min-h-screen bg-[#F6F4FC] flex items-center justify-center">
+        <div className="w-10 h-10 rounded-full border-4 border-[#6C63FF] border-t-transparent animate-spin" />
+      </div>
+    );
+  }
+
+  if (!user) return <LoginScreen />;
+
+  return (
+    <ClientsPage
+      userId={user.id}
+      onSignOut={() => supabase.auth.signOut()}
+    />
   );
 }

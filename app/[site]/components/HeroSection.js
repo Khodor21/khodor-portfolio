@@ -16,7 +16,7 @@ const HeroSection = ({ data }) => {
         className="object-cover"
       />
 
-      <div className="absolute inset-0 z-10 bg-[#7a5103] opacity-60" />
+      <div className="absolute inset-0 z-10 bg-[#805302] opacity-60" />
 
       {/* Top Bar: Logo + Location */}
       <div className="flex justify-between items-center">

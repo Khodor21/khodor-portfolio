@@ -130,7 +130,7 @@ export default function ProductCard({ product, categoryId }) {
           </h3>
 
           {/* Feature */}
-          <p className="text-gray-500 text-xs font-regular leading-snug">
+          <p className="text-gray-500 text-[12px] font-regular leading-snug">
             {product.feature}
           </p>
 
