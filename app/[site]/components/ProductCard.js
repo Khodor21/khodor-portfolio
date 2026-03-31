@@ -51,7 +51,7 @@ export default function ProductCard({ product, categoryId }) {
               e.stopPropagation();
             }}
             aria-label="عرض سريع"
-            className="md:hidden absolute top-2.5 right-2.5 z-10 bg-white rounded-full flex items-center justify-center shadow-sm w-8 h-8"
+            className="md:hidden absolute top-2.5 right-2.5 z-10 bg-white rounded-full flex items-center justify-center shadow-sm w-6 h-6"
           >
             <svg
               width="15"
@@ -72,12 +72,12 @@ export default function ProductCard({ product, categoryId }) {
           <button
             onClick={handleToggleFavorite}
             aria-label="أضف للمفضلة"
-            className="md:hidden absolute top-2.5 left-2.5 z-10 bg-white rounded-full flex items-center justify-center shadow-sm w-8 h-8"
+            className="md:hidden absolute top-2.5 left-2.5 z-10 bg-white rounded-full flex items-center justify-center shadow-sm w-6 h-6"
           >
             {favorited ? (
-              <AiFillHeart size={16} color="#C0392B" />
+              <AiFillHeart size={12} color="#C0392B" />
             ) : (
-              <AiOutlineHeart size={16} color="#1A1A1A" />
+              <AiOutlineHeart size={12} color="#1A1A1A" />
             )}
           </button>
 

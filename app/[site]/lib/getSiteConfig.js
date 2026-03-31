@@ -8,9 +8,10 @@ import shoe1 from "../images/Tirhal/shoe-1.jpeg";
 import shoe2 from "../images/Tirhal/shoe-2.jpeg";
 import shoe3 from "../images/Tirhal/shoe-3.jpeg";
 
-import trip1 from "../images/Tirhal/trips-1.png";
-import trip2 from "../images/Tirhal/trips-2.png";
-import trip3 from "../images/Tirhal/trips-3.png";
+import trip1 from "../images/Tirhal/trips-2.jpeg";
+import trip2 from "../images/Tirhal/trips-3.jpeg";
+import trip3 from "../images/Tirhal/trips-1.jpeg";
+import trip4 from "../images/Tirhal/trips-4.jpeg";
 
 const siteConfigs = {
   tirhal: {
@@ -81,7 +82,7 @@ const siteConfigs = {
       },
       {
         id: "trips",
-        title: "قسم الرحلات",
+        title: "قسم التخيم والرحلات",
         banner: {
           ratio: "2:1",
           imageUrl: tripsBanner,
@@ -90,29 +91,36 @@ const siteConfigs = {
         products: [
           {
             id: "trip-1",
-            name: "رحلة جبال الساحل",
-            feature: "يومان - شامل الإقامة",
-            price: 120,
-            rating: 4.1,
+            name: "خيمة المشكات 3x3 مع 3 شبابيك  ",
+            feature: " تتسع لـ 8 أشخاص  ",
+            price: 70,
+            rating: 4.3,
             image: trip1,
           },
           {
             id: "trip-2",
-            name: "رحلة بادية الشام",
-            feature: "ثلاثة أيام - تخييم",
-            price: 95,
+            name: "كرسي أرضي مع مسند وحزام مكتٌف",
+            feature: "قابل للطي",
+            price: 23,
 
             rating: 4.7,
             image: trip2,
           },
           {
             id: "trip-3",
-            name: "رحلة وادي العلا",
-            feature: "يوم واحد - مشي وتسلق",
-            price: 55,
-
+            name: "فانوس تراثي للرحلات والتخييم",
+            feature: "ينفع لزينة البيت",
+            price: 6.5,
             rating: 4.2,
             image: trip3,
+          },
+          {
+            id: "trip-5",
+            name: "كرسي أرضي مع شنطة",
+            feature: "وزن خفيف ومتانة  ",
+            price: 21,
+            rating: 4.2,
+            image: trip4,
           },
         ],
       },
