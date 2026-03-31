@@ -808,9 +808,7 @@ function ClientsPage({ userId, onSignOut }) {
         .eq("id", form.id)
         .select();
       if (!error && data) {
-        setClients((prev) =>
-          prev.map((c) => (c.id === form.id ? data[0] : c)),
-        );
+        setClients((prev) => prev.map((c) => (c.id === form.id ? data[0] : c)));
       }
     } else {
       // Insert
@@ -931,7 +929,9 @@ function ClientsPage({ userId, onSignOut }) {
       <div className="min-h-screen bg-[#F6F4FC] flex items-center justify-center">
         <div className="text-center space-y-3">
           <div className="w-10 h-10 rounded-full border-4 border-[#6C63FF] border-t-transparent animate-spin mx-auto" />
-          <p className="handiReg text-sm text-[#9B93C8]">جاري تحميل البيانات...</p>
+          <p className="handiReg text-sm text-[#9B93C8]">
+            جاري تحميل البيانات...
+          </p>
         </div>
       </div>
     );
@@ -1257,9 +1257,6 @@ export default function ClientsRoute() {
   if (!user) return <LoginScreen />;
 
   return (
-    <ClientsPage
-      userId={user.id}
-      onSignOut={() => supabase.auth.signOut()}
-    />
+    <ClientsPage userId={user.id} onSignOut={() => supabase.auth.signOut()} />
   );
 }

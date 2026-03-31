@@ -143,7 +143,7 @@ const siteConfigs = {
         },
       ],
 
-      paymentMethods: ["الدفع عند الاستلام", "تحويل محلي"],
+      paymentMethods: ["الدفع عند الاستلام", "شام كاش "],
 
       crNumber: "—", // not available
 
