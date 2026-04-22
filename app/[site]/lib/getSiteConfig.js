@@ -45,6 +45,7 @@ const siteConfigs = {
           {
             id: "shoe-1",
             name: "حذاء شتوي كعب حديد  ",
+            sizeShown : true,
             feature: "مناسب لجميع التضاريس",
             price: 45,
 
@@ -54,6 +55,7 @@ const siteConfigs = {
           {
             id: "shoe-2",
             name: "حذاء صوف عالي  ",
+            sizeShown : true,
             feature: "نعل مقاوم ",
             price: 65,
 
@@ -63,6 +65,7 @@ const siteConfigs = {
           {
             id: "shoe-3",
             name: "حذاء رياضي للمشي ",
+            sizeShown : true,
             feature: "خفيف الوزن ومريح",
             price: 38,
 
@@ -72,6 +75,7 @@ const siteConfigs = {
           {
             id: "shoe-4",
             name: "حذاء شتوي كعب حديد  ",
+            sizeShown : true,
             feature: "مناسب لجميع التضاريس",
             price: 45,
 
@@ -92,6 +96,7 @@ const siteConfigs = {
           {
             id: "trip-1",
             name: "خيمة المشكات 3x3 مع 3 شبابيك  ",
+            sizeShown : false,
             feature: " تتسع لـ 8 أشخاص  ",
             price: 70,
             rating: 4.3,
@@ -100,6 +105,7 @@ const siteConfigs = {
           {
             id: "trip-2",
             name: "كرسي أرضي مع مسند وحزام مكتٌف",
+            sizeShown : false,
             feature: "قابل للطي",
             price: 23,
 
@@ -109,6 +115,7 @@ const siteConfigs = {
           {
             id: "trip-3",
             name: "فانوس تراثي للرحلات والتخييم",
+            sizeShown : false,
             feature: "ينفع لزينة البيت",
             price: 6.5,
             rating: 4.2,
@@ -116,7 +123,8 @@ const siteConfigs = {
           },
           {
             id: "trip-5",
-            name: "كرسي أرضي مع شنطة",
+            name: "    كرسي أرضي مع شنطة",
+            sizeShown : false,
             feature: "وزن خفيف ومتانة  ",
             price: 21,
             rating: 4.2,

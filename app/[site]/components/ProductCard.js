@@ -2,6 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { BsHandbag } from "react-icons/bs";
 import { useCart } from "../context/cartContext";
@@ -12,6 +13,9 @@ export default function ProductCard({ product, categoryId }) {
   const { addToCart, toggleFavorite, isFavorite, hydrated } = useCart();
   const favorited = hydrated && isFavorite(product.id);
   const [showPopup, setShowPopup] = useState(false);
+
+  const pathname = usePathname();
+  const site = pathname.split("/")[1];
 
   const handleAddToCart = (e) => {
     e.preventDefault();
@@ -29,7 +33,7 @@ export default function ProductCard({ product, categoryId }) {
   return (
     <>
       <Link
-        href={`/mustaqar/${categoryId}/${slugify(product.name)}`}
+        href={`/${site}/category/${categoryId}/${slugify(product.name)}`}
         dir="rtl"
         className="group relative bg-white flex flex-col h-full rounded-sm overflow-hidden"
       >
@@ -44,7 +48,6 @@ export default function ProductCard({ product, categoryId }) {
           />
 
           {/* ── MOBILE: top-corner icons ── */}
-          {/* Top-right: Eye — mobile only */}
           <button
             onClick={(e) => {
               e.preventDefault();
@@ -68,7 +71,6 @@ export default function ProductCard({ product, categoryId }) {
             </svg>
           </button>
 
-          {/* Top-left: Heart — mobile only */}
           <button
             onClick={handleToggleFavorite}
             aria-label="أضف للمفضلة"
@@ -81,9 +83,8 @@ export default function ProductCard({ product, categoryId }) {
             )}
           </button>
 
-          {/* ── DESKTOP: bottom-center icons, revealed on hover ── */}
+          {/* ── DESKTOP: bottom-center icons on hover ── */}
           <div className="hidden md:flex absolute bottom-3 left-1/2 -translate-x-1/2 z-10 items-center gap-2 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300">
-            {/* Eye */}
             <button
               onClick={(e) => {
                 e.preventDefault();
@@ -107,7 +108,6 @@ export default function ProductCard({ product, categoryId }) {
               </svg>
             </button>
 
-            {/* Heart */}
             <button
               onClick={handleToggleFavorite}
               aria-label="أضف للمفضلة"
@@ -124,25 +124,22 @@ export default function ProductCard({ product, categoryId }) {
 
         {/* ── BODY ── */}
         <div className="flex flex-col gap-1 pt-2.5 px-2 pb-1 flex-1">
-          {/* Product name */}
           <h3 className="font-extrabold text-[#020202] leading-snug text-sm md:text-base">
             {product.name}
           </h3>
 
-          {/* Feature */}
-          <p className="text-gray-500 text-[12px] font-regular leading-snug">
+          <p className="text-gray-500 text-[12px] leading-snug">
             {product.feature}
           </p>
 
-          {/* Price */}
           <p className="font-extrabold text-[#020202] mt-1 text-lg">
-            {product.price}$
+            {product.price}
+            {product.currency ?? "$"}
           </p>
 
-          {/* Stars */}
           <div className="flex items-center gap-0.5 mt-0.5">
             {[1, 2, 3, 4, 5].map((star) => {
-              const rating = product.rating ?? 4; // fallback to 4 if no rating
+              const rating = product.rating ?? 4;
               const filled = star <= Math.floor(rating);
               const half =
                 !filled && star === Math.ceil(rating) && rating % 1 !== 0;
@@ -176,11 +173,12 @@ export default function ProductCard({ product, categoryId }) {
           </div>
         </div>
 
-        {/* ── ADD TO CART BUTTON — always at bottom ── */}
+        {/* ── ADD TO CART ── */}
         <button
           onClick={handleAddToCart}
           aria-label="أضف للسلة"
-          className="mb-3 mt-2 w-[90%] font-extrabold rounded mx-auto flex items-center justify-center gap-2 text-white bg-primary : py-2 text-sm hover:bg-primary hover:text-white transition-colors duration-200"
+          className="mb-3 mt-2 w-[90%] font-extrabold rounded mx-auto flex items-center justify-center gap-2 text-white py-2 text-sm transition-opacity duration-200 hover:opacity-90"
+          style={{ backgroundColor: "var(--primary-color)" }}
         >
           <BsHandbag size={15} />
           <span>إضافة للسلة</span>

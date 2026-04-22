@@ -67,7 +67,7 @@ export default function BottomNavbar({ site }) {
                       height: "100%",
                       backgroundColor: isActive
                         ? "var(--primary-color)"
-                        : "#9CA3AF",
+                        : "#eeeeee",
                       WebkitMaskImage: `url(${item.icon.src})`,
                       maskImage: `url(${item.icon.src})`,
                       WebkitMaskSize: "contain",

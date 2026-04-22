@@ -16,7 +16,7 @@ import {
 import { supabase } from "../../lib/supabaseClient";
 import { useTasks } from "./useTasks";
 
-// ─── Arabic date ───────────────────────────────────────────────────────────────
+// ─── Arabic date ──────────────────────────────────────────────────────────────
 function getArabicDate() {
   return new Date().toLocaleDateString("ar-SA", {
     weekday: "long",
@@ -26,7 +26,7 @@ function getArabicDate() {
   });
 }
 
-// ─── Icon lists ────────────────────────────────────────────────────────────────
+// ─── Icon lists ───────────────────────────────────────────────────────────────
 const DAILY_ICONS = [
   "📖",
   "🏃",
@@ -41,27 +41,89 @@ const DAILY_ICONS = [
 ];
 const WORK_ICONS = ["📊", "📬", "👥", "🗂️", "💼", "🖥️", "📝", "📞", "🔍", "⚙️"];
 
-// ─── useNotifications hook ─────────────────────────────────────────────────────
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+function todayStr() {
+  return new Date().toISOString().slice(0, 10);
+}
+function nowHHMM() {
+  const n = new Date();
+  return `${String(n.getHours()).padStart(2, "0")}:${String(n.getMinutes()).padStart(2, "0")}`;
+}
+function loadFired() {
+  try {
+    return JSON.parse(localStorage.getItem("tasks_fired") || "{}");
+  } catch {
+    return {};
+  }
+}
+function saveFired(obj) {
+  localStorage.setItem("tasks_fired", JSON.stringify(obj));
+}
+
+// ─── SW notify — most reliable way to show notifications ─────────────────────
+async function swNotify(title, body, tag = "tasks") {
+  if (Notification.permission !== "granted") return;
+  try {
+    const reg = await navigator.serviceWorker.ready;
+    await reg.showNotification(title, {
+      body,
+      icon: "/favicon.ico",
+      badge: "/favicon.ico",
+      dir: "rtl",
+      lang: "ar",
+      tag,
+      renotify: true, // ← CRITICAL: allows same tag to re-fire
+      requireInteraction: false,
+    });
+  } catch {
+    // Plain fallback (no SW)
+    new Notification(title, { body, icon: "/favicon.ico", tag });
+  }
+}
+
+// ─── useNotifications ────────────────────────────────────────────────────────
 function useNotifications(daily, work) {
   const [permission, setPermission] = useState("default");
   const [enabled, setEnabled] = useState(false);
   const [reminderTime, setReminderTime] = useState("09:00");
   const intervalRef = useRef(null);
-  const firedRef = useRef({ reminder: "", overdue: "" });
 
+  // Boot: register SW + sync state
   useEffect(() => {
     if (typeof window === "undefined") return;
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("/sw.js").catch(console.error);
-    }
+
+    const saved = localStorage.getItem("tasks_reminder_time");
+    if (saved) setReminderTime(saved);
+
     if ("Notification" in window) {
       setPermission(Notification.permission);
       if (Notification.permission === "granted") setEnabled(true);
     }
-    const saved = localStorage.getItem("tasks_reminder_time");
-    if (saved) setReminderTime(saved);
+
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker
+        .register("/sw.js", { scope: "/" })
+        .then((reg) => reg.update())
+        .catch(console.error);
+    }
   }, []);
 
+  // Auto-prompt on page open (1 s delay so UI renders first)
+  // Chrome shows its big native Allow / Block bar automatically.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (!("Notification" in window)) return;
+    if (Notification.permission !== "default") return; // already decided
+
+    const t = setTimeout(async () => {
+      const result = await Notification.requestPermission();
+      setPermission(result);
+      setEnabled(result === "granted");
+    }, 1000);
+    return () => clearTimeout(t);
+  }, []);
+
+  // Manual enable button
   const requestPermission = useCallback(async () => {
     if (!("Notification" in window)) return;
     const result = await Notification.requestPermission();
@@ -71,76 +133,69 @@ function useNotifications(daily, work) {
 
   const disableNotifications = useCallback(() => setEnabled(false), []);
 
-  const showNotification = useCallback((title, body) => {
-    if (Notification.permission !== "granted") return;
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.ready.then((reg) => {
-        reg.showNotification(title, {
-          body,
-          icon: "/favicon.ico",
-          dir: "rtl",
-          lang: "ar",
-          badge: "/favicon.ico",
-        });
-      });
-    }
-  }, []);
-
   const saveReminderTime = useCallback((time) => {
     setReminderTime(time);
-    if (typeof window !== "undefined") {
-      localStorage.setItem("tasks_reminder_time", time);
-    }
+    localStorage.setItem("tasks_reminder_time", time);
   }, []);
 
+  // Clock check every 30 s
   useEffect(() => {
-    if (!enabled) {
-      clearInterval(intervalRef.current);
-      return;
-    }
-    function check() {
-      const now = new Date();
-      const nowTime = `${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
-      const today = now.toDateString();
+    clearInterval(intervalRef.current);
+    if (!enabled) return;
 
-      if (
-        nowTime === reminderTime &&
-        firedRef.current.reminder !== today + reminderTime
-      ) {
-        firedRef.current.reminder = today + reminderTime;
-        const unfinished = [...daily, ...work].filter((t) => !t.done).length;
-        const total = daily.length + work.length;
-        if (total > 0 && unfinished > 0) {
-          showNotification(
-            "مهامي اليوم ✅",
-            `لديك ${unfinished} مهمة لم تُنجز بعد. هيا بنا! 💪`,
-          );
-        } else if (total > 0 && unfinished === 0) {
-          showNotification(
-            "مهامي اليوم 🏆",
-            "أحسنت! لقد أنجزت جميع مهامك اليوم 🎉",
-          );
+    function check() {
+      if (Notification.permission !== "granted") return;
+
+      const hhmm = nowHHMM();
+      const today = todayStr();
+      const fired = loadFired();
+      let dirty = false;
+
+      // Morning / custom reminder
+      const reminderKey = `${today}-${reminderTime}`;
+      if (hhmm === reminderTime && fired.reminder !== reminderKey) {
+        fired.reminder = reminderKey;
+        dirty = true;
+        const all = [...daily, ...work];
+        const unfinished = all.filter((t) => !t.done).length;
+        if (all.length > 0) {
+          if (unfinished === 0) {
+            swNotify(
+              "مهامي اليوم 🏆",
+              "أحسنت! لقد أنجزت جميع مهامك اليوم 🎉",
+              "reminder",
+            );
+          } else {
+            swNotify(
+              "مهامي اليوم ✅",
+              `لديك ${unfinished} مهمة لم تُنجز بعد. هيا بنا! 💪`,
+              "reminder",
+            );
+          }
         }
       }
 
-      if (
-        now.getHours() === 20 &&
-        now.getMinutes() === 0 &&
-        firedRef.current.overdue !== today
-      ) {
-        firedRef.current.overdue = today;
+      // Evening reminder 20:00
+      if (hhmm === "20:00" && fired.overdue !== today) {
         const unfinished = [...daily, ...work].filter((t) => !t.done);
         if (unfinished.length > 0) {
-          showNotification(
+          fired.overdue = today;
+          dirty = true;
+          swNotify(
             "تذكير مسائي 🌙",
             `تبقّى ${unfinished.length} مهمة لم تُكتمل اليوم!`,
+            "overdue",
           );
         }
       }
+
+      if (dirty) saveFired(fired);
     }
-    intervalRef.current = setInterval(check, 60 * 1000);
+
+    check(); // run immediately on mount / change
+    intervalRef.current = setInterval(check, 30_000);
     return () => clearInterval(intervalRef.current);
-  }, [enabled, reminderTime, daily, work, showNotification]);
+  }, [enabled, reminderTime, daily, work]);
 
   return {
     permission,
@@ -152,7 +207,7 @@ function useNotifications(daily, work) {
   };
 }
 
-// ─── NotificationSettings widget — 3 states ───────────────────────────────────
+// ─── NotificationSettings ─────────────────────────────────────────────────────
 function NotificationSettings({
   permission,
   enabled,
@@ -168,7 +223,6 @@ function NotificationSettings({
     onTimeChange(e.target.value);
   }
 
-  // ── State 1: never asked yet ───────────────────────────────────────────
   if (permission === "default") {
     return (
       <div className="bg-white rounded-3xl shadow-sm border border-[#E8E4F3] p-5 space-y-3">
@@ -180,29 +234,27 @@ function NotificationSettings({
             🔔 التذكيرات
           </h2>
           <span className="handiReg text-xs text-[#9B93C8] bg-[#F6F4FC] px-3 py-1 rounded-full">
-            غير مفعّلة
+            جاري الطلب...
           </span>
         </div>
         <p className="handiReg text-xs text-[#9B93C8] text-right">
-          فعّل التذكيرات لتصلك إشعارات بمهامك اليومية حتى عند إغلاق الصفحة
+          سيظهر مربع حوار المتصفح لتفعيل الإشعارات تلقائياً
         </p>
         <button
           onClick={onEnable}
-          className="w-full h-12 rounded-2xl text-white text-sm handiBold
-            transition-all duration-200 active:scale-95 flex items-center justify-center gap-2"
+          className="w-full h-12 rounded-2xl text-white text-sm handiBold transition-all duration-200 active:scale-95 flex items-center justify-center gap-2"
           style={{
             fontFamily: "Handi-Bold, sans-serif",
             background: "#6C63FF",
           }}
         >
           <span>🔔</span>
-          <span>فعّل الإشعارات</span>
+          <span>اسمح بالإشعارات</span>
         </button>
       </div>
     );
   }
 
-  // ── State 2: blocked by user ───────────────────────────────────────────
   if (permission === "denied") {
     return (
       <div className="bg-white rounded-3xl shadow-sm border border-[#E8E4F3] p-5 space-y-3">
@@ -219,7 +271,7 @@ function NotificationSettings({
         </div>
         <div className="bg-red-50 rounded-2xl px-4 py-3 space-y-1">
           <p className="handiReg text-xs text-red-400 text-right font-semibold mb-1">
-            لقد حظرت الإشعارات مسبقاً. لتفعيلها:
+            لقد حظرت الإشعارات. لتفعيلها:
           </p>
           <p className="handiReg text-xs text-red-400 text-right">
             ١. اضغط على 🔒 في شريط العنوان
@@ -235,7 +287,6 @@ function NotificationSettings({
     );
   }
 
-  // ── State 3: granted — show toggle + time picker ───────────────────────
   return (
     <div className="bg-white rounded-3xl shadow-sm border border-[#E8E4F3] p-5 space-y-4">
       <div className="flex items-center justify-between">
@@ -247,18 +298,13 @@ function NotificationSettings({
         </h2>
         <button
           onClick={enabled ? onDisable : onEnable}
-          className={`w-12 h-6 rounded-full transition-all duration-300 relative flex-shrink-0 ${
-            enabled ? "bg-[#6C63FF]" : "bg-[#E8E4F3]"
-          }`}
+          className={`w-12 h-6 rounded-full transition-all duration-300 relative flex-shrink-0 ${enabled ? "bg-[#6C63FF]" : "bg-[#E8E4F3]"}`}
         >
           <span
-            className={`absolute top-1 w-4 h-4 rounded-full bg-white shadow-sm transition-all duration-300 ${
-              enabled ? "right-1" : "left-1"
-            }`}
+            className={`absolute top-1 w-4 h-4 rounded-full bg-white shadow-sm transition-all duration-300 ${enabled ? "right-1" : "left-1"}`}
           />
         </button>
       </div>
-
       {enabled && (
         <>
           <div className="flex items-center justify-between gap-3">
@@ -266,9 +312,7 @@ function NotificationSettings({
               type="time"
               value={time}
               onChange={handleTimeChange}
-              className="h-10 bg-[#F6F4FC] rounded-2xl px-4 text-sm text-[#2D2654]
-                handiReg outline-none border-2 border-transparent
-                focus:border-[#C5BCE8] transition-all duration-200"
+              className="h-10 bg-[#F6F4FC] rounded-2xl px-4 text-sm text-[#2D2654] handiReg outline-none border-2 border-transparent focus:border-[#C5BCE8] transition-all duration-200"
             />
             <span className="handiReg text-xs text-[#9B93C8] text-right flex-1">
               وقت التذكير اليومي
@@ -281,6 +325,9 @@ function NotificationSettings({
             <p className="handiReg text-xs text-[#9B93C8] text-right">
               🌙 تنبيه تلقائي عند الساعة ٨ مساءً إذا بقيت مهام غير منجزة
             </p>
+            <p className="handiReg text-xs text-[#43C6AC] text-right">
+              ✅ الإشعارات تعمل حتى عند إغلاق الصفحة
+            </p>
           </div>
         </>
       )}
@@ -288,11 +335,10 @@ function NotificationSettings({
   );
 }
 
-// ─── CircularProgress ──────────────────────────────────────────────────────────
+// ─── CircularProgress ─────────────────────────────────────────────────────────
 function CircularProgress({ pct, size = 56, stroke = 6, color = "#6C63FF" }) {
   const r = (size - stroke) / 2;
   const circ = 2 * Math.PI * r;
-  const offset = circ - (pct / 100) * circ;
   const cx = size / 2;
   return (
     <svg width={size} height={size} style={{ transform: "rotate(-90deg)" }}>
@@ -312,7 +358,7 @@ function CircularProgress({ pct, size = 56, stroke = 6, color = "#6C63FF" }) {
         stroke={color}
         strokeWidth={stroke}
         strokeDasharray={circ}
-        strokeDashoffset={offset}
+        strokeDashoffset={circ - (pct / 100) * circ}
         strokeLinecap="round"
         style={{ transition: "stroke-dashoffset 0.6s ease" }}
       />
@@ -320,7 +366,7 @@ function CircularProgress({ pct, size = 56, stroke = 6, color = "#6C63FF" }) {
   );
 }
 
-// ─── ProgressBar ───────────────────────────────────────────────────────────────
+// ─── ProgressBar ──────────────────────────────────────────────────────────────
 function ProgressBar({ pct, color = "#6C63FF" }) {
   return (
     <div className="w-full h-2 bg-[#F0EDF9] rounded-full overflow-hidden">
@@ -332,26 +378,23 @@ function ProgressBar({ pct, color = "#6C63FF" }) {
   );
 }
 
-// ─── TaskCard ──────────────────────────────────────────────────────────────────
+// ─── TaskCard ─────────────────────────────────────────────────────────────────
 function TaskCard({ task, onToggle, onDelete }) {
   return (
     <div
-      className={`
-        group w-full flex items-center gap-3 p-4 rounded-2xl border transition-all duration-300
-        ${
-          task.done
-            ? "bg-[#F0EDF9] border-[#C5BCE8] opacity-75"
-            : "bg-white border-[#E8E4F3] shadow-sm hover:shadow-md hover:border-[#A89DD4]"
-        }
-      `}
+      className={`group w-full flex items-center gap-3 p-4 rounded-2xl border transition-all duration-300 ${
+        task.done
+          ? "bg-[#F0EDF9] border-[#C5BCE8] opacity-75"
+          : "bg-white border-[#E8E4F3] shadow-sm hover:shadow-md hover:border-[#A89DD4]"
+      }`}
     >
       <button
         onClick={() => onToggle(task.id)}
-        className={`
-          w-6 h-6 rounded-full border-2 flex-shrink-0 flex items-center justify-center
-          transition-all duration-300 active:scale-90
-          ${task.done ? "border-[#6C63FF] bg-[#6C63FF]" : "border-[#C5BCE8] bg-white hover:border-[#6C63FF]"}
-        `}
+        className={`w-6 h-6 rounded-full border-2 flex-shrink-0 flex items-center justify-center transition-all duration-300 active:scale-90 ${
+          task.done
+            ? "border-[#6C63FF] bg-[#6C63FF]"
+            : "border-[#C5BCE8] bg-white hover:border-[#6C63FF]"
+        }`}
       >
         {task.done && (
           <svg width="12" height="9" viewBox="0 0 12 9" fill="none">
@@ -376,9 +419,7 @@ function TaskCard({ task, onToggle, onDelete }) {
       </span>
       <button
         onClick={() => onDelete(task.id)}
-        className="opacity-0 group-hover:opacity-100 focus:opacity-100 w-7 h-7 flex-shrink-0
-          flex items-center justify-center rounded-full text-[#C5BCE8]
-          hover:bg-red-50 hover:text-red-400 transition-all duration-200"
+        className="opacity-0 group-hover:opacity-100 focus:opacity-100 w-7 h-7 flex-shrink-0 flex items-center justify-center rounded-full text-[#C5BCE8] hover:bg-red-50 hover:text-red-400 transition-all duration-200"
         aria-label="حذف"
       >
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -394,7 +435,7 @@ function TaskCard({ task, onToggle, onDelete }) {
   );
 }
 
-// ─── StatusCard ────────────────────────────────────────────────────────────────
+// ─── StatusCard ───────────────────────────────────────────────────────────────
 function StatusCard({ pct }) {
   const cfg =
     pct >= 80
@@ -432,7 +473,7 @@ function StatusCard({ pct }) {
   );
 }
 
-// ─── CustomTooltip ─────────────────────────────────────────────────────────────
+// ─── CustomTooltip ────────────────────────────────────────────────────────────
 function CustomTooltip({ active, payload, label }) {
   if (!active || !payload?.length) return null;
   return (
@@ -448,7 +489,7 @@ function CustomTooltip({ active, payload, label }) {
   );
 }
 
-// ─── AddTaskModal ──────────────────────────────────────────────────────────────
+// ─── AddTaskModal ─────────────────────────────────────────────────────────────
 function AddTaskModal({ type, onClose, onAdd }) {
   const [text, setText] = useState("");
   const [icon, setIcon] = useState(
@@ -488,8 +529,11 @@ function AddTaskModal({ type, onClose, onAdd }) {
             <button
               key={ic}
               onClick={() => setIcon(ic)}
-              className={`text-xl w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-150
-                ${icon === ic ? "scale-110 shadow-md" : "bg-[#F6F4FC] hover:bg-[#EEE8FF]"}`}
+              className={`text-xl w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-150 ${
+                icon === ic
+                  ? "scale-110 shadow-md"
+                  : "bg-[#F6F4FC] hover:bg-[#EEE8FF]"
+              }`}
               style={
                 icon === ic
                   ? {
@@ -507,8 +551,7 @@ function AddTaskModal({ type, onClose, onAdd }) {
           <button
             onClick={handleAdd}
             disabled={!text.trim()}
-            className="flex-shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center
-              text-white transition-all duration-200 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
+            className="flex-shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center text-white transition-all duration-200 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
             style={{ background: accentColor }}
           >
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
@@ -527,9 +570,7 @@ function AddTaskModal({ type, onClose, onAdd }) {
             onChange={(e) => setText(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleAdd()}
             placeholder="اكتب المهمة هنا..."
-            className="flex-1 h-12 bg-[#F6F4FC] rounded-2xl px-4 text-sm text-[#2D2654]
-              handiReg placeholder-[#C5BCE8] outline-none border-2 border-transparent
-              focus:border-[#C5BCE8] transition-all duration-200 text-right"
+            className="flex-1 h-12 bg-[#F6F4FC] rounded-2xl px-4 text-sm text-[#2D2654] handiReg placeholder-[#C5BCE8] outline-none border-2 border-transparent focus:border-[#C5BCE8] transition-all duration-200 text-right"
           />
         </div>
       </div>
@@ -543,13 +584,12 @@ function AddTaskModal({ type, onClose, onAdd }) {
   );
 }
 
-// ─── AddButton ─────────────────────────────────────────────────────────────────
+// ─── AddButton ────────────────────────────────────────────────────────────────
 function AddButton({ color, onClick }) {
   return (
     <button
       onClick={onClick}
-      className="w-8 h-8 rounded-full flex items-center justify-center
-        transition-all duration-200 active:scale-90 hover:scale-110"
+      className="w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 active:scale-90 hover:scale-110"
       style={{ background: color + "22" }}
     >
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -564,7 +604,7 @@ function AddButton({ color, onClick }) {
   );
 }
 
-// ─── LoginScreen ───────────────────────────────────────────────────────────────
+// ─── LoginScreen ──────────────────────────────────────────────────────────────
 function LoginScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -588,17 +628,13 @@ function LoginScreen() {
           password: trimmedPassword,
         });
     if (authError) {
-      if (authError.message === "Email not confirmed") {
-        setError("يرجى تأكيد بريدك الإلكتروني أولاً، أو تواصل مع المسؤول");
-      } else {
-        setError(authError.message);
-      }
+      setError(
+        authError.message === "Email not confirmed"
+          ? "يرجى تأكيد بريدك الإلكتروني أولاً، أو تواصل مع المسؤول"
+          : authError.message,
+      );
     }
     setLoading(false);
-  }
-
-  async function handleGoogle() {
-    await supabase.auth.signInWithOAuth({ provider: "google" });
   }
 
   return (
@@ -636,9 +672,7 @@ function LoginScreen() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="البريد الإلكتروني"
-            className="w-full h-12 bg-[#F6F4FC] rounded-2xl px-4 text-sm text-[#2D2654]
-              handiReg placeholder-[#C5BCE8] outline-none border-2 border-transparent
-              focus:border-[#C5BCE8] transition-all duration-200 text-right"
+            className="w-full h-12 bg-[#F6F4FC] rounded-2xl px-4 text-sm text-[#2D2654] handiReg placeholder-[#C5BCE8] outline-none border-2 border-transparent focus:border-[#C5BCE8] transition-all duration-200 text-right"
           />
           <input
             dir="rtl"
@@ -647,16 +681,13 @@ function LoginScreen() {
             onChange={(e) => setPassword(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
             placeholder="كلمة المرور"
-            className="w-full h-12 bg-[#F6F4FC] rounded-2xl px-4 text-sm text-[#2D2654]
-              handiReg placeholder-[#C5BCE8] outline-none border-2 border-transparent
-              focus:border-[#C5BCE8] transition-all duration-200 text-right"
+            className="w-full h-12 bg-[#F6F4FC] rounded-2xl px-4 text-sm text-[#2D2654] handiReg placeholder-[#C5BCE8] outline-none border-2 border-transparent focus:border-[#C5BCE8] transition-all duration-200 text-right"
           />
         </div>
         <button
           onClick={handleSubmit}
           disabled={loading || !email.trim() || !password.trim()}
-          className="w-full h-12 rounded-2xl text-white text-sm handiBold
-            transition-all duration-200 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
+          className="w-full h-12 rounded-2xl text-white text-sm handiBold transition-all duration-200 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
           style={{
             fontFamily: "Handi-Bold, sans-serif",
             background: "#6C63FF",
@@ -670,10 +701,8 @@ function LoginScreen() {
           <div className="flex-1 h-px bg-[#E8E4F3]" />
         </div>
         <button
-          onClick={handleGoogle}
-          className="w-full h-12 rounded-2xl border-2 border-[#E8E4F3] text-[#2D2654]
-            handiReg text-sm flex items-center justify-center gap-2
-            hover:border-[#A89DD4] transition-all duration-200 active:scale-95"
+          onClick={() => supabase.auth.signInWithOAuth({ provider: "google" })}
+          className="w-full h-12 rounded-2xl border-2 border-[#E8E4F3] text-[#2D2654] handiReg text-sm flex items-center justify-center gap-2 hover:border-[#A89DD4] transition-all duration-200 active:scale-95"
         >
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
             <path
@@ -712,7 +741,7 @@ function LoginScreen() {
   );
 }
 
-// ─── TasksPage ─────────────────────────────────────────────────────────────────
+// ─── TasksPage ────────────────────────────────────────────────────────────────
 function TasksPage({ userId, userEmail, onSignOut }) {
   const { daily, work, loading, addTask, toggleTask, deleteTask } =
     useTasks(userId);
@@ -727,10 +756,6 @@ function TasksPage({ userId, userEmail, onSignOut }) {
     saveReminderTime,
   } = useNotifications(daily, work);
 
-  async function handleEnableNotifications() {
-    await requestPermission();
-  }
-
   const dailyPct = useMemo(
     () =>
       daily.length === 0
@@ -738,6 +763,7 @@ function TasksPage({ userId, userEmail, onSignOut }) {
         : Math.round((daily.filter((t) => t.done).length / daily.length) * 100),
     [daily],
   );
+
   const workPct = useMemo(
     () =>
       work.length === 0
@@ -745,6 +771,7 @@ function TasksPage({ userId, userEmail, onSignOut }) {
         : Math.round((work.filter((t) => t.done).length / work.length) * 100),
     [work],
   );
+
   const totalPct = useMemo(() => {
     const total = daily.length + work.length;
     if (total === 0) return 0;
@@ -779,7 +806,6 @@ function TasksPage({ userId, userEmail, onSignOut }) {
       className="min-h-screen bg-[#F6F4FC]"
       style={{ fontFamily: "Handi-Regular, sans-serif" }}
     >
-      {/* blobs */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden -z-10">
         <div className="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-[#6C63FF] opacity-[0.08] blur-3xl" />
         <div className="absolute top-1/2 -left-20 w-56 h-56 rounded-full bg-[#43C6AC] opacity-[0.07] blur-3xl" />
@@ -809,8 +835,7 @@ function TasksPage({ userId, userEmail, onSignOut }) {
             <button
               onClick={onSignOut}
               title={userEmail}
-              className="w-8 h-8 rounded-full bg-[#F0EDF9] flex items-center justify-center
-                text-[#9B93C8] hover:text-red-400 hover:bg-red-50 transition-all duration-200"
+              className="w-8 h-8 rounded-full bg-[#F0EDF9] flex items-center justify-center text-[#9B93C8] hover:text-red-400 hover:bg-red-50 transition-all duration-200"
             >
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                 <path
@@ -904,7 +929,7 @@ function TasksPage({ userId, userEmail, onSignOut }) {
           permission={permission}
           enabled={enabled}
           reminderTime={reminderTime}
-          onEnable={handleEnableNotifications}
+          onEnable={requestPermission}
           onDisable={disableNotifications}
           onTimeChange={saveReminderTime}
         />
@@ -930,9 +955,7 @@ function TasksPage({ userId, userEmail, onSignOut }) {
             {daily.length === 0 && (
               <button
                 onClick={() => setModal("daily")}
-                className="w-full py-6 rounded-2xl border-2 border-dashed border-[#C5BCE8]
-                  text-[#C5BCE8] handiReg text-sm text-center hover:border-[#6C63FF]
-                  hover:text-[#6C63FF] transition-all duration-200"
+                className="w-full py-6 rounded-2xl border-2 border-dashed border-[#C5BCE8] text-[#C5BCE8] handiReg text-sm text-center hover:border-[#6C63FF] hover:text-[#6C63FF] transition-all duration-200"
               >
                 اضغط لإضافة مهمة يومية +
               </button>
@@ -969,9 +992,7 @@ function TasksPage({ userId, userEmail, onSignOut }) {
             {work.length === 0 && (
               <button
                 onClick={() => setModal("work")}
-                className="w-full py-6 rounded-2xl border-2 border-dashed border-[#A5D8D0]
-                  text-[#A5D8D0] handiReg text-sm text-center hover:border-[#43C6AC]
-                  hover:text-[#43C6AC] transition-all duration-200"
+                className="w-full py-6 rounded-2xl border-2 border-dashed border-[#A5D8D0] text-[#A5D8D0] handiReg text-sm text-center hover:border-[#43C6AC] hover:text-[#43C6AC] transition-all duration-200"
               >
                 اضغط لإضافة مهمة عمل +
               </button>
@@ -1050,7 +1071,6 @@ function TasksPage({ userId, userEmail, onSignOut }) {
         </p>
       </div>
 
-      {/* MODAL */}
       {modal && (
         <AddTaskModal
           type={modal}
@@ -1062,7 +1082,7 @@ function TasksPage({ userId, userEmail, onSignOut }) {
   );
 }
 
-// ─── Root Export ───────────────────────────────────────────────────────────────
+// ─── Root Export ──────────────────────────────────────────────────────────────
 export default function DailyDashboard() {
   const [user, setUser] = useState(null);
   const [loadingAuth, setLoadingAuth] = useState(true);
@@ -1089,7 +1109,6 @@ export default function DailyDashboard() {
   }
 
   if (!user) return <LoginScreen />;
-
   return (
     <TasksPage
       userId={user.id}

@@ -1,7 +1,7 @@
 import { CartProvider } from "./context/cartContext";
 import BottomNavbar from "./components/BottomNavbar";
 import { getSiteConfig } from "./lib/getSiteConfig";
-
+import "./style.css";
 export default async function SiteLayout({ children, params }) {
   const { site } = await params;
   const config = getSiteConfig(site);
