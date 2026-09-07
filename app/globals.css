@@ -1,60 +1,80 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500&display=swap");
 
-.playfair {
-  font-family: "Playfair Display", serif;
-  font-style: italic;
+/* ─── Thmanya Font Family ─────────────────────────── */
+@font-face {
+  font-family: "Thmanya-Sans";
+  src: url("/fonts/Thmanya-sans-Light.otf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Thmanya-Sans";
+  src: url("/fonts/Thmanya-sans-Medium.otf") format("truetype");
   font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Thmanya-Sans";
+  src: url("/fonts/Thmanya-sans-Bold.otf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Thmanya-Serif";
+  src: url("/fonts/Thmanya-serif-Bold.otf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
 }
 
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800&display=swap");
+.thmanya-light {
+  font-family: "Thmanya-Sans";
+  font-weight: 300;
+}
+.thmanya-medium {
+  font-family: "Thmanya-Sans";
+  font-weight: 500;
+}
+.thmanya-bold {
+  font-family: "Thmanya-Sans";
+  font-weight: 700;
+}
+.thmanya-serif {
+  font-family: "Thmanya-Serif";
+  font-weight: 700;
+}
+
 .inter {
   font-family: "Inter", sans-serif;
   font-weight: 600;
 }
 
-@font-face {
-  font-family: "Poppins-Medium";
-  src: url("./assets/fonts/Poppins-Medium.ttf");
-  font-weight: normal;
-  font-style: normal;
-}
-.medium {
-  font-family: "Poppins-Medium";
-}
-
-@font-face {
-  font-family: "Poppins-SemiBold";
-  src: url("./assets/fonts/Poppins-SemiBold.ttf");
-  font-weight: normal;
-  font-style: normal;
-}
-.semiBold {
-  font-family: "Poppins-SemiBold";
-}
-@font-face {
-  font-family: "Handi-Regular";
-  src: url("./assets/fonts/Handi-Regular.otf");
-}
-.handiReg {
-  font-family: "Handi-Regular";
-}
-@font-face {
-  font-family: "Handi-Bold";
-  src: url("./assets/fonts/Handi-Bold.otf");
-}
-.handiBold {
-  font-family: "Handi-Bold";
-}
-
+/* ─── Base ────────────────────────────────────────── */
 html,
 body {
-  background-color: #fdfdfd;
+  background-color: #fafaf9;
+  color: #0c0c0c;
   overflow-x: hidden;
   scroll-behavior: smooth;
+  font-family: "Thmanya-Sans", sans-serif;
+  font-weight: 500;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
+
+::selection {
+  background: #0f766e;
+  color: #fafaf9;
+}
+
+/* ─── Animations ──────────────────────────────────── */
 @keyframes cloud {
   0% {
     transform: translate(0px, 0px);
@@ -79,20 +99,6 @@ body {
     transform: rotate(90deg) translate(0px, -10px);
   }
 }
-
-.finger {
-  animation: finger 1s infinite ease-in-out;
-}
-
-.cloud {
-  animation: cloud 10s infinite ease-in-out;
-  animation-direction: alternate;
-}
-.cloud1 {
-  animation: cloud1 10s infinite ease-in-out;
-  animation-direction: alternate;
-}
-
 @keyframes rotate {
   0% {
     transform: rotate(0deg);
@@ -101,36 +107,64 @@ body {
     transform: rotate(360deg);
   }
 }
-.custom-button {
-  background: linear-gradient(to right, #121212, #2e2e2e);
-  color: #efefef;
+@keyframes l21 {
+  50% {
+    box-shadow:
+      19px 0 0 3px,
+      38px 0 0 7px,
+      57px 0 0 3px;
+  }
+  100% {
+    box-shadow:
+      19px 0 0 0,
+      38px 0 0 3px,
+      57px 0 0 7px;
+  }
 }
 
-.custom-button:hover {
-  background: linear-gradient(to right, #2e2e2e, #121212);
-  color: #efefef;
+.finger {
+  animation: finger 1s infinite ease-in-out;
+}
+.cloud {
+  animation: cloud 10s infinite ease-in-out;
+  animation-direction: alternate;
+}
+.cloud1 {
+  animation: cloud1 10s infinite ease-in-out;
+  animation-direction: alternate;
 }
 .rotate-animation {
   animation: rotate 5s linear infinite;
 }
+
+/* ─── Components ──────────────────────────────────── */
+.custom-button {
+  background: linear-gradient(to right, #0c0c0c, #262626);
+  color: #fafaf9;
+  transition: opacity 0.3s ease;
+}
+.custom-button:hover {
+  background: linear-gradient(to right, #262626, #0c0c0c);
+  color: #fafaf9;
+}
+
 .project-container {
   position: relative;
   overflow: hidden;
 }
+
 .icon-link {
   padding: 8px;
-  background: linear-gradient(to bottom, #1a5b21, #063e0c);
+  background: linear-gradient(to bottom, #0f766e, #0b5a54);
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.7);
+  inset: 0;
+  background: rgba(12, 12, 12, 0.7);
+  backdrop-filter: blur(2px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -139,7 +173,6 @@ body {
   opacity: 0;
   transition: opacity 0.3s ease;
 }
-
 .project-container:hover .overlay {
   opacity: 1;
 }
@@ -147,28 +180,23 @@ body {
 .overlay-content {
   text-align: center;
 }
-
 .overlay-content h4 {
   margin: 0;
   font-size: 1rem;
   color: white;
-  font-family: "Al-Jazeera-Arabic-Bold";
+  font-family: "Thmanya-Serif", serif;
+  font-weight: 700;
 }
+
 .loader {
-  color: #063e0c;
+  color: #0f766e;
   width: 4px;
   aspect-ratio: 1;
   border-radius: 50%;
-  box-shadow: 19px 0 0 7px, 38px 0 0 3px, 57px 0 0 0;
+  box-shadow:
+    19px 0 0 7px,
+    38px 0 0 3px,
+    57px 0 0 0;
   transform: translateX(-38px);
   animation: l21 0.5s infinite alternate linear;
-}
-
-@keyframes l21 {
-  50% {
-    box-shadow: 19px 0 0 3px, 38px 0 0 7px, 57px 0 0 3px;
-  }
-  100% {
-    box-shadow: 19px 0 0 0, 38px 0 0 3px, 57px 0 0 7px;
-  }
 }

@@ -1,127 +1,124 @@
 "use client";
-
-import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import contact from "../assets/animation/contact.json";
-import avatar from "../assets/images/Me.jpg";
-import Navbar from "./Navbar";
+import React from "react";
+import { motion } from "framer-motion";
 import Image from "next/image";
-import Lottie from "lottie-react";
 
-const rotatingWords = ["Designer", "Developer"];
+const easing = [0.22, 1, 0.36, 1];
 
-export default function HeroSection() {
-  const [currentWordIndex, setCurrentWordIndex] = useState(0);
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  visible: (i) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.9, ease: easing, delay: 0.15 * i },
+  }),
+};
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentWordIndex(
-        (prevIndex) => (prevIndex + 1) % rotatingWords.length,
-      );
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
-
+const Hero = () => {
   return (
-    <section className="min-h-[60vh] md:min-h-screen mb-14 sm:mb-0">
-      <Navbar />
-      <div className="relative flex flex-col items-start md:items-center justify-center overflow-hidden bg-white px-4 md:px-20">
-        <div className="flex flex-col justify-center">
-          {/* Background Grid Layer with Linear Gradient Mask */}
-          <div className="absolute inset-0 z-0 pointer-events-none">
-            <svg
-              className="w-full h-full opacity-10"
-              xmlns="http://www.w3.org/2000/svg"
-              style={{
-                maskImage:
-                  "linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%)",
-                WebkitMaskImage:
-                  "linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%)",
-              }}
-            >
-              <defs>
-                <pattern
-                  id="grid"
-                  width="40"
-                  height="40"
-                  patternUnits="userSpaceOnUse"
-                >
-                  <path
-                    d="M40 0 H0 V40"
-                    fill="none"
-                    stroke="black"
-                    strokeWidth="0.5"
-                  />
-                </pattern>
-              </defs>
-              <rect width="100%" height="100%" fill="url(#grid)" />
-            </svg>
-          </div>
-          <div className="relative z-10 w-full flex flex-col items-center text-center mt-[30%] md:mt-[15%]">
-            <div className="flex gap-1 items-center justify-center medium text-base md:text-xl">
-              Hello
-              <span className="inline-block">
+    <section className="relative min-h-screen w-full bg-paper">
+      {/* ─── Vertical hairlines (desktop only) ─── */}
+      <div className="pointer-events-none absolute inset-0 hidden md:block">
+        <div className="mx-auto grid h-full max-w-6xl grid-cols-[1fr_minmax(0,560px)_1fr]">
+          <div />
+          <div className="border-x border-line" />
+          <div />
+        </div>
+      </div>
+
+      {/* ─── Content ─── */}
+      <div className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 py-24">
+        <div className="flex w-full max-w-[560px] flex-col items-center text-center">
+          {/* Avatar */}
+          <motion.div
+            custom={0}
+            initial="hidden"
+            animate="visible"
+            variants={fadeUp}
+            className="relative"
+          >
+            <div className="rounded-full p-[6px] ring-1 ring-line">
+              <div className="relative h-[112px] w-[112px] overflow-hidden rounded-full md:h-[128px] md:w-[128px]">
                 <Image
-                  src={avatar}
-                  alt="avatar"
-                  className="w-8 h-8 rounded-full shadow-md"
-                  style={{
-                    boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
-                  }}
+                  src="/Me.jpg" // ← غيّرها لصورتك
+                  alt="صورتي الشخصية"
+                  fill
+                  priority
+                  className="object-cover"
                 />
-              </span>
-              , I'm Khodor a
-              <motion.span
-                className="relative inline-flex items-center justify-center md:text-xl text-base md:mx-1 mx-[2px] backdrop-blur-md text-black semiBold"
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6, ease: "easeOut" }}
-              >
-                <AnimatePresence mode="wait">
-                  <motion.span
-                    key={rotatingWords[currentWordIndex]}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.4 }}
-                  >
-                    {rotatingWords[currentWordIndex]}
-                  </motion.span>
-                </AnimatePresence>
-              </motion.span>
+              </div>
             </div>
+          </motion.div>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="text-3xl mt-3 md:text-[3.5rem] md:mt-2 semiBold text-extrabold text-gray-900 leading-tight md:px-16 text-center"
-            >
-              I turn ideas into meaningful visual solutions
-              <span className="playfair text-[#d64a40]">that inspire.</span>
-            </motion.h1>
+          {/* Name */}
+          <motion.h1
+            custom={1}
+            initial="hidden"
+            animate="visible"
+            variants={fadeUp}
+            className="thmanya-serif mt-7 text-[32px] leading-tight text-ink md:text-[38px]"
+          >
+            خضــر حســن{" "}
+          </motion.h1>
 
-            {/* Centered button */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.8 }}
-              className="mt-8 flex justify-center items-center w-full"
+          {/* Tagline */}
+          <motion.p
+            custom={2}
+            initial="hidden"
+            animate="visible"
+            variants={fadeUp}
+            className="thmanya-medium mt-3 flex items-center gap-2 text-[17px] text-muted"
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="text-accent"
             >
-              <a href="#footer" rel="noopener noreferrer">
-                <button className="bg-[#d64a40] gap-1 flex justify-center items-center text-white medium px-2 py-1 md:px-4 md:py-2 shadow-sm shadow-black text-sm md:text-lg rounded hover:bg-gray-800 transition duration-300">
-                  Contact Me
-                  <Lottie
-                    className="inline-block mb-1 w-6 h-6 md:w-8 md:h-8"
-                    animationData={contact}
-                    loop={true}
-                  />
-                </button>
-              </a>
-            </motion.div>
-          </div>
+              <rect x="2" y="7" width="20" height="14" rx="2" />
+              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+            </svg>
+            مصمّم ومبرمج مواقع الكترونيّة - أعمل عن بُعد{" "}
+          </motion.p>
+
+          {/* Description */}
+          <motion.p
+            custom={3}
+            initial="hidden"
+            animate="visible"
+            variants={fadeUp}
+            className="thmanya-light mt-7 max-w-[420px] text-[17px] leading-[1.9] text-muted"
+          >
+            مهتم بالإبداع الممتد أثره في الدنيا والآخرة، بعد تخرجي تخصص علوم
+            حاسب، أدركت أن نهاية المرحلة الدراسية هي البداية، فقررت أدمج حبي
+            للتصميم بخبرتي في التقنية وأركز في تصميم وبناء المنتجات الرقمية.
+          </motion.p>
+
+          {/* CTA Button */}
+          <motion.a
+            custom={4}
+            initial="hidden"
+            animate="visible"
+            variants={fadeUp}
+            href="https://wa.me/966500000000" // ← رقمك هنا
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.04 }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ duration: 0.3, ease: easing }}
+            className="thmanya-bold mt-10 inline-flex items-center rounded-full bg-accent px-9 py-2.5 text-[15px] text-paper shadow-sm hover:bg-accent-dark"
+          >
+            تواصل
+          </motion.a>
         </div>
       </div>
     </section>
   );
-}
+};
+
+export default Hero;
