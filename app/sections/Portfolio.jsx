@@ -30,7 +30,7 @@ const saasBanners = [
     title: "مينوزلي (Menusly)",
     subtitle: "ودّع الطباعة، منيو ذكية لمطعمك بتحكم كامل بأقل من دقيقة",
     image: Banner2,
-    href: "https://www.menusly.vercel.app",
+    href: "https://menusly.vercel.app/",
   },
 ];
 
