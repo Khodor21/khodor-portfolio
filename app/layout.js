@@ -5,13 +5,28 @@ import "slick-carousel/slick/slick-theme.css";
 import Footer from "./sections/Footer";
 
 export const metadata = {
-  title: "خضور حسن | مطوّر ومصمّم",
-  description: "بورتفوليو خضور حسن — حيث تجد السحر",
+  metadataBase: new URL("https://khodorhasan.com"), // ← غيّره لدومينك
+  title: "خضر حسن | مطوّر ومصمّم",
+  description: "معرض أعمال خضر حسن — حيث تجد الإبداع",
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon-192.png", type: "image/png", sizes: "192x192" },
+      { url: "/icon-512.png", type: "image/png", sizes: "512x512" },
+    ],
+    shortcut: "/favicon.ico",
     apple: "/apple-touch-icon.png",
   },
   manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "خضر حسن",
+  },
+};
+
+export const viewport = {
+  themeColor: "#F7F5F0",
 };
 
 export default function RootLayout({ children }) {

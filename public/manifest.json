@@ -1,17 +1,23 @@
 {
-  "name": "مهامي اليوم",
-  "short_name": "مهامي",
-  "description": "تطبيق إدارة المهام اليومية",
-  "start_url": "/my-tasks",
+  "name": "خضر حسن | مطوّر ومصمّم",
+  "short_name": "خضر حسن",
+  "description": "معرض أعمال خضر حسن — حيث تجد الإبداع",
+  "start_url": "/",
   "display": "standalone",
-  "background_color": "#F6F4FC",
-  "theme_color": "#6C63FF",
-  "orientation": "portrait",
+  "background_color": "#F7F5F0",
+  "theme_color": "#F7F5F0",
   "icons": [
     {
-      "src": "/favicon.ico",
-      "sizes": "64x64",
-      "type": "image/x-icon"
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
     }
   ]
 }

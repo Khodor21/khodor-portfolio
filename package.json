@@ -18,6 +18,7 @@
     "antd": "^5.15.0",
     "axios": "^1.6.2",
     "canvas-confetti": "^1.9.4",
+    "emoji-picker-react": "^4.20.2",
     "fontsource-lora": "^4.0.0",
     "framer-motion": "^10.16.4",
     "lottie-react": "^2.4.1",
