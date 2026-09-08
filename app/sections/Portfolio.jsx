@@ -23,14 +23,14 @@ const saasBanners = [
     title: "منصة محلّي",
     subtitle: "افتح متجرك الإلكتروني خلال ثواني وبدون خبرة تقنية",
     image: Banner1,
-    href: "#",
+    href: "https://www.mahally.app",
   },
   {
     id: "menu-saas",
     title: "مينوزلي (Menusly)",
     subtitle: "ودّع الطباعة، منيو ذكية لمطعمك بتحكم كامل بأقل من دقيقة",
     image: Banner2,
-    href: "#",
+    href: "https://www.menusly.vercel.app",
   },
 ];
 
