@@ -19,7 +19,7 @@ const Hero = () => {
   return (
     <section className="relative min-h-screen w-full bg-paper">
       {/* ─── Content ─── */}
-      <div className="relative z-10 flex min-h-screen flex-col items-center justify-center  py-6">
+      <div className="relative z-10 flex min-h-screen flex-col items-center justify-center px-4 py-6">
         <div className="flex w-full max-w-[560px] flex-col items-center text-center">
           {/* Avatar */}
           <motion.div
@@ -68,7 +68,7 @@ const Hero = () => {
             initial="hidden"
             animate="visible"
             variants={fadeUp}
-            className="thmanya-light mt-5 max-w-[490px] text-base md:text-lg text-black"
+            className="thmanya-light mt-5 max-w-[490px] px-3 text-base md:text-lg text-black"
           >
             مهتم بالإبداع الذي يصنع أثرًا حقيقيًا وملموسًا. بعد تخرجي في تخصص
             علوم الحاسب، أدركت أن التعلّم الحقيقي يبدأ خارج قاعات الدراسة، فجمعت
