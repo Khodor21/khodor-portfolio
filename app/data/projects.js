@@ -1,5 +1,5 @@
 import MainOne from "../assets/images/Ar-Main One.jpg";
-import MainTwo from "../assets/images/Ar-Main Two.png";
+import MainTwo from "../assets/images/Ar-Main Two.jpg";
 import MainThree from "../assets/images/Ar-Main Three.jpg";
 
 export const projects = [

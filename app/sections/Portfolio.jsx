@@ -3,7 +3,8 @@ import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { projects } from "../data/projects";
-
+import Banner1 from "../assets/images/Ecommerce Saas Banner.jpg";
+import Banner2 from "../assets/images/Menu Saas Banner.jpg";
 const easing = [0.22, 1, 0.36, 1];
 
 const fadeUp = {
@@ -14,6 +15,23 @@ const fadeUp = {
     transition: { duration: 0.9, ease: easing, delay: 0.12 * i },
   }),
 };
+
+const saasBanners = [
+  {
+    id: "ecommerce-saas",
+    title: "متجر بيلدر",
+    subtitle: "أنشئ متجرك الإلكتروني بنفسك",
+    image: Banner1,
+    href: "#",
+  },
+  {
+    id: "menu-saas",
+    title: "منيو بيلدر",
+    subtitle: "أنشئ منيو مطعمك بنفسك",
+    image: Banner2,
+    href: "#",
+  },
+];
 
 const Portfolio = () => {
   return (
@@ -30,64 +48,66 @@ const Portfolio = () => {
           <p className="thmanya-light text-xs text-muted md:text-sm">
             منصّات أمتلكها وأطوّرها
           </p>
-          <div className="mt-3 flex flex-wrap items-center gap-3">
-            <a
-              href="#" // ← رابط منيو بيلدر
-              className="group inline-flex items-center gap-2.5 rounded-full border border-line bg-surface py-2 pe-4 ps-5 transition-colors duration-300 hover:border-accent"
-            >
-              <span className="thmanya-bold text-sm text-ink transition-colors duration-300 group-hover:text-accent">
-                منيو بيلدر
-              </span>
-              <span className="thmanya-light hidden text-xs text-muted sm:inline">
-                أنشئ منيو مطعمك بنفسك
-              </span>
-              <svg
-                width="13"
-                height="13"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="text-muted transition-all duration-300 group-hover:-translate-x-0.5 group-hover:text-accent"
-              >
-                <path d="M17 17L7 7" />
-                <path d="M7 15V7h8" />
-              </svg>
-            </a>
-
-            <a
-              href="#" // ← رابط متجر بيلدر
-              className="group inline-flex items-center gap-2.5 rounded-full border border-line bg-surface py-2 pe-4 ps-5 transition-colors duration-300 hover:border-accent"
-            >
-              <span className="thmanya-bold text-sm text-ink transition-colors duration-300 group-hover:text-accent">
-                متجر بيلدر
-              </span>
-              <span className="thmanya-light hidden text-xs text-muted sm:inline">
-                أنشئ متجرك الإلكتروني بنفسك
-              </span>
-              <svg
-                width="13"
-                height="13"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="text-muted transition-all duration-300 group-hover:-translate-x-0.5 group-hover:text-accent"
-              >
-                <path d="M17 17L7 7" />
-                <path d="M7 15V7h8" />
-              </svg>
-            </a>
-          </div>
         </motion.div>
+
+        {/* ─── SaaS Banners ─── */}
+        <div className="mt-6 flex flex-col gap-3 md:mt-8 md:gap-4">
+          {saasBanners.map((banner, i) => (
+            <motion.a
+              key={banner.id}
+              custom={1 + i}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-40px" }}
+              variants={fadeUp}
+              href={banner.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative block w-full overflow-hidden rounded-xl border border-line bg-surface transition-colors duration-300 hover:border-accent"
+            >
+              {/* 16:9 banner */}
+              <div className="relative aspect-video w-full">
+                <Image
+                  src={banner.image}
+                  alt={banner.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 768px"
+                  className="object-cover transition-transform duration-700 ease-smooth group-hover:scale-[1.02]"
+                />
+              </div>
+
+              {/* Bottom label strip */}
+              <div className="flex items-center justify-between border-t border-line px-4 py-3">
+                <div className="flex items-center gap-3">
+                  <span className="thmanya-bold text-sm text-ink">
+                    {banner.title}
+                  </span>
+                  <span className="thmanya-light hidden text-xs text-muted sm:inline">
+                    {banner.subtitle}
+                  </span>
+                </div>
+                <svg
+                  width="13"
+                  height="13"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="text-muted transition-all duration-300 group-hover:-translate-x-0.5 group-hover:text-accent"
+                >
+                  <path d="M17 17L7 7" />
+                  <path d="M7 15V7h8" />
+                </svg>
+              </div>
+            </motion.a>
+          ))}
+        </div>
 
         {/* ─── أعمال ─── */}
         <motion.h2
-          custom={1}
+          custom={3}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-60px" }}
@@ -102,7 +122,7 @@ const Portfolio = () => {
           {projects.map((project, i) => (
             <motion.a
               key={project.id}
-              custom={2 + i}
+              custom={4 + i}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-40px" }}
@@ -112,7 +132,6 @@ const Portfolio = () => {
               rel="noopener noreferrer"
               className="group block"
             >
-              {/* Card */}
               <div className="project-container relative aspect-[3/4] overflow-hidden rounded-lg">
                 <Image
                   src={project.mainImage}
@@ -121,7 +140,6 @@ const Portfolio = () => {
                   sizes="(max-width: 768px) 50vw, 33vw"
                   className="object-cover transition-transform duration-700 ease-smooth group-hover:scale-[1.04]"
                 />
-                {/* Overlay — desktop hover only */}
                 <div className="overlay pointer-events-none">
                   <div className="overlay-content">
                     <h4 className="text-[15px]">{project.title}</h4>
@@ -131,8 +149,6 @@ const Portfolio = () => {
                   </div>
                 </div>
               </div>
-
-              {/* Info — mobile visible directly */}
               <div className="px-1 pb-1 pt-3 md:hidden">
                 <h3 className="thmanya-bold text-sm leading-snug text-ink">
                   {project.title}
