@@ -2,6 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { FaWhatsapp } from "react-icons/fa";
 
 const easing = [0.22, 1, 0.36, 1];
 
@@ -18,7 +19,7 @@ const Hero = () => {
   return (
     <section className="relative min-h-screen w-full bg-paper">
       {/* ─── Content ─── */}
-      <div className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 py-8">
+      <div className="relative z-10 flex min-h-screen flex-col items-center justify-center  py-6">
         <div className="flex w-full max-w-[560px] flex-col items-center text-center">
           {/* Avatar */}
           <motion.div
@@ -67,29 +68,35 @@ const Hero = () => {
             initial="hidden"
             animate="visible"
             variants={fadeUp}
-            className="thmanya-light mt-5 max-w-[490px] text-base md:text-lg leading-[1.1] text-black"
+            className="thmanya-light mt-5 max-w-[490px] text-base md:text-lg text-black"
           >
-            مهتم بالإبداع الممتد أثره في الدنيا والآخرة، بعد تخرجي تخصص علوم
-            حاسب، أدركت أن نهاية المرحلة الدراسية هي البداية، فقررت أدمج حبي
-            للتصميم بخبرتي في التقنية وأركز في تصميم وبناء المنتجات الرقمية.
+            مهتم بالإبداع الذي يصنع أثرًا حقيقيًا وملموسًا. بعد تخرجي في تخصص
+            علوم الحاسب، أدركت أن التعلّم الحقيقي يبدأ خارج قاعات الدراسة، فجمعت
+            بين <span className="text-accent">شغفي بالتصميم</span> وخبرتي في
+            التقنية لأصمم وأبني{" "}
+            <span className="text-accent">منتجات وتجارب رقمية</span> تجمع بين
+            الجمال، البساطة، والفكرة الواضحة.
           </motion.p>
 
           {/* CTA Button */}
-          <motion.a
-            custom={4}
-            initial="hidden"
-            animate="visible"
-            variants={fadeUp}
-            href="https://wa.me/96171708103" // ← رقمك هنا
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.97 }}
-            transition={{ duration: 0.3, ease: easing }}
-            className="thmanya-bold mt-10 inline-flex items-center rounded-full bg-accent px-9 py-2.5 text-sm text-paper shadow-sm hover:bg-accent-dark"
-          >
-            تواصــل معــي
-          </motion.a>
+          <div className="mt-8 flex flex-row-reverse items-center justify-center gap-[4px] rounded-full bg-accent px-9 py-2.5 shadow-sm hover:bg-accent-dark">
+            <FaWhatsapp className="text-paper" />
+            <motion.a
+              custom={4}
+              initial="hidden"
+              animate="visible"
+              variants={fadeUp}
+              href="https://wa.me/96171708103" // ← رقمك هنا
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ duration: 0.3, ease: easing }}
+              className="thmanya-bold  text-sm text-paper"
+            >
+              تواصــل معــي
+            </motion.a>
+          </div>
         </div>
       </div>
     </section>
